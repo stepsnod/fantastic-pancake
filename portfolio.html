@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZKSHE7V4MH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZKSHE7V4MH');
+</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="#00c6ff" name="theme-color"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<!-- Primary Meta Tags -->
+<meta content="Stephen's photography portfolio — live show photography and Bay Area landscapes. Visual work by the engineer behind Studio San Francisco." name="description"/>
+<meta content="live show photography san francisco, bay area concert photography, sf landscape photography, music photographer san francisco, studio san francisco visuals" name="keywords"/>
+<!-- Canonical URL -->
+<link href="https://www.bookthestudiosf.com/portfolio.html" rel="canonical"/>
+<!-- Open Graph -->
+<meta content="Visuals | Studio San Francisco — Photography by Stephen" property="og:title"/>
+<meta content="Live show photography and Bay Area landscapes by Stephen, engineer and photographer at Studio San Francisco." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://www.bookthestudiosf.com/portfolio.html" property="og:url"/>
+<meta content="https://www.bookthestudiosf.com/images/studio-1.jpg" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Studio San Francisco — Photography by Stephen" property="og:image:alt"/>
+<meta content="Studio San Francisco" property="og:site_name"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Visuals | Studio San Francisco — Photography by Stephen" name="twitter:title"/>
+<meta content="Live show photography and Bay Area landscapes by Stephen, engineer and photographer at Studio San Francisco." name="twitter:description"/>
+<meta content="https://www.bookthestudiosf.com/images/studio-1.jpg" name="twitter:image"/>
+<!-- Author & Geo -->
+<meta content="Stephen" name="author"/>
+<meta content="US-CA" name="geo.region"/>
+<meta content="San Francisco" name="geo.placename"/>
+<meta content="37.740133;-122.397501" name="geo.position"/>
+<meta content="37.740133, -122.397501" name="ICBM"/>
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Visuals — Photography by Stephen",
+  "description": "Live show photography and Bay Area landscape photography by Stephen, engineer and founder of Studio San Francisco.",
+  "url": "https://www.bookthestudiosf.com/portfolio.html",
+  "author": {
+    "@type": "Person",
+    "name": "Stephen",
+    "jobTitle": "Recording Engineer, Songwriter & Photographer",
+    "worksFor": {
+      "@type": "LocalBusiness",
+      "name": "Studio San Francisco",
+      "url": "https://www.bookthestudiosf.com"
+    }
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Studio San Francisco",
+    "url": "https://www.bookthestudiosf.com"
+  },
+  "about": {
+    "@type": "LocalBusiness",
+    "name": "Studio San Francisco",
+    "url": "https://www.bookthestudiosf.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "2025 McKinnon Ave",
+      "addressLocality": "San Francisco",
+      "addressRegion": "CA",
+      "postalCode": "94124",
+      "addressCountry": "US"
+    }
+  }
+}
+</script>
+<title>Visuals | Studio San Francisco — Photography</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Source+Serif+4:wght@400;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙</text></svg>"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+</head>
+<body>
+
+<div aria-hidden="true" class="bg-mesh"></div>
+<div aria-hidden="true" class="bg-noise-overlay"></div>
+<div aria-hidden="true" class="cursor-glow" id="cursorGlow"></div>
+<canvas aria-hidden="true" id="particleCanvas"></canvas>
+<a class="skip-to-main" href="#main">Skip to main content</a>
+
+<header class="topbar desktop-only" id="topbar" role="banner">
+<div class="topbar-inner">
+  <a aria-label="Studio San Francisco home" class="topbrand" href="index.html">
+    <span aria-hidden="true" class="topmark"></span>
+    <span class="topname"><strong>Studio San Francisco</strong></span>
+  </a>
+  <nav aria-label="Primary navigation" class="topnav">
+    <a href="index.html">Home</a>
+    <a href="index.html#menu">Services</a>
+    <a href="portfolio.html" aria-current="page" style="color:var(--accent)">Visuals</a>
+    <a href="blog.html">Blog</a>
+    <a href="index.html#faq">FAQ</a>
+  </nav>
+<div class="topactions">
+<a class="btn btn-nav-cta" href="index.html#quick-start">Get Started</a>
+</div>
+</div>
+</header>
+
+<button aria-label="Open menu" class="menu-fab" id="menuFab" type="button">
+  <span aria-hidden="true" class="menu-dot"></span><span>MENU</span>
+</button>
+<div aria-hidden="true" class="backdrop" id="backdrop"></div>
+<aside aria-label="Site navigation" class="sidebar" id="sidebar" role="navigation">
+<div class="sidebar-inner">
+  <div class="brand">
+    <div class="brand-mark"><div class="brand-name">Studio San Francisco</div></div>
+    <button aria-label="Close menu" class="icon-btn" id="closeSidebar">✕</button>
+  </div>
+  <ul class="nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#quick-start">Get Started</a></li>
+    <li><a href="index.html#menu">Services</a></li>
+    <li><a href="portfolio.html" style="color:var(--accent)">Visuals</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+  </ul>
+</div>
+</aside>
+
+<div class="theme-fab" id="themeFabWrap">
+  <button aria-checked="false" aria-label="Switch to light mode" class="theme-fab-btn" id="themeFab" role="switch" type="button">
+    <span aria-hidden="true" class="theme-fab-icon">☾</span>
+  </button>
+</div>
+
+<main id="main" tabindex="-1">
+
+  <section class="port-hero">
+    <p class="port-hero-eyebrow" data-reveal>Visual Work</p>
+    <h1 class="port-hero-title" data-reveal>Through the <em>lens</em></h1>
+    <p class="port-hero-sub" data-reveal>Live music and landscapes — photographs from the Bay Area and beyond.</p>
+  </section>
+
+  <!-- Filter tabs — built dynamically from photos.json categories -->
+  <div class="port-filters" id="portFilters" role="group" aria-label="Filter by category" data-reveal>
+    <button class="filter-btn active" data-filter="all">All</button>
+    <!-- Category buttons injected here by JS -->
+  </div>
+
+  <div class="port-grid-wrap">
+    <!-- Photo count -->
+    <p class="port-count" id="portCount"></p>
+    <!-- Masonry grid — tiles injected here by JS -->
+    <div class="port-grid" id="portGrid"></div>
+    <!-- Empty state -->
+    <p class="port-empty" id="portEmpty" style="display:none;text-align:center;color:var(--muted2);padding:60px 0;">No photos in this category yet.</p>
+  </div>
+
+  <div class="port-cta" data-reveal>
+    <h2>Want photos at your show?</h2>
+    <p>Live coverage, content packages, and more. Let's talk about your next event.</p>
+    <a class="btn btn-nav-cta" href="index.html#quick-start">Get Started →</a>
+  </div>
+
+</main>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous">‹</button>
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lbClose" aria-label="Close">✕</button>
+    <div class="lightbox-img-wrap" id="lbImgWrap"></div>
+    <div class="lightbox-caption">
+      <div class="lightbox-caption-title" id="lbTitle"></div>
+      <div class="lightbox-caption-cat" id="lbCat"></div>
+    </div>
+  </div>
+  <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next">›</button>
+</div>
+
+<div aria-label="Quick actions" class="cta-mobile" id="ctaMobile">
+  <a class="btn btn-nav-cta" href="index.html#quick-start">Book a Session</a>
+</div>
+
+<footer class="premium-footer">
+<div class="footer-inner">
+<h4>Studio San Francisco</h4>
+<div class="footer-contact"><a href="tel:+14153264531">(415) 326-4531</a><span class="footer-dot">•</span><a href="https://www.instagram.com/thestudiosf/" rel="noopener" target="_blank">@thestudiosf</a></div>
+<address class="footer-address"><a href="https://maps.google.com/?q=2025+McKinnon+Ave,+San+Francisco,+CA+94124" rel="noopener" target="_blank">2025 McKinnon Ave, San Francisco, CA 94124</a> &nbsp;·&nbsp; Inside Secret Studios</address>
+<div class="footer-copy">&copy; <span class="js-year"></span> Studio San Francisco</div>
+</div>
+</footer>
+
+<script src="scripts.js"></script>
+</body>
+</html>

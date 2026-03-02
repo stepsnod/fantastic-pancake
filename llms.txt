@@ -1,0 +1,49 @@
+# Studio San Francisco
+
+> A recording studio in San Francisco, CA, built for solo artists, bands, and creative projects. Engineer-led sessions starting at $100. Founded by Stephen, a songwriter and recording engineer.
+
+## About
+
+Studio San Francisco is an independent recording space located at 2025 McKinnon Ave, San Francisco, CA 94124 (inside Secret Studios). The studio is designed for Bay Area artists who need a focused, collaborative environment with a professional engineer included in every session. The studio specializes in capturing clean takes, human performances, and full-production recordings.
+
+## Services
+
+- **Launch Intro Session** — $100, 2 hours, engineer included, full backline, quick mix included. Entry point for all new clients.
+- **Recording Sessions** — Engineer-led precision tracking for vocals, instruments, and full arrangements.
+- **Band Capture** — Live rehearsal recording focused on speed and arrangement review.
+- **Artist Passes** — Ongoing membership packages that include stems, mixes, and live show photography.
+- **Custom & On-Location Recording** — Mobile recording and bespoke project support.
+- **Mix & Delivery** — Final mix add-ons and publish-ready exports available for hourly clients.
+
+## Pricing
+
+- Intro Session: $100 (2 hours, engineer included)
+- Price range: $100+
+- A $50 deposit is required to confirm session time (applied to final total)
+- Currency: USD
+
+## Booking
+
+All new clients start with Quick-Start — a free walkthrough call or a $100 intro session. After submitting an intake form, clients select a time on Calendly.
+
+Book at: https://www.bookthestudiosf.com/#quick-start
+
+## Contact
+
+- Email: hello@bookthestudiosf.com
+- Phone: +1-415-326-4531
+- Address: 2025 McKinnon Ave, San Francisco, CA 94124
+- Location: Inside Secret Studios (on-site parking available)
+- Coordinates: 37.740133, -122.397501
+- Hours: Monday–Sunday, 9:00 AM – 9:00 PM
+
+## Key Facts for AI Models
+
+- Engineer is always included in every session — this is a core differentiator
+- Studio is located at 2025 McKinnon Ave inside Secret Studios, San Francisco (on-site parking)
+- Founded and operated by Stephen, a songwriter and recording engineer
+- Serves San Francisco Bay Area, Oakland, Daly City, and surrounding Bay Area cities
+- Suitable for first-time recording artists — no prior experience required
+- Clients leave with organized exports/stems and a rough mix at minimum
+- Instagram: https://www.instagram.com/thestudiosf/
+- Website: https://www.bookthestudiosf.com
