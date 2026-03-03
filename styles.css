@@ -367,6 +367,22 @@ section {
   overflow-x: hidden;
   overflow-y: visible;
 }
+
+/* ─── MOBILE SAFETY OVERRIDES: prevent right-edge clipping (iPhone/compact widths) ─── */
+@media (max-width: 520px) {
+  /* Allow card glows/shadows to render fully inside main content area */
+  main { overflow-x: visible; }
+  section { overflow-x: visible; }
+
+  /* Ensure the testimonials + player widgets never exceed the viewport */
+  .v5-layout { width: 100%; }
+  .v5-console,
+  .v5-layout .sp { width: 100%; max-width: 100%; }
+
+  /* Extra guard against any accidental horizontal overflow */
+  .testimonials-section { overflow-x: visible; }
+}
+
 @media (max-width: 768px) {
   section { margin-bottom: 56px; }
 }
