@@ -2907,6 +2907,27 @@ footer {
   font-style: italic;
 }
 
+
+/* Services Menu: separate rate blocks per session type */
+.menu-rate-block{
+  margin: 8px 0 14px;
+}
+.menu-rate-label{
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted2);
+  margin-bottom: 6px;
+  font-family: Inter, Poppins, sans-serif;
+}
+.menu-rate-block .menu-rate-note{
+  margin: 6px 0 10px;
+  font-style: normal;
+  color: var(--muted);
+}
+
+
+/* Diff toggle — inline <details> */
 /* Diff toggle — inline <details> */
 .diff-details { display: block; }
 .diff-details summary.diff-link {
