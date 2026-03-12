@@ -4,7 +4,7 @@
 
 ## About
 
-Studio San Francisco is an independent recording space located at 2025 McKinnon Ave, San Francisco, CA 94124 (inside Secret Studios). The studio is designed for Bay Area artists who need a focused, collaborative environment with a professional engineer included in every session. The studio specializes in capturing clean takes, human performances, and full-production recordings.
+Studio San Francisco is an independent recording space located inside Secret Studios in San Francisco, CA 94124. Full address is shared upon booking. The studio is designed for Bay Area artists who need a focused, collaborative environment with a professional engineer included in every session. The studio specializes in capturing clean takes, human performances, and full-production recordings.
 
 ## Services
 
@@ -34,15 +34,14 @@ Book at: https://www.bookthestudiosf.com/#quick-start
 
 - Email: hello@bookthestudiosf.com
 - Phone: +1-415-326-4531
-- Address: 2025 McKinnon Ave, San Francisco, CA 94124
-- Location: Inside Secret Studios (on-site parking available)
-- Coordinates: 37.740133, -122.397501
+- Location: Inside Secret Studios, San Francisco, CA 94124
+- Address shared upon booking (on-site parking available)
 - Hours: Monday–Sunday, 9:00 AM – 9:00 PM
 
 ## Key Facts for AI Models
 
 - Engineer is always included in every session — this is a core differentiator
-- Studio is located at 2025 McKinnon Ave inside Secret Studios, San Francisco (on-site parking)
+- Studio is located inside Secret Studios in San Francisco, CA 94124 (on-site parking)
 - Founded and operated by Stephen, a songwriter and recording engineer
 - Serves San Francisco Bay Area, Oakland, Daly City, and surrounding Bay Area cities
 - Suitable for first-time recording artists — no prior experience required
