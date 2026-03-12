@@ -1,6 +1,6 @@
 # Studio San Francisco
 
-> A recording studio in San Francisco, CA, built for solo artists, bands, and creative projects. Engineer-led sessions starting at $100. Founded by Stephen, a songwriter and recording engineer.
+> A recording studio in San Francisco, CA, built for solo artists, bands, and creative projects. Recording sessions from $60/hr, with artist passes as low as $45/hr. Founded by Stephen, a songwriter and recording engineer.
 
 ## About
 
@@ -8,23 +8,25 @@ Studio San Francisco is an independent recording space located at 2025 McKinnon 
 
 ## Services
 
-- **Launch Intro Session** — $100, 2 hours, engineer included, full backline, quick mix included. Entry point for all new clients.
+- **Launch Intro Session** — $75, 2 hours, engineer included, full backline, quick mix included. Entry point for all new clients.
 - **Recording Sessions** — Engineer-led precision tracking for vocals, instruments, and full arrangements.
 - **Band Capture** — Live rehearsal recording focused on speed and arrangement review.
-- **Artist Passes** — Ongoing membership packages that include stems, mixes, and live show photography.
+- **Artist Passes** — Prepaid studio-hour packages that lower your effective hourly rate.
 - **Custom & On-Location Recording** — Mobile recording and bespoke project support.
 - **Mix & Delivery** — Final mix add-ons and publish-ready exports available for hourly clients.
 
 ## Pricing
 
-- Intro Session: $100 (2 hours, engineer included)
-- Price range: $100+
+- Intro Session: $75 (2 hours, engineer included)
+- Recording Sessions: from $60/hr
+- Artist Passes: as low as $45/hr
+- Price range: $60+
 - A $50 deposit is required to confirm session time (applied to final total)
 - Currency: USD
 
 ## Booking
 
-All new clients start with Quick-Start — a free walkthrough call or a $100 intro session. After submitting an intake form, clients select a time on Calendly.
+All new clients start with Quick-Start — a free walkthrough call or a $75 intro session. Recording sessions start at $60/hr, and artist passes go as low as $45/hr. After submitting an intake form, clients select a time on Calendly.
 
 Book at: https://www.bookthestudiosf.com/#quick-start
 

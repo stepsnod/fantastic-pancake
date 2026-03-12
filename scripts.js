@@ -2146,72 +2146,47 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!boxEl) return;
 
     var data = {
-      starter: {
-        title: 'Starter - Savings Breakdown',
-        includedValue: '$1,025',
-        passPrice: '$750',
-        builtIn: '$275',
-        perksTotal: '$100',
-        totalPossible: '$375',
+      eight: {
+        title: '8-Hour Artist Pass',
+        includedValue: '$480',
+        passPrice: '$400',
+        builtIn: '$80',
         lines: [
-          '10 studio hours @ $80/hr = $800',
-          '1 Final Mix = $150',
-          '1 Stems export = $75'
-        ],
-        perks: [
-          'Next-Gig at $400 (normally $450) = save $50',
-          'Artist Feature at $400 (normally $450) = save $50'
+          '8 studio hours @ $60/hr = $480',
+          'Effective prepaid rate = $50/hr'
         ]
       },
-      builder: {
-        title: 'Builder - Savings Breakdown',
-        includedValue: '$2,595',
-        passPrice: '$1,750',
-        builtIn: '$845',
-        perksTotal: '$200',
-        totalPossible: '$1,045',
+      sixteen: {
+        title: '16-Hour Artist Pass',
+        includedValue: '$960',
+        passPrice: '$760',
+        builtIn: '$200',
         lines: [
-          '24 studio hours @ $80/hr = $1,920',
-          '3 Final Mixes @ $150 = $450',
-          '3 Stems exports @ $75 = $225'
-        ],
-        perks: [
-          'Next-Gig at $350 (normally $450) = save $100',
-          'Artist Feature at $350 (normally $450) = save $100'
+          '16 studio hours @ $60/hr = $960',
+          'Effective prepaid rate = $47.50/hr'
         ]
       },
-      headliner: {
-        title: 'Headliner - Savings Breakdown',
-        includedValue: '$5,190',
-        passPrice: '$3,495',
-        builtIn: '$1,695',
-        perksTotal: '$300',
-        totalPossible: '$1,995',
+      twentyfour: {
+        title: '24-Hour Artist Pass',
+        includedValue: '$1,440',
+        passPrice: '$1,080',
+        builtIn: '$360',
         lines: [
-          '48 studio hours @ $80/hr = $3,840',
-          '6 Final Mixes @ $150 = $900',
-          '6 Stems exports @ $75 = $450'
-        ],
-        perks: [
-          'Additional Next-Gig at $300 (normally $450) = save $150',
-          'Artist Feature at $300 (normally $450) = save $150'
+          '24 studio hours @ $60/hr = $1,440',
+          'Effective prepaid rate = $45/hr'
         ]
       }
     };
 
-    var d = data[passKey] || data.starter;
+    var d = data[passKey] || data.eight;
     if (titleEl) titleEl.textContent = 'Artist Pass Details';
     boxEl.innerHTML =
       '<h4 class="dialog-subtitle">' + d.title + '</h4>' +
-      '<p class="dialog-muted">How savings are calculated</p>' +
-      '<p><strong>Included retail value (a la carte): ' + d.includedValue + '</strong></p>' +
+      '<p class="dialog-muted">Simple prepaid recording hours</p>' +
+      '<p><strong>Standard-session value: ' + d.includedValue + '</strong></p>' +
       '<ul>' + d.lines.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
-      '<p><strong>Pass price: ' + d.passPrice + '</strong><br>Built-in savings: <strong>' + d.builtIn + '</strong></p>' +
-      '<p><strong>Optional perk savings (if used)</strong></p>' +
-      '<ul>' + d.perks.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
-      '<p><strong>Total possible savings with perks: ' + d.totalPossible + '</strong></p>';
+      '<p><strong>Pass price: ' + d.passPrice + '</strong><br>Built-in savings: <strong>' + d.builtIn + '</strong></p>';
   }
-
 
   // Generic handler: any link with data-dialog opens the named dialog
   document.querySelectorAll('[data-dialog]').forEach(function (link) {
