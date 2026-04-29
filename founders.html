@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="#071018" name="theme-color"/>
+<title>Founder Content Sessions — Studio San Francisco</title>
+<meta name="description" content="Studio San Francisco helps founders and teams record interviews, explainers, podcasts, and short-form clips that make their work easier to understand and easier to share."/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Source+Serif+4:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   STUDIO SAN FRANCISCO — Founder Content Sessions
+   Tokens mirror main site exactly.
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --accent:   #00c6ff;
+  --accent2:  #00ffc6;
+  --gold:     #F4C430;
+  --bg:       #071018;
+  --bg2:      #0a1722;
+  --card:     #0c1b27;
+  --text:     #e9f3fb;
+  --muted:    #b8d4e5;
+  --muted2:   #92b3c8;
+  --border:   rgba(255,255,255,.09);
+  --border2:  rgba(0,198,255,.18);
+  --ease:     cubic-bezier(.2,.9,.2,1);
+  --ease2:    cubic-bezier(.4,0,.2,1);
+  --max:      1100px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; overflow-x: clip; color-scheme: dark; }
+#selected-work { scroll-margin-top: 32px; }
+
+body {
+  font-family: Poppins, -apple-system, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 700px at 15% 12%, rgba(0,198,255,.18), transparent 55%),
+    radial-gradient(1100px 650px at 85% 25%, rgba(0,198,255,.10), transparent 52%),
+    linear-gradient(180deg, var(--bg), var(--bg2));
+  min-height: 100svh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+a { color: var(--text); text-decoration: none; }
+a:hover { color: var(--accent2); }
+
+/* ── BACKGROUND SYSTEM (exact match from main site) ─────── */
+
+.bg-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 10% 20%, rgba(0,198,255,.10), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 90% 30%, rgba(0,198,255,.07), transparent 45%),
+    radial-gradient(ellipse 50% 50% at 50% 80%, rgba(0,150,200,.06), transparent 50%);
+}
+
+.bg-noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Particle canvas — exact from main site CSS */
+#particleCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Cursor glow — exact from main site CSS */
+.cursor-glow {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,198,255,.10), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.4s ease, background 0.5s ease;
+  opacity: 0;
+  will-change: transform;
+}
+body:hover .cursor-glow { opacity: 1; }
+
+@media (hover: none), (pointer: coarse) {
+  .cursor-glow { display: none !important; }
+}
+
+/* ── LAYOUT ─────────────────────────────────────────────── */
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ── NAV ────────────────────────────────────────────────── */
+nav {
+  padding: 22px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+.nav-wordmark {
+  font-family: 'Source Serif 4', serif;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+.nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted2);
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border2);
+  padding-bottom: 1px;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--accent); }
+
+/* ══════════════════════════════════════════════════════════
+   HERO — split layout
+   ══════════════════════════════════════════════════════════ */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: 92svh;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-copy {
+  padding: 80px 56px 80px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.hero-h1 {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(32px, 4.2vw, 52px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 24px;
+  letter-spacing: -0.01em;
+}
+.hero-h1 em {
+  font-style: italic;
+  color: var(--muted);
+}
+
+.hero-sub {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 440px;
+  margin-bottom: 44px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+/* ── HERO IMAGE PANEL ───────────────────────────────────── */
+.hero-visual {
+  position: relative;
+  height: 100%;
+  min-height: 540px;
+  overflow: hidden;
+  border-left: 1px solid var(--border);
+}
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  opacity: 0.82;
+  filter: saturate(0.85);
+}
+.hero-img-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(7,16,24,0.55) 0%, transparent 35%),
+    linear-gradient(to top,   rgba(7,16,24,0.6)  0%, transparent 40%);
+}
+.hero-img-caption {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: rgba(233,243,251,0.35);
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════════════════════════
+   SECTIONS
+   ══════════════════════════════════════════════════════════ */
+.section {
+  padding: 80px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted2);
+  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::after {
+  content: '';
+  display: block;
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── THREE-COLUMN OFFER ─────────────────────────────────── */
+.offer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.offer-col {
+  padding: 36px 32px;
+  border-right: 1px solid var(--border);
+  transition: background 0.25s;
+}
+.offer-col:last-child { border-right: none; }
+.offer-col:hover { background: rgba(0,198,255,.03); }
+.offer-num {
+  font-family: 'Source Serif 4', serif;
+  font-size: 13px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--accent);
+  opacity: 0.7;
+  margin-bottom: 14px;
+}
+.offer-title {
+  font-family: 'Source Serif 4', serif;
+  font-size: 19px;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.offer-desc {
+  font-size: 14px;
+  color: var(--muted2);
+  line-height: 1.7;
+}
+
+/* ── HOW IT WORKS ───────────────────────────────────────── */
+.how-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.how-steps { display: flex; flex-direction: column; }
+.how-step {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 18px;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+.how-step:last-child { border-bottom: 1px solid var(--border); }
+.how-step-n {
+  font-family: 'Source Serif 4', serif;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--accent);
+  opacity: 0.6;
+  padding-top: 2px;
+}
+.how-step-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.how-step-desc {
+  font-size: 14px;
+  color: var(--muted2);
+  line-height: 1.65;
+}
+.how-aside {
+  padding: 32px;
+  background: rgba(12,27,39,0.5);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.how-aside::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 80% 0%, rgba(0,198,255,.06), transparent 60%);
+  pointer-events: none;
+}
+.how-aside-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.how-aside p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.75;
+  position: relative;
+}
+.how-aside strong { color: var(--text); font-weight: 500; }
+
+/* ── USEFUL WHEN ────────────────────────────────────────── */
+.useful-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.useful-item {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.useful-item::before {
+  content: '—';
+  color: var(--accent);
+  opacity: 0.5;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.useful-item span {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── SELECTED WORK ──────────────────────────────────────── */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.work-card {
+  padding: 28px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: background 0.22s;
+  text-decoration: none;
+  color: inherit;
+}
+.work-card:last-child { border-right: none; }
+.work-card:hover { background: rgba(0,198,255,.04); }
+.work-card-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.7;
+}
+.work-card-title {
+  font-family: 'Source Serif 4', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.35;
+}
+.work-card-desc {
+  font-size: 13px;
+  color: var(--muted2);
+  line-height: 1.6;
+  flex: 1;
+}
+.work-card-link {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted2);
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+  transition: color 0.2s;
+}
+.work-card:hover .work-card-link { color: var(--accent); }
+
+/* ── FINAL CTA ──────────────────────────────────────────── */
+.cta-section { padding: 100px 0 80px; }
+.cta-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+}
+.cta-h2 {
+  font-family: 'Source Serif 4', serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.cta-sub { font-size: 14px; color: var(--muted2); }
+.cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+  min-width: 240px;
+}
+.cta-tertiary {
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted2);
+  padding-top: 4px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  text-decoration: none;
+  display: block;
+}
+.cta-tertiary:hover { opacity: 1; color: var(--muted); }
+
+/* ── BUTTONS — exact match main site ────────────────────── */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 10px;
+  font-family: Poppins, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+  text-decoration: none;
+  padding: 13px 22px;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #071018;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(0,198,255,.2);
+}
+.btn-primary:hover {
+  box-shadow: 0 6px 28px rgba(0,198,255,.35);
+  transform: translateY(-1px);
+  color: #071018;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.14), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.btn-primary:hover::after { opacity: 1; }
+
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover {
+  border-color: var(--border2);
+  background: rgba(0,198,255,.04);
+  color: var(--muted);
+  box-shadow: 0 0 16px rgba(0,198,255,.08);
+}
+
+/* ── FOOTER ─────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.footer-brand {
+  font-family: 'Source Serif 4', serif;
+  font-size: 13px;
+  color: var(--muted2);
+}
+.footer-note {
+  font-size: 12px;
+  color: var(--muted2);
+  opacity: 0.4;
+}
+
+/* ── SCROLL REVEAL ──────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── HERO ENTRY ANIMATIONS ──────────────────────────────── */
+.hero-copy > * {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeUp 0.7s var(--ease) forwards;
+}
+.hero-eyebrow { animation-delay: 0.08s; }
+.hero-h1      { animation-delay: 0.18s; }
+.hero-sub     { animation-delay: 0.28s; }
+.hero-actions { animation-delay: 0.38s; }
+.hero-visual {
+  opacity: 0;
+  animation: fadeIn 1s var(--ease2) 0.2s forwards;
+}
+
+@keyframes fadeUp { to { opacity: 1; transform: none; } }
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-copy { padding: 60px 0 48px; order: 1; }
+  .hero-visual {
+    order: 0;
+    min-height: 280px;
+    height: 280px;
+    border-left: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-sub { max-width: none; }
+  .offer-grid, .work-grid { grid-template-columns: 1fr; }
+  .offer-col, .work-card { border-right: none; border-bottom: 1px solid var(--border); }
+  .offer-col:last-child, .work-card:last-child { border-bottom: none; }
+  .how-grid { grid-template-columns: 1fr; gap: 36px; }
+  .useful-grid { grid-template-columns: 1fr 1fr; }
+  .cta-inner { grid-template-columns: 1fr; gap: 32px; }
+  .cta-actions { min-width: auto; }
+}
+
+@media (max-width: 600px) {
+  .wrap { padding: 0 20px; }
+  .useful-grid { grid-template-columns: 1fr; }
+  .section { padding: 56px 0; }
+  .cta-section { padding: 64px 0 56px; }
+  footer { padding: 20px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background system — exact match from main site -->
+<div class="bg-mesh" aria-hidden="true"></div>
+<div class="bg-noise-overlay" aria-hidden="true"></div>
+<canvas id="particleCanvas" aria-hidden="true"></canvas>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+<!-- NAV -->
+<div class="wrap">
+  <nav>
+    <span class="nav-wordmark">Studio San Francisco</span>
+    <a class="nav-link" href="index.html">Main site →</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">Founder Content Sessions</p>
+      <h1 class="hero-h1">
+        Turn what you're building<br>
+        into content people<br>
+        <em>understand.</em>
+      </h1>
+      <p class="hero-sub">
+        Studio San Francisco helps founders and teams record interviews, explainers, podcasts, and short-form clips that make their work easier to understand and easier to share.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://calendly.com/thestudiosf/founders-call-intro" target="_blank" rel="noopener">
+          Book a 15-min intro call
+        </a>
+        <a class="btn btn-outline" href="mailto:stephen@bookthestudiosf.com">
+          Email Stephen
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <img
+        class="hero-img"
+        src="images/stephen-studio-portrait.jpg"
+        <!-- Replace this src with a real Studio San Francisco image when ready. -->
+        alt="Studio San Francisco recording environment"
+        loading="eager"
+        width="900"
+        height="1100"
+      />
+      <div class="hero-img-overlay"></div>
+      <span class="hero-img-caption">SF · By appointment</span>
+    </div>
+  </div>
+</div>
+
+<!-- OFFER -->
+<div class="wrap">
+  <div class="section">
+    <p class="section-label reveal">What we make together</p>
+    <div class="offer-grid reveal">
+      <div class="offer-col">
+        <p class="offer-num">01</p>
+        <h3 class="offer-title">Record the story</h3>
+        <p class="offer-desc">Founder interviews, podcast conversations, and launch explainers — captured in a real studio with an engineer in the room.</p>
+      </div>
+      <div class="offer-col">
+        <p class="offer-num">02</p>
+        <h3 class="offer-title">Capture clean assets</h3>
+        <p class="offer-desc">Professional-grade audio, video, and source material you can clip, edit, and repurpose. Nothing locked inside a Zoom recording.</p>
+      </div>
+      <div class="offer-col">
+        <p class="offer-num">03</p>
+        <h3 class="offer-title">Share with clarity</h3>
+        <p class="offer-desc">Content built for LinkedIn, X, your website, fundraising decks, and recruiting — wherever your audience actually is.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="wrap">
+  <div class="section">
+    <p class="section-label reveal">How it works</p>
+    <div class="how-grid">
+      <div class="how-steps reveal">
+        <div class="how-step">
+          <span class="how-step-n">i.</span>
+          <div>
+            <p class="how-step-title">15-min intro call</p>
+            <p class="how-step-desc">We clarify the goal, the audience, and the kind of content worth making before you step into the room.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <span class="how-step-n">ii.</span>
+          <div>
+            <p class="how-step-title">90-min studio session</p>
+            <p class="how-step-desc">Engineer in the room. Full recording setup. We guide the conversation and handle everything technical.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <span class="how-step-n">iii.</span>
+          <div>
+            <p class="how-step-title">Clean deliverables</p>
+            <p class="how-step-desc">Audio, video, and clips ready to publish, share, or hand off to a video editor.</p>
+          </div>
+        </div>
+      </div>
+      <div class="how-aside reveal">
+        <p class="how-aside-label">The approach</p>
+        <p>
+          <strong>Bring the idea.</strong> We guide the conversation, handle the room, and capture clean audio and video you can turn into useful content. No gear knowledge needed. We keep the conversation focused, natural, and useful — with someone who knows how to make founders sound like themselves.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- USEFUL WHEN -->
+<div class="wrap">
+  <div class="section">
+    <p class="section-label reveal">Useful when you're</p>
+    <div class="useful-grid reveal">
+      <div class="useful-item"><span>Launching a product</span></div>
+      <div class="useful-item"><span>Fundraising</span></div>
+      <div class="useful-item"><span>Recruiting</span></div>
+      <div class="useful-item"><span>Building in public</span></div>
+      <div class="useful-item"><span>Explaining a complex product</span></div>
+      <div class="useful-item"><span>Turning founder knowledge into content</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SELECTED WORK -->
+<div class="wrap">
+  <div class="section" id="selected-work">
+    <p class="section-label reveal">Selected work</p>
+    <div class="work-grid reveal">
+      <a class="work-card" href="https://www.youtube.com/playlist?list=PLnhP_3cmlvva5jMaPIhy18iiN_isfBzcK" target="_blank" rel="noopener">
+        <p class="work-card-tag">Series</p>
+        <p class="work-card-title">Brew in the Stu</p>
+        <p class="work-card-desc">Casual studio conversations and creative content produced at Studio San Francisco.</p>
+        <p class="work-card-link">Watch ↗</p>
+      </a>
+      <a class="work-card" href="https://www.youtube.com/@Acc.Ventures/videos" target="_blank" rel="noopener">
+        <p class="work-card-tag">Podcast</p>
+        <p class="work-card-title">ACC Ventures Founder Interviews</p>
+        <p class="work-card-desc">Founder-focused conversations with builders across Web3, AI, and startup ecosystems.</p>
+        <p class="work-card-link">Listen ↗</p>
+      </a>
+      <a class="work-card" href="index.html" target="_blank" rel="noopener">
+        <p class="work-card-tag">Studio</p>
+        <p class="work-card-title">Studio San Francisco</p>
+        <p class="work-card-desc">Recording, production, and creative sessions in SF. The full picture of what we do.</p>
+        <p class="work-card-link">See the studio ↗</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="wrap">
+  <div class="cta-section">
+    <div class="cta-inner reveal">
+      <div>
+        <h2 class="cta-h2">Have a content idea<br>you haven't made yet?</h2>
+        <p class="cta-sub">Book a free 15-minute intro call. No commitment, no pitch deck.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="https://calendly.com/thestudiosf/founders-call-intro" target="_blank" rel="noopener">
+          Book a 15-min intro call
+        </a>
+        <a class="btn btn-outline" href="mailto:stephen@bookthestudiosf.com">
+          Email Stephen
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="wrap">
+  <footer>
+    <span class="footer-brand">Studio San Francisco</span>
+    <span class="footer-note">San Francisco, CA · By appointment</span>
+  </footer>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   CURSOR GLOW + PARTICLE CONSTELLATION
+   Extracted exactly from Studio San Francisco scripts.js §12
+   ═══════════════════════════════════════════════════════════ */
+
+(function () {
+  'use strict';
+
+  // --- Cursor Glow (smooth lerp follow) ---
+  var cursorGlow = document.getElementById('cursorGlow');
+  if (cursorGlow && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var glowMouseX = 0, glowMouseY = 0;
+    var glowX = 0, glowY = 0;
+
+    document.addEventListener('mousemove', function (e) {
+      glowMouseX = e.clientX;
+      glowMouseY = e.clientY;
+    });
+
+    function animateCursorGlow() {
+      glowX += (glowMouseX - glowX) * 0.06;
+      glowY += (glowMouseY - glowY) * 0.06;
+      cursorGlow.style.left = glowX + 'px';
+      cursorGlow.style.top  = glowY + 'px';
+      requestAnimationFrame(animateCursorGlow);
+    }
+    animateCursorGlow();
+  }
+
+  // --- Particle Constellation System ---
+  var canvas = document.getElementById('particleCanvas');
+  if (canvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var ctx = canvas.getContext('2d');
+    var constellationParticles = [];
+    var constellationMouseX = -1000, constellationMouseY = -1000;
+
+    function isLightTheme() {
+      return document.documentElement.getAttribute('data-theme') === 'light';
+    }
+
+    function getParticleColor(opacity) {
+      return 'rgba(0, 198, 255, ' + opacity + ')';
+    }
+    function getLineColor(opacity) {
+      return 'rgba(0, 198, 255, ' + opacity + ')';
+    }
+    function getOpacityMultiplier() {
+      return isLightTheme() ? 3.5 : 1.0;
+    }
+
+    function resizeCanvas() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function createParticles() {
+      constellationParticles = [];
+      var density = Math.min(90, Math.floor((canvas.width * canvas.height) / 16000));
+
+      for (var i = 0; i < density; i++) {
+        constellationParticles.push({
+          x:           Math.random() * canvas.width,
+          y:           Math.random() * canvas.height,
+          vx:          (Math.random() - 0.5) * 0.3,
+          vy:          (Math.random() - 0.5) * 0.3,
+          radius:      Math.random() * 1.8 + 0.6,
+          baseOpacity: Math.random() * 0.4 + 0.15
+        });
+      }
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      var opacityMult = getOpacityMultiplier();
+
+      for (var i = 0; i < constellationParticles.length; i++) {
+        var p = constellationParticles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Wrap edges
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        // Draw dot
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = getParticleColor(p.baseOpacity * opacityMult);
+        ctx.fill();
+
+        // Connect nearby particles
+        for (var j = i + 1; j < constellationParticles.length; j++) {
+          var p2 = constellationParticles[j];
+          var cdx = p.x - p2.x;
+          var cdy = p.y - p2.y;
+          var cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+
+          if (cdist < 120) {
+            var lineOpacity = (0.12 * (1 - cdist / 120)) * opacityMult;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = getLineColor(lineOpacity);
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+
+        // Repel from cursor
+        var rdx   = constellationMouseX - p.x;
+        var rdy   = constellationMouseY - p.y;
+        var rdist = Math.sqrt(rdx * rdx + rdy * rdy);
+
+        if (rdist < 150 && rdist > 0) {
+          var force         = (150 - rdist) / 150;
+          var pushStrength  = force * force * 0.08;
+          p.vx -= (rdx / rdist) * pushStrength;
+          p.vy -= (rdy / rdist) * pushStrength;
+        }
+
+        // Damping
+        p.vx *= 0.992;
+        p.vy *= 0.992;
+
+        // Speed cap
+        var speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+        if (speed > 3) {
+          p.vx = (p.vx / speed) * 3;
+          p.vy = (p.vy / speed) * 3;
+        }
+      }
+
+      requestAnimationFrame(drawParticles);
+    }
+
+    document.addEventListener('mousemove', function (e) {
+      constellationMouseX = e.clientX;
+      constellationMouseY = e.clientY;
+    });
+
+    document.addEventListener('mouseleave', function () {
+      constellationMouseX = -1000;
+      constellationMouseY = -1000;
+    });
+
+    resizeCanvas();
+    createParticles();
+    drawParticles();
+
+    var resizeTimeout;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(function () {
+        resizeCanvas();
+        createParticles();
+      }, 150);
+    });
+  }
+
+  // --- Scroll reveal ---
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+})();
+</script>
+
+</body>
+</html>
