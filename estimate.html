@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZKSHE7V4MH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZKSHE7V4MH');
+</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="#00c6ff" name="theme-color"/>
+<meta content="index,follow,max-image-preview:large" name="robots"/>
+<title>Video Estimate — Studio San Francisco</title>
+<meta content="Get a transparent, itemized estimate for professional video production. Testimonial shoots in-studio, Bay Area on-location, or anywhere in the US. Configure your session in minutes." name="description"/>
+<link href="https://www.bookthestudiosf.com/estimate.html" rel="canonical"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙</text></svg>"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<!-- Open Graph -->
+<meta content="Video Estimate — Studio San Francisco" property="og:title"/>
+<meta content="Configure your video shoot and get a transparent, itemized estimate for professional testimonial video production." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://www.bookthestudiosf.com/estimate.html" property="og:url"/>
+<meta content="https://www.bookthestudiosf.com/images/studio-1.jpg" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Studio San Francisco" property="og:site_name"/>
+<!-- Twitter -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Video Estimate — Studio San Francisco" name="twitter:title"/>
+<meta content="Configure your shoot and get a clear, itemized video production estimate." name="twitter:description"/>
+<meta content="https://www.bookthestudiosf.com/images/studio-1.jpg" name="twitter:image"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Source+Serif+4:wght@400;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<!-- Shared stylesheet -->
+<link rel="preload" href="styles.css" as="style"/>
+<link href="styles.css" rel="stylesheet"/>
+<!-- Page-specific styles -->
+<style>
+/* ═══════════════════════════════════════════════════════════
+   ESTIMATE PAGE — page-scoped styles
+   All global tokens (--accent, --gold, --card, etc.) come
+   from styles.css. Nothing here overrides shared components.
+   ═══════════════════════════════════════════════════════════ */
+
+.est-page-hero {
+  padding: 72px 0 48px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.est-breadcrumb {
+  font-size: 13px;
+  color: var(--muted2);
+  margin-bottom: 18px;
+  font-family: Inter, Poppins, sans-serif;
+}
+.est-breadcrumb a {
+  color: var(--muted2);
+  text-decoration: none;
+  transition: color .2s;
+}
+.est-breadcrumb a:hover { color: var(--accent); }
+
+.est-section { padding-bottom: 80px; }
+.est-wrap { max-width: 760px; margin: 0 auto; }
+
+/* ── Progress bar ── */
+.est-prog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+.est-pstep { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.est-pdot {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 600;
+  transition: all .3s var(--ease);
+}
+.est-pdot.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #041723;
+  box-shadow: 0 0 18px rgba(0,198,255,.4);
+}
+.est-pdot.done {
+  background: rgba(0,198,255,.12);
+  border: 1px solid var(--border2);
+  color: var(--accent);
+}
+.est-pdot.idle {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--muted2);
+}
+.est-plabel {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .09em; text-transform: uppercase;
+}
+.est-plabel.active { color: var(--accent); }
+.est-plabel.done   { color: var(--muted); }
+.est-plabel.idle   { color: var(--muted2); opacity: .4; }
+.est-pline {
+  width: 80px; height: 1px;
+  margin-bottom: 18px;
+  transition: background .3s;
+}
+.est-pline.done { background: var(--border2); }
+.est-pline.idle { background: var(--border); }
+
+/* ── Step headings ── */
+.est-stitle {
+  font-size: clamp(22px, 3.5vw, 30px);
+  font-weight: 500; margin-bottom: 6px;
+}
+.est-ssub {
+  font-size: 14px; color: var(--muted);
+  line-height: 1.65; margin-bottom: 32px;
+  font-family: Inter, Poppins, sans-serif;
+}
+
+/* ── Tier cards ── */
+.est-tier-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+.est-tc {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  cursor: pointer;
+  transition: all .25s var(--ease);
+  display: flex; align-items: flex-start; gap: 20px;
+}
+.est-tc:hover {
+  border-color: var(--border2);
+  box-shadow: var(--glow-subtle);
+  transform: translateY(-1px);
+}
+.est-tc.sel {
+  border-color: var(--accent);
+  background: rgba(0,198,255,.06);
+  box-shadow: 0 0 0 1px rgba(0,198,255,.18), var(--glow-subtle);
+}
+.est-tnum {
+  font-family: 'Source Serif 4', serif;
+  font-size: 40px; font-weight: 400;
+  color: rgba(0,198,255,.15);
+  line-height: 1; min-width: 28px;
+  padding-top: 2px;
+  transition: color .2s;
+}
+.est-tc.sel .est-tnum { color: var(--accent); }
+.est-tbody { flex: 1; }
+.est-ttag {
+  font-size: 10px; letter-spacing: .15em;
+  text-transform: uppercase; font-weight: 600;
+  color: var(--muted2); margin-bottom: 4px;
+}
+.est-tc.sel .est-ttag { color: var(--accent); }
+.est-tname { font-size: 20px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.est-tdesc {
+  font-size: 13px; color: var(--muted);
+  line-height: 1.65;
+  font-family: Inter, Poppins, sans-serif;
+}
+.est-tfrom { font-size: 12px; font-weight: 600; color: var(--gold); margin-top: 10px; }
+
+/* ── Option groups ── */
+.est-og { margin-bottom: 26px; }
+.est-ol {
+  display: block; font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; font-weight: 600;
+  color: var(--muted); margin-bottom: 10px;
+}
+.est-oh {
+  font-size: 12px; color: var(--muted2);
+  margin-top: 8px; line-height: 1.65;
+  font-family: Inter, Poppins, sans-serif;
+}
+
+/* ── Pills ── */
+.est-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.est-pill {
+  padding: 8px 18px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 13px; font-weight: 500;
+  color: var(--muted); cursor: pointer;
+  transition: all .2s var(--ease);
+  background: var(--card);
+  user-select: none;
+}
+.est-pill:hover { border-color: var(--border2); color: var(--text); }
+.est-pill.on {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(0,198,255,.10);
+}
+
+/* ── Add-ons ── */
+.est-adlist { display: flex; flex-direction: column; gap: 10px; }
+.est-ad {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all .2s var(--ease);
+  background: var(--card);
+}
+.est-ad:hover { border-color: var(--border2); }
+.est-ad.on { border-color: var(--accent); background: rgba(0,198,255,.07); }
+.est-adl { flex: 1; }
+.est-adname { font-size: 14px; font-weight: 500; color: var(--text); }
+.est-addesc {
+  font-size: 12px; color: var(--muted);
+  margin-top: 2px;
+  font-family: Inter, Poppins, sans-serif;
+}
+.est-adprice { font-size: 13px; font-weight: 600; color: var(--muted2); padding-left: 16px; white-space: nowrap; }
+.est-ad.on .est-adprice { color: var(--accent); }
+
+/* ── Form inputs ── */
+input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; margin: 8px 0; }
+.est-range-val { font-size: 22px; font-weight: 600; color: var(--gold); margin-top: 4px; }
+.est-input {
+  width: 100%;
+  background: var(--field-bg);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-family: Poppins, sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border .2s;
+  box-sizing: border-box;
+}
+.est-input:focus { border-color: var(--border2); }
+.est-input::placeholder { color: var(--placeholder); }
+
+/* ── Divider ── */
+.est-div { border: none; border-top: 1px solid var(--border); margin: 26px 0; }
+
+/* ── Estimate output ── */
+.est-otag {
+  font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; font-weight: 600;
+  color: var(--accent); margin-bottom: 6px;
+}
+.est-otitle { font-size: clamp(24px, 4vw, 32px); font-weight: 500; margin-bottom: 32px; }
+
+.est-lis { margin-bottom: 6px; }
+.est-li {
+  display: flex; align-items: flex-start;
+  justify-content: space-between;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 16px;
+}
+.est-li:first-child { border-top: 1px solid var(--border); }
+.est-lil { flex: 1; }
+.est-lname { font-size: 14px; font-weight: 500; color: var(--text); }
+.est-lsub {
+  font-size: 12px; color: var(--muted);
+  margin-top: 3px; line-height: 1.5;
+  font-family: Inter, Poppins, sans-serif;
+}
+.est-lamt { font-size: 14px; font-weight: 600; color: var(--text); white-space: nowrap; padding-top: 1px; }
+
+.est-tot {
+  display: flex; align-items: baseline;
+  justify-content: space-between; padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.est-totlbl {
+  font-size: 16px; font-style: italic;
+  color: var(--muted);
+  font-family: 'Source Serif 4', serif;
+}
+.est-totamt {
+  font-size: 34px; font-weight: 600;
+  color: var(--gold);
+  text-shadow: 0 0 30px rgba(244,196,48,.25);
+}
+
+/* ── Info panels ── */
+.est-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px; margin-top: 20px;
+}
+.est-ptitle {
+  font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; font-weight: 600;
+  color: var(--muted); margin-bottom: 14px;
+}
+.est-pr {
+  display: flex; justify-content: space-between;
+  padding: 6px 0; font-size: 13px;
+  font-family: Inter, Poppins, sans-serif;
+}
+.est-prl { color: var(--muted); }
+.est-prv { font-weight: 500; color: var(--text); }
+.est-ptot {
+  display: flex; justify-content: space-between;
+  padding: 12px 0 4px;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+  font-size: 13px; font-weight: 600;
+}
+.est-ptotl { color: var(--text); }
+.est-ptotv { color: var(--accent2); }
+.est-di {
+  display: flex; align-items: flex-start;
+  gap: 10px; padding: 5px 0;
+  font-size: 13px; color: var(--muted);
+  line-height: 1.55;
+  font-family: Inter, Poppins, sans-serif;
+}
+.est-dck { color: var(--accent2); flex-shrink: 0; margin-top: 1px; font-size: 12px; }
+
+/* ── Remote callout ── */
+.est-rcall {
+  border: 1px solid var(--border2);
+  background: rgba(0,198,255,.05);
+  border-radius: var(--radius);
+  padding: 18px 20px; margin-top: 20px;
+  font-size: 13px; color: var(--muted);
+  line-height: 1.75;
+  font-family: Inter, Poppins, sans-serif;
+}
+.est-rcall strong { color: var(--accent); font-weight: 500; }
+
+/* ── Button row ── */
+.est-brow { display: flex; gap: 12px; margin-top: 32px; }
+.est-brow .btn-dim { flex: 0 0 auto; }
+.est-brow .btn-primary { flex: 1; }
+
+.est-cnote {
+  text-align: center; font-size: 12px;
+  color: var(--muted2); margin-top: 16px; line-height: 1.65;
+  font-family: Inter, Poppins, sans-serif;
+}
+.est-cnote a { color: var(--accent); text-decoration: none; }
+.est-cnote a:hover { color: var(--accent2); }
+
+/* ── Fade animation ── */
+.est-fade { animation: fadeInUp .32s var(--ease) both; }
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .est-tc { padding: 16px 16px; gap: 14px; }
+  .est-tnum { font-size: 30px; min-width: 24px; }
+  .est-brow { flex-direction: column; }
+  .est-brow .btn-dim, .est-brow .btn-primary { flex: none; width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background Layers -->
+<div aria-hidden="true" class="bg-mesh"></div>
+<div aria-hidden="true" class="bg-noise-overlay"></div>
+<canvas aria-hidden="true" id="particleCanvas"></canvas>
+<div aria-hidden="true" class="cursor-glow" id="cursorGlow"></div>
+
+<a class="skip-to-main" href="#main">Skip to main content</a>
+
+<!-- DESKTOP TOP NAV -->
+<header class="topbar desktop-only" id="topbar" role="banner">
+<div class="topbar-inner">
+<a aria-label="Studio San Francisco home" class="topbrand" href="index.html">
+<span aria-hidden="true" class="topmark"></span>
+<span class="topname"><strong>Studio San Francisco</strong></span>
+</a>
+<nav aria-label="Primary navigation" class="topnav">
+<a href="index.html#menu">Services</a>
+<a href="founders.html">Founder Content</a>
+<a href="index.html#photos">The Studio</a>
+<a href="portfolio.html">Visuals</a>
+<a href="blog.html">Blog</a>
+<a href="estimate.html" aria-current="page">Video Estimate</a>
+<a href="index.html#testimonials">Proof</a>
+<a href="index.html#faq">FAQ</a>
+</nav>
+<div class="topactions">
+<a class="btn btn-nav-cta" href="index.html#quick-start">Get Started</a>
+</div>
+</div>
+</header>
+
+<!-- MOBILE MENU BUTTON -->
+<button aria-label="Open menu" class="menu-fab" id="menuFab" type="button">
+<span aria-hidden="true" class="menu-dot"></span>
+<span>MENU</span>
+</button>
+
+<!-- BACKDROP -->
+<div aria-hidden="true" class="backdrop" id="backdrop"></div>
+
+<!-- SIDEBAR -->
+<aside aria-label="Site navigation" class="sidebar" id="sidebar" role="navigation">
+<div class="sidebar-inner">
+<div class="brand">
+<div class="brand-mark">
+<div class="brand-name">Studio San Francisco</div>
+</div>
+<button aria-label="Close menu" class="icon-btn" id="closeSidebar">&#10005;</button>
+</div>
+<ul class="nav">
+<li><a href="index.html">Home</a></li>
+<li><a href="index.html#quick-start">Get Started</a></li>
+<li><a href="founders.html">Founder Content</a></li>
+<li><a href="index.html#menu">Services</a></li>
+<li><a href="index.html#photos">The Studio</a></li>
+<li><a href="portfolio.html">Visuals</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="estimate.html" aria-current="page">Video Estimate</a></li>
+<li><a href="index.html#testimonials">Proof</a></li>
+<li><a href="index.html#engineer">Meet Your Engineer</a></li>
+<li><a href="index.html#faq">FAQ</a></li>
+<li class="nav-divider"></li>
+<li class="nav-label">More</li>
+<li><a href="index.html#noise">Studio Policies</a></li>
+<li><a href="index.html#deposit">Deposit &amp; Cancellation</a></li>
+</ul>
+</div>
+</aside>
+
+<!-- THEME FAB -->
+<div aria-hidden="false" class="theme-fab" id="themeFabWrap">
+<button aria-checked="false" aria-label="Switch to light mode" class="theme-fab-btn" id="themeFab" role="switch" type="button">
+<span aria-hidden="true" class="theme-fab-icon">&#9790;</span>
+</button>
+</div>
+
+<!-- BACK TO TOP -->
+<div class="back-to-top" id="backToTop" style="display:none;">
+<a aria-label="Back to top" href="#estimate-top">
+<span class="back-to-top-icon">&#8593;</span>
+<span class="back-to-top-text">Top</span>
+</a>
+</div>
+
+<!-- MOBILE CTA BAR -->
+<div aria-label="Quick actions" class="cta-mobile" id="ctaMobile">
+<a class="btn btn-nav-cta" href="index.html#quick-start">Get Started</a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     MAIN CONTENT
+     ═══════════════════════════════════════════════════════════ -->
+<main id="main" tabindex="-1">
+
+<!-- Page Hero -->
+<section class="est-page-hero" id="estimate-top">
+  <p class="est-breadcrumb"><a href="index.html">&#8592; Studio San Francisco</a></p>
+  <p class="kicker" data-reveal="">Video Production</p>
+  <h1 data-reveal="">Video Estimate</h1>
+  <p class="subhead" data-reveal="">Configure your shoot below and get a clear, itemized estimate before we talk. Every line item is explained — no surprises, no pressure.</p>
+</section>
+
+<!-- Estimator -->
+<section class="est-section" id="estimate">
+<div class="est-wrap">
+  <div id="est-prog"></div>
+  <div id="est-s1"></div>
+  <div id="est-s2" style="display:none;"></div>
+  <div id="est-s3" style="display:none;"></div>
+</div>
+</section>
+
+</main>
+
+<!-- Mini Player (site-wide brand element) -->
+<div id="miniPlayer" class="mini-player" role="complementary" aria-label="Audio player">
+  <div class="mini-progress-line"><div class="mini-progress-fill" id="miniProgressFill"></div></div>
+  <div class="mini-bar">
+    <div class="mini-invite" id="miniInvite">
+      <span class="mini-invite-icon" aria-hidden="true">&#9835;</span>
+      <span class="mini-invite-label">Hear what we&#39;ve made &mdash; listen while you browse</span>
+      <button class="mini-play-invite-btn" id="miniPlayInvite" type="button" aria-label="Start playing studio samples">
+        <svg width="10" height="12" viewBox="0 0 16 18" fill="currentColor" style="vertical-align:-2px;margin-right:4px"><path d="M2.5 1.2a1 1 0 0 1 1.5-.86l11 8.16a1 1 0 0 1 0 1.72l-11 7.16A1 1 0 0 1 2.5 16.5V1.2z"/></svg>
+        Play
+      </button>
+    </div>
+    <div class="mini-controls" id="miniControls" style="display:none">
+      <div class="mini-disc" id="miniDisc" aria-hidden="true">&#9835;</div>
+      <div class="mini-track-wrap">
+        <div class="mini-title" id="miniTitle" role="link" tabindex="0" title="Go to audio player">&ndash;</div>
+        <div class="mini-plays" id="miniPlays"></div>
+      </div>
+      <div class="mini-btns">
+        <button class="mini-btn" id="miniPrev" type="button" aria-label="Previous track">&#9198;</button>
+        <button class="mini-btn mini-btn-play" id="miniPlay" type="button" aria-label="Play / Pause">
+          <svg width="12" height="14" viewBox="0 0 16 18" fill="currentColor"><path d="M2.5 1.2a1 1 0 0 1 1.5-.86l11 8.16a1 1 0 0 1 0 1.72l-11 7.16A1 1 0 0 1 2.5 16.5V1.2z"/></svg>
+        </button>
+        <button class="mini-btn" id="miniNext" type="button" aria-label="Next track">&#9197;</button>
+      </div>
+      <div class="mini-vol">
+        <button class="mini-btn mini-mute-btn" id="miniMute" type="button" aria-label="Mute">&#128266;</button>
+        <input class="mini-vol-slider" id="miniVol" type="range" min="0" max="1" step="0.05" value="0.8" aria-label="Volume"/>
+      </div>
+    </div>
+    <button class="mini-dismiss" id="miniDismiss" type="button" aria-label="Close player">&#10005;</button>
+  </div>
+</div>
+
+<!-- Shared scripts -->
+<script src="scripts.js"></script>
+
+<!-- Estimator script -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── State (exposed to window for inline handlers) ── */
+  window.EST = {
+    tier: null,
+    subjects: 1,
+    socialCuts: 0,
+    distance: 'near',
+    destination: '',
+    flightCost: 450,
+    hotelNights: 1,
+    addons: {}
+  };
+
+  /* ── Global handlers (called by onclick in innerHTML) ── */
+
+  window.estSelTier = function (t) {
+    EST.tier = t;
+    document.querySelectorAll('.est-tc').forEach(function (c) {
+      c.classList.toggle('sel', c.getAttribute('data-tier') === t);
+    });
+    var btn = document.getElementById('est-btn2');
+    if (btn) btn.disabled = false;
+  };
+
+  window.estPill = function (grp, val, el) {
+    EST[grp] = val;
+    el.closest('.est-pills').querySelectorAll('.est-pill').forEach(function (p) {
+      p.classList.remove('on');
+    });
+    el.classList.add('on');
+  };
+
+  window.estToggle = function (k, el) {
+    EST.addons[k] = !EST.addons[k];
+    el.classList.toggle('on', !!EST.addons[k]);
+  };
+
+  window.estGo = function (n) {
+    [1, 2, 3].forEach(function (i) {
+      var el = document.getElementById('est-s' + i);
+      if (el) el.style.display = i === n ? 'block' : 'none';
+    });
+    if (n === 2) renderS2();
+    if (n === 3) renderS3();
+    renderProg(n);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  /* ── Helpers ── */
+  function fmt(n) { return '$' + n.toLocaleString(); }
+
+  function pill(val, label, grp, cur) {
+    var arg = (typeof val === 'number') ? val : ("'" + val + "'");
+    return '<span class="est-pill' + (cur == val ? ' on' : '') +
+      '" onclick="estPill(\'' + grp + '\',' + arg + ',this)">' + label + '</span>';
+  }
+
+  function addon(key, name, desc, price) {
+    return '<div class="est-ad' + (EST.addons[key] ? ' on' : '') +
+      '" onclick="estToggle(\'' + key + '\',this)">' +
+      '<div class="est-adl"><div class="est-adname">' + name + '</div>' +
+      '<div class="est-addesc">' + desc + '</div></div>' +
+      '<div class="est-adprice">' + price + '</div></div>';
+  }
+
+  function tcHTML(tier, num, tag, name, desc, from) {
+    return '<div class="est-tc' + (EST.tier === tier ? ' sel' : '') +
+      '" data-tier="' + tier + '" onclick="estSelTier(\'' + tier + '\')">' +
+      '<div class="est-tnum">' + num + '</div>' +
+      '<div class="est-tbody">' +
+      '<div class="est-ttag">' + tag + '</div>' +
+      '<div class="est-tname">' + name + '</div>' +
+      '<div class="est-tdesc">' + desc + '</div>' +
+      '<div class="est-tfrom">' + from + '</div>' +
+      '</div></div>';
+  }
+
+  /* ── Progress ── */
+  function renderProg(step) {
+    var lbls = ['Tier', 'Configure', 'Estimate'];
+    var h = '';
+    lbls.forEach(function (l, i) {
+      var n = i + 1;
+      var cls = n < step ? 'done' : n === step ? 'active' : 'idle';
+      h += '<div class="est-pstep">' +
+        '<div class="est-pdot ' + cls + '">' + (n < step ? '&#10003;' : n) + '</div>' +
+        '<div class="est-plabel ' + cls + '">' + l + '</div>' +
+        '</div>';
+      if (i < 2) h += '<div class="est-pline ' + (step > n ? 'done' : 'idle') + '"></div>';
+    });
+    var el = document.getElementById('est-prog');
+    if (el) el.innerHTML = h;
+  }
+
+  /* ── Step 1: Tier selection ── */
+  function renderS1() {
+    var h = '<div class="est-fade">' +
+      '<h2 class="est-stitle">Where is the shoot?</h2>' +
+      '<p class="est-ssub">Location determines logistics, travel time, and how costs are structured. Choose the tier that fits your situation.</p>' +
+      '<div class="est-tier-grid">' +
+      tcHTML('studio', 'I', 'In-Studio', 'Your team comes to San Francisco',
+        'Subject shows up at Studio San Francisco. Controlled lighting, dialed-in setup, no location surprises. Setup is complete before you arrive — you walk in, we shoot. Lowest logistics, best value per deliverable.',
+        'From $650 &middot; San Francisco, CA') +
+      tcHTML('bayarea', 'II', 'Bay Area On-Location', 'I bring the studio to you',
+        'I pack down the full lighting and camera rig, drive to your location in the Bay Area (within 40 miles of SF), shoot on-site, then return to the studio and reset. Best for teams whose subjects can\'t travel into the city.',
+        'From $800 &middot; Bay Area within 40 mi of SF') +
+      tcHTML('remote', 'III', 'Remote / National Travel', 'I fly to your city',
+        'For clients with subjects anywhere in the US. All travel expenses are itemized transparently &mdash; flights, hotel, per diem, and ground transport billed at actual cost, no markup. Non-shooting travel days are billed at a flat day rate. The shoot itself is priced identically to in-studio.',
+        'From $2,400 &middot; all travel costs itemized') +
+      '</div>' +
+      '<button class="btn btn-primary" id="est-btn2" onclick="estGo(2)" disabled ' +
+      'style="width:100%; padding:14px; font-size:15px; margin-top:4px; border-radius:14px;" type="button">' +
+      'Next: Configure your shoot &rarr;</button>' +
+      '</div>';
+    var el = document.getElementById('est-s1');
+    if (el) { el.innerHTML = h; el.style.display = 'block'; }
+  }
+
+  /* ── Step 2: Configuration ── */
+  function renderS2() {
+    var tn = { studio: 'In-Studio', bayarea: 'Bay Area On-Location', remote: 'Remote / National Travel' };
+
+    var h = '<div class="est-fade">' +
+      '<h2 class="est-stitle">Configure your shoot</h2>' +
+      '<p class="est-ssub">Tier: <strong style="color:var(--accent);font-weight:500;">' + tn[EST.tier] + '</strong>. Adjust the options below &mdash; your estimate is generated on the next step.</p>' +
+
+      '<div class="est-og"><span class="est-ol">Number of testimonial subjects</span>' +
+      '<div class="est-pills">' +
+      pill(1, '1 subject', 'subjects', EST.subjects) +
+      pill(2, '2 subjects', 'subjects', EST.subjects) +
+      pill(3, '3 subjects', 'subjects', EST.subjects) +
+      '</div><p class="est-oh">Each subject is one person filmed for one testimonial. Batching 2&ndash;3 subjects in a single session significantly reduces per-subject cost &mdash; setup, teardown, and travel happen once regardless of how many people you film.</p></div>' +
+
+      '<div class="est-og"><span class="est-ol">Social media cuts per subject</span>' +
+      '<div class="est-pills">' +
+      pill(0, 'None &mdash; hero cut only', 'socialCuts', EST.socialCuts) +
+      pill(1, '+1 social cut', 'socialCuts', EST.socialCuts) +
+      pill(2, '+2 social cuts', 'socialCuts', EST.socialCuts) +
+      '</div><p class="est-oh">Every subject receives one primary hero cut (up to 90 sec, web and presentation ready) by default. Social cuts are shorter, independently edited clips (15&ndash;30 sec) formatted for LinkedIn, YouTube Shorts, or paid ads &mdash; each is a separate edit, not just a trim.</p></div>';
+
+    if (EST.tier === 'bayarea') {
+      h += '<div class="est-og"><span class="est-ol">Distance from San Francisco</span>' +
+        '<div class="est-pills">' +
+        pill('near', 'Within 20 miles', 'distance', EST.distance) +
+        pill('far', '21&ndash;40 miles', 'distance', EST.distance) +
+        '</div><p class="est-oh">Within 20 miles: Oakland, Berkeley, Marin, Daly City, South SF. 21&ndash;40 miles: San Jose, Palo Alto, Napa, Walnut Creek. Beyond 40 miles is Tier III remote territory.</p></div>';
+    }
+
+    if (EST.tier === 'remote') {
+      h += '<div class="est-og"><span class="est-ol">Destination city</span>' +
+        '<input class="est-input" type="text" id="est-dest" placeholder="e.g. Austin, TX" ' +
+        'value="' + EST.destination + '" oninput="EST.destination=this.value" /></div>' +
+
+        '<div class="est-og"><span class="est-ol">Estimated roundtrip flight cost</span>' +
+        '<input type="range" min="150" max="1200" step="25" value="' + EST.flightCost + '" ' +
+        'oninput="EST.flightCost=parseInt(this.value);document.getElementById(\'est-fdv\').textContent=\'$\'+parseInt(this.value).toLocaleString()" />' +
+        '<div class="est-range-val" id="est-fdv">' + fmt(EST.flightCost) + '</div>' +
+        '<p class="est-oh">Used for your estimate only. Flights are invoiced at actual cost &mdash; no markup. If the ticket is cheaper, you pay less. I send receipts for all travel expenses.</p></div>' +
+
+        '<div class="est-og"><span class="est-ol">Hotel nights needed</span>' +
+        '<div class="est-pills">' +
+        pill(1, '1 night', 'hotelNights', EST.hotelNights) +
+        pill(2, '2 nights', 'hotelNights', EST.hotelNights) +
+        pill(3, '3 nights', 'hotelNights', EST.hotelNights) +
+        '</div><p class="est-oh">For a standard 1-day shoot: 1 night is typical (arrive the evening before, shoot full day, fly back). 2+ nights for longer engagements or when the return flight is the following day. Hotel invoiced at actual cost.</p></div>';
+    }
+
+    h += '<hr class="est-div" />' +
+      '<div class="est-og"><span class="est-ol">Add-ons</span>' +
+      '<div class="est-adlist">' +
+      addon('broll', 'B-roll package', 'Environmental, product, or team footage captured the same shoot day and woven into the final edit', '+$350') +
+      addon('intro', 'Branded intro/outro animation', 'Animated opener and closer with your logo, brand colors, and a clean title card &mdash; applied to all videos', '+$300') +
+      addon('captions', 'Closed captions', 'Delivered as a burned-in version and a separate SRT file &mdash; per finished video', '+$85/video') +
+      addon('rush', 'Rush delivery', 'Turnaround under 5 business days instead of 7&ndash;10. Adds 25% to post-production cost only.', '+25% post') +
+      '</div></div>' +
+
+      '<div class="est-brow">' +
+      '<button class="btn btn-dim" onclick="estGo(1)" type="button" style="border-radius:12px;">&larr; Back</button>' +
+      '<button class="btn btn-primary" onclick="estGo(3)" type="button" style="border-radius:12px;">Get my estimate &rarr;</button>' +
+      '</div></div>';
+
+    var el = document.getElementById('est-s2');
+    if (el) el.innerHTML = h;
+  }
+
+  /* ── Pricing calculation ── */
+  function calc() {
+    var lines = [], sub = 0;
+    var sm = { 1: 450, 2: 650, 3: 850 };
+    var sf = sm[EST.subjects];
+
+    lines.push({
+      n: 'Production session fee',
+      d: EST.subjects + ' subject' + (EST.subjects > 1 ? 's' : '') + ' &middot; studio setup 1.5 hrs &middot; 2-hr minimum shoot &middot; teardown',
+      a: sf
+    });
+    sub += sf;
+
+    var rm = EST.addons.rush ? 1.25 : 1;
+    var pf = Math.round(200 * EST.subjects * rm);
+    lines.push({
+      n: 'Post-production',
+      d: 'Edit &middot; color grade &middot; audio mix &middot; export &middot; file delivery' +
+        (EST.addons.rush ? ' &middot; <em>rush rate applied</em>' : '') +
+        ' &mdash; $' + Math.round(200 * rm) + '/subject &times; ' + EST.subjects,
+      a: pf
+    });
+    sub += pf;
+
+    if (EST.socialCuts > 0) {
+      var cf = EST.socialCuts * 65 * EST.subjects;
+      lines.push({
+        n: 'Social media cuts',
+        d: '+' + EST.socialCuts + ' cut' + (EST.socialCuts > 1 ? 's' : '') +
+          ' per subject &middot; independently edited &middot; 15&ndash;30 sec, formatted for social platforms',
+        a: cf
+      });
+      sub += cf;
+    }
+
+    if (EST.tier === 'bayarea') {
+      var tf = EST.distance === 'near' ? 150 : 275;
+      lines.push({
+        n: 'Bay Area travel &amp; logistics',
+        d: EST.distance === 'near'
+          ? 'Within 20 mi of SF &middot; pack-down, drive, on-site setup &amp; breakdown, return to studio'
+          : '21&ndash;40 mi from SF &middot; extended pack-down, drive, on-site setup &amp; breakdown, return',
+        a: tf
+      });
+      sub += tf;
+    }
+
+    if (EST.tier === 'remote') {
+      lines.push({ n: 'Travel day rate', d: '2 non-shooting travel days (departure + return) &middot; $350/day', a: 700 });
+      sub += 700;
+
+      lines.push({
+        n: 'Roundtrip airfare',
+        d: (EST.destination || 'Destination TBD') + ' &middot; estimated &middot; invoiced at actual cost, no markup',
+        a: EST.flightCost
+      });
+      sub += EST.flightCost;
+
+      var hf = EST.hotelNights * 200;
+      lines.push({
+        n: 'Hotel',
+        d: EST.hotelNights + ' night' + (EST.hotelNights > 1 ? 's' : '') + ' &middot; est. $200/night &middot; invoiced at actual cost',
+        a: hf
+      });
+      sub += hf;
+
+      var pd = (EST.hotelNights + 2) * 75;
+      lines.push({
+        n: 'Per diem',
+        d: (EST.hotelNights + 2) + ' days (meals &amp; incidentals) &middot; $75/day &middot; covers shoot day + travel days',
+        a: pd
+      });
+      sub += pd;
+
+      lines.push({
+        n: 'Equipment handling &amp; ground transport',
+        d: 'Checked bag fees for camera &amp; audio gear &middot; rental car or rideshare at destination',
+        a: 200
+      });
+      sub += 200;
+    }
+
+    if (EST.addons.broll) {
+      lines.push({ n: 'B-roll package', d: 'Environmental/product footage &middot; same shoot day &middot; edited into finished videos', a: 350 });
+      sub += 350;
+    }
+    if (EST.addons.intro) {
+      lines.push({ n: 'Branded intro/outro animation', d: 'Animated opener &amp; closer with your logo and brand colors &middot; applied to all videos', a: 300 });
+      sub += 300;
+    }
+    if (EST.addons.captions) {
+      var cv = EST.subjects * (1 + EST.socialCuts);
+      var cap = 85 * cv;
+      lines.push({ n: 'Closed captions', d: 'Burned-in version + SRT file &middot; per finished video &times; ' + cv, a: cap });
+      sub += cap;
+    }
+
+    return { lines: lines, total: sub };
+  }
+
+  /* ── Time breakdown ── */
+  function getTime() {
+    var rows = [];
+    rows.push({ l: 'Studio setup', v: '1.5 hrs' });
+    var sm = Math.max(2, 1 + EST.subjects * 0.7);
+    rows.push({ l: 'Shoot &mdash; ' + EST.subjects + ' subject' + (EST.subjects > 1 ? 's' : '') + ' (2-hr minimum enforced)', v: sm.toFixed(1) + '&ndash;' + (sm + 0.5).toFixed(1) + ' hrs' });
+    rows.push({ l: 'Teardown', v: '30 min' });
+
+    if (EST.tier === 'bayarea') {
+      rows.push({ l: 'Studio pack-down &amp; equipment load-out', v: '1 hr' });
+      rows.push({ l: 'Drive each way', v: EST.distance === 'near' ? '45&ndash;60 min' : '1&ndash;1.5 hrs' });
+      rows.push({ l: 'On-location setup &amp; breakdown', v: '1 hr' });
+      rows.push({ l: 'Studio reset on return', v: '30 min' });
+    }
+    if (EST.tier === 'remote') {
+      rows.push({ l: 'Travel day &mdash; each direction', v: '6&ndash;10 hrs' });
+      rows.push({ l: 'Equipment check-in &amp; handling', v: '1.5 hrs' });
+    }
+
+    var eh = EST.subjects * 3, em = eh + EST.subjects;
+    rows.push({ l: 'Post-production &mdash; ' + EST.subjects + ' video' + (EST.subjects > 1 ? 's' : ''), v: eh + '&ndash;' + em + ' hrs' });
+    rows.push({ l: 'File export, QC &amp; delivery', v: '30 min' });
+
+    var extra = EST.subjects > 1 ? (EST.subjects - 1) * 0.7 : 0;
+    var mn = 4.5 + extra + eh;
+    var mx = 6 + extra + em;
+    if (EST.tier === 'bayarea') { mn += EST.distance === 'near' ? 3.25 : 4.5; mx += EST.distance === 'near' ? 4 : 5.5; }
+    if (EST.tier === 'remote') { mn += 14; mx += 22; }
+
+    return { rows: rows, tot: Math.round(mn) + '&ndash;' + Math.round(mx) + ' hrs total' };
+  }
+
+  /* ── Deliverables ── */
+  function getDelivs() {
+    var tv = EST.subjects * (1 + EST.socialCuts);
+    var items = [
+      tv + ' finished video' + (tv > 1 ? 's' : '') + ' &mdash; ' + EST.subjects + ' hero cut' + (EST.subjects > 1 ? 's' : '') +
+        (EST.socialCuts > 0 ? ' + ' + (EST.subjects * EST.socialCuts) + ' social cut' + (EST.subjects * EST.socialCuts > 1 ? 's' : '') : ''),
+      'Professional color grade &mdash; consistent, clean look across all clips',
+      'Audio mix &mdash; cleaned, balanced, noise-reduced dialogue throughout',
+      'MP4 / H.264 &mdash; optimized for web, email, ads, and presentations',
+      'Delivered via shared Google Drive folder link',
+      EST.addons.rush ? 'Turnaround: 3&ndash;5 business days (rush)' : 'Turnaround: 7&ndash;10 business days',
+      '2 revision rounds included'
+    ];
+    if (EST.addons.captions) items.push('Closed captions: burned-in version + SRT file for every video');
+    if (EST.addons.broll) items.push('B-roll footage woven into the finished edit');
+    if (EST.addons.intro) items.push('Branded intro/outro animation on all videos');
+    return items;
+  }
+
+  /* ── Step 3: Estimate output ── */
+  function renderS3() {
+    var res = calc();
+    var tm = getTime();
+    var dv = getDelivs();
+    var tn = { studio: 'In-Studio', bayarea: 'Bay Area On-Location', remote: 'Remote / National Travel' };
+
+    var lh = res.lines.map(function (l) {
+      return '<div class="est-li">' +
+        '<div class="est-lil"><div class="est-lname">' + l.n + '</div><div class="est-lsub">' + l.d + '</div></div>' +
+        '<div class="est-lamt">' + fmt(l.a) + '</div></div>';
+    }).join('');
+
+    var th = tm.rows.map(function (r) {
+      return '<div class="est-pr"><span class="est-prl">' + r.l + '</span><span class="est-prv">' + r.v + '</span></div>';
+    }).join('');
+
+    var dh = dv.map(function (d) {
+      return '<div class="est-di"><span class="est-dck">&#10003;</span><span>' + d + '</span></div>';
+    }).join('');
+
+    var rn = '';
+    if (EST.tier === 'remote') {
+      rn = '<div class="est-rcall">' +
+        '<strong>On remote billing:</strong> Flights, hotel, and ground transport are pass-through costs &mdash; ' +
+        'invoiced at actual price with zero markup. I send receipts for everything. ' +
+        'The <strong>$350/day travel day rate</strong> covers non-shooting days when I\'m in transit on your behalf. ' +
+        'A <strong>50% deposit is required</strong> to confirm remote bookings and lock in travel arrangements. ' +
+        'Balance is due within 7 days of final delivery.' +
+        '</div>';
+    }
+
+    /* Build mailto with estimate summary */
+    var addonsUsed = Object.keys(EST.addons).filter(function (k) { return EST.addons[k]; });
+    var mailBody = [
+      'Hi Stephen,',
+      '',
+      'I configured a video shoot estimate on your website.',
+      '',
+      'Tier: ' + tn[EST.tier],
+      'Subjects: ' + EST.subjects,
+      'Social cuts per subject: ' + EST.socialCuts,
+      'Add-ons: ' + (addonsUsed.length ? addonsUsed.join(', ') : 'none'),
+      EST.tier === 'remote' ? 'Destination: ' + (EST.destination || 'TBD') : null,
+      '',
+      'Estimated total: ' + fmt(res.total),
+      '',
+      "I'd like to move forward. When can we connect?"
+    ].filter(function (l) { return l !== null; }).join('\n');
+
+    var mailHref = 'mailto:hello@bookthestudiosf.com' +
+      '?subject=' + encodeURIComponent('Video Estimate &mdash; ' + tn[EST.tier] + ' Shoot') +
+      '&body=' + encodeURIComponent(mailBody);
+
+    var h = '<div class="est-fade">' +
+      '<p class="est-otag">' + tn[EST.tier] + '</p>' +
+      '<p class="est-otitle">Your estimate</p>' +
+
+      '<div class="est-lis">' + lh + '</div>' +
+      '<div class="est-tot">' +
+      '<span class="est-totlbl">Estimated total</span>' +
+      '<span class="est-totamt">' + fmt(res.total) + '</span>' +
+      '</div>' +
+
+      '<div class="est-panel">' +
+      '<div class="est-ptitle">Time commitment &mdash; what this shoot actually takes</div>' +
+      th +
+      '<div class="est-ptot"><span class="est-ptotl">Total work hours</span><span class="est-ptotv">' + tm.tot + '</span></div>' +
+      '</div>' +
+
+      '<div class="est-panel">' +
+      '<div class="est-ptitle">What\'s included in this estimate</div>' +
+      dh +
+      '</div>' +
+
+      rn +
+
+      '<div class="est-brow">' +
+      '<button class="btn btn-dim" onclick="estGo(2)" type="button" style="border-radius:12px;">&larr; Edit</button>' +
+      '<a class="btn btn-primary" href="' + mailHref + '" style="text-align:center;text-decoration:none;border-radius:12px;">Book this shoot &rarr;</a>' +
+      '</div>' +
+
+      '<p class="est-cnote">This estimate is non-binding. Booking initiates a short intake &mdash; scope is confirmed before anything is locked.<br>' +
+      'Questions first? <a href="' + mailHref + '">hello@bookthestudiosf.com</a></p>' +
+      '</div>';
+
+    var el = document.getElementById('est-s3');
+    if (el) el.innerHTML = h;
+  }
+
+  /* ── Init ── */
+  renderProg(1);
+  renderS1();
+
+}());
+</script>
+
+</body>
+</html>
