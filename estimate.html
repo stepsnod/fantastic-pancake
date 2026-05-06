@@ -69,18 +69,37 @@
 .est-wrap { max-width: 760px; margin: 0 auto; }
 
 /* ── Progress bar ── */
+/* ── Progress bar — two-row layout ── */
 .est-prog {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   margin-bottom: 48px;
+  gap: 8px;
 }
-.est-pstep { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.est-prog-track {
+  display: flex;
+  align-items: center;
+}
+.est-prog-labels {
+  display: flex;
+  align-items: flex-start;
+}
+.est-plabel-wrap {
+  width: 32px;
+  display: flex;
+  justify-content: center;
+}
+.est-plabel-spacer {
+  width: 80px;
+  flex-shrink: 0;
+}
 .est-pdot {
   width: 32px; height: 32px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 13px; font-weight: 600;
+  flex-shrink: 0;
   transition: all .3s var(--ease);
 }
 .est-pdot.active {
@@ -98,22 +117,21 @@
   border: 1px solid var(--border);
   color: var(--muted2);
 }
+.est-pline {
+  width: 80px; height: 1px;
+  flex-shrink: 0;
+  transition: background .3s;
+}
+.est-pline.done { background: var(--accent); opacity: .4; }
+.est-pline.idle { background: var(--border); }
 .est-plabel {
   font-size: 10px; font-weight: 600;
   letter-spacing: .09em; text-transform: uppercase;
+  white-space: nowrap;
 }
 .est-plabel.active { color: var(--accent); }
 .est-plabel.done   { color: var(--muted); }
 .est-plabel.idle   { color: var(--muted2); opacity: .4; }
-.est-pline {
-  width: 80px; height: 1px;
-  align-self: flex-start;
-  margin-top: 15px; /* centers line with the 32px dot (32/2 - 1/2 = 15.5) */
-  flex-shrink: 0;
-  transition: background .3s;
-}
-.est-pline.done { background: var(--accent); opacity: .35; }
-.est-pline.idle { background: var(--border); }
 
 /* ── Step headings ── */
 .est-stitle {
@@ -645,18 +663,32 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
   /* ── Progress ── */
   function renderProg(step) {
     var lbls = ['Tier', 'Configure', 'Estimate'];
-    var h = '';
+    var track = '';
+    var labels = '';
+
     lbls.forEach(function (l, i) {
       var n = i + 1;
       var cls = n < step ? 'done' : n === step ? 'active' : 'idle';
-      h += '<div class="est-pstep">' +
-        '<div class="est-pdot ' + cls + '">' + (n < step ? '&#10003;' : n) + '</div>' +
-        '<div class="est-plabel ' + cls + '">' + l + '</div>' +
-        '</div>';
-      if (i < 2) h += '<div class="est-pline ' + (step > n ? 'done' : 'idle') + '"></div>';
+      // Dot in track row
+      track += '<div class="est-pdot ' + cls + '">' + (n < step ? '&#10003;' : n) + '</div>';
+      // Line connector (between dots only)
+      if (i < 2) {
+        track += '<div class="est-pline ' + (step > n ? 'done' : 'idle') + '"></div>';
+      }
+      // Label in labels row — wrapped to match dot width exactly
+      labels += '<div class="est-plabel-wrap"><span class="est-plabel ' + cls + '">' + l + '</span></div>';
+      // Spacer between labels to match line width
+      if (i < 2) {
+        labels += '<div class="est-plabel-spacer"></div>';
+      }
     });
+
     var el = document.getElementById('est-prog');
-    if (el) el.innerHTML = h;
+    if (el) {
+      el.innerHTML =
+        '<div class="est-prog-track">' + track + '</div>' +
+        '<div class="est-prog-labels">' + labels + '</div>';
+    }
   }
 
   /* ── Step 1: Tier selection ── */
