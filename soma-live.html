@@ -15,7 +15,6 @@
 .soma-hero{padding:120px 24px 32px;text-align:center;max-width:680px;margin:0 auto}
 .soma-eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
 .soma-title{font-size:clamp(26px,5vw,40px);font-weight:600;line-height:1.2;margin:0;color:var(--text)}
-
 .steps-block{max-width:720px;margin:36px auto 0;padding:0 24px}
 .steps-inner{background:rgba(0,198,255,.05);border:1px solid rgba(0,198,255,.18);border-radius:var(--radius);padding:28px 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 @media(max-width:600px){.steps-inner{grid-template-columns:1fr;gap:16px}}
@@ -23,9 +22,7 @@
 .step-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#071018;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .step-text{font-size:13px;color:var(--muted);line-height:1.55}
 .step-text strong{display:block;color:var(--text);font-weight:500;font-size:14px;margin-bottom:2px}
-
 .estimator{max-width:720px;margin:40px auto 0;padding:0 24px 80px}
-
 .baseline-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--radius);padding:28px;margin-bottom:28px;box-shadow:var(--glow-subtle)}
 .baseline-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px}
 .baseline-card-title{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
@@ -36,10 +33,8 @@
 .baseline-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:8px;flex-shrink:0}
 .baseline-item-label{font-size:13px;color:var(--muted);line-height:1.5}
 .baseline-item-label strong{display:block;color:var(--text);font-weight:500;font-size:14px}
-
 .section-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);margin:0 0 14px}
 .section-note{font-size:13px;color:var(--muted2);margin:-6px 0 18px;line-height:1.5}
-
 .toggle-group{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;margin-bottom:12px;transition:border-color .2s}
 .toggle-group-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:6px}
 .toggle-group-desc{font-size:12px;color:var(--muted2);margin-bottom:14px;line-height:1.55}
@@ -48,7 +43,6 @@
 .pill:hover{border-color:rgba(0,198,255,.4);color:var(--text)}
 .pill.active{background:rgba(0,198,255,.12);border-color:var(--accent);color:var(--accent);font-weight:500}
 .pill-add{font-size:11px;opacity:.6;margin-left:2px}
-
 .price-display{background:var(--card);border:1px solid var(--border2);border-radius:var(--radius);padding:36px 28px 28px;margin:32px 0 8px;text-align:center;box-shadow:var(--glow-subtle);position:relative;overflow:hidden}
 .price-display::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(0,198,255,.07),transparent 70%);pointer-events:none}
 .price-view-toggle{display:inline-flex;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:999px;padding:3px;margin-bottom:28px;gap:2px}
@@ -64,9 +58,7 @@
 .price-line-val.add{color:var(--accent2)}
 .price-divider{height:1px;background:var(--border);margin:2px 0}
 .price-total-line{display:flex;justify-content:space-between;font-size:15px;font-weight:600;color:var(--text)}
-
 .fine-print{font-size:12px;color:var(--muted2);text-align:center;line-height:1.65;margin-top:14px;padding:0 8px}
-
 .bottom-export{margin-top:44px;text-align:center}
 .btn-export{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:var(--accent);color:#071018;border:none;border-radius:12px;font-family:Poppins,sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:opacity .2s,transform .15s}
 .btn-export:hover{opacity:.88;transform:translateY(-2px)}
@@ -151,11 +143,11 @@
     </div>
     <div class="step">
       <div class="step-num">2</div>
-      <div class="step-text"><strong>Adjust any variables</strong>Toggle options for guests, location, cameras, or audio to match your episode.</div>
+      <div class="step-text"><strong>Adjust any variables</strong>Toggle options to match what each episode requires.</div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
-      <div class="step-text"><strong>Download the estimate</strong>Export a branded PDF at the bottom — ready to send to your finance team.</div>
+      <div class="step-text"><strong>Download the estimate</strong>Export a branded PDF at the bottom — ready for your finance team.</div>
     </div>
   </div>
 </div>
@@ -180,15 +172,15 @@
   </div>
 
   <p class="section-label">Adjust for episode variations</p>
-  <p class="section-note">Each option below reflects a real change in scope. Adjust to match what a given episode requires — the estimate updates instantly.</p>
+  <p class="section-note">Each option below reflects a real change in production scope. Adjust to match what a given episode requires — the estimate updates instantly.</p>
 
   <div class="toggle-group">
-    <p class="toggle-group-title">Guests this episode</p>
-    <p class="toggle-group-desc">Additional guests require extra mic placement, camera reframing, and extended setup time before the shoot begins.</p>
+    <p class="toggle-group-title">Episode format</p>
+    <p class="toggle-group-desc">Interviews and multi-person episodes require a different setup — additional mics, adjusted framing, and a longer pre-shoot configuration. Select the format that matches your episode.</p>
     <div class="pill-row" id="guestGroup">
-      <button class="pill active" data-val="0" onclick="select(this,'guestGroup')">Solo only</button>
-      <button class="pill" data-val="100" onclick="select(this,'guestGroup')">1 guest <span class="pill-add">+$100</span></button>
-      <button class="pill" data-val="150" onclick="select(this,'guestGroup')">2 or more guests <span class="pill-add">+$150</span></button>
+      <button class="pill active" data-val="0" onclick="select(this,'guestGroup')">Solo</button>
+      <button class="pill" data-val="50" onclick="select(this,'guestGroup')">Interview (1 guest) <span class="pill-add">+$50</span></button>
+      <button class="pill" data-val="100" onclick="select(this,'guestGroup')">Multi-person (2+ guests) <span class="pill-add">+$100</span></button>
     </div>
   </div>
 
@@ -256,13 +248,13 @@
 
 <script src="scripts.js"></script>
 <script>
-const BASE = 300;
-let guestAdd=0, locationAdd=0, cameraAdd=0, audioAdd=0, view='episode';
+const BASE=300;
+let guestAdd=0,locationAdd=0,cameraAdd=0,audioAdd=0,view='episode';
 
-function select(btn, groupId) {
+function select(btn,groupId){
   document.querySelectorAll('#'+groupId+' .pill').forEach(p=>p.classList.remove('active'));
   btn.classList.add('active');
-  const val = parseInt(btn.dataset.val);
+  const val=parseInt(btn.dataset.val);
   if(groupId==='guestGroup')    guestAdd=val;
   if(groupId==='locationGroup') locationAdd=val;
   if(groupId==='cameraGroup')   cameraAdd=val;
@@ -270,34 +262,45 @@ function select(btn, groupId) {
   render();
 }
 
-function setView(v) {
+function setView(v){
   view=v;
   document.getElementById('btnPerEpisode').classList.toggle('active',v==='episode');
   document.getElementById('btnPerMonth').classList.toggle('active',v==='month');
   render();
 }
 
-function fmt(n){ return '$'+(view==='month'?n*4:n).toLocaleString(); }
+function fmt(n){return '$'+(view==='month'?n*4:n).toLocaleString();}
 
-function render() {
-  const ep = BASE+guestAdd+locationAdd+cameraAdd+audioAdd;
-  const display = view==='episode'?ep:ep*4;
-  document.getElementById('priceNum').textContent = display.toLocaleString();
-  document.getElementById('pricePeriod').textContent = view==='episode'?'per episode':'per month (4 episodes)';
-  document.getElementById('totalLabel').textContent = view==='episode'?'Per episode total':'Per month total';
-  document.getElementById('totalVal').textContent = '$'+display.toLocaleString();
-  document.getElementById('baseVal').textContent = fmt(BASE);
+function render(){
+  const ep=BASE+guestAdd+locationAdd+cameraAdd+audioAdd;
+  const display=view==='episode'?ep:ep*4;
+  document.getElementById('priceNum').textContent=display.toLocaleString();
+  document.getElementById('pricePeriod').textContent=view==='episode'?'per episode':'per month (4 episodes)';
+  document.getElementById('totalLabel').textContent=view==='episode'?'Per episode total':'Per month total';
+  document.getElementById('totalVal').textContent='$'+display.toLocaleString();
+  document.getElementById('baseVal').textContent=fmt(BASE);
   let html='';
-  if(guestAdd)    html+=row('Guest(s) on set',fmt(guestAdd));
+  if(guestAdd)    html+=row('Episode format add-on',fmt(guestAdd));
   if(locationAdd) html+=row('On-location shoot',fmt(locationAdd));
   if(cameraAdd)   html+=row('Third camera angle',fmt(cameraAdd));
   if(audioAdd)    html+=row('Audio cleanup',fmt(audioAdd));
   document.getElementById('addOns').innerHTML=html;
 }
 
-function row(label,val){ return `<div class="price-line"><span>${label}</span><span class="price-line-val add">+${val}</span></div>`; }
+function row(label,val){return `<div class="price-line"><span>${label}</span><span class="price-line-val add">+${val}</span></div>`;}
 
-function exportPDF() {
+function getFormatLabel(){
+  if(guestAdd===50)  return 'Interview (1 guest)';
+  if(guestAdd===100) return 'Multi-person (2+ guests)';
+  return 'Solo';
+}
+function getLocationLabel(){
+  if(locationAdd===150) return 'On location';
+  if(locationAdd===75)  return 'Mix of both';
+  return 'SOMA West office';
+}
+
+function exportPDF(){
   const {jsPDF}=window.jspdf;
   const doc=new jsPDF({unit:'pt',format:'letter'});
   const W=612,M=54,R=W-M;
@@ -336,24 +339,23 @@ function exportPDF() {
   y+=18; doc.setDrawColor(...BORDER); doc.line(M,y,R,y);
 
   y+=20; doc.setFont('helvetica','bold'); doc.setFontSize(8); doc.setTextColor(...ACCENT);
-  doc.text('BASE CONFIGURATION',M,y);
+  doc.text('EPISODE CONFIGURATION',M,y);
 
-  const baseItems=[
-    ['Weekly episodes','Monday shoots, 4x per month'],
-    ['Solo format','Chine on camera'],
-    ['Location','SOMA West office, 1066 Howard St'],
-    ['Cameras','2-camera coverage with pro lenses'],
+  const configItems=[
+    ['Frequency','Weekly, Mondays  ·  4 shoots per month'],
+    ['Format',getFormatLabel()],
+    ['Location',getLocationLabel()],
+    ['Cameras',cameraAdd>0?'3-camera coverage (third angle included)':'2-camera coverage with pro lenses'],
     ['Lighting','Full pro lighting kit, set up each shoot'],
-    ['Audio','2 dedicated mics, isolated tracks per session'],
-    ['Deliverables','Shoot and handoff, raw files'],
-    ['File delivery','Same day — files delivered every Monday'],
+    ['Audio',audioAdd>0?'2 dedicated mics + audio cleanup included':'2 dedicated mics, raw isolated tracks'],
+    ['Deliverables','Shoot and handoff, files delivered same day'],
   ];
 
   const colW=(R-M-20)/2;
-  let col=0, rowY=y+16;
-  baseItems.forEach((item,i)=>{
+  let col=0,rowY=y+16;
+  configItems.forEach((item,i)=>{
     const x=M+col*(colW+20);
-    if(col===0){ doc.setFillColor(...LIGHT); doc.rect(M-4,rowY-10,R-M+8,30,'F'); }
+    if(col===0){doc.setFillColor(...LIGHT);doc.rect(M-4,rowY-10,R-M+8,30,'F');}
     doc.setFillColor(...ACCENT); doc.circle(x+5,rowY-3,2.5,'F');
     doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(...DARK);
     doc.text(item[0],x+14,rowY);
@@ -373,7 +375,7 @@ function exportPDF() {
   y+=4; doc.setDrawColor(...BORDER); doc.line(M,y,R,y);
 
   const pLines=[['Base shoot (travel, setup, record, handoff)',BASE,BASE*4]];
-  if(guestAdd)    pLines.push(['Guest(s) on set',guestAdd,guestAdd*4]);
+  if(guestAdd)    pLines.push([getFormatLabel()+' configuration',guestAdd,guestAdd*4]);
   if(locationAdd) pLines.push(['On-location shoot',locationAdd,locationAdd*4]);
   if(cameraAdd)   pLines.push(['Third camera angle',cameraAdd,cameraAdd*4]);
   if(audioAdd)    pLines.push(['Audio cleanup',audioAdd,audioAdd*4]);
