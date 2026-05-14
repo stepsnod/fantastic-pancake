@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="#00c6ff" name="theme-color"/>
+<title>SOMA Live Production Estimate | Studio San Francisco</title>
+<meta content="Configure and export a production estimate for SOMA Live by SOMA West CBD." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+/* ── SOMA Live page-specific styles ── */
+.soma-hero {
+  padding: 120px 24px 48px;
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.soma-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.soma-title {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 16px;
+  color: var(--text);
+}
+.soma-subtitle {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Export bar ── */
+.export-bar {
+  position: sticky;
+  top: 72px;
+  z-index: 80;
+  background: rgba(7,16,24,.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+[data-theme="light"] .export-bar {
+  background: rgba(248,250,252,.92);
+}
+.export-bar-label {
+  font-size: 13px;
+  color: var(--muted);
+}
+.export-bar-label strong {
+  color: var(--text);
+  font-weight: 500;
+}
+.btn-export {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: var(--accent);
+  color: #071018;
+  border: none;
+  border-radius: 10px;
+  font-family: Poppins, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .2s, transform .15s;
+  white-space: nowrap;
+}
+.btn-export:hover { opacity: .88; transform: translateY(-1px); }
+.btn-export:active { transform: translateY(0); }
+
+/* ── Estimator container ── */
+.estimator {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* ── Baseline card ── */
+.baseline-card {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 32px;
+  box-shadow: var(--glow-subtle);
+}
+.baseline-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.baseline-card-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.baseline-locked {
+  font-size: 11px;
+  color: var(--muted2);
+  background: rgba(0,198,255,.08);
+  border: 1px solid rgba(0,198,255,.16);
+  border-radius: 6px;
+  padding: 3px 10px;
+}
+.baseline-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 520px) {
+  .baseline-items { grid-template-columns: 1fr; }
+}
+.baseline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.baseline-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+.baseline-item-label {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.baseline-item-label strong {
+  display: block;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* ── Section label ── */
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted2);
+  margin: 0 0 16px;
+}
+.section-note {
+  font-size: 13px;
+  color: var(--muted2);
+  margin: -8px 0 20px;
+  line-height: 1.5;
+}
+
+/* ── Toggle group (pill style) ── */
+.toggle-group {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-bottom: 14px;
+}
+.toggle-group-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.pill-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.pill {
+  padding: 9px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: Poppins, sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all .18s;
+  white-space: nowrap;
+}
+.pill:hover {
+  border-color: rgba(0,198,255,.4);
+  color: var(--text);
+}
+.pill.active {
+  background: rgba(0,198,255,.12);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ── Price display ── */
+.price-display {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  padding: 36px 28px;
+  margin: 32px 0 8px;
+  text-align: center;
+  box-shadow: var(--glow-subtle);
+  position: relative;
+  overflow: hidden;
+}
+.price-display::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(0,198,255,.07), transparent 70%);
+  pointer-events: none;
+}
+.price-view-toggle {
+  display: inline-flex;
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px;
+  margin-bottom: 28px;
+  gap: 2px;
+}
+.price-view-btn {
+  padding: 7px 20px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: Poppins, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .18s;
+}
+.price-view-btn.active {
+  background: var(--accent);
+  color: #071018;
+}
+.price-amount {
+  font-size: clamp(48px, 10vw, 72px);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1;
+  transition: all .25s var(--ease);
+}
+.price-amount span {
+  font-size: .45em;
+  font-weight: 400;
+  color: var(--muted);
+  vertical-align: super;
+  margin-right: 2px;
+}
+.price-period {
+  font-size: 15px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.price-breakdown {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.price-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+.price-line.base { color: var(--text); }
+.price-line-val { font-weight: 500; color: var(--text); }
+.price-line-val.add { color: var(--accent2); }
+.price-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
+.price-total-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── Fine print ── */
+.fine-print {
+  font-size: 12px;
+  color: var(--muted2);
+  text-align: center;
+  line-height: 1.6;
+  margin-top: 12px;
+  padding: 0 8px;
+}
+
+/* ── Bottom export ── */
+.bottom-export {
+  margin-top: 40px;
+  text-align: center;
+}
+.bottom-export .btn-export {
+  font-size: 15px;
+  padding: 14px 32px;
+  border-radius: 12px;
+}
+.bottom-contact {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--muted2);
+}
+.bottom-contact a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div aria-hidden="true" class="bg-mesh"></div>
+<div aria-hidden="true" class="bg-noise-overlay"></div>
+<div aria-hidden="true" class="cursor-glow" id="cursorGlow"></div>
+
+<!-- TOPBAR -->
+<header class="topbar desktop-only" id="topbar" role="banner">
+<div class="topbar-inner">
+<a aria-label="Studio San Francisco home" class="topbrand" href="index.html">
+<span aria-hidden="true" class="topmark"></span>
+<span class="topname"><strong>Studio San Francisco</strong></span>
+</a>
+<nav aria-label="Primary navigation" class="topnav">
+<a href="index.html#menu">Services</a>
+<a href="founders.html">Founder Content</a>
+<a href="index.html#photos">The Studio</a>
+<a href="portfolio.html">Visuals</a>
+<a href="blog.html">Blog</a>
+<a href="estimate.html">Video Estimate</a>
+<a href="index.html#testimonials">Proof</a>
+<a href="index.html#faq">FAQ</a>
+</nav>
+<div class="topactions">
+<a class="btn btn-nav-cta" href="index.html#quick-start">Get Started</a>
+</div>
+</div>
+</header>
+
+<!-- MOBILE MENU BUTTON -->
+<button aria-label="Open menu" class="menu-fab" id="menuFab" type="button">
+<span aria-hidden="true" class="menu-dot"></span>
+<span>MENU</span>
+</button>
+<div aria-hidden="true" class="backdrop" id="backdrop"></div>
+<aside aria-label="Site navigation" class="sidebar" id="sidebar" role="navigation">
+<div class="sidebar-inner">
+<div class="brand">
+<div class="brand-mark">
+<div class="brand-name">Studio San Francisco</div>
+</div>
+<button aria-label="Close menu" class="icon-btn" id="closeSidebar">✕</button>
+</div>
+<ul class="nav">
+<li><a href="index.html">Home</a></li>
+<li><a href="index.html#quick-start">Get Started</a></li>
+<li><a href="founders.html">Founder Content</a></li>
+<li><a href="index.html#menu">Services</a></li>
+<li><a href="index.html#photos">The Studio</a></li>
+<li><a href="portfolio.html">Visuals</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="estimate.html">Video Estimate</a></li>
+<li><a href="index.html#testimonials">Proof</a></li>
+<li><a href="index.html#faq">FAQ</a></li>
+</ul>
+</div>
+</aside>
+
+<!-- THEME FAB -->
+<div aria-hidden="false" class="theme-fab" id="themeFabWrap">
+<button aria-checked="false" aria-label="Switch to light mode" class="theme-fab-btn" id="themeFab" role="switch" type="button">
+<span aria-hidden="true" class="theme-fab-icon">☾</span>
+</button>
+</div>
+
+<main id="main" tabindex="-1">
+
+<!-- HERO -->
+<div class="soma-hero">
+  <p class="soma-eyebrow">SOMA West CBD x Studio San Francisco</p>
+  <h1 class="soma-title">SOMA Live Production Estimate</h1>
+  <p class="soma-subtitle">Your baseline is pre-configured based on your show format. Adjust any variables below and export a branded PDF for your finance team.</p>
+</div>
+
+<!-- STICKY EXPORT BAR -->
+<div class="export-bar">
+  <p class="export-bar-label">Ready to send to finance? <strong>Export the estimate as a PDF below.</strong></p>
+  <button class="btn-export" id="exportBtnTop" onclick="exportPDF()">
+    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 16l-4-4h3V4h2v8h3l-4 4zm-7 4v-2h14v2H5z"/></svg>
+    Download PDF
+  </button>
+</div>
+
+<!-- ESTIMATOR -->
+<div class="estimator">
+
+  <!-- Baseline -->
+  <div class="baseline-card">
+    <div class="baseline-card-header">
+      <span class="baseline-card-title">Your base configuration</span>
+      <span class="baseline-locked">Pre-filled from your brief</span>
+    </div>
+    <div class="baseline-items">
+      <div class="baseline-item">
+        <div class="baseline-dot"></div>
+        <div class="baseline-item-label"><strong>Weekly episodes</strong>4 shoots per month, Mondays</div>
+      </div>
+      <div class="baseline-item">
+        <div class="baseline-dot"></div>
+        <div class="baseline-item-label"><strong>Solo format</strong>Chine on camera</div>
+      </div>
+      <div class="baseline-item">
+        <div class="baseline-dot"></div>
+        <div class="baseline-item-label"><strong>SOMA West office</strong>1066 Howard Street</div>
+      </div>
+      <div class="baseline-item">
+        <div class="baseline-dot"></div>
+        <div class="baseline-item-label"><strong>Shoot and handoff</strong>Raw files delivered after each session</div>
+      </div>
+      <div class="baseline-item">
+        <div class="baseline-dot"></div>
+        <div class="baseline-item-label"><strong>3 cameras</strong>Multi-angle coverage</div>
+      </div>
+      <div class="baseline-item">
+        <div class="baseline-dot"></div>
+        <div class="baseline-item-label"><strong>Pro audio</strong>2 dedicated mics, isolated tracks</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Adjustable variables -->
+  <p class="section-label">Adjust for episode variations</p>
+  <p class="section-note">Change any variable below to see how it affects the per-episode and monthly cost.</p>
+
+  <!-- Guests -->
+  <div class="toggle-group">
+    <p class="toggle-group-title">Guests this episode</p>
+    <div class="pill-row" id="guestGroup">
+      <button class="pill active" data-val="0" onclick="select(this,'guestGroup')">Solo only</button>
+      <button class="pill" data-val="100" onclick="select(this,'guestGroup')">1 guest <span style="font-size:12px;opacity:.6">+$100</span></button>
+      <button class="pill" data-val="150" onclick="select(this,'guestGroup')">2 or more guests <span style="font-size:12px;opacity:.6">+$150</span></button>
+    </div>
+  </div>
+
+  <!-- Location -->
+  <div class="toggle-group">
+    <p class="toggle-group-title">Shoot location</p>
+    <div class="pill-row" id="locationGroup">
+      <button class="pill active" data-val="0" onclick="select(this,'locationGroup')">SOMA West office</button>
+      <button class="pill" data-val="150" onclick="select(this,'locationGroup')">On location <span style="font-size:12px;opacity:.6">+$150</span></button>
+      <button class="pill" data-val="75" onclick="select(this,'locationGroup')">Mix of both <span style="font-size:12px;opacity:.6">+$75</span></button>
+    </div>
+  </div>
+
+  <!-- Audio cleanup -->
+  <div class="toggle-group">
+    <p class="toggle-group-title">Audio cleanup</p>
+    <div class="pill-row" id="audioGroup">
+      <button class="pill active" data-val="0" onclick="select(this,'audioGroup')">Raw files only</button>
+      <button class="pill" data-val="75" onclick="select(this,'audioGroup')">Basic audio cleanup <span style="font-size:12px;opacity:.6">+$75</span></button>
+    </div>
+  </div>
+
+  <!-- Price display -->
+  <div class="price-display">
+    <div class="price-view-toggle">
+      <button class="price-view-btn active" id="btnPerEpisode" onclick="setView('episode')">Per episode</button>
+      <button class="price-view-btn" id="btnPerMonth" onclick="setView('month')">Per month</button>
+    </div>
+    <div class="price-amount" id="priceAmount"><span>$</span><span id="priceNum">300</span></div>
+    <p class="price-period" id="pricePeriod">per episode</p>
+    <div class="price-breakdown" id="priceBreakdown">
+      <div class="price-line base">
+        <span>Base shoot (travel, setup, record, handoff)</span>
+        <span class="price-line-val">$300</span>
+      </div>
+      <div id="addOns"></div>
+      <div class="price-divider"></div>
+      <div class="price-total-line">
+        <span id="totalLabel">Per episode</span>
+        <span id="totalVal">$300</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="fine-print">Monthly rate based on 4 sessions. Months with 5 Mondays are billed at the per-episode rate for the additional shoot. Estimate reflects current scope and is subject to adjustment as the show evolves.</p>
+
+  <!-- Bottom export -->
+  <div class="bottom-export">
+    <button class="btn-export" onclick="exportPDF()">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 16l-4-4h3V4h2v8h3l-4 4zm-7 4v-2h14v2H5z"/></svg>
+      Download Estimate PDF
+    </button>
+    <p class="bottom-contact">Questions? <a href="mailto:hello@bookthestudiosf.com">hello@bookthestudiosf.com</a> &nbsp;·&nbsp; (415) 326-4531</p>
+  </div>
+
+</div>
+</main>
+
+<script src="scripts.js"></script>
+<script>
+// ── State ──
+const BASE = 300;
+let guestAdd = 0;
+let locationAdd = 0;
+let audioAdd = 0;
+let view = 'episode'; // 'episode' | 'month'
+
+function select(btn, groupId) {
+  document.querySelectorAll('#' + groupId + ' .pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const val = parseInt(btn.dataset.val);
+  if (groupId === 'guestGroup') guestAdd = val;
+  if (groupId === 'locationGroup') locationAdd = val;
+  if (groupId === 'audioGroup') audioAdd = val;
+  render();
+}
+
+function setView(v) {
+  view = v;
+  document.getElementById('btnPerEpisode').classList.toggle('active', v === 'episode');
+  document.getElementById('btnPerMonth').classList.toggle('active', v === 'month');
+  render();
+}
+
+function render() {
+  const episodeTotal = BASE + guestAdd + locationAdd + audioAdd;
+  const monthTotal = episodeTotal * 4;
+  const display = view === 'episode' ? episodeTotal : monthTotal;
+
+  document.getElementById('priceNum').textContent = display.toLocaleString();
+  document.getElementById('pricePeriod').textContent = view === 'episode' ? 'per episode' : 'per month (4 episodes)';
+  document.getElementById('totalLabel').textContent = view === 'episode' ? 'Per episode' : 'Per month';
+  document.getElementById('totalVal').textContent = '$' + display.toLocaleString();
+
+  // Add-ons
+  let html = '';
+  if (guestAdd > 0) html += `<div class="price-line"><span>Guest(s) on set</span><span class="price-line-val add">+$${view==='month'?guestAdd*4:guestAdd}</span></div>`;
+  if (locationAdd > 0) html += `<div class="price-line"><span>On-location shoot</span><span class="price-line-val add">+$${view==='month'?locationAdd*4:locationAdd}</span></div>`;
+  if (audioAdd > 0) html += `<div class="price-line"><span>Audio cleanup</span><span class="price-line-val add">+$${view==='month'?audioAdd*4:audioAdd}</span></div>`;
+  document.getElementById('addOns').innerHTML = html;
+
+  // Update base line if month view
+  document.querySelector('.price-line.base .price-line-val').textContent = '$' + (view === 'month' ? BASE * 4 : BASE).toLocaleString();
+}
+
+// ── PDF Export ──
+function exportPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+  const W = 612, MARGIN = 54;
+  const RIGHT = W - MARGIN;
+  const ACCENT = [0, 198, 255];
+  const DARK = [26, 26, 46];
+  const MID = [85, 85, 85];
+  const LIGHT = [240, 245, 248];
+  const BORDER = [220, 230, 235];
+  const FOOTER_COLOR = [44, 44, 58];
+
+  const episodeTotal = BASE + guestAdd + locationAdd + audioAdd;
+  const monthTotal = episodeTotal * 4;
+
+  // Top accent bar
+  doc.setFillColor(...ACCENT);
+  doc.rect(0, 0, W, 10, 'F');
+
+  // Studio name
+  let y = 52;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(22);
+  doc.setTextColor(...DARK);
+  doc.text('Studio San Francisco', MARGIN, y);
+
+  // ESTIMATE label
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(24);
+  doc.setTextColor(...ACCENT);
+  doc.text('ESTIMATE', RIGHT, y, { align: 'right' });
+
+  // Sub-header
+  y += 18;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(...MID);
+  doc.text('bookthestudiosf.com  ·  hello@bookthestudiosf.com  ·  (415) 326-4531', MARGIN, y);
+  const dateStr = 'Prepared ' + new Date().toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'});
+  doc.text(dateStr, RIGHT, y, { align: 'right' });
+
+  // Rule
+  y += 18;
+  doc.setDrawColor(...BORDER);
+  doc.setLineWidth(0.5);
+  doc.line(MARGIN, y, RIGHT, y);
+
+  // Prepared for
+  y += 22;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8);
+  doc.setTextColor(...ACCENT);
+  doc.text('PREPARED FOR', MARGIN, y);
+
+  y += 16;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.setTextColor(...DARK);
+  doc.text('Chine Emeahara  ·  SOMA West Community Benefit District', MARGIN, y);
+
+  y += 14;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(...MID);
+  doc.text('somawestcbd.org  ·  1066 Howard Street, San Francisco, CA', MARGIN, y);
+
+  // Project title
+  y += 28;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(17);
+  doc.setTextColor(...DARK);
+  doc.text('SOMA Live — Weekly Video Production', MARGIN, y);
+
+  y += 16;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(...MID);
+  doc.text('Recurring weekly production package · Mondays · SOMA West CBD', MARGIN, y);
+
+  // Rule
+  y += 18;
+  doc.setDrawColor(...BORDER);
+  doc.line(MARGIN, y, RIGHT, y);
+
+  // Section: Base configuration
+  y += 20;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8);
+  doc.setTextColor(...ACCENT);
+  doc.text('BASE CONFIGURATION', MARGIN, y);
+
+  const baseItems = [
+    ['Weekly episodes', 'Monday shoots, 4x per month'],
+    ['Solo format', 'Chine on camera'],
+    ['Location', 'SOMA West office, 1066 Howard St'],
+    ['Deliverables', 'Shoot and handoff, raw files delivered'],
+    ['Cameras', '3-camera coverage, multi-angle'],
+    ['Audio', '2 dedicated mics, isolated tracks per session'],
+  ];
+
+  const colW = (RIGHT - MARGIN - 20) / 2;
+  let col = 0, rowY = y + 16;
+  baseItems.forEach((item, i) => {
+    const x = MARGIN + col * (colW + 20);
+    // Alternating row bg
+    if (i % 2 === 0 && col === 0) {
+      doc.setFillColor(...LIGHT);
+      doc.rect(MARGIN - 4, rowY - 10, RIGHT - MARGIN + 8, 28, 'F');
+    }
+    doc.setFillColor(...ACCENT);
+    doc.circle(x + 5, rowY - 3, 2.5, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(...DARK);
+    doc.text(item[0], x + 14, rowY);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
+    doc.setTextColor(...MID);
+    doc.text(item[1], x + 14, rowY + 12);
+    col++;
+    if (col > 1) { col = 0; rowY += 34; }
+  });
+  y = rowY + 8;
+
+  // Rule
+  doc.setDrawColor(...BORDER);
+  doc.line(MARGIN, y, RIGHT, y);
+
+  // Pricing section
+  y += 20;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8);
+  doc.setTextColor(...ACCENT);
+  doc.text('PRICING BREAKDOWN', MARGIN, y);
+
+  const lines = [
+    ['Base shoot (travel, setup, record, handoff)', `$${BASE}/episode`, `$${BASE * 4}/month`],
+  ];
+  if (guestAdd > 0) lines.push(['Guest(s) on set', `+$${guestAdd}/episode`, `+$${guestAdd * 4}/month`]);
+  if (locationAdd > 0) lines.push(['On-location shoot', `+$${locationAdd}/episode`, `+$${locationAdd * 4}/month`]);
+  if (audioAdd > 0) lines.push(['Audio cleanup', `+$${audioAdd}/episode`, `+$${audioAdd * 4}/month`]);
+
+  y += 16;
+  // Header row
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8.5);
+  doc.setTextColor(...MID);
+  doc.text('Item', MARGIN, y);
+  doc.text('Per episode', RIGHT - 120, y);
+  doc.text('Per month', RIGHT, y, { align: 'right' });
+
+  y += 4;
+  doc.setDrawColor(...BORDER);
+  doc.line(MARGIN, y, RIGHT, y);
+
+  lines.forEach((line, i) => {
+    y += 18;
+    if (i % 2 === 0) {
+      doc.setFillColor(...LIGHT);
+      doc.rect(MARGIN - 4, y - 10, RIGHT - MARGIN + 8, 22, 'F');
+    }
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(...DARK);
+    doc.text(line[0], MARGIN, y);
+    doc.setFont('helvetica', 'bold');
+    doc.text(line[1], RIGHT - 120, y);
+    doc.text(line[2], RIGHT, y, { align: 'right' });
+  });
+
+  // Total row
+  y += 14;
+  doc.setDrawColor(...BORDER);
+  doc.line(MARGIN, y, RIGHT, y);
+  y += 18;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.setTextColor(...DARK);
+  doc.text('TOTAL', MARGIN, y);
+  doc.setFontSize(18);
+  doc.setTextColor(...DARK);
+  doc.text('$' + episodeTotal.toLocaleString(), RIGHT - 120, y);
+  doc.text('$' + monthTotal.toLocaleString(), RIGHT, y, { align: 'right' });
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8);
+  doc.setTextColor(...MID);
+  doc.text('per episode', RIGHT - 120, y + 12);
+  doc.text('per month', RIGHT, y + 12, { align: 'right' });
+
+  y += 30;
+  doc.setDrawColor(...BORDER);
+  doc.line(MARGIN, y, RIGHT, y);
+
+  // Terms
+  y += 18;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8);
+  doc.setTextColor(...ACCENT);
+  doc.text('TERMS', MARGIN, y);
+
+  const terms = [
+    ['Frequency', 'Weekly, Mondays. 4 sessions per month billed at the monthly rate.'],
+    ['Additional sessions', 'Months with 5 Mondays billed at the per-episode rate for the 5th shoot.'],
+    ['Scope', 'This estimate covers the configuration above. Changes to format, guests, or location are adjusted accordingly.'],
+    ['Contact', 'hello@bookthestudiosf.com  ·  (415) 326-4531'],
+  ];
+
+  terms.forEach(([label, text]) => {
+    y += 18;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(...DARK);
+    doc.text(label + ':', MARGIN, y);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
+    doc.setTextColor(...MID);
+    const lines = doc.splitTextToSize(text, RIGHT - MARGIN - 100);
+    doc.text(lines, MARGIN + 110, y);
+    if (lines.length > 1) y += (lines.length - 1) * 11;
+  });
+
+  // Footer
+  doc.setFillColor(...FOOTER_COLOR);
+  doc.rect(0, 792 - 36, W, 36, 'F');
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8);
+  doc.setTextColor(255, 255, 255);
+  doc.text('Studio San Francisco  ·  Inside Secret Studios, San Francisco, CA 94124', MARGIN, 792 - 14);
+  doc.setTextColor(...ACCENT);
+  doc.text('bookthestudiosf.com', RIGHT, 792 - 14, { align: 'right' });
+
+  doc.save('StudioSF_SOMALive_Estimate.pdf');
+}
+
+// Init
+render();
+</script>
+</body>
+</html>
