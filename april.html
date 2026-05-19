@@ -289,6 +289,173 @@
     }
     .gallery-img:first-of-type { border-top:none; }
 
+    /* ── Session Pass button ── */
+    .pass-wrap {
+      padding:28px 32px 0; text-align:center;
+    }
+    .pass-trigger {
+      display:inline-flex; align-items:center; gap:10px;
+      padding:16px 28px;
+      background:transparent;
+      border:0.5px solid rgba(201,168,76,.45);
+      color:var(--gold);
+      font-family:'Jost',sans-serif;
+      font-weight:400; font-size:15px; letter-spacing:.12em;
+      text-transform:uppercase; cursor:pointer;
+      transition:background .25s ease, border-color .25s ease;
+      width:100%;
+      justify-content:center;
+    }
+    .pass-trigger:hover {
+      background:rgba(201,168,76,.07);
+      border-color:rgba(201,168,76,.7);
+    }
+    .pass-trigger svg { flex-shrink:0; }
+
+    /* ── Pass overlay ── */
+    .pass-overlay {
+      position:fixed; inset:0; z-index:2000;
+      background:rgba(8,11,13,.92);
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      padding:24px 20px;
+      opacity:0; pointer-events:none;
+      transition:opacity .4s ease;
+      overflow-y:auto;
+    }
+    .pass-overlay.open { opacity:1; pointer-events:all; }
+
+    /* ── The card ── */
+    .pass-card {
+      width:100%; max-width:360px;
+      background:var(--ink2);
+      border:0.5px solid rgba(201,168,76,.35);
+      position:relative;
+      box-shadow:0 24px 80px rgba(0,0,0,.7), 0 0 0 1px rgba(201,168,76,.1);
+    }
+
+    /* Card body */
+    .pass-body {
+      padding:32px 28px 28px;
+      text-align:center;
+    }
+    .pass-brand {
+      font-weight:400; font-size:11px; letter-spacing:.28em;
+      text-transform:uppercase; color:var(--gold);
+      display:block; margin-bottom:16px;
+    }
+    .pass-rule-gold {
+      width:100%; height:0.5px;
+      background:linear-gradient(90deg,transparent,rgba(201,168,76,.6),rgba(201,168,76,.9),rgba(201,168,76,.6),transparent);
+      border:none; margin-bottom:24px;
+    }
+    .pass-title {
+      font-family:'Cormorant Garamond',serif;
+      font-weight:600; font-size:2.2rem; line-height:1;
+      letter-spacing:.04em; color:var(--cream);
+      margin-bottom:6px;
+    }
+    .pass-for {
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic; font-weight:400; font-size:1.1rem;
+      color:var(--gold); margin-bottom:28px;
+    }
+
+    /* QR panel */
+    .pass-qr-panel {
+      background:var(--cream);
+      padding:20px; margin:0 auto 20px;
+      width:180px; height:180px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .pass-qr-panel canvas,
+    .pass-qr-panel img { display:block; }
+    .pass-scan {
+      font-weight:300; font-size:12px; letter-spacing:.14em;
+      text-transform:uppercase; color:var(--warm);
+      margin-bottom:0;
+    }
+
+    /* Perforated tear line */
+    .pass-perf {
+      display:flex; align-items:center; gap:0;
+      margin:24px 0 0;
+      position:relative;
+    }
+    .pass-perf::before,
+    .pass-perf::after {
+      content:'';
+      width:18px; height:18px; border-radius:50%;
+      background:rgba(8,11,13,.92);
+      flex-shrink:0;
+      border:0.5px solid rgba(201,168,76,.25);
+      margin:0 -9px;
+      position:relative; z-index:1;
+    }
+    .pass-perf-line {
+      flex:1;
+      border:none;
+      border-top:1px dashed rgba(201,168,76,.3);
+      margin:0 4px;
+    }
+
+    /* Stub */
+    .pass-stub {
+      padding:22px 28px 26px;
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:14px 20px;
+    }
+    .stub-item { }
+    .stub-label {
+      font-weight:400; font-size:9px; letter-spacing:.22em;
+      text-transform:uppercase; color:var(--gold);
+      display:block; margin-bottom:3px;
+    }
+    .stub-value {
+      font-family:'Cormorant Garamond',serif;
+      font-weight:500; font-size:1rem; line-height:1.3;
+      color:var(--cream);
+    }
+    .stub-item.full { grid-column:1/-1; }
+
+    /* Corner marks */
+    .pass-corner {
+      position:absolute; width:12px; height:12px;
+      border-color:rgba(201,168,76,.4); border-style:solid;
+    }
+    .pass-corner.tl { top:8px; left:8px; border-width:1px 0 0 1px; }
+    .pass-corner.tr { top:8px; right:8px; border-width:1px 1px 0 0; }
+    .pass-corner.bl { bottom:8px; left:8px; border-width:0 0 1px 1px; }
+    .pass-corner.br { bottom:8px; right:8px; border-width:0 1px 1px 0; }
+
+    /* Action buttons */
+    .pass-actions {
+      display:flex; gap:10px; margin-top:20px;
+      width:100%; max-width:360px;
+    }
+    .pass-action {
+      flex:1; padding:14px;
+      font-family:'Jost',sans-serif;
+      font-weight:400; font-size:13px; letter-spacing:.12em;
+      text-transform:uppercase; cursor:pointer;
+      border:0.5px solid rgba(201,168,76,.4);
+      transition:background .2s ease;
+    }
+    .pass-action.primary {
+      background:var(--gold); color:var(--ink);
+      border-color:var(--gold);
+    }
+    .pass-action.primary:hover { background:var(--gold-l); }
+    .pass-action.secondary {
+      background:transparent; color:var(--warm);
+    }
+    .pass-action.secondary:hover { background:rgba(201,168,76,.07); }
+
+    /* Print styles */
+    @media print {
+      .pass-overlay { display:none !important; }
+    }
+
     @keyframes riseIn {
       from { opacity:0; transform:translateY(18px); }
       to   { opacity:1; transform:translateY(0); }
@@ -448,7 +615,7 @@
       <span class="item-n">IV</span>
       <div>
         <p class="item-title">Two precision mixes, included.</p>
-        <p class="item-desc">When the session wraps, your recordings are mixed and delivered. If more time is needed, additional sessions are easy to book.</p>
+        <p class="item-desc">Delivered for what's recorded and approved in the session — mixed, finished, and yours. Additional sessions can be booked if more time is needed.</p>
       </div>
     </div>
   </div>
@@ -472,8 +639,73 @@
     </div>
   </div>
 
-  <div class="s2-foot rv" style="--d:1.18s">
+  <div class="pass-wrap rv" style="--d:1.26s">
+    <button class="pass-trigger" id="passBtn" aria-label="Save your session pass">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="2" y="1" width="12" height="14" rx="1" stroke="#C9A84C" stroke-width=".9"/>
+        <line x1="5" y1="5" x2="11" y2="5" stroke="#C9A84C" stroke-width=".9"/>
+        <line x1="5" y1="8" x2="11" y2="8" stroke="#C9A84C" stroke-width=".9"/>
+        <line x1="5" y1="11" x2="8" y2="11" stroke="#C9A84C" stroke-width=".9"/>
+      </svg>
+      Save Your Session Pass
+    </button>
+  </div>
+
+  <div class="s2-foot rv" style="--d:1.34s">
     Studio San Francisco &nbsp;&middot;&nbsp; bookthestudiosf.com
+  </div>
+
+</div>
+
+<!-- ══ SESSION PASS OVERLAY ══ -->
+<div class="pass-overlay" id="passOverlay" role="dialog" aria-modal="true" aria-label="Session Pass">
+
+  <div class="pass-card" id="passCard">
+    <div class="pass-corner tl"></div>
+    <div class="pass-corner tr"></div>
+    <div class="pass-corner bl"></div>
+    <div class="pass-corner br"></div>
+
+    <div class="pass-body">
+      <span class="pass-brand">Studio San Francisco</span>
+      <div class="pass-rule-gold"></div>
+      <p class="pass-title">Session Pass</p>
+      <p class="pass-for">for April</p>
+      <div class="pass-qr-panel" id="passQR"></div>
+      <p class="pass-scan">Scan to book your session</p>
+    </div>
+
+    <div class="pass-perf">
+      <div class="pass-perf-line"></div>
+    </div>
+
+    <div class="pass-stub">
+      <div class="stub-item">
+        <span class="stub-label">Session</span>
+        <span class="stub-value">2-Hour Intro</span>
+      </div>
+      <div class="stub-item">
+        <span class="stub-label">Mixes</span>
+        <span class="stub-value">2 Precision</span>
+      </div>
+      <div class="stub-item">
+        <span class="stub-label">Format</span>
+        <span class="stub-value">Solo &amp; Duet</span>
+      </div>
+      <div class="stub-item">
+        <span class="stub-label">Valid Through</span>
+        <span class="stub-value">Nov 18, 2026</span>
+      </div>
+      <div class="stub-item full">
+        <span class="stub-label">Studio</span>
+        <span class="stub-value">bookthestudiosf.com &nbsp;&middot;&nbsp; (415) 326-4531</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pass-actions">
+    <button class="pass-action primary" id="passPrint">Save Pass</button>
+    <button class="pass-action secondary" id="passClose">Close</button>
   </div>
 
 </div>
@@ -553,6 +785,132 @@
   stage.addEventListener('click', openGift);
   stage.addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openGift(); }
+  });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  const CALENDLY = 'https://calendly.com/thestudiosf/april-and-steffen-studio-sf';
+  const overlay  = document.getElementById('passOverlay');
+  const passBtn  = document.getElementById('passBtn');
+  const closeBtn = document.getElementById('passClose');
+  const printBtn = document.getElementById('passPrint');
+  let   qrMade   = false;
+
+  function openPass() {
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if (!qrMade) {
+      new QRCode(document.getElementById('passQR'), {
+        text:         CALENDLY,
+        width:        140,
+        height:       140,
+        colorDark:    '#0a0d0f',
+        colorLight:   '#F2EBE0',
+        correctLevel: QRCode.CorrectLevel.H
+      });
+      qrMade = true;
+    }
+  }
+
+  function closePass() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  passBtn.addEventListener('click', openPass);
+  closeBtn.addEventListener('click', closePass);
+
+  printBtn.addEventListener('click', async () => {
+    printBtn.textContent = 'Saving…';
+    printBtn.disabled = true;
+
+    try {
+      const W = 380, H = 614, SC = 3;
+      const QX = 100, QY = 164, QS = 180;
+
+      // Build ticket as SVG — QR drawn separately to avoid canvas taint
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
+        <defs>
+          <linearGradient id="gl" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#C9A84C" stop-opacity="0"/>
+            <stop offset="30%"  stop-color="#C9A84C" stop-opacity="0.7"/>
+            <stop offset="70%"  stop-color="#C9A84C" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <rect width="${W}" height="${H}" fill="#0e1318"/>
+        <rect x="1" y="1" width="${W-2}" height="${H-2}" fill="none" stroke="#C9A84C" stroke-width="0.5" stroke-opacity="0.38"/>
+        <path d="M12,26 L12,12 L26,12" fill="none" stroke="#C9A84C" stroke-opacity="0.5" stroke-width="1.2"/>
+        <path d="M${W-26},12 L${W-12},12 L${W-12},26" fill="none" stroke="#C9A84C" stroke-opacity="0.5" stroke-width="1.2"/>
+        <path d="M12,${H-26} L12,${H-12} L26,${H-12}" fill="none" stroke="#C9A84C" stroke-opacity="0.5" stroke-width="1.2"/>
+        <path d="M${W-26},${H-12} L${W-12},${H-12} L${W-12},${H-26}" fill="none" stroke="#C9A84C" stroke-opacity="0.5" stroke-width="1.2"/>
+        <text x="${W/2}" y="44" text-anchor="middle" font-family="Helvetica Neue,Arial,sans-serif" font-size="9" fill="#C9A84C" letter-spacing="3.5">STUDIO SAN FRANCISCO</text>
+        <line x1="0" y1="56" x2="${W}" y2="56" stroke="url(#gl)" stroke-width="0.6"/>
+        <text x="${W/2}" y="106" text-anchor="middle" font-family="Georgia,serif" font-size="40" font-weight="bold" fill="#F2EBE0">Session Pass</text>
+        <text x="${W/2}" y="130" text-anchor="middle" font-family="Georgia,serif" font-size="19" font-style="italic" fill="#C9A84C">for April</text>
+        <rect x="${QX-18}" y="${QY-18}" width="${QS+36}" height="${QS+36}" fill="#F2EBE0"/>
+        <text x="${W/2}" y="408" text-anchor="middle" font-family="Helvetica Neue,Arial,sans-serif" font-size="9" fill="#D4C4AE" letter-spacing="2">SCAN TO BOOK YOUR SESSION</text>
+        <circle cx="0"  cy="428" r="10" fill="#0e1318" stroke="#C9A84C" stroke-opacity="0.22" stroke-width="0.5"/>
+        <circle cx="${W}" cy="428" r="10" fill="#0e1318" stroke="#C9A84C" stroke-opacity="0.22" stroke-width="0.5"/>
+        <line x1="18" y1="428" x2="${W-18}" y2="428" stroke="#C9A84C" stroke-opacity="0.28" stroke-width="1" stroke-dasharray="5,5"/>
+        <text x="28"       y="458" font-family="Helvetica Neue,Arial,sans-serif" font-size="8" fill="#C9A84C" letter-spacing="2.5">SESSION</text>
+        <text x="${W/2+8}" y="458" font-family="Helvetica Neue,Arial,sans-serif" font-size="8" fill="#C9A84C" letter-spacing="2.5">MIXES</text>
+        <text x="28"       y="477" font-family="Georgia,serif" font-size="15" fill="#F2EBE0">2-Hour Intro</text>
+        <text x="${W/2+8}" y="477" font-family="Georgia,serif" font-size="15" fill="#F2EBE0">2 Precision</text>
+        <text x="28"       y="504" font-family="Helvetica Neue,Arial,sans-serif" font-size="8" fill="#C9A84C" letter-spacing="2.5">FORMAT</text>
+        <text x="${W/2+8}" y="504" font-family="Helvetica Neue,Arial,sans-serif" font-size="8" fill="#C9A84C" letter-spacing="2.5">VALID THROUGH</text>
+        <text x="28"       y="522" font-family="Georgia,serif" font-size="15" fill="#F2EBE0">Solo &amp; Duet</text>
+        <text x="${W/2+8}" y="522" font-family="Georgia,serif" font-size="15" fill="#F2EBE0">Nov 18, 2026</text>
+        <line x1="28" y1="540" x2="${W-28}" y2="540" stroke="#C9A84C" stroke-opacity="0.14" stroke-width="0.5"/>
+        <text x="28" y="558" font-family="Helvetica Neue,Arial,sans-serif" font-size="8" fill="#C9A84C" letter-spacing="2.5">STUDIO</text>
+        <text x="28" y="578" font-family="Georgia,serif" font-size="12.5" fill="#F2EBE0">bookthestudiosf.com  ·  (415) 326-4531</text>
+      </svg>`;
+
+      // Load SVG into an Image
+      const svgBlob = new Blob([svg], { type:'image/svg+xml;charset=utf-8' });
+      const svgUrl  = URL.createObjectURL(svgBlob);
+      const img     = new Image();
+
+      await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = svgUrl; });
+
+      // Draw SVG onto canvas
+      const cvs = document.createElement('canvas');
+      cvs.width  = W * SC;
+      cvs.height = H * SC;
+      const ctx  = cvs.getContext('2d');
+      ctx.scale(SC, SC);
+      ctx.drawImage(img, 0, 0, W, H);
+      URL.revokeObjectURL(svgUrl);
+
+      // Draw QR on top (same-origin canvas — no taint)
+      const qrEl = document.querySelector('#passQR canvas') || document.querySelector('#passQR img');
+      if (qrEl) ctx.drawImage(qrEl, QX, QY, QS, QS);
+
+      // Download
+      const link = document.createElement('a');
+      link.download = 'StudioSF-SessionPass.png';
+      link.href = cvs.toDataURL('image/png');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+    } catch(err) {
+      console.error(err);
+      navigator.clipboard?.writeText(CALENDLY)
+        .then(() => alert('Booking link copied to clipboard.'))
+        .catch(() => alert('Please screenshot the pass to save it.'));
+    }
+
+    printBtn.textContent = 'Save Pass';
+    printBtn.disabled = false;
+  });
+
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closePass();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closePass();
   });
 </script>
 </body>
