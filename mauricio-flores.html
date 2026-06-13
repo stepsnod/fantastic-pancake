@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<!--
+  STUDIO SAN FRANCISCO — Client Delivery
+  Mauricio Flores · Sangre Fría · June 12, 2026
+
+  ── Server setup ──────────────────────────────────────────
+  Place these 4 files in the same folder on your server:
+    mauricio-flores.html
+    Sangre_Fria_final_06_12_2026.mp3
+    no_drums_Sangre_Fria_final_06_12_2026.mp3
+    Sangre_Fria_with_drums_06_12_2026.mp3
+
+  The download="" attribute renames each file on the client's device.
+
+  ── Tracking ──────────────────────────────────────────────
+  GA4 property G-ZKSHE7V4MH receives:
+    "session_opened"  → when Mauricio clicks the date gate
+    "file_download"   → when each download button is clicked
+  Check: GA4 → Reports → Engagement → Events
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <meta name="theme-color" content="#00c6ff"/>
+  <title>Sangre Fría · Your Session — Studio San Francisco</title>
+
+  <!-- Google Analytics (same property as bookthestudiosf.com) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZKSHE7V4MH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZKSHE7V4MH', { page_title: 'Client Delivery – Mauricio Flores' });
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Source+Serif+4:ital,wght@1,400;1,600&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ══════════════════════════════════════════════════════════
+       DESIGN TOKENS  —  mirrors bookthestudiosf.com exactly
+    ══════════════════════════════════════════════════════════ */
+    :root {
+      --accent:   #00c6ff;
+      --accent2:  #00ffc6;
+      --bg:       #071018;
+      --bg2:      #0a1722;
+      --card:     #0c1b27;
+      --text:     #e9f3fb;
+      --muted:    #b8d4e5;
+      --muted2:   #92b3c8;
+      --border:   rgba(255,255,255,.10);
+      --border2:  rgba(0,198,255,.22);
+      --border3:  rgba(0,255,198,.28);
+      --radius:   18px;
+      --ease:     cubic-bezier(.2,.9,.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { color-scheme: dark; }
+    a    { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; padding: 0; }
+
+    body {
+      font-family: Poppins, -apple-system, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 12%, rgba(0,198,255,.18), transparent 55%),
+        radial-gradient(1100px 650px at 85% 25%, rgba(0,198,255,.10), transparent 52%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+
+    /* ══════════════════════════════════════════════════════════
+       GATE SCREEN
+    ══════════════════════════════════════════════════════════ */
+
+    .gate-screen {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 20px;
+      position: relative;
+    }
+
+    .gate-wordmark {
+      position: absolute;
+      top: 34px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.7;
+      white-space: nowrap;
+    }
+
+    /* ── The clickable date card ── */
+    .gate-card {
+      text-align: center;
+      cursor: pointer;
+      padding: 52px 68px 44px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(12,27,39,.62);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      transition: border-color .45s ease, box-shadow .45s ease, transform .3s ease;
+      user-select: none; -webkit-user-select: none;
+      max-width: 400px;
+      width: 100%;
+    }
+    .gate-card:hover {
+      border-color: rgba(0,198,255,.32);
+      box-shadow: 0 0 80px rgba(0,198,255,.12), 0 24px 80px rgba(0,0,0,.5);
+      transform: translateY(-3px);
+    }
+    .gate-card:active { transform: translateY(-1px) scale(.99); }
+
+    .gate-session-label {
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--muted2);
+      margin-bottom: 18px;
+    }
+
+    .gate-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-size: 32px;
+      font-weight: 400;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 26px;
+    }
+
+    .gate-divider {
+      width: 36px;
+      height: 1px;
+      background: var(--border2);
+      margin: 0 auto 30px;
+    }
+
+    .gate-date-main {
+      display: block;
+      font-size: clamp(54px, 11vw, 76px);
+      font-weight: 300;
+      letter-spacing: -0.025em;
+      line-height: 1;
+      color: var(--text);
+      animation: dateGlow 4s ease-in-out infinite;
+    }
+    .gate-card:hover .gate-date-main {
+      animation-duration: 1.6s;
+    }
+
+    .gate-date-year {
+      display: block;
+      font-size: 20px;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--muted2);
+      margin-top: 8px;
+    }
+
+    @keyframes dateGlow {
+      0%, 100% { text-shadow: 0 0 40px rgba(0,198,255,.22); }
+      50%       { text-shadow: 0 0 70px rgba(0,198,255,.50), 0 0 20px rgba(0,255,198,.18); }
+    }
+
+    .gate-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      margin-top: 30px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted2);
+    }
+    .gate-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: breathe 2.2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: .35; transform: scale(1);   box-shadow: none; }
+      50%       { opacity: 1;   transform: scale(1.35); box-shadow: 0 0 10px rgba(0,198,255,.65); }
+    }
+
+    /* Gate exit */
+    .gate-screen.is-exiting {
+      animation: gateExit .5s var(--ease) forwards;
+      pointer-events: none;
+    }
+    @keyframes gateExit {
+      from { opacity: 1; transform: scale(1);    }
+      to   { opacity: 0; transform: scale(.975) translateY(-14px); }
+    }
+    .gate-screen.is-gone { display: none !important; }
+
+
+    /* ══════════════════════════════════════════════════════════
+       DELIVERY SCREEN
+    ══════════════════════════════════════════════════════════ */
+
+    .delivery-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 60px 20px 56px;
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .65s var(--ease), transform .65s var(--ease);
+    }
+    .delivery-screen.is-open   { display: flex; }
+    .delivery-screen.is-ready  { opacity: 1; transform: translateY(0); }
+
+    .delivery-inner {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Wordmark */
+    .delivery-wordmark {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: .75;
+      margin-bottom: 52px;
+      transition: opacity .2s, color .2s;
+    }
+    .delivery-wordmark:hover { opacity: 1; color: var(--accent2); }
+
+    /* Header */
+    .delivery-header {
+      text-align: center;
+      margin-bottom: 48px;
+      width: 100%;
+    }
+    .delivery-header h1 {
+      font-size: clamp(30px, 6vw, 44px);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .delivery-name {
+      font-weight: 500;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .delivery-meta {
+      font-size: 13px;
+      color: var(--muted2);
+      letter-spacing: .06em;
+    }
+    .delivery-meta .dot { margin: 0 9px; opacity: .4; }
+
+
+    /* ══════════════════════════════════════════════════════════
+       TRACK CARDS
+    ══════════════════════════════════════════════════════════ */
+
+    .tracks {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .track-card {
+      background: rgba(12,27,39,.84);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 22px 20px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      /* stagger reveal starts hidden */
+      opacity: 0;
+      transform: translateY(18px);
+      transition:
+        opacity   .55s var(--ease),
+        transform .55s var(--ease),
+        border-color .35s ease,
+        box-shadow .35s ease;
+    }
+    .track-card.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .track-card:hover {
+      border-color: rgba(0,198,255,.18);
+    }
+    .track-card.is-playing {
+      border-color: rgba(0,198,255,.32);
+      box-shadow: 0 0 40px rgba(0,198,255,.07), 0 12px 40px rgba(0,0,0,.35);
+    }
+    .track-card.is-done {
+      border-color: rgba(0,255,198,.22);
+    }
+
+    /* ── Card top row ── */
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .file-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 11px;
+      background: rgba(0,198,255,.08);
+      border: 1px solid rgba(0,198,255,.16);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      color: var(--accent);
+      transition: background .3s, border-color .3s, color .3s;
+    }
+    .track-card.is-playing .file-badge {
+      background: rgba(0,198,255,.15);
+      border-color: rgba(0,198,255,.32);
+    }
+    .track-card.is-done .file-badge {
+      background: rgba(0,255,198,.08);
+      border-color: rgba(0,255,198,.20);
+      color: var(--accent2);
+    }
+
+    .file-meta { flex: 1; min-width: 0; }
+    .file-title {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .file-label {
+      font-size: 11.5px;
+      color: var(--muted2);
+    }
+
+    /* ── Animated waveform (top-right, shows when playing) ── */
+    .card-waveform {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 24px;
+      flex-shrink: 0;
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+    .track-card.is-playing .card-waveform { opacity: 1; }
+
+    .wave-bar {
+      width: 3px;
+      border-radius: 2px;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      transform-origin: bottom center;
+    }
+    .track-card.is-playing .wave-bar {
+      animation: waveBounce .75s ease-in-out infinite alternate;
+    }
+    .track-card.is-playing .wave-bar:nth-child(1) { animation-duration:.65s; animation-delay:0s;    }
+    .track-card.is-playing .wave-bar:nth-child(2) { animation-duration:.90s; animation-delay:.08s;  }
+    .track-card.is-playing .wave-bar:nth-child(3) { animation-duration:.60s; animation-delay:.18s;  }
+    .track-card.is-playing .wave-bar:nth-child(4) { animation-duration:.82s; animation-delay:.04s;  }
+    .track-card.is-playing .wave-bar:nth-child(5) { animation-duration:.72s; animation-delay:.12s;  }
+
+    @keyframes waveBounce {
+      from { transform: scaleY(.25); opacity: .5; }
+      to   { transform: scaleY(1);   opacity: 1;  }
+    }
+
+    /* ── Separator ── */
+    .card-sep {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 18px;
+    }
+
+
+    /* ══════════════════════════════════════════════════════════
+       CUSTOM AUDIO PLAYER
+    ══════════════════════════════════════════════════════════ */
+
+    .player {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Row 1: play + progress + time */
+    .player-row1 {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    /* Play / Pause button */
+    .play-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      color: rgba(0,0,0,.85);
+      flex-shrink: 0;
+      transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+      box-shadow: 0 4px 14px rgba(0,198,255,.22);
+    }
+    .play-btn:hover { transform: scale(1.07); filter: brightness(1.1); box-shadow: 0 6px 20px rgba(0,198,255,.35); }
+    .play-btn:active { transform: scale(.97); }
+
+    /* Progress bar wrapper */
+    .progress-wrap { flex: 1; }
+
+    /* ── Shared range input styles ── */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      /* Fill driven by JS-set --fill custom property */
+      background: linear-gradient(
+        to right,
+        var(--range-fill-color, var(--accent)) var(--fill, 0%),
+        rgba(255,255,255,.12) var(--fill, 0%)
+      );
+      cursor: pointer;
+      outline: none;
+      display: block;
+    }
+
+    /* Chrome/Safari thumb */
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 0 2px rgba(0,198,255,.35), 0 2px 6px rgba(0,0,0,.35);
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.25);
+      box-shadow: 0 0 0 3px rgba(0,198,255,.50), 0 2px 10px rgba(0,0,0,.4);
+    }
+
+    /* Firefox thumb */
+    input[type="range"]::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: none;
+      background: #fff;
+      box-shadow: 0 0 0 2px rgba(0,198,255,.35), 0 2px 6px rgba(0,0,0,.35);
+      cursor: pointer;
+    }
+
+    /* Volume slider — teal accent */
+    input.volume-range {
+      --range-fill-color: var(--accent2);
+    }
+    input.volume-range::-webkit-slider-thumb {
+      box-shadow: 0 0 0 2px rgba(0,255,198,.35), 0 2px 6px rgba(0,0,0,.35);
+    }
+    input.volume-range::-webkit-slider-thumb:hover {
+      box-shadow: 0 0 0 3px rgba(0,255,198,.50), 0 2px 10px rgba(0,0,0,.4);
+    }
+    input.volume-range::-moz-range-thumb {
+      box-shadow: 0 0 0 2px rgba(0,255,198,.35), 0 2px 6px rgba(0,0,0,.35);
+    }
+
+    /* Larger touch targets on mobile */
+    @media (hover: none) {
+      input[type="range"] { height: 6px; }
+      input[type="range"]::-webkit-slider-thumb { width: 22px; height: 22px; }
+      input[type="range"]::-moz-range-thumb     { width: 22px; height: 22px; }
+    }
+
+    /* Time display */
+    .time-display {
+      font-size: 11.5px;
+      color: var(--muted2);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      flex-shrink: 0;
+      min-width: 84px;
+      text-align: right;
+    }
+
+    /* Row 2: volume + download */
+    .player-row2 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .volume-group {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      flex: 1;
+    }
+    .vol-icon {
+      color: var(--muted2);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      cursor: default;
+      width: 18px;
+    }
+
+    /* ── Download button ── */
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 20px;
+      border-radius: 50px;
+      font-family: Poppins, sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(0,0,0,.85);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: transform .2s ease, filter .2s ease, background .3s ease,
+                  color .3s ease, border .3s ease, box-shadow .2s ease;
+      box-shadow: 0 4px 14px rgba(0,198,255,.20);
+    }
+    .dl-btn:hover { transform: translateY(-1px); filter: brightness(1.08); box-shadow: 0 6px 20px rgba(0,198,255,.32); }
+    .dl-btn:active { transform: translateY(0); }
+
+    .dl-btn.is-done {
+      background: transparent;
+      border: 1.5px solid rgba(0,255,198,.35);
+      color: var(--accent2);
+      box-shadow: none;
+    }
+    .dl-btn.is-done:hover { transform: none; filter: none; }
+
+
+    /* ══════════════════════════════════════════════════════════
+       ALL-DONE BANNER
+    ══════════════════════════════════════════════════════════ */
+
+    .all-done-banner {
+      width: 100%;
+      max-width: 600px;
+      padding: 18px 24px;
+      border-radius: 14px;
+      background: rgba(0,255,198,.05);
+      border: 1px solid rgba(0,255,198,.18);
+      text-align: center;
+      margin-bottom: 14px;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity .5s var(--ease), transform .5s var(--ease);
+    }
+    .all-done-banner.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .all-done-banner p     { font-size: 14px; color: var(--accent2); font-weight: 500; }
+    .all-done-banner small { display: block; font-size: 12px; color: var(--muted2); margin-top: 4px; }
+
+
+    /* ══════════════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════════════ */
+
+    footer {
+      margin-top: 44px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted2);
+      line-height: 1.9;
+    }
+    footer a { color: var(--accent); transition: color .2s; }
+    footer a:hover { color: var(--accent2); }
+    .fdot { margin: 0 7px; opacity: .4; }
+
+
+    /* ══════════════════════════════════════════════════════════
+       MOBILE
+    ══════════════════════════════════════════════════════════ */
+
+    @media (max-width: 520px) {
+      .gate-card { padding: 40px 28px 36px; }
+      .delivery-screen { padding: 52px 16px 48px; }
+      .track-card { padding: 18px 16px 16px; }
+      .player-row2 { flex-wrap: wrap; gap: 10px; }
+      .volume-group { flex: 1 1 100%; }
+      .dl-btn { flex: 1; justify-content: center; }
+      .file-title { font-size: 13.5px; }
+    }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .track-card { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════
+       GATE — click the date to enter your session
+  ══════════════════════════════════════════════════ -->
+  <div id="gate" class="gate-screen">
+
+    <div class="gate-wordmark">Studio San Francisco</div>
+
+    <div class="gate-card" id="gate-card"
+         role="button" tabindex="0"
+         aria-label="Open your session — June 12, 2026">
+
+      <div class="gate-session-label">Your Session</div>
+      <div class="gate-title">Sangre Fría</div>
+      <div class="gate-divider"></div>
+      <span class="gate-date-main">June 12</span>
+      <span class="gate-date-year">2026</span>
+      <div class="gate-hint">
+        <span class="gate-dot"></span>
+        <span>open</span>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       DELIVERY — file cards with players
+  ══════════════════════════════════════════════════ -->
+  <div id="delivery" class="delivery-screen">
+    <div class="delivery-inner">
+
+      <a href="https://www.bookthestudiosf.com" class="delivery-wordmark"
+         target="_blank" rel="noopener">Studio San Francisco</a>
+
+      <div class="delivery-header">
+        <h1>Your recordings,<br><span class="delivery-name">Mauricio.</span></h1>
+        <p class="delivery-meta">
+          Sangre Fría
+          <span class="dot">·</span>
+          June 12, 2026
+        </p>
+      </div>
+
+      <div class="tracks" id="tracks">
+
+        <!-- ── Track 1: Final ───────────────────────────────── -->
+        <div class="track-card" id="card-1" data-src="Sangre_Fria_final_06_12_2026.mp3">
+          <div class="card-top">
+            <div class="file-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 18V5l12-2v13"/>
+                <circle cx="6" cy="18" r="3"/>
+                <circle cx="18" cy="16" r="3"/>
+              </svg>
+            </div>
+            <div class="file-meta">
+              <div class="file-title">Sangre Fría — Final</div>
+              <div class="file-label">Master mix &nbsp;·&nbsp; June 12, 2026</div>
+            </div>
+            <div class="card-waveform" aria-hidden="true">
+              <div class="wave-bar" style="height:8px"></div>
+              <div class="wave-bar" style="height:16px"></div>
+              <div class="wave-bar" style="height:22px"></div>
+              <div class="wave-bar" style="height:13px"></div>
+              <div class="wave-bar" style="height:19px"></div>
+            </div>
+          </div>
+          <div class="card-sep"></div>
+          <div class="player">
+            <div class="player-row1">
+              <button class="play-btn" aria-label="Play Sangre Fría Final">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </button>
+              <div class="progress-wrap">
+                <input type="range" class="progress-range" value="0" min="0" max="100" step="0.1" aria-label="Playback position"/>
+              </div>
+              <span class="time-display">0:00 / --:--</span>
+            </div>
+            <div class="player-row2">
+              <div class="volume-group">
+                <span class="vol-icon" aria-hidden="true"></span>
+                <input type="range" class="volume-range" value="80" min="0" max="100" aria-label="Volume"/>
+              </div>
+              <a class="dl-btn" id="btn-1"
+                 href="Sangre_Fria_final_06_12_2026.mp3"
+                 download="Sangre Fria - final 06 12 2026.mp3"
+                 onclick="onDownload(event,1,'Sangre Fria - Final')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ── Track 2: No Drums ───────────────────────────── -->
+        <div class="track-card" id="card-2" data-src="no_drums_Sangre_Fria_final_06_12_2026.mp3">
+          <div class="card-top">
+            <div class="file-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 18V5l12-2v13"/>
+                <circle cx="6" cy="18" r="3"/>
+                <circle cx="18" cy="16" r="3"/>
+              </svg>
+            </div>
+            <div class="file-meta">
+              <div class="file-title">Sangre Fría — No Drums</div>
+              <div class="file-label">Alternate mix &nbsp;·&nbsp; percussion removed</div>
+            </div>
+            <div class="card-waveform" aria-hidden="true">
+              <div class="wave-bar" style="height:8px"></div>
+              <div class="wave-bar" style="height:16px"></div>
+              <div class="wave-bar" style="height:22px"></div>
+              <div class="wave-bar" style="height:13px"></div>
+              <div class="wave-bar" style="height:19px"></div>
+            </div>
+          </div>
+          <div class="card-sep"></div>
+          <div class="player">
+            <div class="player-row1">
+              <button class="play-btn" aria-label="Play Sangre Fría No Drums">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </button>
+              <div class="progress-wrap">
+                <input type="range" class="progress-range" value="0" min="0" max="100" step="0.1" aria-label="Playback position"/>
+              </div>
+              <span class="time-display">0:00 / --:--</span>
+            </div>
+            <div class="player-row2">
+              <div class="volume-group">
+                <span class="vol-icon" aria-hidden="true"></span>
+                <input type="range" class="volume-range" value="80" min="0" max="100" aria-label="Volume"/>
+              </div>
+              <a class="dl-btn" id="btn-2"
+                 href="no_drums_Sangre_Fria_final_06_12_2026.mp3"
+                 download="Sangre Fria - no drums.mp3"
+                 onclick="onDownload(event,2,'Sangre Fria - No Drums')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ── Track 3: Drumset Added ─────────────────────── -->
+        <div class="track-card" id="card-3" data-src="Sangre_Fria_with_drums_06_12_2026.mp3">
+          <div class="card-top">
+            <div class="file-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 18V5l12-2v13"/>
+                <circle cx="6" cy="18" r="3"/>
+                <circle cx="18" cy="16" r="3"/>
+              </svg>
+            </div>
+            <div class="file-meta">
+              <div class="file-title">Sangre Fría — Drumset Added</div>
+              <div class="file-label">Alternate mix &nbsp;·&nbsp; full drumset</div>
+            </div>
+            <div class="card-waveform" aria-hidden="true">
+              <div class="wave-bar" style="height:8px"></div>
+              <div class="wave-bar" style="height:16px"></div>
+              <div class="wave-bar" style="height:22px"></div>
+              <div class="wave-bar" style="height:13px"></div>
+              <div class="wave-bar" style="height:19px"></div>
+            </div>
+          </div>
+          <div class="card-sep"></div>
+          <div class="player">
+            <div class="player-row1">
+              <button class="play-btn" aria-label="Play Sangre Fría Drumset Added">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </button>
+              <div class="progress-wrap">
+                <input type="range" class="progress-range" value="0" min="0" max="100" step="0.1" aria-label="Playback position"/>
+              </div>
+              <span class="time-display">0:00 / --:--</span>
+            </div>
+            <div class="player-row2">
+              <div class="volume-group">
+                <span class="vol-icon" aria-hidden="true"></span>
+                <input type="range" class="volume-range" value="80" min="0" max="100" aria-label="Volume"/>
+              </div>
+              <a class="dl-btn" id="btn-3"
+                 href="Sangre_Fria_with_drums_06_12_2026.mp3"
+                 download="Sangre Fria - drumset added.mp3"
+                 onclick="onDownload(event,3,'Sangre Fria - Drumset Added')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /tracks -->
+
+      <div class="all-done-banner" id="all-done" role="status" aria-live="polite">
+        <p>✓ All three files saved</p>
+        <small>You're all set. Reach out anytime for a revision or your next session.</small>
+      </div>
+
+      <footer>
+        <a href="https://www.bookthestudiosf.com" target="_blank" rel="noopener">Studio San Francisco</a>
+        <span class="fdot">·</span>
+        <a href="mailto:hello@bookthestudiosf.com">hello@bookthestudiosf.com</a>
+        <br>
+        <span style="opacity:.5; font-size:11px;">Secret Studios &nbsp;·&nbsp; San Francisco, CA</span>
+      </footer>
+
+    </div><!-- /delivery-inner -->
+  </div><!-- /delivery-screen -->
+
+
+  <script>
+    /* ════════════════════════════════════════════════════════════
+       SVG ICON CONSTANTS
+    ════════════════════════════════════════════════════════════ */
+
+    const SVG_PLAY  = `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
+    const SVG_PAUSE = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`;
+
+    // Volume icons (muted / low / high)
+    const SVG_VOL_MUTE = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>`;
+    const SVG_VOL_LOW  = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`;
+    const SVG_VOL_HIGH = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`;
+
+    const SVG_CHECK = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>`;
+    const SVG_DL    = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+
+
+    /* ════════════════════════════════════════════════════════════
+       HELPERS
+    ════════════════════════════════════════════════════════════ */
+
+    function formatTime(s) {
+      if (!s || isNaN(s) || !isFinite(s)) return '0:00';
+      const m  = Math.floor(s / 60);
+      const ss = Math.floor(s % 60);
+      return m + ':' + ss.toString().padStart(2, '0');
+    }
+
+    function setFill(input, value, min, max) {
+      const pct = Math.max(0, Math.min(100, ((value - min) / (max - min)) * 100));
+      input.style.setProperty('--fill', pct + '%');
+    }
+
+    function getVolIcon(val) {
+      if (val == 0)  return SVG_VOL_MUTE;
+      if (val < 55)  return SVG_VOL_LOW;
+      return SVG_VOL_HIGH;
+    }
+
+
+    /* ════════════════════════════════════════════════════════════
+       GATE LOGIC
+    ════════════════════════════════════════════════════════════ */
+
+    const gateEl     = document.getElementById('gate');
+    const deliveryEl = document.getElementById('delivery');
+    const gateCard   = document.getElementById('gate-card');
+
+    function openSession() {
+      /* GA4 — fires when Mauricio clicks the date */
+      if (typeof gtag === 'function') {
+        gtag('event', 'session_opened', {
+          event_category: 'client_delivery',
+          client_name:    'Mauricio Flores',
+          session_title:  'Sangre Fria',
+          session_date:   '2026-06-12'
+        });
+      }
+
+      /* Animate gate out */
+      gateEl.classList.add('is-exiting');
+      gateEl.addEventListener('animationend', () => {
+        gateEl.classList.add('is-gone');
+      }, { once: true });
+
+      /* Reveal delivery with two-frame trick to trigger transition */
+      deliveryEl.classList.add('is-open');      // display: flex, opacity still 0
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          deliveryEl.classList.add('is-ready'); // transition to opacity:1
+        });
+      });
+
+      /* Stagger card reveal */
+      document.querySelectorAll('.track-card').forEach((card, i) => {
+        setTimeout(() => card.classList.add('revealed'), 320 + i * 140);
+      });
+
+      /* Restore localStorage download states */
+      restoreDownloadState();
+    }
+
+    gateCard.addEventListener('click', openSession);
+    gateCard.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openSession(); }
+    });
+
+
+    /* ════════════════════════════════════════════════════════════
+       AUDIO PLAYERS
+    ════════════════════════════════════════════════════════════ */
+
+    const players   = {};   // id → Audio element
+    let   activeId  = null; // currently playing card id
+
+    function setPlayingState(id, playing) {
+      const card    = document.getElementById('card-' + id);
+      const playBtn = card.querySelector('.play-btn');
+      playBtn.innerHTML = playing ? SVG_PAUSE : SVG_PLAY;
+      card.classList.toggle('is-playing', playing);
+    }
+
+    function initPlayer(id) {
+      const card       = document.getElementById('card-' + id);
+      const src        = card.dataset.src;
+      const audio      = new Audio(src);
+      audio.preload    = 'metadata';
+      audio.volume     = 0.8;
+
+      const playBtn    = card.querySelector('.play-btn');
+      const progEl     = card.querySelector('.progress-range');
+      const volEl      = card.querySelector('.volume-range');
+      const timeEl     = card.querySelector('.time-display');
+      const volIconEl  = card.querySelector('.vol-icon');
+
+      /* Set initial state */
+      setFill(volEl, 80, 0, 100);
+      volIconEl.innerHTML = SVG_VOL_HIGH;
+
+      /* Metadata loaded → show total time */
+      audio.addEventListener('loadedmetadata', () => {
+        timeEl.textContent = '0:00 / ' + formatTime(audio.duration);
+      });
+
+      /* Time update → move scrubber */
+      audio.addEventListener('timeupdate', () => {
+        if (!audio.duration) return;
+        const pct = (audio.currentTime / audio.duration) * 100;
+        progEl.value = pct;
+        setFill(progEl, pct, 0, 100);
+        timeEl.textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
+      });
+
+      /* Track ended */
+      audio.addEventListener('ended', () => {
+        setPlayingState(id, false);
+        progEl.value = 0;
+        setFill(progEl, 0, 0, 100);
+        activeId = null;
+      });
+
+      /* ── Play / Pause ── */
+      playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+          /* Stop the currently active player */
+          if (activeId !== null && activeId !== id && players[activeId]) {
+            players[activeId].pause();
+            setPlayingState(activeId, false);
+          }
+          audio.play().catch(() => {});
+          setPlayingState(id, true);
+          activeId = id;
+        } else {
+          audio.pause();
+          setPlayingState(id, false);
+          activeId = null;
+        }
+      });
+
+      /* ── Seek ── */
+      progEl.addEventListener('input', () => {
+        if (audio.duration) {
+          audio.currentTime = (progEl.value / 100) * audio.duration;
+          setFill(progEl, progEl.value, 0, 100);
+        }
+      });
+
+      /* ── Volume ── */
+      volEl.addEventListener('input', () => {
+        const v = parseInt(volEl.value, 10);
+        audio.volume = v / 100;
+        setFill(volEl, v, 0, 100);
+        volIconEl.innerHTML = getVolIcon(v);
+      });
+
+      players[id] = audio;
+    }
+
+    /* Boot all three players */
+    [1, 2, 3].forEach(id => initPlayer(id));
+
+
+    /* ════════════════════════════════════════════════════════════
+       DOWNLOAD TRACKING
+    ════════════════════════════════════════════════════════════ */
+
+    const STORE_KEY   = 'ssf_mauricio_sangria_v2';
+    const TOTAL_FILES = 3;
+    let   downloaded  = {};
+
+    try { downloaded = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {}
+
+    function onDownload(e, id, trackName) {
+      /* GA4 event */
+      if (typeof gtag === 'function') {
+        gtag('event', 'file_download', {
+          event_category: 'client_delivery',
+          event_label:    trackName,
+          file_id:        id,
+          client_name:    'Mauricio Flores',
+          session_title:  'Sangre Fria',
+          session_date:   '2026-06-12'
+        });
+      }
+
+      downloaded[id] = { name: trackName, ts: Date.now() };
+      try { localStorage.setItem(STORE_KEY, JSON.stringify(downloaded)); } catch(e) {}
+      setTimeout(() => markDone(id), 400);
+    }
+
+    function markDone(id) {
+      const card = document.getElementById('card-' + id);
+      const btn  = document.getElementById('btn-' + id);
+      if (!card || !btn || btn.classList.contains('is-done')) return;
+
+      card.classList.add('is-done');
+      btn.classList.add('is-done');
+      btn.innerHTML = SVG_CHECK + ' Saved';
+      btn.removeAttribute('href');
+      btn.removeAttribute('download');
+      btn.removeAttribute('onclick');
+
+      checkAllDone();
+    }
+
+    function checkAllDone() {
+      if (Object.keys(downloaded).length >= TOTAL_FILES) {
+        document.getElementById('all-done').classList.add('visible');
+      }
+    }
+
+    function restoreDownloadState() {
+      Object.keys(downloaded).forEach(id => markDone(Number(id)));
+    }
+  </script>
+
+</body>
+</html>
