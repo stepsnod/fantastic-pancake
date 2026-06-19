@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <!--
   STUDIO SAN FRANCISCO — Client Delivery
-  Mauricio Flores · Sangre Fría · June 12, 2026
+  Mauricio Flores · Multi-Session Archive
+
+  ── Sessions on this page ─────────────────────────────────
+  1. Blood Moon       — June 18, 2026  — 1 track   (NEWEST)
+  2. Sangre Fría      — June 12, 2026  — 3 tracks
 
   ── Server setup ──────────────────────────────────────────
-  Place these 4 files in the same folder on your server:
+  Place these files in the same folder on your server:
     mauricio-flores.html
+    Blood_Moon_final_06_18_2026.mp3              ← REPLACE: confirm exact filename once uploaded
     Sangre_Fria_final_06_12_2026.mp3
     no_drums_Sangre_Fria_final_06_12_2026.mp3
     Sangre_Fria_with_drums_06_12_2026.mp3
+
+  NOTE: "Blood_Moon_final_06_18_2026.mp3" is a PLACEHOLDER filename.
+  Once you upload the actual Blood Moon file, send it over (or just tell me
+  the exact filename) and I'll patch the two references — same as last time.
+  Search for "BLOOD MOON SRC" below to find both spots quickly.
 
   The download="" attribute renames each file on the client's device.
 
   ── Tracking ──────────────────────────────────────────────
   GA4 property G-ZKSHE7V4MH receives:
-    "session_opened"  → when Mauricio clicks the date gate
+    "session_opened"  → when Mauricio opens a session card
     "file_download"   → when each download button is clicked
-  Check: GA4 → Reports → Engagement → Events
+  Both events carry session_title + session_date so you can filter
+  by session in GA4 → Reports → Engagement → Events → file_download
 -->
 <html lang="en">
 <head>
@@ -24,7 +35,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <meta name="robots" content="noindex, nofollow"/>
   <meta name="theme-color" content="#00c6ff"/>
-  <title>Sangre Fría · Your Session — Studio San Francisco</title>
+  <title>Your Sessions — Studio San Francisco</title>
 
   <!-- Google Analytics (same property as bookthestudiosf.com) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZKSHE7V4MH"></script>
@@ -80,20 +91,29 @@
 
 
     /* ══════════════════════════════════════════════════════════
-       GATE SCREEN
+       SELECT SCREEN  (session picker)
     ══════════════════════════════════════════════════════════ */
 
-    .gate-screen {
+    .select-screen {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 48px 20px;
+      padding: 56px 20px;
       position: relative;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity .5s var(--ease), transform .5s var(--ease);
     }
+    .select-screen.is-exiting {
+      opacity: 0;
+      transform: scale(.975) translateY(-14px);
+      pointer-events: none;
+    }
+    .select-screen.is-gone { display: none !important; }
 
-    .gate-wordmark {
+    .select-wordmark {
       position: absolute;
       top: 34px;
       left: 50%;
@@ -107,119 +127,141 @@
       white-space: nowrap;
     }
 
-    /* ── The clickable date card ── */
-    .gate-card {
+    .select-header {
       text-align: center;
-      cursor: pointer;
-      padding: 52px 68px 44px;
-      border-radius: 28px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(12,27,39,.62);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      transition: border-color .45s ease, box-shadow .45s ease, transform .3s ease;
-      user-select: none; -webkit-user-select: none;
-      max-width: 400px;
-      width: 100%;
+      margin-bottom: 42px;
     }
-    .gate-card:hover {
-      border-color: rgba(0,198,255,.32);
-      box-shadow: 0 0 80px rgba(0,198,255,.12), 0 24px 80px rgba(0,0,0,.5);
-      transform: translateY(-3px);
-    }
-    .gate-card:active { transform: translateY(-1px) scale(.99); }
-
-    .gate-session-label {
+    .select-eyebrow {
       font-size: 10.5px;
       font-weight: 500;
       letter-spacing: 0.24em;
       text-transform: uppercase;
       color: var(--muted2);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
-
-    .gate-title {
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-style: italic;
-      font-size: 32px;
+    .select-title {
+      font-size: clamp(28px, 6vw, 38px);
       font-weight: 400;
+      margin-bottom: 10px;
+    }
+    .select-name {
+      font-weight: 500;
       background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      line-height: 1.2;
-      margin-bottom: 26px;
     }
-
-    .gate-divider {
-      width: 36px;
-      height: 1px;
-      background: var(--border2);
-      margin: 0 auto 30px;
-    }
-
-    .gate-date-main {
-      display: block;
-      font-size: clamp(54px, 11vw, 76px);
-      font-weight: 300;
-      letter-spacing: -0.025em;
-      line-height: 1;
-      color: var(--text);
-      animation: dateGlow 4s ease-in-out infinite;
-    }
-    .gate-card:hover .gate-date-main {
-      animation-duration: 1.6s;
-    }
-
-    .gate-date-year {
-      display: block;
-      font-size: 20px;
-      font-weight: 300;
-      letter-spacing: 0.1em;
+    .select-sub {
+      font-size: 13.5px;
       color: var(--muted2);
-      margin-top: 8px;
     }
 
-    @keyframes dateGlow {
-      0%, 100% { text-shadow: 0 0 40px rgba(0,198,255,.22); }
-      50%       { text-shadow: 0 0 70px rgba(0,198,255,.50), 0 0 20px rgba(0,255,198,.18); }
+    /* ── Session list ── */
+    .session-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      max-width: 460px;
     }
 
-    .gate-hint {
+    .session-card {
+      position: relative;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 9px;
-      margin-top: 30px;
-      font-size: 11px;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 28px 26px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: rgba(12,27,39,.62);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      cursor: pointer;
+      user-select: none; -webkit-user-select: none;
+      transition: border-color .35s ease, box-shadow .35s ease, transform .25s ease, background .35s ease;
+    }
+    .session-card:hover {
+      border-color: rgba(0,198,255,.28);
+      box-shadow: 0 14px 50px rgba(0,198,255,.10), 0 10px 30px rgba(0,0,0,.4);
+      transform: translateY(-2px);
+    }
+    .session-card:active { transform: translateY(0) scale(.99); }
+
+    .session-card.is-featured {
+      border-color: rgba(0,198,255,.26);
+      background: rgba(12,27,39,.80);
+      box-shadow: 0 0 50px rgba(0,198,255,.08);
+    }
+    .session-card.is-featured:hover {
+      box-shadow: 0 0 70px rgba(0,198,255,.16), 0 14px 50px rgba(0,0,0,.4);
+    }
+
+    .session-badge {
+      position: absolute;
+      top: 0;
+      right: 24px;
+      transform: translateY(-50%);
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 4px 11px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: rgba(0,0,0,.85);
+      box-shadow: 0 4px 14px rgba(0,198,255,.3);
+    }
+
+    .session-card-left {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      min-width: 0;
+    }
+    .session-eyebrow {
+      font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted2);
     }
-    .gate-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      animation: breathe 2.2s ease-in-out infinite;
-      flex-shrink: 0;
+    .session-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 25px;
+      line-height: 1.15;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    @keyframes breathe {
-      0%, 100% { opacity: .35; transform: scale(1);   box-shadow: none; }
-      50%       { opacity: 1;   transform: scale(1.35); box-shadow: 0 0 10px rgba(0,198,255,.65); }
+    .session-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted2);
     }
+    .meta-dot { opacity: .45; }
 
-    /* Gate exit */
-    .gate-screen.is-exiting {
-      animation: gateExit .5s var(--ease) forwards;
-      pointer-events: none;
+    .session-arrow {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border: 1px solid var(--border2);
+      color: var(--accent);
+      transition: transform .25s ease, background .25s ease, border-color .25s ease;
     }
-    @keyframes gateExit {
-      from { opacity: 1; transform: scale(1);    }
-      to   { opacity: 0; transform: scale(.975) translateY(-14px); }
+    .session-card:hover .session-arrow {
+      transform: translateX(3px);
+      background: rgba(0,198,255,.10);
+      border-color: rgba(0,198,255,.45);
     }
-    .gate-screen.is-gone { display: none !important; }
 
 
     /* ══════════════════════════════════════════════════════════
@@ -231,7 +273,7 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      padding: 60px 20px 56px;
+      padding: 52px 20px 56px;
       opacity: 0;
       transform: translateY(22px);
       transition: opacity .65s var(--ease), transform .65s var(--ease);
@@ -246,6 +288,23 @@
       flex-direction: column;
       align-items: center;
     }
+
+    /* Back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted2);
+      margin-bottom: 30px;
+      align-self: flex-start;
+      transition: color .2s ease, transform .2s ease;
+    }
+    .back-link:hover { color: var(--accent); transform: translateX(-3px); }
+    .back-link svg { flex-shrink: 0; }
 
     /* Wordmark */
     .delivery-wordmark {
@@ -307,7 +366,6 @@
       padding: 22px 22px 20px;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      /* stagger reveal starts hidden */
       opacity: 0;
       transform: translateY(18px);
       transition:
@@ -426,14 +484,12 @@
       gap: 14px;
     }
 
-    /* Row 1: play + progress + time */
     .player-row1 {
       display: flex;
       align-items: center;
       gap: 13px;
     }
 
-    /* Play / Pause button */
     .play-btn {
       width: 40px;
       height: 40px;
@@ -449,17 +505,14 @@
     .play-btn:hover { transform: scale(1.07); filter: brightness(1.1); box-shadow: 0 6px 20px rgba(0,198,255,.35); }
     .play-btn:active { transform: scale(.97); }
 
-    /* Progress bar wrapper */
     .progress-wrap { flex: 1; }
 
-    /* ── Shared range input styles ── */
     input[type="range"] {
       -webkit-appearance: none;
       appearance: none;
       width: 100%;
       height: 4px;
       border-radius: 2px;
-      /* Fill driven by JS-set --fill custom property */
       background: linear-gradient(
         to right,
         var(--range-fill-color, var(--accent)) var(--fill, 0%),
@@ -470,7 +523,6 @@
       display: block;
     }
 
-    /* Chrome/Safari thumb */
     input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
       width: 14px;
@@ -486,7 +538,6 @@
       box-shadow: 0 0 0 3px rgba(0,198,255,.50), 0 2px 10px rgba(0,0,0,.4);
     }
 
-    /* Firefox thumb */
     input[type="range"]::-moz-range-thumb {
       width: 14px;
       height: 14px;
@@ -497,7 +548,6 @@
       cursor: pointer;
     }
 
-    /* Volume slider — teal accent */
     input.volume-range {
       --range-fill-color: var(--accent2);
     }
@@ -511,14 +561,12 @@
       box-shadow: 0 0 0 2px rgba(0,255,198,.35), 0 2px 6px rgba(0,0,0,.35);
     }
 
-    /* Larger touch targets on mobile */
     @media (hover: none) {
       input[type="range"] { height: 6px; }
       input[type="range"]::-webkit-slider-thumb { width: 22px; height: 22px; }
       input[type="range"]::-moz-range-thumb     { width: 22px; height: 22px; }
     }
 
-    /* Time display */
     .time-display {
       font-size: 11.5px;
       color: var(--muted2);
@@ -529,7 +577,6 @@
       text-align: right;
     }
 
-    /* Row 2: volume + download */
     .player-row2 {
       display: flex;
       align-items: center;
@@ -551,7 +598,6 @@
       width: 18px;
     }
 
-    /* ── Download button ── */
     .dl-btn {
       display: inline-flex;
       align-items: center;
@@ -629,8 +675,9 @@
     ══════════════════════════════════════════════════════════ */
 
     @media (max-width: 520px) {
-      .gate-card { padding: 40px 28px 36px; }
-      .delivery-screen { padding: 52px 16px 48px; }
+      .session-card { padding: 22px 20px; }
+      .session-title { font-size: 22px; }
+      .delivery-screen { padding: 48px 16px 48px; }
       .track-card { padding: 18px 16px 16px; }
       .player-row2 { flex-wrap: wrap; gap: 10px; }
       .volume-group { flex: 1 1 100%; }
@@ -648,35 +695,183 @@
 <body>
 
   <!-- ══════════════════════════════════════════════════
-       GATE — click the date to enter your session
+       SELECT — choose a session
   ══════════════════════════════════════════════════ -->
-  <div id="gate" class="gate-screen">
+  <div id="select" class="select-screen">
 
-    <div class="gate-wordmark">Studio San Francisco</div>
+    <div class="select-wordmark">Studio San Francisco</div>
 
-    <div class="gate-card" id="gate-card"
-         role="button" tabindex="0"
-         aria-label="Open your session — June 12, 2026">
+    <div class="select-header">
+      <div class="select-eyebrow">Your Sessions</div>
+      <h1 class="select-title">Hello, <span class="select-name">Mauricio.</span></h1>
+      <p class="select-sub">Choose a session to listen and download.</p>
+    </div>
 
-      <div class="gate-session-label">Your Session</div>
-      <div class="gate-title">Sangre Fría</div>
-      <div class="gate-divider"></div>
-      <span class="gate-date-main">June 12</span>
-      <span class="gate-date-year">2026</span>
-      <div class="gate-hint">
-        <span class="gate-dot"></span>
-        <span>open</span>
+    <div class="session-list">
+
+      <!-- Blood Moon — newest -->
+      <div class="session-card is-featured" id="select-bloodmoon"
+           data-target="delivery-bloodmoon"
+           role="button" tabindex="0"
+           aria-label="Open Blood Moon session — June 18, 2026">
+        <div class="session-badge">New</div>
+        <div class="session-card-left">
+          <div class="session-eyebrow">Latest Session</div>
+          <div class="session-title">Blood Moon</div>
+          <div class="session-meta-row">
+            <span>June 18, 2026</span>
+            <span class="meta-dot">·</span>
+            <span>1 track</span>
+          </div>
+        </div>
+        <div class="session-arrow">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </div>
       </div>
+
+      <!-- Sangre Fría — previous -->
+      <div class="session-card" id="select-sangrefria"
+           data-target="delivery-sangrefria"
+           role="button" tabindex="0"
+           aria-label="Open Sangre Fría session — June 12, 2026">
+        <div class="session-card-left">
+          <div class="session-eyebrow">Previous Session</div>
+          <div class="session-title">Sangre Fría</div>
+          <div class="session-meta-row">
+            <span>June 12, 2026</span>
+            <span class="meta-dot">·</span>
+            <span>3 tracks</span>
+          </div>
+        </div>
+        <div class="session-arrow">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </div>
+      </div>
+
+    </div><!-- /session-list -->
+  </div><!-- /select-screen -->
+
+
+  <!-- ══════════════════════════════════════════════════
+       DELIVERY — Blood Moon (1 track)
+  ══════════════════════════════════════════════════ -->
+  <div id="delivery-bloodmoon" class="delivery-screen">
+    <div class="delivery-inner">
+
+      <button class="back-link" data-back type="button">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+        </svg>
+        All Sessions
+      </button>
+
+      <a href="https://www.bookthestudiosf.com" class="delivery-wordmark"
+         target="_blank" rel="noopener">Studio San Francisco</a>
+
+      <div class="delivery-header">
+        <h1>Your recording,<br><span class="delivery-name">Mauricio.</span></h1>
+        <p class="delivery-meta">
+          Blood Moon
+          <span class="dot">·</span>
+          June 18, 2026
+        </p>
+      </div>
+
+      <div class="tracks">
+
+        <!-- BLOOD MOON SRC (1 of 2) -->
+        <div class="track-card" id="card-bm-1" data-src="Blood_Moon_final_06_18_2026.mp3">
+          <div class="card-top">
+            <div class="file-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 18V5l12-2v13"/>
+                <circle cx="6" cy="18" r="3"/>
+                <circle cx="18" cy="16" r="3"/>
+              </svg>
+            </div>
+            <div class="file-meta">
+              <div class="file-title">Blood Moon — Final</div>
+              <div class="file-label">Master mix &nbsp;·&nbsp; June 18, 2026</div>
+            </div>
+            <div class="card-waveform" aria-hidden="true">
+              <div class="wave-bar" style="height:8px"></div>
+              <div class="wave-bar" style="height:16px"></div>
+              <div class="wave-bar" style="height:22px"></div>
+              <div class="wave-bar" style="height:13px"></div>
+              <div class="wave-bar" style="height:19px"></div>
+            </div>
+          </div>
+          <div class="card-sep"></div>
+          <div class="player">
+            <div class="player-row1">
+              <button class="play-btn" aria-label="Play Blood Moon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </button>
+              <div class="progress-wrap">
+                <input type="range" class="progress-range" value="0" min="0" max="100" step="0.1" aria-label="Playback position"/>
+              </div>
+              <span class="time-display">0:00 / --:--</span>
+            </div>
+            <div class="player-row2">
+              <div class="volume-group">
+                <span class="vol-icon" aria-hidden="true"></span>
+                <input type="range" class="volume-range" value="80" min="0" max="100" aria-label="Volume"/>
+              </div>
+              <!-- BLOOD MOON SRC (2 of 2) -->
+              <a class="dl-btn" id="btn-bm-1"
+                 href="Blood_Moon_final_06_18_2026.mp3"
+                 download="Blood Moon - final 06 18 2026.mp3"
+                 onclick="onDownload(event,'bm-1','Blood Moon - Final','delivery-bloodmoon')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /tracks -->
+
+      <div class="all-done-banner" id="all-done-bloodmoon" role="status" aria-live="polite">
+        <p>✓ File saved</p>
+        <small>You're all set. Reach out anytime for a revision or your next session.</small>
+      </div>
+
+      <footer>
+        <a href="https://www.bookthestudiosf.com" target="_blank" rel="noopener">Studio San Francisco</a>
+        <span class="fdot">·</span>
+        <a href="mailto:hello@bookthestudiosf.com">hello@bookthestudiosf.com</a>
+        <br>
+        <span style="opacity:.5; font-size:11px;">Secret Studios &nbsp;·&nbsp; San Francisco, CA</span>
+      </footer>
 
     </div>
   </div>
 
 
   <!-- ══════════════════════════════════════════════════
-       DELIVERY — file cards with players
+       DELIVERY — Sangre Fría (3 tracks)
   ══════════════════════════════════════════════════ -->
-  <div id="delivery" class="delivery-screen">
+  <div id="delivery-sangrefria" class="delivery-screen">
     <div class="delivery-inner">
+
+      <button class="back-link" data-back type="button">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+        </svg>
+        All Sessions
+      </button>
 
       <a href="https://www.bookthestudiosf.com" class="delivery-wordmark"
          target="_blank" rel="noopener">Studio San Francisco</a>
@@ -690,10 +885,10 @@
         </p>
       </div>
 
-      <div class="tracks" id="tracks">
+      <div class="tracks">
 
-        <!-- ── Track 1: Final ───────────────────────────────── -->
-        <div class="track-card" id="card-1" data-src="Sangre_Fria_final_06_12_2026.mp3">
+        <!-- Track sf-1: Final -->
+        <div class="track-card" id="card-sf-1" data-src="Sangre_Fria_final_06_12_2026.mp3">
           <div class="card-top">
             <div class="file-badge">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -733,10 +928,10 @@
                 <span class="vol-icon" aria-hidden="true"></span>
                 <input type="range" class="volume-range" value="80" min="0" max="100" aria-label="Volume"/>
               </div>
-              <a class="dl-btn" id="btn-1"
+              <a class="dl-btn" id="btn-sf-1"
                  href="Sangre_Fria_final_06_12_2026.mp3"
                  download="Sangre Fria - final 06 12 2026.mp3"
-                 onclick="onDownload(event,1,'Sangre Fria - Final')">
+                 onclick="onDownload(event,'sf-1','Sangre Fria - Final','delivery-sangrefria')">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                      stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -749,9 +944,8 @@
           </div>
         </div>
 
-
-        <!-- ── Track 2: No Drums ───────────────────────────── -->
-        <div class="track-card" id="card-2" data-src="no_drums_Sangre_Fria_final_06_12_2026.mp3">
+        <!-- Track sf-2: No Drums -->
+        <div class="track-card" id="card-sf-2" data-src="no_drums_Sangre_Fria_final_06_12_2026.mp3">
           <div class="card-top">
             <div class="file-badge">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -791,10 +985,10 @@
                 <span class="vol-icon" aria-hidden="true"></span>
                 <input type="range" class="volume-range" value="80" min="0" max="100" aria-label="Volume"/>
               </div>
-              <a class="dl-btn" id="btn-2"
+              <a class="dl-btn" id="btn-sf-2"
                  href="no_drums_Sangre_Fria_final_06_12_2026.mp3"
                  download="Sangre Fria - no drums.mp3"
-                 onclick="onDownload(event,2,'Sangre Fria - No Drums')">
+                 onclick="onDownload(event,'sf-2','Sangre Fria - No Drums','delivery-sangrefria')">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                      stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -807,9 +1001,8 @@
           </div>
         </div>
 
-
-        <!-- ── Track 3: Drumset Added ─────────────────────── -->
-        <div class="track-card" id="card-3" data-src="Sangre_Fria_with_drums_06_12_2026.mp3">
+        <!-- Track sf-3: Drumset Added -->
+        <div class="track-card" id="card-sf-3" data-src="Sangre_Fria_with_drums_06_12_2026.mp3">
           <div class="card-top">
             <div class="file-badge">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -849,10 +1042,10 @@
                 <span class="vol-icon" aria-hidden="true"></span>
                 <input type="range" class="volume-range" value="80" min="0" max="100" aria-label="Volume"/>
               </div>
-              <a class="dl-btn" id="btn-3"
+              <a class="dl-btn" id="btn-sf-3"
                  href="Sangre_Fria_with_drums_06_12_2026.mp3"
                  download="Sangre Fria - drumset added.mp3"
-                 onclick="onDownload(event,3,'Sangre Fria - Drumset Added')">
+                 onclick="onDownload(event,'sf-3','Sangre Fria - Drumset Added','delivery-sangrefria')">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                      stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -867,7 +1060,7 @@
 
       </div><!-- /tracks -->
 
-      <div class="all-done-banner" id="all-done" role="status" aria-live="polite">
+      <div class="all-done-banner" id="all-done-sangrefria" role="status" aria-live="polite">
         <p>✓ All three files saved</p>
         <small>You're all set. Reach out anytime for a revision or your next session.</small>
       </div>
@@ -880,11 +1073,33 @@
         <span style="opacity:.5; font-size:11px;">Secret Studios &nbsp;·&nbsp; San Francisco, CA</span>
       </footer>
 
-    </div><!-- /delivery-inner -->
-  </div><!-- /delivery-screen -->
+    </div>
+  </div>
 
 
   <script>
+    /* ════════════════════════════════════════════════════════════
+       SESSION REGISTRY
+       Add a new entry here + a new session-card + delivery-screen
+       block to onboard future sessions.
+    ════════════════════════════════════════════════════════════ */
+
+    const SESSIONS = {
+      'delivery-bloodmoon': {
+        storeKey: 'ssf_mauricio_bloodmoon_v1',
+        total: 1,
+        title: 'Blood Moon',
+        date: '2026-06-18'
+      },
+      'delivery-sangrefria': {
+        storeKey: 'ssf_mauricio_sangria_v2',
+        total: 3,
+        title: 'Sangre Fria',
+        date: '2026-06-12'
+      }
+    };
+
+
     /* ════════════════════════════════════════════════════════════
        SVG ICON CONSTANTS
     ════════════════════════════════════════════════════════════ */
@@ -892,13 +1107,11 @@
     const SVG_PLAY  = `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
     const SVG_PAUSE = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`;
 
-    // Volume icons (muted / low / high)
     const SVG_VOL_MUTE = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>`;
     const SVG_VOL_LOW  = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`;
     const SVG_VOL_HIGH = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`;
 
     const SVG_CHECK = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>`;
-    const SVG_DL    = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
 
 
     /* ════════════════════════════════════════════════════════════
@@ -925,50 +1138,70 @@
 
 
     /* ════════════════════════════════════════════════════════════
-       GATE LOGIC
+       SESSION NAVIGATION
     ════════════════════════════════════════════════════════════ */
 
-    const gateEl     = document.getElementById('gate');
-    const deliveryEl = document.getElementById('delivery');
-    const gateCard   = document.getElementById('gate-card');
+    const selectEl = document.getElementById('select');
 
-    function openSession() {
-      /* GA4 — fires when Mauricio clicks the date */
+    function openSession(targetId) {
+      const meta = SESSIONS[targetId];
       if (typeof gtag === 'function') {
         gtag('event', 'session_opened', {
           event_category: 'client_delivery',
           client_name:    'Mauricio Flores',
-          session_title:  'Sangre Fria',
-          session_date:   '2026-06-12'
+          session_title:  meta.title,
+          session_date:   meta.date
         });
       }
 
-      /* Animate gate out */
-      gateEl.classList.add('is-exiting');
-      gateEl.addEventListener('animationend', () => {
-        gateEl.classList.add('is-gone');
-      }, { once: true });
+      selectEl.classList.add('is-exiting');
+      setTimeout(() => selectEl.classList.add('is-gone'), 500);
 
-      /* Reveal delivery with two-frame trick to trigger transition */
-      deliveryEl.classList.add('is-open');      // display: flex, opacity still 0
+      const deliveryEl = document.getElementById(targetId);
+      deliveryEl.classList.add('is-open');
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          deliveryEl.classList.add('is-ready'); // transition to opacity:1
-        });
+        requestAnimationFrame(() => deliveryEl.classList.add('is-ready'));
       });
 
-      /* Stagger card reveal */
-      document.querySelectorAll('.track-card').forEach((card, i) => {
+      deliveryEl.querySelectorAll('.track-card').forEach((card, i) => {
         setTimeout(() => card.classList.add('revealed'), 320 + i * 140);
       });
-
-      /* Restore localStorage download states */
-      restoreDownloadState();
     }
 
-    gateCard.addEventListener('click', openSession);
-    gateCard.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openSession(); }
+    function backToSessions(currentId) {
+      const deliveryEl = document.getElementById(currentId);
+
+      /* pause any audio playing within this session */
+      deliveryEl.querySelectorAll('.track-card').forEach(card => {
+        const id = card.id.replace('card-', '');
+        if (players[id] && !players[id].paused) {
+          players[id].pause();
+          setPlayingState(id, false);
+        }
+      });
+      activeId = null;
+
+      deliveryEl.classList.remove('is-ready');
+      setTimeout(() => {
+        deliveryEl.classList.remove('is-open');
+        deliveryEl.querySelectorAll('.track-card').forEach(c => c.classList.remove('revealed'));
+      }, 650);
+
+      selectEl.classList.remove('is-gone');
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => selectEl.classList.remove('is-exiting'));
+      });
+    }
+
+    document.querySelectorAll('.session-card').forEach(card => {
+      card.addEventListener('click', () => openSession(card.dataset.target));
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openSession(card.dataset.target); }
+      });
+    });
+
+    document.querySelectorAll('[data-back]').forEach(btn => {
+      btn.addEventListener('click', () => backToSessions(btn.closest('.delivery-screen').id));
     });
 
 
@@ -976,8 +1209,8 @@
        AUDIO PLAYERS
     ════════════════════════════════════════════════════════════ */
 
-    const players   = {};   // id → Audio element
-    let   activeId  = null; // currently playing card id
+    const players  = {};   // id → Audio element
+    let   activeId = null; // currently playing card id
 
     function setPlayingState(id, playing) {
       const card    = document.getElementById('card-' + id);
@@ -987,28 +1220,25 @@
     }
 
     function initPlayer(id) {
-      const card       = document.getElementById('card-' + id);
-      const src        = card.dataset.src;
-      const audio      = new Audio(src);
-      audio.preload    = 'metadata';
-      audio.volume     = 0.8;
+      const card    = document.getElementById('card-' + id);
+      const src     = card.dataset.src;
+      const audio   = new Audio(src);
+      audio.preload = 'metadata';
+      audio.volume  = 0.8;
 
-      const playBtn    = card.querySelector('.play-btn');
-      const progEl     = card.querySelector('.progress-range');
-      const volEl      = card.querySelector('.volume-range');
-      const timeEl     = card.querySelector('.time-display');
-      const volIconEl  = card.querySelector('.vol-icon');
+      const playBtn   = card.querySelector('.play-btn');
+      const progEl    = card.querySelector('.progress-range');
+      const volEl     = card.querySelector('.volume-range');
+      const timeEl    = card.querySelector('.time-display');
+      const volIconEl = card.querySelector('.vol-icon');
 
-      /* Set initial state */
       setFill(volEl, 80, 0, 100);
       volIconEl.innerHTML = SVG_VOL_HIGH;
 
-      /* Metadata loaded → show total time */
       audio.addEventListener('loadedmetadata', () => {
         timeEl.textContent = '0:00 / ' + formatTime(audio.duration);
       });
 
-      /* Time update → move scrubber */
       audio.addEventListener('timeupdate', () => {
         if (!audio.duration) return;
         const pct = (audio.currentTime / audio.duration) * 100;
@@ -1017,7 +1247,6 @@
         timeEl.textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
       });
 
-      /* Track ended */
       audio.addEventListener('ended', () => {
         setPlayingState(id, false);
         progEl.value = 0;
@@ -1025,10 +1254,8 @@
         activeId = null;
       });
 
-      /* ── Play / Pause ── */
       playBtn.addEventListener('click', () => {
         if (audio.paused) {
-          /* Stop the currently active player */
           if (activeId !== null && activeId !== id && players[activeId]) {
             players[activeId].pause();
             setPlayingState(activeId, false);
@@ -1043,7 +1270,6 @@
         }
       });
 
-      /* ── Seek ── */
       progEl.addEventListener('input', () => {
         if (audio.duration) {
           audio.currentTime = (progEl.value / 100) * audio.duration;
@@ -1051,7 +1277,6 @@
         }
       });
 
-      /* ── Volume ── */
       volEl.addEventListener('input', () => {
         const v = parseInt(volEl.value, 10);
         audio.volume = v / 100;
@@ -1062,39 +1287,41 @@
       players[id] = audio;
     }
 
-    /* Boot all three players */
-    [1, 2, 3].forEach(id => initPlayer(id));
+    /* Boot every player across every session (lazy: metadata-only until played) */
+    ['bm-1', 'sf-1', 'sf-2', 'sf-3'].forEach(id => initPlayer(id));
 
 
     /* ════════════════════════════════════════════════════════════
-       DOWNLOAD TRACKING
+       DOWNLOAD TRACKING  (scoped per session via localStorage key)
     ════════════════════════════════════════════════════════════ */
 
-    const STORE_KEY   = 'ssf_mauricio_sangria_v2';
-    const TOTAL_FILES = 3;
-    let   downloaded  = {};
+    const downloadedStores = {};
+    Object.values(SESSIONS).forEach(meta => {
+      try { downloadedStores[meta.storeKey] = JSON.parse(localStorage.getItem(meta.storeKey) || '{}'); }
+      catch (e) { downloadedStores[meta.storeKey] = {}; }
+    });
 
-    try { downloaded = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) {}
+    function onDownload(e, id, trackName, sessionId) {
+      const meta = SESSIONS[sessionId];
 
-    function onDownload(e, id, trackName) {
-      /* GA4 event */
       if (typeof gtag === 'function') {
         gtag('event', 'file_download', {
           event_category: 'client_delivery',
           event_label:    trackName,
           file_id:        id,
           client_name:    'Mauricio Flores',
-          session_title:  'Sangre Fria',
-          session_date:   '2026-06-12'
+          session_title:  meta.title,
+          session_date:   meta.date
         });
       }
 
-      downloaded[id] = { name: trackName, ts: Date.now() };
-      try { localStorage.setItem(STORE_KEY, JSON.stringify(downloaded)); } catch(e) {}
-      setTimeout(() => markDone(id), 400);
+      downloadedStores[meta.storeKey][id] = { name: trackName, ts: Date.now() };
+      try { localStorage.setItem(meta.storeKey, JSON.stringify(downloadedStores[meta.storeKey])); } catch (e) {}
+
+      setTimeout(() => markDone(id, sessionId), 400);
     }
 
-    function markDone(id) {
+    function markDone(id, sessionId) {
       const card = document.getElementById('card-' + id);
       const btn  = document.getElementById('btn-' + id);
       if (!card || !btn || btn.classList.contains('is-done')) return;
@@ -1106,18 +1333,22 @@
       btn.removeAttribute('download');
       btn.removeAttribute('onclick');
 
-      checkAllDone();
+      checkAllDone(sessionId);
     }
 
-    function checkAllDone() {
-      if (Object.keys(downloaded).length >= TOTAL_FILES) {
-        document.getElementById('all-done').classList.add('visible');
+    function checkAllDone(sessionId) {
+      const meta  = SESSIONS[sessionId];
+      const count = Object.keys(downloadedStores[meta.storeKey]).length;
+      if (count >= meta.total) {
+        const banner = document.querySelector('#' + sessionId + ' .all-done-banner');
+        if (banner) banner.classList.add('visible');
       }
     }
 
-    function restoreDownloadState() {
-      Object.keys(downloaded).forEach(id => markDone(Number(id)));
-    }
+    /* Restore ✓ state for every session on load (DOM exists even while hidden) */
+    Object.entries(SESSIONS).forEach(([sessionId, meta]) => {
+      Object.keys(downloadedStores[meta.storeKey]).forEach(id => markDone(id, sessionId));
+    });
   </script>
 
 </body>
