@@ -2490,3 +2490,83 @@ if (notifyForm) {
 }
 
 })();
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PROJECT ESTIMATE FORM — #estimate section (added 2026-07-17)
+   Netlify AJAX submit, inline status, same pattern as Reach Out.
+   ═══════════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('projectEstimateForm');
+  if (!form) return;
+
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const statusBox = form.querySelector('.form-inline-status');
+  const origBtnText = submitBtn ? submitBtn.textContent : 'Send My Idea →';
+
+  const setStatus = (kind, html) => {
+    if (!statusBox) return;
+    statusBox.innerHTML = html || '';
+    statusBox.dataset.kind = kind || '';
+  };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Local environment guard (Netlify Forms only work on the deployed site)
+    const host = window.location.hostname;
+    const isLocal = window.location.protocol === 'file:' || host === '' ||
+      host === 'localhost' || host === '127.0.0.1' || host === '0.0.0.0' ||
+      /^192\.168\./.test(host) || /^10\./.test(host) ||
+      /^172\.(1[6-9]|2\d|3[01])\./.test(host);
+    if (isLocal) {
+      setStatus('err', '<div class="err">Form submissions only work on the deployed site. Open <strong>bookthestudiosf.com</strong> to test.</div>');
+      return;
+    }
+
+    setStatus('', '');
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.classList.remove('is-submitted');
+      submitBtn.textContent = 'Sending...';
+    }
+
+    try {
+      const formData = new FormData(form);
+      const body = new URLSearchParams(formData).toString();
+
+      const res = await fetch(form.getAttribute('action') || '/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body
+      });
+
+      if (!res.ok) throw new Error('Network response not ok');
+
+      if (submitBtn) {
+        submitBtn.classList.add('is-submitted');
+        submitBtn.textContent = 'Sent ✓';
+      }
+
+      form.querySelectorAll('input, select, textarea').forEach(el => {
+        if (el.type !== 'hidden') el.disabled = true;
+      });
+
+      setStatus('ok', `
+        <div class="ok">
+          <div class="tick">✓</div>
+          <div class="msg">
+            <strong>Got it.</strong> Your idea is in my inbox — you'll have a personal estimate within 24 hours.<br/>
+            <span style="color: rgba(255,255,255,0.62);">Want to move faster? Text me at (415) 326-4531.</span>
+          </div>
+        </div>
+      `);
+    } catch (err) {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = origBtnText;
+      }
+      setStatus('err', '<div class="err">Something went wrong. Please try again, or email <a href="mailto:hello@bookthestudiosf.com">hello@bookthestudiosf.com</a>.</div>');
+    }
+  }, true);
+});

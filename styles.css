@@ -5867,3 +5867,226 @@ body.has-mini-player .theme-fab                  { bottom: 82px;  }
   background: rgba(0,198,255,0.08);
   color: var(--accent);
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   ESTIMATE SECTION — "What Can We Make Here?" (added 2026-07-17)
+   Outcomes cards + pricing logic + estimate request form
+   ═══════════════════════════════════════════════════════════════ */
+
+.hero-estimate-line {
+  margin: 10px 0 0;
+  font-size: 15px;
+  color: var(--muted);
+}
+.hero-estimate-line a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,198,255,0.35);
+  transition: border-color .2s, color .2s;
+}
+.hero-estimate-line a:hover { border-color: var(--accent); }
+
+.estimate-section h2 { text-align: center; }
+.estimate-section .subhead {
+  text-align: center;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Rate logic — the whole pricing model in three tiles */
+.rate-logic {
+  display: grid;
+  gap: 16px;
+  margin: 32px 0 8px;
+}
+@media (min-width: 700px) {
+  .rate-logic { grid-template-columns: repeat(3, 1fr); }
+}
+.rate-logic-item {
+  background: var(--card, rgba(255,255,255,0.04));
+  border: 1px solid var(--border, rgba(255,255,255,0.1));
+  border-radius: 18px;
+  padding: 24px 22px;
+  text-align: center;
+}
+.rate-logic-price {
+  font-size: 34px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  font-family: 'Space Grotesk', Inter, sans-serif;
+}
+.rate-logic-price span { font-size: 17px; font-weight: 400; color: var(--muted); }
+.rate-logic-label {
+  margin-top: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+}
+.rate-logic-desc {
+  margin-top: 6px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* Outcome cards */
+.outcomes-title {
+  text-align: center;
+  margin: 44px 0 20px;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text);
+}
+.outcomes-grid {
+  display: grid;
+  gap: 16px;
+}
+@media (min-width: 640px)  { .outcomes-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .outcomes-grid { grid-template-columns: repeat(3, 1fr); } }
+.outcome-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card, rgba(255,255,255,0.04));
+  border: 1px solid var(--border, rgba(255,255,255,0.1));
+  border-radius: 18px;
+  padding: 24px 22px;
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+.outcome-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0,198,255,0.4);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+}
+.outcome-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.outcome-desc {
+  margin: 8px 0 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+  flex-grow: 1;
+}
+.outcome-range {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.outcome-cta {
+  align-self: flex-start;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,198,255,0.35);
+  padding-bottom: 1px;
+  transition: color .2s, border-color .2s;
+}
+.outcome-cta:hover { color: var(--accent); border-color: var(--accent); }
+.outcomes-footnote {
+  text-align: center;
+  margin: 22px auto 0;
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 520px;
+}
+
+/* Estimate request form */
+.est-form-wrap {
+  max-width: 700px;
+  margin: 52px auto 0;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border, rgba(255,255,255,0.1));
+  border-radius: 24px;
+  padding: 44px 40px;
+  scroll-margin-top: var(--anchor-offset, 90px);
+}
+@media (max-width: 560px) { .est-form-wrap { padding: 32px 22px; } }
+.est-form-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 500;
+  margin: 0 0 10px;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.est-form-sub {
+  text-align: center;
+  font-size: 15px;
+  color: var(--muted);
+  margin: 0 0 32px;
+}
+.est-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 560px) { .est-form-grid { grid-template-columns: 1fr; } }
+.est-field-full { grid-column: 1 / -1; }
+.est-field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.est-optional { font-weight: 400; color: var(--muted); }
+.est-field input[type="text"],
+.est-field input[type="email"],
+.est-field input[type="tel"],
+.est-field select,
+.est-field textarea {
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--field-bg, rgba(255,255,255,0.06));
+  border: 2px solid var(--border, rgba(255,255,255,0.12));
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 15px;
+  font-family: inherit;
+  transition: border-color .2s;
+  box-sizing: border-box;
+}
+.est-field textarea { resize: vertical; }
+.est-field input:focus,
+.est-field select:focus,
+.est-field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.est-field select { cursor: pointer; }
+.est-pills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media (min-width: 640px) { .est-pills { grid-template-columns: repeat(4, 1fr); } }
+.est-submit-btn {
+  width: 100%;
+  padding: 15px 28px;
+  background: #00c6ff;
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s, background .2s;
+  box-shadow: 0 4px 20px rgba(0,198,255,0.4);
+}
+.est-submit-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 26px rgba(0,198,255,0.5); }
+.est-submit-btn.is-submitted { background: #22c55e; box-shadow: 0 4px 20px rgba(34,197,94,0.4); }
+.est-submit-btn:disabled { cursor: default; }
+.est-promise {
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 12px 0 0;
+}
