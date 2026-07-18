@@ -13,13 +13,13 @@
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#00c6ff" name="theme-color"/>
 <meta content="index,follow,max-image-preview:large" name="robots"/>
-<title>Video Estimate — Studio San Francisco</title>
+<title>Video Estimate - Studio San Francisco</title>
 <meta content="Get a transparent, itemized estimate for professional video production. Testimonial shoots in-studio, Bay Area on-location, or anywhere in the US. Configure your session in minutes." name="description"/>
 <link href="https://www.bookthestudiosf.com/estimate.html" rel="canonical"/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙</text></svg>"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <!-- Open Graph -->
-<meta content="Video Estimate — Studio San Francisco" property="og:title"/>
+<meta content="Video Estimate - Studio San Francisco" property="og:title"/>
 <meta content="Configure your video shoot and get a transparent, itemized estimate for professional testimonial video production." property="og:description"/>
 <meta content="website" property="og:type"/>
 <meta content="https://www.bookthestudiosf.com/estimate.html" property="og:url"/>
@@ -29,7 +29,7 @@
 <meta content="Studio San Francisco" property="og:site_name"/>
 <!-- Twitter -->
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Video Estimate — Studio San Francisco" name="twitter:title"/>
+<meta content="Video Estimate - Studio San Francisco" name="twitter:title"/>
 <meta content="Configure your shoot and get a clear, itemized video production estimate." name="twitter:description"/>
 <meta content="https://www.bookthestudiosf.com/images/studio-1.jpg" name="twitter:image"/>
 <!-- Google Fonts -->
@@ -42,7 +42,7 @@
 <!-- Page-specific styles -->
 <style>
 /* ═══════════════════════════════════════════════════════════
-   ESTIMATE PAGE — page-scoped styles
+   ESTIMATE PAGE - page-scoped styles
    All global tokens (--accent, --gold, --card, etc.) come
    from styles.css. Nothing here overrides shared components.
    ═══════════════════════════════════════════════════════════ */
@@ -69,7 +69,7 @@
 .est-wrap { max-width: 760px; margin: 0 auto; }
 
 /* ── Progress bar ── */
-/* ── Progress bar — two-row layout ── */
+/* ── Progress bar - two-row layout ── */
 .est-prog {
   display: flex;
   flex-direction: column;
@@ -431,6 +431,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
 <a href="index.html#menu">Services</a>
 <a href="index.html#estimate">Get an Estimate</a>
 <a href="index.html#photos">The Studio</a>
+<a href="brew.html">Brew in the Stu</a>
 <a href="portfolio.html">Visuals</a>
 <a href="blog.html">Blog</a>
 <a href="index.html#testimonials">Proof</a>
@@ -466,6 +467,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
 <li><a href="index.html#estimate">Get an Estimate</a></li>
 <li><a href="index.html#menu">Services</a></li>
 <li><a href="index.html#photos">The Studio</a></li>
+<li><a href="brew.html">Brew in the Stu</a></li>
 <li><a href="portfolio.html">Visuals</a></li>
 <li><a href="blog.html">Blog</a></li>
 <li><a href="estimate.html" aria-current="page">Video Estimate</a></li>
@@ -510,8 +512,8 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
   <p class="est-breadcrumb"><a href="index.html">&#8592; Studio San Francisco</a></p>
   <p class="kicker" data-reveal="">Video Production</p>
   <h1 data-reveal="">Video Estimate</h1>
-  <p class="subhead" data-reveal="">This estimator is built for <strong>testimonial &amp; brand video shoots</strong>. Configure your shoot below and get a clear, itemized estimate before we talk. Every line item is explained — no surprises, no pressure.</p>
-  <p class="subhead" data-reveal="" style="font-size:14px;">Working on something else — a song, band project, podcast, or a mixed audio/video idea? <a href="index.html#estimate-form" style="color:var(--accent);">Describe it here and get a personal estimate within 24 hours &rarr;</a></p>
+  <p class="subhead" data-reveal="">This estimator is built for <strong>testimonial &amp; brand video shoots</strong>. Configure your shoot below and get a clear, itemized estimate before we talk. Every line item is explained - no surprises, no pressure.</p>
+  <p class="subhead" data-reveal="" style="font-size:14px;">Working on something else - a song, band project, podcast, or a mixed audio/video idea? <a href="index.html#estimate-form" style="color:var(--accent);">Describe it here and get a personal estimate within 24 hours &rarr;</a></p>
 </section>
 
 <!-- Estimator -->
@@ -548,7 +550,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
   <div class="mini-bar">
     <div class="mini-invite" id="miniInvite">
       <span class="mini-invite-icon" aria-hidden="true">&#9835;</span>
-      <span class="mini-invite-label">Hear what we&#39;ve made &mdash; listen while you browse</span>
+      <span class="mini-invite-label">Hear what we&#39;ve made - listen while you browse</span>
       <button class="mini-play-invite-btn" id="miniPlayInvite" type="button" aria-label="Start playing studio samples">
         <svg width="10" height="12" viewBox="0 0 16 18" fill="currentColor" style="vertical-align:-2px;margin-right:4px"><path d="M2.5 1.2a1 1 0 0 1 1.5-.86l11 8.16a1 1 0 0 1 0 1.72l-11 7.16A1 1 0 0 1 2.5 16.5V1.2z"/></svg>
         Play
@@ -675,7 +677,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
       if (i < 2) {
         track += '<div class="est-pline ' + (step > n ? 'done' : 'idle') + '"></div>';
       }
-      // Label in labels row — wrapped to match dot width exactly
+      // Label in labels row - wrapped to match dot width exactly
       labels += '<div class="est-plabel-wrap"><span class="est-plabel ' + cls + '">' + l + '</span></div>';
       // Spacer between labels to match line width
       if (i < 2) {
@@ -698,13 +700,13 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
       '<p class="est-ssub">Location determines logistics, travel time, and how costs are structured. Choose the tier that fits your situation.</p>' +
       '<div class="est-tier-grid">' +
       tcHTML('studio', 'I', 'In-Studio', 'Your team comes to San Francisco',
-        'Subject shows up at Studio San Francisco. Controlled lighting, dialed-in setup, no location surprises. Setup is complete before you arrive — you walk in, we shoot. Lowest logistics, best value per deliverable.',
+        'Subject shows up at Studio San Francisco. Controlled lighting, dialed-in setup, no location surprises. Setup is complete before you arrive - you walk in, we shoot. Lowest logistics, best value per deliverable.',
         'From $650 &middot; San Francisco, CA') +
       tcHTML('bayarea', 'II', 'Bay Area On-Location', 'I bring the studio to you',
         'I pack down the full lighting and camera rig, drive to your location in the Bay Area (within 40 miles of SF), shoot on-site, then return to the studio and reset. Best for teams whose subjects can\'t travel into the city.',
         'From $800 &middot; Bay Area within 40 mi of SF') +
       tcHTML('remote', 'III', 'Remote / National Travel', 'I fly to your city',
-        'For clients with subjects anywhere in the US. All travel expenses are itemized transparently &mdash; flights, hotel, per diem, and ground transport billed at actual cost, no markup. Non-shooting travel days are billed at a flat day rate. The shoot itself is priced identically to in-studio.',
+        'For clients with subjects anywhere in the US. All travel expenses are itemized transparently - flights, hotel, per diem, and ground transport billed at actual cost, no markup. Non-shooting travel days are billed at a flat day rate. The shoot itself is priced identically to in-studio.',
         'From $2,400 &middot; all travel costs itemized') +
       '</div>' +
       '<button class="btn btn-primary" id="est-btn2" onclick="estGo(2)" disabled ' +
@@ -721,21 +723,21 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
 
     var h = '<div class="est-fade">' +
       '<h2 class="est-stitle">Configure your shoot</h2>' +
-      '<p class="est-ssub">Tier: <strong style="color:var(--accent);font-weight:500;">' + tn[EST.tier] + '</strong>. Adjust the options below &mdash; your estimate is generated on the next step.</p>' +
+      '<p class="est-ssub">Tier: <strong style="color:var(--accent);font-weight:500;">' + tn[EST.tier] + '</strong>. Adjust the options below - your estimate is generated on the next step.</p>' +
 
       '<div class="est-og"><span class="est-ol">Number of testimonial subjects</span>' +
       '<div class="est-pills">' +
       pill(1, '1 subject', 'subjects', EST.subjects) +
       pill(2, '2 subjects', 'subjects', EST.subjects) +
       pill(3, '3 subjects', 'subjects', EST.subjects) +
-      '</div><p class="est-oh">Each subject is one person filmed for one testimonial. Batching 2&ndash;3 subjects in a single session significantly reduces per-subject cost &mdash; setup, teardown, and travel happen once regardless of how many people you film.</p></div>' +
+      '</div><p class="est-oh">Each subject is one person filmed for one testimonial. Batching 2&ndash;3 subjects in a single session significantly reduces per-subject cost - setup, teardown, and travel happen once regardless of how many people you film.</p></div>' +
 
       '<div class="est-og"><span class="est-ol">Social media cuts per subject</span>' +
       '<div class="est-pills">' +
-      pill(0, 'None &mdash; hero cut only', 'socialCuts', EST.socialCuts) +
+      pill(0, 'None - hero cut only', 'socialCuts', EST.socialCuts) +
       pill(1, '+1 social cut', 'socialCuts', EST.socialCuts) +
       pill(2, '+2 social cuts', 'socialCuts', EST.socialCuts) +
-      '</div><p class="est-oh">Every subject receives one primary hero cut (up to 90 sec, web and presentation ready) by default. Social cuts are shorter, independently edited clips (15&ndash;30 sec) formatted for LinkedIn, YouTube Shorts, or paid ads &mdash; each is a separate edit, not just a trim.</p></div>';
+      '</div><p class="est-oh">Every subject receives one primary hero cut (up to 90 sec, web and presentation ready) by default. Social cuts are shorter, independently edited clips (15&ndash;30 sec) formatted for LinkedIn, YouTube Shorts, or paid ads - each is a separate edit, not just a trim.</p></div>';
 
     if (EST.tier === 'bayarea') {
       h += '<div class="est-og"><span class="est-ol">Distance from San Francisco</span>' +
@@ -754,7 +756,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
         '<input type="range" min="150" max="1200" step="25" value="' + EST.flightCost + '" ' +
         'oninput="EST.flightCost=parseInt(this.value);document.getElementById(\'est-fdv\').textContent=\'$\'+parseInt(this.value).toLocaleString()" />' +
         '<div class="est-range-val" id="est-fdv">' + fmt(EST.flightCost) + '</div>' +
-        '<p class="est-oh">Used for your estimate only. Flights are invoiced at actual cost &mdash; no markup. If the ticket is cheaper, you pay less. I send receipts for all travel expenses.</p></div>' +
+        '<p class="est-oh">Used for your estimate only. Flights are invoiced at actual cost - no markup. If the ticket is cheaper, you pay less. I send receipts for all travel expenses.</p></div>' +
 
         '<div class="est-og"><span class="est-ol">Hotel nights needed</span>' +
         '<div class="est-pills">' +
@@ -768,8 +770,8 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
       '<div class="est-og"><span class="est-ol">Add-ons</span>' +
       '<div class="est-adlist">' +
       addon('broll', 'B-roll package', 'Environmental, product, or team footage captured the same shoot day and woven into the final edit', '+$350') +
-      addon('intro', 'Branded intro/outro animation', 'Animated opener and closer with your logo, brand colors, and a clean title card &mdash; applied to all videos', '+$300') +
-      addon('captions', 'Closed captions', 'Delivered as a burned-in version and a separate SRT file &mdash; per finished video', '+$85/video') +
+      addon('intro', 'Branded intro/outro animation', 'Animated opener and closer with your logo, brand colors, and a clean title card - applied to all videos', '+$300') +
+      addon('captions', 'Closed captions', 'Delivered as a burned-in version and a separate SRT file - per finished video', '+$85/video') +
       addon('rush', 'Rush delivery', 'Turnaround under 5 business days instead of 7&ndash;10. Adds 25% to post-production cost only.', '+25% post') +
       '</div></div>' +
 
@@ -801,7 +803,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
       n: 'Post-production',
       d: 'Edit &middot; color grade &middot; audio mix &middot; export &middot; file delivery' +
         (EST.addons.rush ? ' &middot; <em>rush rate applied</em>' : '') +
-        ' &mdash; $' + Math.round(200 * rm) + '/subject &times; ' + EST.subjects,
+        ' - $' + Math.round(200 * rm) + '/subject &times; ' + EST.subjects,
       a: pf
     });
     sub += pf;
@@ -887,7 +889,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
     var rows = [];
     rows.push({ l: 'Studio setup', v: '1.5 hrs' });
     var sm = Math.max(2, 1 + EST.subjects * 0.7);
-    rows.push({ l: 'Shoot &mdash; ' + EST.subjects + ' subject' + (EST.subjects > 1 ? 's' : '') + ' (2-hr minimum enforced)', v: sm.toFixed(1) + '&ndash;' + (sm + 0.5).toFixed(1) + ' hrs' });
+    rows.push({ l: 'Shoot - ' + EST.subjects + ' subject' + (EST.subjects > 1 ? 's' : '') + ' (2-hr minimum enforced)', v: sm.toFixed(1) + '&ndash;' + (sm + 0.5).toFixed(1) + ' hrs' });
     rows.push({ l: 'Teardown', v: '30 min' });
 
     if (EST.tier === 'bayarea') {
@@ -897,12 +899,12 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
       rows.push({ l: 'Studio reset on return', v: '30 min' });
     }
     if (EST.tier === 'remote') {
-      rows.push({ l: 'Travel day &mdash; each direction', v: '6&ndash;10 hrs' });
+      rows.push({ l: 'Travel day - each direction', v: '6&ndash;10 hrs' });
       rows.push({ l: 'Equipment check-in &amp; handling', v: '1.5 hrs' });
     }
 
     var eh = EST.subjects * 3, em = eh + EST.subjects;
-    rows.push({ l: 'Post-production &mdash; ' + EST.subjects + ' video' + (EST.subjects > 1 ? 's' : ''), v: eh + '&ndash;' + em + ' hrs' });
+    rows.push({ l: 'Post-production - ' + EST.subjects + ' video' + (EST.subjects > 1 ? 's' : ''), v: eh + '&ndash;' + em + ' hrs' });
     rows.push({ l: 'File export, QC &amp; delivery', v: '30 min' });
 
     var extra = EST.subjects > 1 ? (EST.subjects - 1) * 0.7 : 0;
@@ -918,11 +920,11 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
   function getDelivs() {
     var tv = EST.subjects * (1 + EST.socialCuts);
     var items = [
-      tv + ' finished video' + (tv > 1 ? 's' : '') + ' &mdash; ' + EST.subjects + ' hero cut' + (EST.subjects > 1 ? 's' : '') +
+      tv + ' finished video' + (tv > 1 ? 's' : '') + ' - ' + EST.subjects + ' hero cut' + (EST.subjects > 1 ? 's' : '') +
         (EST.socialCuts > 0 ? ' + ' + (EST.subjects * EST.socialCuts) + ' social cut' + (EST.subjects * EST.socialCuts > 1 ? 's' : '') : ''),
-      'Professional color grade &mdash; consistent, clean look across all clips',
-      'Audio mix &mdash; cleaned, balanced, noise-reduced dialogue throughout',
-      'MP4 / H.264 &mdash; optimized for web, email, ads, and presentations',
+      'Professional color grade - consistent, clean look across all clips',
+      'Audio mix - cleaned, balanced, noise-reduced dialogue throughout',
+      'MP4 / H.264 - optimized for web, email, ads, and presentations',
       'Delivered via shared Google Drive folder link',
       EST.addons.rush ? 'Turnaround: 3&ndash;5 business days (rush)' : 'Turnaround: 7&ndash;10 business days',
       '2 revision rounds included'
@@ -957,7 +959,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
     var rn = '';
     if (EST.tier === 'remote') {
       rn = '<div class="est-rcall">' +
-        '<strong>On remote billing:</strong> Flights, hotel, and ground transport are pass-through costs &mdash; ' +
+        '<strong>On remote billing:</strong> Flights, hotel, and ground transport are pass-through costs - ' +
         'invoiced at actual price with zero markup. I send receipts for everything. ' +
         'The <strong>$350/day travel day rate</strong> covers non-shooting days when I\'m in transit on your behalf. ' +
         'A <strong>50% deposit is required</strong> to confirm remote bookings and lock in travel arrangements. ' +
@@ -984,7 +986,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
     ].filter(function (l) { return l !== null; }).join('\n');
 
     var mailHref = 'mailto:hello@bookthestudiosf.com' +
-      '?subject=' + encodeURIComponent('Video Estimate &mdash; ' + tn[EST.tier] + ' Shoot') +
+      '?subject=' + encodeURIComponent('Video Estimate - ' + tn[EST.tier] + ' Shoot') +
       '&body=' + encodeURIComponent(mailBody);
 
     var h = '<div class="est-fade">' +
@@ -998,7 +1000,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
       '</div>' +
 
       '<div class="est-panel">' +
-      '<div class="est-ptitle">Time commitment &mdash; what this shoot actually takes</div>' +
+      '<div class="est-ptitle">Time commitment - what this shoot actually takes</div>' +
       th +
       '<div class="est-ptot"><span class="est-ptotl">Total work hours</span><span class="est-ptotv">' + tm.tot + '</span></div>' +
       '</div>' +
@@ -1015,7 +1017,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; m
       '<a class="btn btn-primary" href="' + mailHref + '" style="text-align:center;text-decoration:none;border-radius:12px;">Book this shoot &rarr;</a>' +
       '</div>' +
 
-      '<p class="est-cnote">This estimate is non-binding. Booking initiates a short intake &mdash; scope is confirmed before anything is locked.<br>' +
+      '<p class="est-cnote">This estimate is non-binding. Booking initiates a short intake - scope is confirmed before anything is locked.<br>' +
       'Questions first? <a href="' + mailHref + '">hello@bookthestudiosf.com</a></p>' +
       '</div>';
 

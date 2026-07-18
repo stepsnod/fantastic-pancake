@@ -14,25 +14,24 @@
 <meta content="#00c6ff" name="theme-color"/>
 <meta content="index,follow,max-image-preview:large" name="robots"/>
 <!-- Primary Meta Tags -->
-<meta content="Stephen's photography portfolio - live show photography and Bay Area landscapes. Visual work by the engineer behind Studio San Francisco." name="description"/>
-<meta content="live show photography san francisco, bay area concert photography, sf landscape photography, music photographer san francisco, studio san francisco visuals" name="keywords"/>
+<title>Brew in the Stu | Studio San Francisco - The Video Series</title>
+<meta content="Brew in the Stu: a 30-episode video series from Studio San Francisco. Coffee, music, and real moments from a working recording studio, made by Stephen." name="description"/>
 <!-- Canonical URL -->
-<link href="https://www.bookthestudiosf.com/portfolio.html" rel="canonical"/>
+<link href="https://www.bookthestudiosf.com/brew.html" rel="canonical"/>
 <!-- Open Graph -->
-<meta content="Visuals | Studio San Francisco - Photography by Stephen" property="og:title"/>
-<meta content="Live show photography and Bay Area landscapes by Stephen, engineer and photographer at Studio San Francisco." property="og:description"/>
+<meta content="Brew in the Stu | Studio San Francisco" property="og:title"/>
+<meta content="A 30-episode video series from inside Studio San Francisco. Coffee, music, and real moments from a working recording studio." property="og:description"/>
 <meta content="website" property="og:type"/>
-<meta content="https://www.bookthestudiosf.com/portfolio.html" property="og:url"/>
+<meta content="https://www.bookthestudiosf.com/brew.html" property="og:url"/>
 <meta content="https://www.bookthestudiosf.com/images/studio-1.jpg" property="og:image"/>
 <meta content="1200" property="og:image:width"/>
 <meta content="630" property="og:image:height"/>
-<meta content="Studio San Francisco - Photography by Stephen" property="og:image:alt"/>
 <meta content="Studio San Francisco" property="og:site_name"/>
 <meta content="en_US" property="og:locale"/>
 <!-- Twitter -->
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="Visuals | Studio San Francisco - Photography by Stephen" name="twitter:title"/>
-<meta content="Live show photography and Bay Area landscapes by Stephen, engineer and photographer at Studio San Francisco." name="twitter:description"/>
+<meta content="Brew in the Stu | Studio San Francisco" name="twitter:title"/>
+<meta content="A 30-episode video series from inside a working San Francisco recording studio." name="twitter:description"/>
 <meta content="https://www.bookthestudiosf.com/images/studio-1.jpg" name="twitter:image"/>
 <!-- Author & Geo -->
 <meta content="Stephen" name="author"/>
@@ -43,9 +42,9 @@
 {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": "Visuals - Photography by Stephen",
-  "description": "Live show photography and Bay Area landscape photography by Stephen, engineer and founder of Studio San Francisco.",
-  "url": "https://www.bookthestudiosf.com/portfolio.html",
+  "name": "Brew in the Stu - The Video Series",
+  "description": "A 30-episode video series filmed inside Studio San Francisco. Coffee, music, and real moments from a working recording studio.",
+  "url": "https://www.bookthestudiosf.com/brew.html",
   "author": {
     "@type": "Person",
     "name": "Stephen",
@@ -60,22 +59,9 @@
     "@type": "WebSite",
     "name": "Studio San Francisco",
     "url": "https://www.bookthestudiosf.com"
-  },
-  "about": {
-    "@type": "LocalBusiness",
-    "name": "Studio San Francisco",
-    "url": "https://www.bookthestudiosf.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "San Francisco",
-      "addressRegion": "CA",
-      "postalCode": "94124",
-      "addressCountry": "US"
-    }
   }
 }
 </script>
-<title>Visuals | Studio San Francisco - Photography</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Source+Serif+4:wght@400;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -100,8 +86,8 @@
   <nav aria-label="Primary navigation" class="topnav">
     <a href="index.html">Home</a>
     <a href="index.html#menu">Services</a>
-    <a href="brew.html">Brew in the Stu</a>
-    <a href="portfolio.html" aria-current="page" style="color:var(--accent)">Visuals</a>
+    <a href="brew.html" aria-current="page" style="color:var(--accent)">Brew in the Stu</a>
+    <a href="portfolio.html">Visuals</a>
     <a href="blog.html">Blog</a>
     <a href="index.html#faq">FAQ</a>
   </nav>
@@ -124,9 +110,9 @@
   <ul class="nav">
     <li><a href="index.html">Home</a></li>
     <li><a href="index.html#quick-start">Get Started</a></li>
+    <li><a href="brew.html" style="color:var(--accent)">Brew in the Stu</a></li>
     <li><a href="index.html#menu">Services</a></li>
-    <li><a href="brew.html">Brew in the Stu</a></li>
-    <li><a href="portfolio.html" style="color:var(--accent)">Visuals</a></li>
+    <li><a href="portfolio.html">Visuals</a></li>
     <li><a href="blog.html">Blog</a></li>
     <li><a href="index.html#faq">FAQ</a></li>
   </ul>
@@ -142,47 +128,49 @@
 <main id="main" tabindex="-1">
 
   <section class="port-hero">
-    <p class="port-hero-eyebrow" data-reveal>Visual Work</p>
-    <h1 class="port-hero-title" data-reveal>Through the <em>lens</em></h1>
-    <p class="port-hero-sub" data-reveal>Live music and landscapes - photographs from the Bay Area and beyond.</p>
+    <p class="port-hero-eyebrow" data-reveal>The Video Series</p>
+    <h1 class="port-hero-title" data-reveal>Brew in the <em>Stu</em></h1>
+    <p class="port-hero-sub" data-reveal>Coffee, music, and real moments from inside a working recording studio. A 30-day season, made in this room.</p>
   </section>
 
-  <!-- Filter tabs - built dynamically from photos.json categories -->
-  <div class="port-filters" id="portFilters" role="group" aria-label="Filter by category" data-reveal>
-    <button class="filter-btn active" data-filter="all">All</button>
-    <!-- Category buttons injected here by JS -->
-  </div>
+  <!-- Featured Player -->
+  <section class="brew-player-section" id="watch">
+    <div class="brew-player-wrap" data-reveal>
+      <div class="brew-player" id="brewPlayer">
+        <iframe
+          id="brewFrame"
+          src="https://www.youtube-nocookie.com/embed/videoseries?list=UU6K1Kz8v5tNrDyOANCnRG9w&rel=0"
+          title="Brew in the Stu - Studio San Francisco video series"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+      <p class="brew-now-playing" id="brewNowPlaying">Season 1 playlist. Pick any episode below, or just press play.</p>
+    </div>
+  </section>
 
-  <div class="port-grid-wrap">
-    <!-- Photo count -->
-    <p class="port-count" id="portCount"></p>
-    <!-- Masonry grid - tiles injected here by JS -->
-    <div class="port-grid" id="portGrid"></div>
-    <!-- Empty state -->
-    <p class="port-empty" id="portEmpty" style="display:none;text-align:center;color:var(--muted2);padding:60px 0;">No photos in this category yet.</p>
-  </div>
+  <!-- Episode Grid -->
+  <section class="brew-grid-section">
+    <div class="brew-grid-head" data-reveal>
+      <h2 class="brew-grid-title" id="brewSeasonTitle">Season 1</h2>
+      <p class="brew-grid-count" id="brewCount"></p>
+    </div>
+    <div class="brew-grid" id="brewGrid"></div>
+    <p class="brew-empty" id="brewEmpty" style="display:none;">Episode guide coming soon. Meanwhile, the full season is in the player above.</p>
+    <p class="brew-yt-link" data-reveal>
+      <a href="https://www.youtube.com/@thestudio_sf/videos" rel="noopener" target="_blank">Watch the whole channel on YouTube &rarr;</a>
+    </p>
+  </section>
 
+  <!-- Story teaser -->
   <div class="port-cta" data-reveal>
-    <h2>Want photos at your show?</h2>
-    <p>Live coverage, content packages, and more. Let's talk about your next event.</p>
+    <h2>Made in this room</h2>
+    <p>Every episode was filmed, recorded, and brewed at Studio San Francisco. Want to make something here too?</p>
     <a class="btn btn-nav-cta" href="index.html#quick-start">Get Started →</a>
   </div>
 
 </main>
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
-  <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous">‹</button>
-  <div class="lightbox-inner">
-    <button class="lightbox-close" id="lbClose" aria-label="Close">✕</button>
-    <div class="lightbox-img-wrap" id="lbImgWrap"></div>
-    <div class="lightbox-caption">
-      <div class="lightbox-caption-title" id="lbTitle"></div>
-      <div class="lightbox-caption-cat" id="lbCat"></div>
-    </div>
-  </div>
-  <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next">›</button>
-</div>
 
 <div aria-label="Quick actions" class="cta-mobile" id="ctaMobile">
   <a class="btn btn-nav-cta" href="index.html#quick-start">Book a Session</a>

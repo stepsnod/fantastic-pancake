@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   STUDIO SAN FRANCISCO — scripts.js
+   STUDIO SAN FRANCISCO - scripts.js
    ═══════════════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -18,16 +18,16 @@ document.addEventListener('DOMContentLoaded', function () {
     launch: 'https://calendly.com/thestudiosf/2hr-intro-launch?text_color=004655&primary_color=00c6ff'
   };
 
-  // DOM refs — steps
+  // DOM refs - steps
   var step1 = document.getElementById('quickStartStep1');
   var step2 = document.getElementById('quickStartStep2');
   var step3 = document.getElementById('quickStartStep3');
 
-  // DOM refs — forms
+  // DOM refs - forms
   var walkthroughForm = document.getElementById('walkthroughForm');
   var launchForm = document.getElementById('launchForm');
 
-  // DOM refs — Calendly & navigation
+  // DOM refs - Calendly & navigation
   var calendlyEmbed = document.getElementById('calendlyEmbed');
   var backToStartBtn = document.getElementById('backToStart');
   var quickStartSection = document.getElementById('quick-start');
@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 
-  // ── Form submission (handled by section 13 — Form Validation) ──
+  // ── Form submission (handled by section 13 - Form Validation) ──
 
 
   /* ═══════════════════════════════════════════════════════════════
@@ -461,10 +461,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (currentScroll <= SCROLL_THRESHOLD) {
       if (topbar) topbar.classList.remove('topbar-hidden');
     } else if (currentScroll > lastScrollY && currentScroll > SCROLL_THRESHOLD) {
-      // Scrolling down — hide
+      // Scrolling down - hide
       if (topbar) topbar.classList.add('topbar-hidden');
     } else if (currentScroll < lastScrollY) {
-      // Scrolling up — show
+      // Scrolling up - show
       if (topbar) topbar.classList.remove('topbar-hidden');
     }
 
@@ -728,7 +728,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   
   /* ═══════════════════════════════════════════════════════════════
-     7b. TESTIMONIALS — HIDE REVIEWS + SCROLL TO SECTION TOP
+     7b. TESTIMONIALS - HIDE REVIEWS + SCROLL TO SECTION TOP
      ═══════════════════════════════════════════════════════════════ */
 
   function scrollToSectionTop(targetId) {
@@ -769,7 +769,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
 /* ═══════════════════════════════════════════════════════════════
-     8. FOOTER — CURRENT YEAR
+     8. FOOTER - CURRENT YEAR
      ═══════════════════════════════════════════════════════════════ */
 
   var yearEl = document.getElementById('year');
@@ -884,7 +884,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   /* ═══════════════════════════════════════════════════════════════
-     11b. OPEN PLAN INTAKE — scrolls to Quick-Start and opens
+     11b. OPEN PLAN INTAKE - scrolls to Quick-Start and opens
           the "Start with a Plan" walkthrough form
      ═══════════════════════════════════════════════════════════════ */
 
@@ -1101,7 +1101,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function submitNetlifyForm(formEl) {
 
     // ── Local environment guard ─────────────────────────────────────────────
-    // Netlify Forms are processed on Netlify's edge servers — they CANNOT work
+    // Netlify Forms are processed on Netlify's edge servers - they CANNOT work
     // when opened from a local file, localhost, or any non-Netlify host.
     // Detect all common local/dev environments and fail fast with a clear message.
     var _proto = window.location.protocol;
@@ -1288,7 +1288,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   /* ═══════════════════════════════════════════════════════════════
-     13b. STUDIO PLAYER (v5 — enhanced with testimonials)
+     13b. STUDIO PLAYER (v5 - enhanced with testimonials)
      ═══════════════════════════════════════════════════════════════ */
 
   // ── TESTIMONIALS DATA ──────────────────────────────────────────
@@ -1656,7 +1656,7 @@ document.addEventListener('DOMContentLoaded', function () {
       spLoad(next, true);
     });
 
-    // Error handling — show message and auto-skip
+    // Error handling - show message and auto-skip
     spAudio.addEventListener('error', function () {
       if (spErrorEl) spErrorEl.classList.add('visible');
       spPlaying = false;
@@ -1979,7 +1979,7 @@ document.addEventListener('DOMContentLoaded', function () {
       spLoad(0, true);
     });
 
-    // Hero play prompt — true toggle (play/pause) + gentle ramp on first play
+    // Hero play prompt - true toggle (play/pause) + gentle ramp on first play
     var heroPlayBtn = document.getElementById('heroPlayBtn');
     var heroListen = document.getElementById('heroListen');
 
@@ -2056,7 +2056,7 @@ document.addEventListener('DOMContentLoaded', function () {
       spLoad(spNextIdx(1), spPlaying);
     });
 
-    // Mini volume — mirrors the main player's audio element
+    // Mini volume - mirrors the main player's audio element
     var miniVolSlider = document.getElementById('miniVol');
     var miniMuteBtn   = document.getElementById('miniMute');
 
@@ -2200,7 +2200,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Reach Out form — handled by inline handler below (reachOutForm__inlineHandler)
+  // Reach Out form - handled by inline handler below (reachOutForm__inlineHandler)
 
   // Close + click-outside handlers for ALL dialogs
   document.querySelectorAll('.dialog-overlay').forEach(function (dialog) {
@@ -2298,9 +2298,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /* ═══════════════════════════════════════════════════════════════
-   PORTFOLIO PAGE — portfolio.html
+   PORTFOLIO PAGE - portfolio.html
    Loads from photos.json. Shuffles on every page load.
-   To add photos: edit photos.json only — no HTML changes needed.
+   To add photos: edit photos.json only - no HTML changes needed.
    ═══════════════════════════════════════════════════════════════ */
 
 (function() {
@@ -2458,7 +2458,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 /* ═══════════════════════════════════════════════════════════════
-   BLOG PAGE — blog.html
+   BLOG PAGE - blog.html
    Only runs when #notifyForm or .blog-featured is present.
    ═══════════════════════════════════════════════════════════════ */
 
@@ -2493,7 +2493,7 @@ if (notifyForm) {
 
 
 /* ═══════════════════════════════════════════════════════════════
-   PROJECT ESTIMATE FORM — #estimate section (added 2026-07-17)
+   PROJECT ESTIMATE FORM - #estimate section (added 2026-07-17)
    Netlify AJAX submit, inline status, same pattern as Reach Out.
    ═══════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
@@ -2556,7 +2556,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="ok">
           <div class="tick">✓</div>
           <div class="msg">
-            <strong>Got it.</strong> Your idea is in my inbox — you'll have a personal estimate within 24 hours.<br/>
+            <strong>Got it.</strong> Your idea is in my inbox - you'll have a personal estimate within 24 hours.<br/>
             <span style="color: rgba(255,255,255,0.62);">Want to move faster? Text me at (415) 326-4531.</span>
           </div>
         </div>
@@ -2570,3 +2570,157 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, true);
 });
+
+
+/* ═══════════════════════════════════════════════════════════════
+   BREW IN THE STU - brew.html
+   Loads from episodes.json. To add episodes or a new season,
+   edit episodes.json only - no HTML changes needed.
+   ═══════════════════════════════════════════════════════════════ */
+(function () {
+  var grid = document.getElementById('brewGrid');
+  if (!grid) return;
+
+  var frame       = document.getElementById('brewFrame');
+  var nowPlaying  = document.getElementById('brewNowPlaying');
+  var countEl     = document.getElementById('brewCount');
+  var emptyEl     = document.getElementById('brewEmpty');
+  var seasonTitle = document.getElementById('brewSeasonTitle');
+  var playerWrap  = document.querySelector('.brew-player-wrap');
+
+  // Story panel (created once, lives under the player)
+  var storyEl = document.createElement('div');
+  storyEl.className = 'brew-story';
+  storyEl.style.display = 'none';
+  if (playerWrap) playerWrap.appendChild(storyEl);
+
+  function playEpisode(ep) {
+    if (frame) {
+      frame.src = 'https://www.youtube-nocookie.com/embed/' + ep.id + '?autoplay=1&rel=0';
+    }
+    if (nowPlaying) {
+      nowPlaying.textContent = 'Now playing: Ep ' + ep.ep + (ep.title ? ' · ' + ep.title : '');
+    }
+    if (storyEl) {
+      if (ep.story && ep.story.trim()) {
+        storyEl.innerHTML = '';
+        var h = document.createElement('h3');
+        h.textContent = 'About this episode';
+        var p = document.createElement('p');
+        p.textContent = ep.story;
+        storyEl.appendChild(h);
+        storyEl.appendChild(p);
+        storyEl.style.display = 'block';
+      } else {
+        storyEl.style.display = 'none';
+      }
+    }
+    var target = document.getElementById('watch');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function makeCard(ep) {
+    var card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'brew-card';
+    card.setAttribute('aria-label', 'Play episode ' + ep.ep + (ep.title ? ': ' + ep.title : ''));
+
+    var thumbWrap = document.createElement('span');
+    thumbWrap.className = 'brew-thumb';
+    var img = document.createElement('img');
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.alt = 'Brew in the Stu episode ' + ep.ep + (ep.title ? ': ' + ep.title : '');
+    img.src = 'https://i.ytimg.com/vi/' + ep.id + '/hqdefault.jpg';
+    var badge = document.createElement('span');
+    badge.className = 'brew-ep-badge';
+    badge.textContent = 'Ep ' + ep.ep;
+    var play = document.createElement('span');
+    play.className = 'brew-play-icon';
+    play.setAttribute('aria-hidden', 'true');
+    play.innerHTML = '&#9654;';
+    thumbWrap.appendChild(img);
+    thumbWrap.appendChild(badge);
+    thumbWrap.appendChild(play);
+
+    var title = document.createElement('span');
+    title.className = 'brew-card-title';
+    title.textContent = ep.title || ('Episode ' + ep.ep);
+
+    card.appendChild(thumbWrap);
+    card.appendChild(title);
+    if (ep.story && ep.story.trim()) {
+      var tag = document.createElement('span');
+      tag.className = 'brew-story-tag';
+      tag.textContent = 'With story';
+      card.appendChild(tag);
+    }
+    card.addEventListener('click', function () { playEpisode(ep); });
+    return card;
+  }
+
+  function injectVideoSchema(allEps) {
+    if (!allEps.length) return;
+    var items = allEps.map(function (ep, i) {
+      return {
+        '@type': 'ListItem',
+        'position': i + 1,
+        'item': {
+          '@type': 'VideoObject',
+          'name': 'Brew in the Stu Ep ' + ep.ep + (ep.title ? ': ' + ep.title : ''),
+          'description': ep.story && ep.story.trim() ? ep.story : 'Episode ' + ep.ep + ' of Brew in the Stu, filmed at Studio San Francisco.',
+          'thumbnailUrl': 'https://i.ytimg.com/vi/' + ep.id + '/hqdefault.jpg',
+          'embedUrl': 'https://www.youtube-nocookie.com/embed/' + ep.id,
+          'url': 'https://www.youtube.com/watch?v=' + ep.id
+        }
+      };
+    });
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      'name': 'Brew in the Stu',
+      'itemListElement': items
+    });
+    document.head.appendChild(script);
+  }
+
+  fetch('episodes.json')
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var seasons = (data && data.seasons) || [];
+      var allEps = [];
+
+      seasons.forEach(function (season, si) {
+        var eps = season.episodes || [];
+        if (!eps.length) return;
+
+        // For a single season, the static header is enough; add sub-headers when there are multiple
+        if (seasons.filter(function (s) { return (s.episodes || []).length; }).length > 1) {
+          var head = document.createElement('h3');
+          head.className = 'brew-season-head';
+          head.textContent = season.title || ('Season ' + season.season);
+          grid.appendChild(head);
+        } else if (seasonTitle && season.title) {
+          seasonTitle.textContent = season.title;
+        }
+
+        eps.forEach(function (ep) {
+          grid.appendChild(makeCard(ep));
+          allEps.push(ep);
+        });
+      });
+
+      if (!allEps.length) {
+        if (emptyEl) emptyEl.style.display = 'block';
+        if (countEl) countEl.style.display = 'none';
+      } else {
+        if (countEl) countEl.textContent = allEps.length + ' episode' + (allEps.length === 1 ? '' : 's');
+        injectVideoSchema(allEps);
+      }
+    })
+    .catch(function () {
+      if (emptyEl) emptyEl.style.display = 'block';
+    });
+})();

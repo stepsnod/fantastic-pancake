@@ -1,0 +1,44 @@
+{
+  "_howto": "To add an episode: copy one block in 'episodes', set 'ep' (number), 'id' (the YouTube video ID, the part after watch?v= in the URL), and 'title'. 'story' is optional: write as much as you want and it appears under the player when that episode is opened. To start Season 2 someday, copy the whole season block. No HTML changes ever needed.",
+  "channelUrl": "https://www.youtube.com/@thestudio_sf",
+  "uploadsPlaylist": "UU6K1Kz8v5tNrDyOANCnRG9w",
+  "seasons": [
+    {
+      "season": 1,
+      "title": "Season 1",
+      "tagline": "A 30-day season. Coffee, music, and real moments from the studio.",
+      "episodes": [
+        { "ep": 1,  "id": "9jfJQV9BWd0", "title": "Day 1: Where It All Starts", "story": "" },
+        { "ep": 2,  "id": "aIw6MfBOq94", "title": "Bring an Idea!", "story": "" },
+        { "ep": 3,  "id": "hms405Hh9mM", "title": "Let's Talk Pricing", "story": "" },
+        { "ep": 4,  "id": "XvOYUUoWwD0", "title": "Why You Feel Stuck Right Before a Breakthrough", "story": "" },
+        { "ep": 5,  "id": "urGoMRci1rk", "title": "Why Recording Is the Real Test for Your Song", "story": "" },
+        { "ep": 6,  "id": "MyuFIjfgZeo", "title": "Recording Session vs. Band Rehearsal Capture: Which One Should You Book?", "story": "" },
+        { "ep": 7,  "id": "GNb6IWo60tc", "title": "How Do You Know When a Song Is Finished?", "story": "" },
+        { "ep": 8,  "id": "fsITJ_VKmoY", "title": "The Real Reason Your Song Is Still Stuck", "story": "" },
+        { "ep": 9,  "id": "l8r82wZA-tI", "title": "You Can't Save a Bad Song with Good Gear", "story": "" },
+        { "ep": 10, "id": "zYY7GPNn5hI", "title": "Music Is Photography. Here's Why.", "story": "" },
+        { "ep": 11, "id": "X-mfZicMcdg", "title": "Why Waiting to Feel Ready Is Keeping You Stuck", "story": "" },
+        { "ep": 12, "id": "xMKELIITbhQ", "title": "A Lot of Songs Don't Die. The Momentum Does.", "story": "" },
+        { "ep": 13, "id": "bt6Qn2h5myg", "title": "What Coffee Taught Me About Recording Music", "story": "" },
+        { "ep": 14, "id": "ezdbxGcmslc", "title": "The Hard Truth About Recording Your Own Music", "story": "" },
+        { "ep": 15, "id": "CEmpdlaxEJw", "title": "What Actually Keeps Music Alive?", "story": "" },
+        { "ep": 16, "id": "uQnLvKUvIU8", "title": "What Changes When Play Turns Into Performance?", "story": "" },
+        { "ep": 17, "id": "SOs0BZ9zg1Y", "title": "Practice the Pressure, Not Just the Part", "story": "" },
+        { "ep": 18, "id": "OLWGsCxDNG8", "title": "ASMR: A Quiet Day in the Studio", "story": "" },
+        { "ep": 19, "id": "nFM2lIq5Dac", "title": "Free Can Grow You. Skin in the Game Can Focus You.", "story": "" },
+        { "ep": 20, "id": "i-eduzQBphU", "title": "Pressure Reveals What Comfort Hides", "story": "" },
+        { "ep": 21, "id": "ezrjZdpwP78", "title": "The Accident Is the Doorway: Why Mistakes Can Make Music Better", "story": "" },
+        { "ep": 22, "id": "X5I94tARAkU", "title": "Why Practice Gets Boring Right Before It Starts Working", "story": "" },
+        { "ep": 23, "id": "yi1bxSTPOok", "title": "Don't Poison the Craft: The Dangerous Side of Discipline", "story": "" },
+        { "ep": 24, "id": "zIHsTLVTv0M", "title": "Courage Isn't Enough! Preparation Changes Everything", "story": "" },
+        { "ep": 25, "id": "-G13llezoyg", "title": "When the Heart Is Gone, Do This", "story": "" },
+        { "ep": 26, "id": "RR9mLEyqE7o", "title": "You Can Ruin a Good Thing by Trying Not to Be Cliche", "story": "" },
+        { "ep": 27, "id": "_fTGyF2yXAQ", "title": "You Can't Force Inspiration, But You Can Catch It", "story": "" },
+        { "ep": 28, "id": "osSbxXounYc", "title": "You're Too Close to Your Own Art to Judge It Clearly", "story": "" },
+        { "ep": 29, "id": "-NmFvsHzwfY", "title": "That Feeling Before the Moment Means More Than You Think", "story": "" },
+        { "ep": 30, "id": "rtMIzoBSkpQ", "title": "I Posted for 30 Days Straight... Here's What It Taught Me", "story": "" }
+      ]
+    }
+  ]
+}

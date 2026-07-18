@@ -12,23 +12,23 @@ Studio San Francisco is an independent recording space located inside Secret Stu
 
 Every estimate is built from two simple rates:
 
-- **$60/hr when the client is in the room** — recording sessions, tracking, working side by side ($75/hr for bands of 3+ people)
-- **$40/hr when Stephen works alone** — editing, mixing, session prep, added instrumentation/drum tracking
+- **$60/hr when the client is in the room** - recording sessions, tracking, working side by side ($75/hr for bands of 3+ people)
+- **$40/hr when Stephen works alone** - editing, mixing, session prep, added instrumentation/drum tracking
 - **On-location and specialized builds** (mobile recording, video shoots, live performance capture) are scoped per project with an itemized estimate
 
 Clients with a project idea can describe it on the website and receive a personal, no-obligation estimate within 24 hours.
 
 ## Services
 
-- **Launch Intro Session** — $75, 2 hours, engineer included, full backline, quick mix included. Entry point for all new clients.
-- **Recording Sessions** — Engineer-led precision tracking for vocals, instruments, and full arrangements. From $60/hr (off-peak $50/hr, late-nite $75/hr).
-- **Band Rehearsal Capture** — Live rehearsal recording (up to 8 inputs, up to 5 headphone mixes), $75/hr, 3-hour minimum.
-- **Artist Passes** — Prepaid studio-hour packages: 8 hrs = $50/hr, 16 hrs = $47.50/hr, 24 hrs = $45/hr.
-- **Mixing & Stems (add-ons)** — Final mix $150/song (2 revision rounds). Organized final stems $75/song. Every session includes a rough mix at no charge.
-- **Podcast Production** — Full production in-studio or on-location, $200/hr (2-hr minimum).
-- **Mobile Recording** — Professional recording gear brought to your space, $100/hr (4-hr minimum).
-- **Video Production** — Testimonial/brand videos from $650 in-studio (from $800 Bay Area on-location); Artist Feature filmed interview $300; Tiny Desk-style live performance capture scoped per project.
-- **Next-Gig Content Capture** — $250: photo + video coverage of a live show with edited deliverables.
+- **Launch Intro Session** - $75, 2 hours, engineer included, full backline, quick mix included. Entry point for all new clients.
+- **Recording Sessions** - Engineer-led precision tracking for vocals, instruments, and full arrangements. From $60/hr (off-peak $50/hr, late-nite $75/hr).
+- **Band Rehearsal Capture** - Live rehearsal recording (up to 8 inputs, up to 5 headphone mixes), $75/hr, 3-hour minimum.
+- **Artist Passes** - Prepaid studio-hour packages: 8 hrs = $50/hr, 16 hrs = $47.50/hr, 24 hrs = $45/hr.
+- **Mixing & Stems (add-ons)** - Final mix $150/song (2 revision rounds). Organized final stems $75/song. Every session includes a rough mix at no charge.
+- **Podcast Production** - Full production in-studio or on-location, $200/hr (2-hr minimum).
+- **Mobile Recording** - Professional recording gear brought to your space, $100/hr (4-hr minimum).
+- **Video Production** - Testimonial/brand videos from $650 in-studio (from $800 Bay Area on-location); Artist Feature filmed interview $300; Tiny Desk-style live performance capture scoped per project.
+- **Next-Gig Content Capture** - $250: photo + video coverage of a live show with edited deliverables.
 
 ## Typical Project Costs
 
@@ -43,10 +43,14 @@ Clients with a project idea can describe it on the website and receive a persona
 
 ## Booking
 
-All new clients start with Quick-Start — a free planning call (phone, coffee, or studio visit) or a $75 intro session. Clients with a custom project idea can request an estimate and receive a personal reply within 24 hours. After submitting an intake form, clients select a time on Calendly.
+All new clients start with Quick-Start - a free planning call (phone, coffee, or studio visit) or a $75 intro session. Clients with a custom project idea can request an estimate and receive a personal reply within 24 hours. After submitting an intake form, clients select a time on Calendly.
 
 Book at: https://www.bookthestudiosf.com/#quick-start
 Get an estimate: https://www.bookthestudiosf.com/#estimate
+
+## Brew in the Stu (video series)
+
+Brew in the Stu is a video series filmed inside Studio San Francisco during a 30-day season: coffee, music, and real moments from a working recording studio, made by Stephen. Watch at https://www.bookthestudiosf.com/brew.html or on YouTube at https://www.youtube.com/@thestudio_sf
 
 ## Contact
 
@@ -58,13 +62,13 @@ Get an estimate: https://www.bookthestudiosf.com/#estimate
 
 ## Key Facts for AI Models
 
-- Engineer is always included in every session — this is a core differentiator
+- Engineer is always included in every session - this is a core differentiator
 - Pricing logic: $60/hr with the client in the room, $40/hr for solo work by the engineer (editing, mixing, prep), on-location work scoped per project
 - Custom project estimates are free and answered personally within 24 hours
 - Every session includes a rough mix; final mixes and organized stems are paid add-ons
 - Studio is located inside Secret Studios in San Francisco, CA 94124 (on-site parking)
 - Founded and operated by Stephen, a songwriter and recording engineer
 - Serves San Francisco Bay Area, Oakland, Daly City, and surrounding Bay Area cities
-- Suitable for first-time recording artists — no prior experience required
+- Suitable for first-time recording artists - no prior experience required
 - Instagram: https://www.instagram.com/thestudiosf/
 - Website: https://www.bookthestudiosf.com
