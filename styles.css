@@ -6279,3 +6279,17 @@ body.has-mini-player .theme-fab                  { bottom: 82px;  }
   padding-bottom: 1px;
 }
 .brew-yt-link a:hover { border-color: var(--accent); }
+
+/* ═══════════════════════════════════════════════════════════════
+   FIX (2026-07-17): homepage gallery lightbox was invisible.
+   Two .lightbox definitions exist (homepage uses .active, the
+   portfolio page uses .open). The later base rule set opacity:0
+   and overrode the homepage lightbox. Unify both open states.
+   ═══════════════════════════════════════════════════════════════ */
+.lightbox { visibility: hidden; }
+.lightbox.active,
+.lightbox.open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+}
