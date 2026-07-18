@@ -2594,9 +2594,14 @@ document.addEventListener('DOMContentLoaded', () => {
   storyEl.style.display = 'none';
   if (playerWrap) playerWrap.appendChild(storyEl);
 
+  // Episode order + auto-advance state
+  var orderedEps = [];
+  var currentIdx = -1;
+
   function playEpisode(ep) {
+    currentIdx = orderedEps.indexOf(ep);
     if (frame) {
-      frame.src = 'https://www.youtube-nocookie.com/embed/' + ep.id + '?autoplay=1&rel=0';
+      frame.src = 'https://www.youtube-nocookie.com/embed/' + ep.id + '?autoplay=1&rel=0&enablejsapi=1';
     }
     if (nowPlaying) {
       nowPlaying.textContent = 'Now playing: Ep ' + ep.ep + (ep.title ? ' · ' + ep.title : '');
@@ -2720,12 +2725,12 @@ document.addEventListener('DOMContentLoaded', () => {
         injectVideoSchema(allEps);
 
         // Keep the default player in sync with the episode list:
-        // episode 1 first, the rest queued as a playlist. Only the
-        // season's episodes - never other channel uploads.
+        // it always starts on the first episode. Auto-advance below
+        // plays the season in order - only ever the season's episodes.
+        orderedEps = allEps;
+        currentIdx = 0;
         if (frame) {
-          var restIds = allEps.slice(1).map(function (e) { return e.id; }).join(',');
-          var desired = 'https://www.youtube-nocookie.com/embed/' + allEps[0].id +
-                        (restIds ? '?playlist=' + restIds + '&rel=0' : '?rel=0');
+          var desired = 'https://www.youtube-nocookie.com/embed/' + allEps[0].id + '?rel=0&enablejsapi=1';
           if (frame.src !== desired) frame.src = desired;
         }
       }
@@ -2733,4 +2738,26 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(function () {
       if (emptyEl) emptyEl.style.display = 'block';
     });
+
+  // Auto-advance: when an episode ends, play the next one in order.
+  // Uses the YouTube iframe messaging API (enablejsapi=1).
+  function tellPlayerWeAreListening() {
+    if (frame && frame.contentWindow) {
+      try {
+        frame.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 'brew', channel: 'widget' }), '*');
+      } catch (e) { /* no-op */ }
+    }
+  }
+  if (frame) frame.addEventListener('load', tellPlayerWeAreListening);
+
+  window.addEventListener('message', function (e) {
+    if (typeof e.data !== 'string' || e.origin.indexOf('youtube') === -1) return;
+    var d;
+    try { d = JSON.parse(e.data); } catch (err) { return; }
+    // playerState 0 = ended
+    if (d && d.info && d.info.playerState === 0) {
+      var next = currentIdx >= 0 ? orderedEps[currentIdx + 1] : null;
+      if (next) playEpisode(next);
+    }
+  });
 })();
