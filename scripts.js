@@ -1064,8 +1064,26 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
 
+      // Energy saver: stop the loop entirely while the tab is hidden.
+      // The visibilitychange listener below restarts it when the tab returns.
+      if (document.hidden) {
+        particleLoopRunning = false;
+        return;
+      }
       requestAnimationFrame(drawParticles);
     }
+
+    // Track loop state so pause/resume never double-starts the animation
+    var particleLoopRunning = false;
+    function startParticleLoop() {
+      if (particleLoopRunning) return;
+      particleLoopRunning = true;
+      requestAnimationFrame(drawParticles);
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) startParticleLoop();
+    });
 
     document.addEventListener('mousemove', function (e) {
       constellationMouseX = e.clientX;
@@ -1079,7 +1097,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     resizeCanvas();
     createParticles();
-    drawParticles();
+    startParticleLoop();
 
     var constellationResizeTimeout;
     window.addEventListener('resize', function () {
