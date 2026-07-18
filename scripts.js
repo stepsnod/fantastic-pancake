@@ -2718,6 +2718,16 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         if (countEl) countEl.textContent = allEps.length + ' episode' + (allEps.length === 1 ? '' : 's');
         injectVideoSchema(allEps);
+
+        // Keep the default player in sync with the episode list:
+        // episode 1 first, the rest queued as a playlist. Only the
+        // season's episodes - never other channel uploads.
+        if (frame) {
+          var restIds = allEps.slice(1).map(function (e) { return e.id; }).join(',');
+          var desired = 'https://www.youtube-nocookie.com/embed/' + allEps[0].id +
+                        (restIds ? '?playlist=' + restIds + '&rel=0' : '?rel=0');
+          if (frame.src !== desired) frame.src = desired;
+        }
       }
     })
     .catch(function () {
