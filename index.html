@@ -474,6 +474,31 @@
     </select>
   </div>
 
+  <!-- How would you like to start -->
+  <div>
+    <label style="display:block; font-size:14px; font-weight:500; color:var(--text); margin-bottom:8px;">How would you like to start? *</label>
+    <select name="preferred_contact" required="" style="width:100%; padding:14px 18px; background:var(--field-bg); border:2px solid var(--border); border-radius:12px; color:var(--text); font-size:15px; transition:all 0.2s; box-sizing:border-box; cursor:pointer;">
+      <option value="">Select one...</option>
+      <option value="call-text">Call or text me</option>
+      <option value="coffee">Meet for coffee</option>
+      <option value="walkthrough">Walkthrough at the studio</option>
+    </select>
+  </div>
+
+  <!-- Budget -->
+  <div>
+    <label style="display:block; font-size:14px; font-weight:500; color:var(--text); margin-bottom:8px;">Comfortable budget range <span style="font-weight:400; color:var(--muted);">(helps me recommend options)</span></label>
+    <select name="budget" style="width:100%; padding:14px 18px; background:var(--field-bg); border:2px solid var(--border); border-radius:12px; color:var(--text); font-size:15px; transition:all 0.2s; box-sizing:border-box; cursor:pointer;">
+      <option value="">Select one...</option>
+      <option value="under-200">Under $200</option>
+      <option value="200-400">$200 – $400</option>
+      <option value="400-800">$400 – $800</option>
+      <option value="800-1500">$800 – $1,500</option>
+      <option value="1500+">$1,500+</option>
+      <option value="not-sure">Not sure yet</option>
+    </select>
+  </div>
+
   <!-- Referral -->
   <div>
     <label style="display:block; font-size:14px; font-weight:500; color:var(--text); margin-bottom:8px;">Were you referred by someone? <span style="font-weight:400; color:var(--muted);">(optional)</span></label>

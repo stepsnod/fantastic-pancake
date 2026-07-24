@@ -1359,7 +1359,15 @@ document.addEventListener('DOMContentLoaded', function () {
     'audio/Three Minutes - 03 03 2022.mp3'
   ];
 
-  var spNames = spTracks.map(function (p) { return p.replace('audio/', '').replace(/\.mp3$/i, ''); });
+  // Display-name overrides (file paths stay untouched)
+  var spNameOverrides = {
+    'Shorty Sax - feat. Gordon Ramos - 02 25 2023': 'Shorty Gordon Pedro Ramos on Sax - 02 25 2023'
+  };
+
+  var spNames = spTracks.map(function (p) {
+    var n = p.replace('audio/', '').replace(/\.mp3$/i, '');
+    return spNameOverrides[n] || n;
+  });
 
   // ── DOM REFS ───────────────────────────────────────────────────
   var spAudio    = document.getElementById('studioAudio');
