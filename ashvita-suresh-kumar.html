@@ -12,12 +12,17 @@
   ── Server setup ──────────────────────────────────────────
   Drop these 4 files in the same folder on your server:
     ashvita-suresh-kumar.html
-    mr_brightside.mp3
+    mr brightside.mp3
     exhale.mp3
-    the_hardest_part.mp3
-  Filenames are final and already wired in below — nothing left
-  to patch. All three were checked before wiring in (clean decode,
-  sane length): Mr. Brightside 3:43, Exhale 2:24, The Hardest Part 2:56.
+    the hardest part.mp3
+  NOTE: the two multi-word filenames really do have spaces in
+  them (confirmed from your server screenshot) — the HTML below
+  references them URL-encoded (%20 for each space: "mr%20brightside.mp3",
+  "the%20hardest%20part.mp3") so they resolve correctly everywhere.
+  Keep the actual files named with real spaces, not underscores —
+  don't rename them, the encoding in the HTML already matches.
+  All three were checked before wiring in (clean decode, sane
+  length): Mr. Brightside 3:43, Exhale 2:24, The Hardest Part 2:56.
 
   The download="" attribute renames each file on the client's device.
 
@@ -38,6 +43,12 @@
                 the all-done banner the moment it's actually earned —
                 stays silent on repeat visits, restored ✓ state does
                 not replay the animation
+  2026-07-30  Bug fix: Mr. Brightside and The Hardest Part weren't
+              loading — the real filenames on the server have spaces
+              ("mr brightside.mp3" / "the hardest part.mp3"), not
+              underscores like the placeholders assumed. Only Exhale
+              (single word, no space) worked. Fixed by pointing the
+              src/href at the real filenames, URL-encoded.
 
   ── Next up ────────────────────────────────────────────────
   v2: business-loop CTAs (book-next-session button, gold Google
@@ -831,7 +842,7 @@
       <div class="tracks">
 
         <!-- Track mb-1: Mr. Brightside -->
-        <div class="track-card" id="card-mb-1" data-src="mr_brightside.mp3">
+        <div class="track-card" id="card-mb-1" data-src="mr%20brightside.mp3">
           <div class="card-top">
             <div class="file-badge">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -872,7 +883,7 @@
                 <input type="range" class="volume-range" value="80" min="0" max="100" aria-label="Volume"/>
               </div>
               <a class="dl-btn" id="btn-mb-1"
-                 href="mr_brightside.mp3"
+                 href="mr%20brightside.mp3"
                  download="Ashvita - Mr Brightside cover.mp3"
                  onclick="onDownload(event,'mb-1','Mr. Brightside','delivery-covers')">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -945,7 +956,7 @@
         </div>
 
         <!-- Track hp-1: The Hardest Part -->
-        <div class="track-card" id="card-hp-1" data-src="the_hardest_part.mp3">
+        <div class="track-card" id="card-hp-1" data-src="the%20hardest%20part.mp3">
           <div class="card-top">
             <div class="file-badge">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -986,7 +997,7 @@
                 <input type="range" class="volume-range" value="80" min="0" max="100" aria-label="Volume"/>
               </div>
               <a class="dl-btn" id="btn-hp-1"
-                 href="the_hardest_part.mp3"
+                 href="the%20hardest%20part.mp3"
                  download="Ashvita - The Hardest Part cover.mp3"
                  onclick="onDownload(event,'hp-1','The Hardest Part','delivery-covers')">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
