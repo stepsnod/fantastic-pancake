@@ -1388,7 +1388,8 @@ document.addEventListener('DOMContentLoaded', function () {
   var spDur      = document.getElementById('spTimeDuration');
 
   // ── STATE ──────────────────────────────────────────────────────
-  var spIdx      = 0;
+  // Start on a random track so repeat visitors hear something different each time
+  var spIdx      = Math.floor(Math.random() * spTracks.length);
   var spUserSetVolume = false; // prevents hero click from overriding user volume
 
   var spPlaying  = false;
@@ -2002,7 +2003,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Invite "Press Play"
     var miniPlayInvite = document.getElementById('miniPlayInvite');
     if (miniPlayInvite) miniPlayInvite.addEventListener('click', function () {
-      spLoad(0, true);
+      spLoad(spIdx, true);
     });
 
     // Hero play prompt - true toggle (play/pause) + gentle ramp on first play
@@ -2047,7 +2048,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Ensure a track is loaded then play
       if (!spAudio.src || spAudio.src === window.location.href) {
-        spLoad(0, true);
+        spLoad(spIdx, true);
       } else {
         var p = spAudio.play();
         if (p && typeof p.catch === 'function') p.catch(function () {});
@@ -2163,64 +2164,11 @@ document.addEventListener('DOMContentLoaded', function () {
   // New dialogs
   var contactDialog = document.getElementById('contactDialog');
   var nextGigDialog = document.getElementById('nextGigDialog');
-  var passDetailsDialog = document.getElementById('passDetailsDialog');
-
-  // Artist Pass savings breakdown (Deals)
-  function setPassBreakdown(passKey) {
-    var titleEl = document.getElementById('passDetailsTitle');
-    var boxEl = document.getElementById('passSavingsBreakdown');
-    if (!boxEl) return;
-
-    var data = {
-      eight: {
-        title: '8-Hour Artist Pass',
-        includedValue: '$480',
-        passPrice: '$400',
-        builtIn: '$80',
-        lines: [
-          '8 studio hours @ $60/hr = $480',
-          'Effective prepaid rate = $50/hr'
-        ]
-      },
-      sixteen: {
-        title: '16-Hour Artist Pass',
-        includedValue: '$960',
-        passPrice: '$760',
-        builtIn: '$200',
-        lines: [
-          '16 studio hours @ $60/hr = $960',
-          'Effective prepaid rate = $47.50/hr'
-        ]
-      },
-      twentyfour: {
-        title: '24-Hour Artist Pass',
-        includedValue: '$1,440',
-        passPrice: '$1,080',
-        builtIn: '$360',
-        lines: [
-          '24 studio hours @ $60/hr = $1,440',
-          'Effective prepaid rate = $45/hr'
-        ]
-      }
-    };
-
-    var d = data[passKey] || data.eight;
-    if (titleEl) titleEl.textContent = 'Artist Pass Details';
-    boxEl.innerHTML =
-      '<h4 class="dialog-subtitle">' + d.title + '</h4>' +
-      '<p class="dialog-muted">Simple prepaid recording hours</p>' +
-      '<p><strong>Standard-session value: ' + d.includedValue + '</strong></p>' +
-      '<ul>' + d.lines.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
-      '<p><strong>Pass price: ' + d.passPrice + '</strong><br>Built-in savings: <strong>' + d.builtIn + '</strong></p>';
-  }
 
   // Generic handler: any link with data-dialog opens the named dialog
   document.querySelectorAll('[data-dialog]').forEach(function (link) {
     link.addEventListener('click', function (e) {
       e.preventDefault();
-      if (link.getAttribute('data-dialog') === 'passDetailsDialog' && link.getAttribute('data-pass')) {
-        setPassBreakdown(link.getAttribute('data-pass'));
-      }
       var dialogEl = document.getElementById(link.getAttribute('data-dialog'));
       if (dialogEl) openDialog(dialogEl);
     });
