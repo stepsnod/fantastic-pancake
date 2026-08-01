@@ -103,7 +103,7 @@
         {"@type": "Offer",
          "itemOffered": {"@type": "Service", "name": "Audiobook and Voiceover Recording", "description": "Audiobook recording, commercial voiceover and spoken-word narration in a treated, quiet room with a dedicated engineer. Authors narrating their own book are welcome. Scoped per project."}},
         {"@type": "Offer",
-         "itemOffered": {"@type": "Service", "name": "Mobile Recording", "description": "Professional recording gear brought to your space. Four-hour minimum."},
+         "itemOffered": {"@type": "Service", "name": "Mobile Recording", "description": "Professional recording gear brought to your space. Four-hour minimum. Extended on-location engagements of 20 hours or more are quoted at studio rates of $60/hr recording and $45/hr editing, with setup and breakdown itemized separately."},
          "priceSpecification": {"@type": "UnitPriceSpecification", "price": "100", "priceCurrency": "USD", "unitCode": "HUR"}},
         {"@type": "Offer",
          "itemOffered": {"@type": "Service", "name": "Artist Feature", "description": "Filmed podcast-style interview built around an artist and their music, plus a highlight clip for social."},
@@ -494,6 +494,8 @@
       <label class="pill-check"><input name="specialized[]" type="checkbox" value="buyout"/><span>Studio Buyout / Custom Build</span></label>
       <label class="pill-check"><input name="specialized[]" type="checkbox" value="fullbuild"/><span>Full Build (Producer-Led)</span></label>
       <label class="pill-check"><input name="specialized[]" type="checkbox" value="artistfeature"/><span>Artist Feature</span></label>
+      <label class="pill-check"><input name="specialized[]" type="checkbox" value="testimonial"/><span>Testimonial / Brand Video</span></label>
+      <label class="pill-check"><input name="specialized[]" type="checkbox" value="liveshow"/><span>Live Show Coverage</span></label>
       <label class="pill-check"><input name="specialized[]" type="checkbox" value="photoshoot"/><span>Photography Shoot</span></label>
       <label class="pill-check"><input name="specialized[]" type="checkbox" value="audiobook"/><span>Audiobook / Voiceover</span></label>
       <label class="pill-check"><input name="specialized[]" type="checkbox" value="notsure"/><span>Not sure yet</span></label>
@@ -611,7 +613,8 @@
   <!-- What do you want to walk out with -->
   <div>
     <label style="display:block; font-size:14px; font-weight:500; color:var(--text); margin-bottom:8px;">What do you want to walk out with? *</label>
-    <textarea name="walk_out_with" placeholder="A rough demo? Polished vocals? A full track? Just an idea of what's possible?" required="" rows="2" style="width:100%; padding:14px 18px; background:var(--field-bg); border:2px solid var(--border); border-radius:12px; color:var(--text); font-size:15px; transition:all 0.2s; resize:vertical; box-sizing:border-box; font-family:inherit;"></textarea>
+    <textarea name="walk_out_with" placeholder="Vocals tracked over your beat? A song idea captured properly? A clear direction for the next session?" required="" rows="2" style="width:100%; padding:14px 18px; background:var(--field-bg); border:2px solid var(--border); border-radius:12px; color:var(--text); font-size:15px; transition:all 0.2s; resize:vertical; box-sizing:border-box; font-family:inherit;"></textarea>
+    <p style="font-size:12.5px; color:var(--muted); margin:8px 0 0; line-height:1.5;">You&rsquo;ll leave with your labeled session files. Editing and mixing are booked separately at $45/hr &mdash; tell me the goal and I&rsquo;ll tell you what it takes.</p>
   </div>
 
   <!-- Experience -->
@@ -759,8 +762,8 @@
 <div class="outcome-card">
 <div class="outcome-name">Record an audiobook</div>
 <p class="outcome-desc">Audiobook, voiceover, and narration - a quiet, treated room and an engineer who keeps long sessions on track. Authors welcome to narrate their own.</p>
-<div class="outcome-range">Scoped per project</div>
-<a class="outcome-cta" href="#estimate-form">Get an estimate &rarr;</a>
+<div class="outcome-range">Typically $3,000&ndash;$4,230</div>
+<a class="outcome-cta" href="audiobook-estimate-example.html">See a real estimate &rarr;</a>
 </div>
 <div class="outcome-card">
 <div class="outcome-name">Artist Feature</div>
@@ -979,7 +982,7 @@
         <div class="menu-item" data-persona="location">
           <div class="menu-item-left">
             <span class="menu-item-name">Mobile Recording</span>
-            <span class="menu-item-desc">I bring professional recording gear to your space (4-hr min).</span>
+            <span class="menu-item-desc">I bring professional recording gear to your space (4-hr min). <strong>Extended engagements of 20+ hours</strong> are quoted at studio rates ($60/hr recording, $45/hr editing) with setup and breakdown itemized separately.</span>
           </div>
           <span class="menu-item-price">$100/hr</span>
         </div>
@@ -1014,7 +1017,7 @@
         <div class="menu-item" data-persona="specialized">
           <div class="menu-item-left">
             <span class="menu-item-name">Audiobook &amp; Voiceover</span>
-            <span class="menu-item-desc">Audiobook recording, commercial voiceover, and spoken-word narration - including authors narrating their own book. Treated, quiet room and a dedicated engineer for long-form sessions. Scoped per project because length and edit depth vary. <a href="#estimate-form" class="routing-link">Get an estimate &rarr;</a></span>
+            <span class="menu-item-desc">Audiobook recording, commercial voiceover, and spoken-word narration - including authors narrating their own book. Treated, quiet room and a dedicated engineer for long-form sessions. Scoped per project because length and edit depth vary. <a href="audiobook-estimate-example.html" class="routing-link">See a real estimate, line by line &rarr;</a></span>
 </div>
           <span class="menu-item-price">Scoped</span>
         </div>
@@ -1038,7 +1041,7 @@
         <div class="menu-item" data-persona="specialized">
           <div class="menu-item-left">
             <span class="menu-item-name">Mobile Recording</span>
-            <span class="menu-item-desc">I bring professional recording gear to your space (4-hr min).</span>
+            <span class="menu-item-desc">I bring professional recording gear to your space (4-hr min). <strong>Extended engagements of 20+ hours</strong> are quoted at studio rates ($60/hr recording, $45/hr editing) with setup and breakdown itemized separately.</span>
 </div>
           <span class="menu-item-price">$100/hr</span>
         </div>
@@ -1301,7 +1304,7 @@ Coffee bar on-site - pour-overs between takes to reset and listen back. Mini fri
 <img alt="Stephen in the studio at Studio San Francisco" decoding="async" loading="lazy" src="assets/stephen-in-studio.jpg"/>
 </div>
 <div class="engineer-photo-frame">
-<img alt="The recording space at Studio San Francisco" decoding="async" loading="lazy" onerror="this.parentElement.style.display='none'" src="assets/studio-space.jpg"/>
+<img alt="The recording space at Studio San Francisco" decoding="async" loading="lazy" onerror="this.parentElement.style.display='none'" src="images/studio-1.jpg"/>
 </div>
 </div>
 </div>

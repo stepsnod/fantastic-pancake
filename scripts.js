@@ -2548,8 +2548,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ═══════════════════════════════════════════════════════════════
    BREW IN THE STU - brew.html
-   Loads from episodes.json. To add episodes or a new season,
-   edit episodes.json only - no HTML changes needed.
+   Loads from episodes.json. To add episodes, change a season story,
+   or re-sort episodes into different learning tracks, edit
+   episodes.json only - no HTML changes needed.
    ═══════════════════════════════════════════════════════════════ */
 (function () {
   var grid = document.getElementById('brewGrid');
@@ -2561,6 +2562,20 @@ document.addEventListener('DOMContentLoaded', () => {
   var emptyEl     = document.getElementById('brewEmpty');
   var seasonTitle = document.getElementById('brewSeasonTitle');
   var playerWrap  = document.querySelector('.brew-player-wrap');
+  var storyIntro  = document.getElementById('brewSeasonStory');
+  var trackWrap   = document.getElementById('brewTracks');
+  var trackDesc   = document.getElementById('brewTrackDesc');
+  var quizOpts    = document.getElementById('brewQuizOpts');
+  var quizStep1   = document.getElementById('brewQuizStep1');
+  var quizResult  = document.getElementById('brewQuizResult');
+  var resultTitle = document.getElementById('brewResultTitle');
+  var resultDesc  = document.getElementById('brewResultDesc');
+  var pathWrap    = document.getElementById('brewPath');
+  var quizSkip    = document.getElementById('brewQuizSkip');
+  var quizRestart = document.getElementById('brewQuizRestart');
+  var progLabel   = document.getElementById('brewProgressLabel');
+  var progFill    = document.getElementById('brewProgressFill');
+  var progReset   = document.getElementById('brewProgressReset');
 
   // Story panel (created once, lives under the player)
   var storyEl = document.createElement('div');
@@ -2568,10 +2583,57 @@ document.addEventListener('DOMContentLoaded', () => {
   storyEl.style.display = 'none';
   if (playerWrap) playerWrap.appendChild(storyEl);
 
-  // Episode order + auto-advance state
-  var orderedEps = [];
+  var orderedEps = [];   // full season order, drives auto-advance
   var currentIdx = -1;
+  var allEps     = [];
+  var tracks     = [];
+  var activeTrack = 'all';
+  var cardsByEp  = {};
 
+  /* ── Watched state (localStorage, this device only) ── */
+  var WATCH_KEY = 'brewWatched_v1';
+  var watched = {};
+  try {
+    watched = JSON.parse(localStorage.getItem(WATCH_KEY) || '{}') || {};
+  } catch (e) { watched = {}; }
+
+  function persistWatched() {
+    try { localStorage.setItem(WATCH_KEY, JSON.stringify(watched)); } catch (e) { /* no-op */ }
+  }
+
+  function isWatched(ep) { return !!watched[ep.id]; }
+
+  function setWatched(ep, val) {
+    if (val) { watched[ep.id] = 1; } else { delete watched[ep.id]; }
+    persistWatched();
+    syncWatchedUI();
+  }
+
+  function syncWatchedUI() {
+    allEps.forEach(function (ep) {
+      var card = cardsByEp[ep.id];
+      if (!card) return;
+      var on = isWatched(ep);
+      card.classList.toggle('is-watched', on);
+      var btn = card.querySelector('.brew-watch-toggle');
+      if (btn) {
+        btn.innerHTML = on ? '&#10003;' : '';
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        btn.setAttribute('aria-label', (on ? 'Mark unwatched: ' : 'Mark watched: ') + (ep.title || ('Episode ' + ep.ep)));
+      }
+    });
+    var n = allEps.filter(isWatched).length;
+    var total = allEps.length;
+    if (progLabel) progLabel.textContent = n + ' of ' + total + ' watched';
+    if (progFill) progFill.style.width = (total ? (n / total) * 100 : 0) + '%';
+    // reflect in any open guided path
+    Array.prototype.forEach.call(document.querySelectorAll('.brew-path-item'), function (item) {
+      var id = item.getAttribute('data-ep-id');
+      item.classList.toggle('is-watched', !!watched[id]);
+    });
+  }
+
+  /* ── Player ── */
   function playEpisode(ep) {
     currentIdx = orderedEps.indexOf(ep);
     if (frame) {
@@ -2581,28 +2643,49 @@ document.addEventListener('DOMContentLoaded', () => {
       nowPlaying.textContent = 'Now playing: Ep ' + ep.ep + (ep.title ? ' · ' + ep.title : '');
     }
     if (storyEl) {
-      if (ep.story && ep.story.trim()) {
+      var text = (ep.story && ep.story.trim()) ? ep.story : (ep.blurb || '');
+      if (text) {
         storyEl.innerHTML = '';
         var h = document.createElement('h3');
         h.textContent = 'About this episode';
         var p = document.createElement('p');
-        p.textContent = ep.story;
+        p.textContent = text;
         storyEl.appendChild(h);
         storyEl.appendChild(p);
+        var yt = document.createElement('p');
+        var a = document.createElement('a');
+        a.href = 'https://www.youtube.com/watch?v=' + ep.id;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.textContent = 'Join the conversation on YouTube →';
+        yt.appendChild(a);
+        storyEl.appendChild(yt);
         storyEl.style.display = 'block';
       } else {
         storyEl.style.display = 'none';
       }
     }
+    setWatched(ep, true);
     var target = document.getElementById('watch');
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  function trackName(id) {
+    for (var i = 0; i < tracks.length; i++) { if (tracks[i].id === id) return tracks[i].name; }
+    return '';
+  }
+
+  /* ── Episode cards ── */
   function makeCard(ep) {
-    var card = document.createElement('button');
-    card.type = 'button';
+    var card = document.createElement('div');
     card.className = 'brew-card';
-    card.setAttribute('aria-label', 'Play episode ' + ep.ep + (ep.title ? ': ' + ep.title : ''));
+    card.setAttribute('data-track', ep.track || '');
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'brew-card-hit';
+    btn.setAttribute('aria-label', 'Play episode ' + ep.ep + (ep.title ? ': ' + ep.title : ''));
+    btn.style.cssText = 'all:unset;display:block;width:100%;cursor:pointer;';
 
     var thumbWrap = document.createElement('span');
     thumbWrap.className = 'brew-thumb';
@@ -2626,28 +2709,168 @@ document.addEventListener('DOMContentLoaded', () => {
     title.className = 'brew-card-title';
     title.textContent = ep.title || ('Episode ' + ep.ep);
 
-    card.appendChild(thumbWrap);
-    card.appendChild(title);
-    if (ep.story && ep.story.trim()) {
-      var tag = document.createElement('span');
-      tag.className = 'brew-story-tag';
-      tag.textContent = 'With story';
-      card.appendChild(tag);
+    btn.appendChild(thumbWrap);
+    btn.appendChild(title);
+
+    if (ep.blurb) {
+      var blurb = document.createElement('span');
+      blurb.className = 'brew-card-blurb';
+      blurb.textContent = ep.blurb;
+      btn.appendChild(blurb);
     }
-    card.addEventListener('click', function () { playEpisode(ep); });
+    if (ep.track) {
+      var tn = document.createElement('span');
+      tn.className = 'brew-card-track';
+      tn.textContent = trackName(ep.track);
+      btn.appendChild(tn);
+    }
+    btn.addEventListener('click', function () { playEpisode(ep); });
+    card.appendChild(btn);
+
+    // watched toggle
+    var toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'brew-watch-toggle';
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setWatched(ep, !isWatched(ep));
+    });
+    card.appendChild(toggle);
+
+    cardsByEp[ep.id] = card;
     return card;
   }
 
-  function injectVideoSchema(allEps) {
-    if (!allEps.length) return;
-    var items = allEps.map(function (ep, i) {
+  /* ── Track filtering ── */
+  function applyTrack(id) {
+    activeTrack = id;
+    Array.prototype.forEach.call(trackWrap.querySelectorAll('.brew-track-btn'), function (b) {
+      b.classList.toggle('active', b.getAttribute('data-track') === id);
+    });
+    var shown = 0;
+    allEps.forEach(function (ep) {
+      var card = cardsByEp[ep.id];
+      if (!card) return;
+      var vis = (id === 'all') || (ep.track === id);
+      card.style.display = vis ? '' : 'none';
+      if (vis) shown++;
+    });
+    if (countEl) countEl.textContent = shown + ' episode' + (shown === 1 ? '' : 's');
+    if (trackDesc) {
+      var t = null;
+      for (var i = 0; i < tracks.length; i++) { if (tracks[i].id === id) t = tracks[i]; }
+      trackDesc.textContent = t ? t.desc : '';
+    }
+  }
+
+  function buildTracks() {
+    if (!trackWrap) return;
+    trackWrap.innerHTML = '';
+    var defs = [{ id: 'all', name: 'All episodes' }].concat(tracks);
+    defs.forEach(function (t) {
+      var n = (t.id === 'all') ? allEps.length : allEps.filter(function (e) { return e.track === t.id; }).length;
+      if (!n) return;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'brew-track-btn' + (t.id === 'all' ? ' active' : '');
+      b.setAttribute('data-track', t.id);
+      b.innerHTML = t.name + '<span class="brew-track-count">' + n + '</span>';
+      b.addEventListener('click', function () {
+        applyTrack(t.id);
+        var g = document.getElementById('episodes');
+        if (g) g.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      trackWrap.appendChild(b);
+    });
+  }
+
+  /* ── Guided path quiz ── */
+  function showPath(t) {
+    var eps = allEps.filter(function (e) { return e.track === t.id; });
+    if (resultTitle) resultTitle.textContent = t.name;
+    if (resultDesc) resultDesc.textContent = t.desc || '';
+    if (pathWrap) {
+      pathWrap.innerHTML = '';
+      eps.forEach(function (ep, i) {
+        var item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'brew-path-item';
+        item.setAttribute('data-ep-id', ep.id);
+        var num = document.createElement('span');
+        num.className = 'brew-path-num';
+        num.innerHTML = '<span>' + (i + 1) + '</span>';
+        var txt = document.createElement('span');
+        txt.className = 'brew-path-text';
+        var tt = document.createElement('span');
+        tt.className = 'brew-path-title';
+        tt.textContent = ep.title || ('Episode ' + ep.ep);
+        txt.appendChild(tt);
+        if (ep.blurb) {
+          var bb = document.createElement('span');
+          bb.className = 'brew-path-blurb';
+          bb.textContent = ep.blurb;
+          txt.appendChild(bb);
+        }
+        item.appendChild(num);
+        item.appendChild(txt);
+        item.addEventListener('click', function () { playEpisode(ep); });
+        pathWrap.appendChild(item);
+      });
+    }
+    if (quizStep1) quizStep1.style.display = 'none';
+    if (quizResult) quizResult.style.display = 'block';
+    applyTrack(t.id);
+    syncWatchedUI();
+  }
+
+  function buildQuiz() {
+    if (!quizOpts) return;
+    quizOpts.innerHTML = '';
+    tracks.forEach(function (t) {
+      var n = allEps.filter(function (e) { return e.track === t.id; }).length;
+      if (!n) return;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'brew-quiz-opt';
+      var label = document.createElement('span');
+      label.textContent = t.short || t.name;
+      var cnt = document.createElement('span');
+      cnt.className = 'brew-quiz-opt-count';
+      cnt.textContent = n + ' episode' + (n === 1 ? '' : 's');
+      b.appendChild(label);
+      b.appendChild(cnt);
+      b.addEventListener('click', function () { showPath(t); });
+      quizOpts.appendChild(b);
+    });
+  }
+
+  if (quizSkip) quizSkip.addEventListener('click', function () {
+    applyTrack('all');
+    var g = document.getElementById('episodes');
+    if (g) g.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  if (quizRestart) quizRestart.addEventListener('click', function () {
+    if (quizResult) quizResult.style.display = 'none';
+    if (quizStep1) quizStep1.style.display = 'block';
+    applyTrack('all');
+  });
+  if (progReset) progReset.addEventListener('click', function () {
+    watched = {};
+    persistWatched();
+    syncWatchedUI();
+  });
+
+  /* ── Schema ── */
+  function injectVideoSchema(eps) {
+    if (!eps.length) return;
+    var items = eps.map(function (ep, i) {
       return {
         '@type': 'ListItem',
         'position': i + 1,
         'item': {
           '@type': 'VideoObject',
           'name': 'Brew in the Stu Ep ' + ep.ep + (ep.title ? ': ' + ep.title : ''),
-          'description': ep.story && ep.story.trim() ? ep.story : 'Episode ' + ep.ep + ' of Brew in the Stu, filmed at Studio San Francisco.',
+          'description': (ep.story && ep.story.trim()) ? ep.story : (ep.blurb || ('Episode ' + ep.ep + ' of Brew in the Stu, filmed at Studio San Francisco.')),
           'thumbnailUrl': 'https://i.ytimg.com/vi/' + ep.id + '/hqdefault.jpg',
           'embedUrl': 'https://www.youtube-nocookie.com/embed/' + ep.id,
           'url': 'https://www.youtube.com/watch?v=' + ep.id
@@ -2665,17 +2888,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(script);
   }
 
+  /* ── Boot ── */
   fetch('episodes.json')
     .then(function (r) { return r.json(); })
     .then(function (data) {
       var seasons = (data && data.seasons) || [];
-      var allEps = [];
+      tracks = (data && data.tracks) || [];
+      allEps = [];
 
-      seasons.forEach(function (season, si) {
+      seasons.forEach(function (season) {
         var eps = season.episodes || [];
         if (!eps.length) return;
-
-        // For a single season, the static header is enough; add sub-headers when there are multiple
         if (seasons.filter(function (s) { return (s.episodes || []).length; }).length > 1) {
           var head = document.createElement('h3');
           head.className = 'brew-season-head';
@@ -2684,7 +2907,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (seasonTitle && season.title) {
           seasonTitle.textContent = season.title;
         }
-
+        if (storyIntro && season.story && !storyIntro.textContent) {
+          storyIntro.textContent = season.story;
+        }
         eps.forEach(function (ep) {
           grid.appendChild(makeCard(ep));
           allEps.push(ep);
@@ -2694,19 +2919,20 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!allEps.length) {
         if (emptyEl) emptyEl.style.display = 'block';
         if (countEl) countEl.style.display = 'none';
-      } else {
-        if (countEl) countEl.textContent = allEps.length + ' episode' + (allEps.length === 1 ? '' : 's');
-        injectVideoSchema(allEps);
+        return;
+      }
 
-        // Keep the default player in sync with the episode list:
-        // it always starts on the first episode. Auto-advance below
-        // plays the season in order - only ever the season's episodes.
-        orderedEps = allEps;
-        currentIdx = 0;
-        if (frame) {
-          var desired = 'https://www.youtube-nocookie.com/embed/' + allEps[0].id + '?rel=0&enablejsapi=1';
-          if (frame.src !== desired) frame.src = desired;
-        }
+      if (countEl) countEl.textContent = allEps.length + ' episode' + (allEps.length === 1 ? '' : 's');
+      injectVideoSchema(allEps);
+      buildTracks();
+      buildQuiz();
+      syncWatchedUI();
+
+      orderedEps = allEps;
+      currentIdx = 0;
+      if (frame) {
+        var desired = 'https://www.youtube-nocookie.com/embed/' + allEps[0].id + '?rel=0&enablejsapi=1';
+        if (frame.src !== desired) frame.src = desired;
       }
     })
     .catch(function () {
@@ -2714,7 +2940,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
   // Auto-advance: when an episode ends, play the next one in order.
-  // Uses the YouTube iframe messaging API (enablejsapi=1).
   function tellPlayerWeAreListening() {
     if (frame && frame.contentWindow) {
       try {
@@ -2728,7 +2953,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof e.data !== 'string' || e.origin.indexOf('youtube') === -1) return;
     var d;
     try { d = JSON.parse(e.data); } catch (err) { return; }
-    // playerState 0 = ended
     if (d && d.info && d.info.playerState === 0) {
       var next = currentIdx >= 0 ? orderedEps[currentIdx + 1] : null;
       if (next) playEpisode(next);

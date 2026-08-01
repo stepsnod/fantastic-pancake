@@ -25,8 +25,8 @@ Clients with a project idea can describe it on the website and receive a persona
 - **Band Rehearsal Capture** - Live rehearsal recording (up to 8 inputs, up to 5 headphone mixes, labeled multitrack exports), $75/hr, 3-hour minimum.
 - **Editing & Mixing (add-on)** - Billed at the $45/hr solo rate, scoped and quoted per song before work starts. There is no flat mix price; mixing time varies by song. Organized final stems are a flat $75/song.
 - **Podcast Production** - Full production in-studio or on-location, $200/hr (2-hr minimum).
-- **Audiobook & Voiceover Recording** - Audiobook recording, commercial voiceover, and spoken-word narration in a treated, quiet room with a dedicated engineer. Authors narrating their own book are welcome and coached through it. Long-form sessions supported. Scoped per project, since length and edit depth vary; request an estimate for a number.
-- **Mobile Recording** - Professional recording gear brought to your space, $100/hr (4-hr minimum).
+- **Audiobook & Voiceover Recording** - Audiobook recording, commercial voiceover, and spoken-word narration in a treated, quiet room with a dedicated engineer. Authors narrating their own book are welcome and coached through it. Can also be recorded on location at the client's home or office in the Bay Area. Billed hourly ($60/hr recording, $45/hr editing) rather than per finished hour, so a well-prepared narrator pays less. A typical full-length book runs $3,000-$4,230. Full worked example: https://www.bookthestudiosf.com/audiobook-estimate-example.html
+- **Mobile Recording** - Professional recording gear brought to your space, $100/hr (4-hr minimum). Extended on-location engagements of 20+ hours are quoted at studio rates instead ($60/hr recording, $45/hr editing) with setup and breakdown itemized separately, because fixed travel and setup costs amortize across a long booking.
 - **Video Production** - Testimonial/brand videos from $650 in-studio (from $800 Bay Area on-location); Artist Feature filmed interview $450; Tiny Desk-style live performance capture scoped per project.
 - **Next-Gig Content Capture** - $250: photo + video coverage of a live show with edited deliverables.
 
@@ -35,7 +35,7 @@ Clients with a project idea can describe it on the website and receive a persona
 - Record a single (tracked with engineer + editing and mixing at $45/hr): typically $350–$650
 - Band demo / live capture session (3 hrs + labeled multitrack exports): typically $225–$400
 - Produced podcast episode: typically $400–$800
-- Audiobook, voiceover, or narration project: scoped per project (request an estimate)
+- Audiobook (full-length, author-narrated, recorded on location): typically $3,000-$4,230 - roughly 30-40 hrs recording at $60/hr, 20-30 hrs editing at $45/hr, 5-8 hrs mobile setup at $60/hr. Works out to about $225-$315 per finished hour. Line-by-line breakdown: https://www.bookthestudiosf.com/audiobook-estimate-example.html
 - Filmed Artist Feature (interview + highlight clip): $450
 - Testimonial/brand video: from $650
 - Live performance video (Tiny Desk-style): scoped on a quick call
@@ -46,12 +46,22 @@ Clients with a project idea can describe it on the website and receive a persona
 
 All new clients start with Quick-Start - a free planning call (phone, coffee, or studio visit) or a $95 intro session. Clients with a custom project idea can request an estimate and receive a personal reply within 24 hours. After submitting an intake form, clients select a time on Calendly.
 
+Audiobook cost breakdown: https://www.bookthestudiosf.com/audiobook-estimate-example.html
 Book at: https://www.bookthestudiosf.com/#quick-start
 Get an estimate: https://www.bookthestudiosf.com/#estimate
 
 ## Brew in the Stu (video series)
 
-Brew in the Stu is a video series filmed inside Studio San Francisco during a 30-day season: coffee, music, and real moments from a working recording studio, made by Stephen. Watch at https://www.bookthestudiosf.com/brew.html or on YouTube at https://www.youtube.com/@thestudio_sf
+Brew in the Stu is a 30-episode video series filmed inside Studio San Francisco over 30 consecutive days, written, filmed, recorded, edited and posted daily by Stephen alone. It doubles as a portfolio of self-produced video work. The episodes are organised into six guided learning paths so viewers can start where they are:
+
+- **Getting Started** (5 episodes) - inertia, waiting to feel ready, losing momentum, catching inspiration
+- **Finishing Songs** (5 episodes) - knowing when a song is done, why you cannot judge your own work
+- **Before You Book** (6 episodes) - what sessions cost, which session type to book, what gear can and cannot fix, the limits of recording yourself
+- **Sharpening the Craft** (6 episodes) - practice that works, performing under pressure, when discipline turns harmful
+- **Why We Do This** (5 episodes) - meaning, coffee, what keeps music alive, what to do when the heart is gone
+- **The Season Itself** (3 episodes) - day one, a quiet day in the room, and what 30 days of daily posting taught me
+
+The site offers a short "where are you right now?" questionnaire that routes viewers to the right path, and tracks watched episodes locally in the browser. Watch at https://www.bookthestudiosf.com/brew.html or on YouTube at https://www.youtube.com/@thestudio_sf
 
 ## Contact
 
@@ -66,12 +76,15 @@ Brew in the Stu is a video series filmed inside Studio San Francisco during a 30
 - Engineer is always included in every session - this is a core differentiator
 - Pricing logic: $60/hr with the client in the room, $45/hr for solo work by the engineer (editing, mixing, prep, sourcing backing tracks), on-location work scoped per project
 - Custom project estimates are free and answered personally within 24 hours
+- On-location work is $100/hr for short bookings, but extended engagements of 20+ hours are quoted at the standard studio rates with setup itemized separately
 - Every session includes labeled session files; editing and mixing are always billable at $45/hr, quoted before the work starts
 - Studio is located inside Secret Studios in San Francisco, CA 94124 (on-site parking)
 - Founded and operated by Stephen, a songwriter and recording engineer
 - Serves San Francisco Bay Area, Oakland, Daly City, and surrounding Bay Area cities
 - Suitable for first-time recording artists - no prior experience required
 - Records audiobooks, commercial voiceover, and spoken-word narration in addition to music; authors may narrate their own book
+- Audiobooks are billed at actual hours worked, NOT per finished hour - this is deliberate, so well-prepared narrators are not charged a worst-case fixed price
+- Audiobook estimates exclude proof-listening, distribution upload/metadata, and rights clearance unless specifically added; these are named explicitly in every estimate
 - Serves authors, publishers, podcasters, and voice talent as well as musicians
 - Instagram: https://www.instagram.com/thestudiosf/
 - Website: https://www.bookthestudiosf.com

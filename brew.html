@@ -16,6 +16,7 @@
 <!-- Primary Meta Tags -->
 <title>Brew in the Stu | Studio San Francisco - The Video Series</title>
 <meta content="Brew in the Stu: a 30-episode video series from Studio San Francisco. Coffee, music, and real moments from a working recording studio, made by Stephen." name="description"/>
+<meta content="recording studio video series, music production lessons, how to finish a song, why my song is stuck, recording studio san francisco, songwriting advice, home recording vs studio, music practice tips, studio vlog" name="keywords"/>
 <!-- Canonical URL -->
 <link href="https://www.bookthestudiosf.com/brew.html" rel="canonical"/>
 <!-- Open Graph -->
@@ -68,6 +69,72 @@
 <link href="styles.css" rel="stylesheet"/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎙</text></svg>"/>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+<style>
+  /* ── Season story ── */
+  .brew-intro{max-width:760px;margin:0 auto;padding:0 22px 8px;text-align:center;}
+  .brew-intro-story{font-size:16.5px;line-height:1.75;color:var(--muted);margin:0 0 26px;text-align:left;}
+  .brew-intro-stats{display:flex;justify-content:center;gap:38px;flex-wrap:wrap;padding-bottom:8px;}
+  .brew-stat{display:flex;flex-direction:column;gap:2px;}
+  .brew-stat-num{font-size:30px;font-weight:600;color:var(--accent);line-height:1;font-variant-numeric:tabular-nums;}
+  .brew-stat-label{font-family:Inter,sans-serif;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);}
+
+  /* ── Guided path quiz ── */
+  .brew-quiz{max-width:820px;margin:44px auto 8px;padding:0 22px;}
+  .brew-quiz-inner{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:22px;padding:34px 30px;}
+  .brew-quiz-eyebrow{font-family:Inter,sans-serif;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 10px;}
+  .brew-quiz-q{font-size:26px;font-weight:500;letter-spacing:-.01em;margin:0 0 20px;}
+  .brew-quiz-desc{font-size:15px;color:var(--muted);line-height:1.65;margin:0 0 22px;}
+  .brew-quiz-opts{display:grid;gap:11px;}
+  .brew-quiz-opt{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;text-align:left;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:16px 18px;color:var(--text);font-size:15.5px;font-family:inherit;cursor:pointer;transition:border-color .18s,background .18s,transform .18s;}
+  .brew-quiz-opt:hover{border-color:var(--accent);background:rgba(255,255,255,.07);transform:translateX(3px);}
+  .brew-quiz-opt-count{font-family:Inter,sans-serif;font-size:12px;color:var(--muted2);white-space:nowrap;}
+  .brew-quiz-skip{margin-top:18px;background:none;border:none;color:var(--muted2);font-size:13.5px;font-family:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:4px 0;}
+  .brew-quiz-skip:hover{color:var(--accent);}
+  .brew-path{display:grid;gap:10px;}
+  .brew-path-item{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:13px 16px;color:var(--text);font-family:inherit;cursor:pointer;transition:border-color .18s,background .18s;}
+  .brew-path-item:hover{border-color:var(--accent);background:rgba(255,255,255,.07);}
+  .brew-path-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(0,198,255,.14);color:var(--accent);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;}
+  .brew-path-text{display:flex;flex-direction:column;gap:2px;min-width:0;}
+  .brew-path-title{font-size:15px;font-weight:500;line-height:1.35;}
+  .brew-path-blurb{font-size:13px;color:var(--muted);line-height:1.45;}
+  .brew-path-item.is-watched .brew-path-num{background:rgba(0,198,255,.28);}
+  .brew-path-item.is-watched .brew-path-num:after{content:"\2713";}
+  .brew-path-item.is-watched .brew-path-num span{display:none;}
+
+  /* ── Progress ── */
+  .brew-progress{max-width:1180px;margin:0 auto 22px;padding:0 4px;}
+  .brew-progress-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px;}
+  .brew-progress-label{font-family:Inter,sans-serif;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;}
+  .brew-progress-reset{background:none;border:none;color:var(--muted2);font-size:12.5px;font-family:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px;}
+  .brew-progress-reset:hover{color:var(--accent);}
+  .brew-progress-bar{height:5px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden;}
+  .brew-progress-fill{display:block;height:100%;width:0;border-radius:99px;background:var(--accent);transition:width .4s ease;}
+  .brew-progress-note{font-size:11.5px;color:var(--muted2);margin:7px 0 0;font-style:italic;}
+
+  /* ── Track filters ── */
+  .brew-tracks{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:0 auto 14px;max-width:1000px;}
+  .brew-track-btn{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:99px;padding:9px 17px;color:var(--muted);font-size:13.5px;font-family:inherit;cursor:pointer;transition:all .18s;white-space:nowrap;}
+  .brew-track-btn:hover{color:var(--text);border-color:var(--accent);}
+  .brew-track-btn.active{background:var(--accent);border-color:var(--accent);color:#04121b;font-weight:500;}
+  .brew-track-count{opacity:.65;font-size:12px;margin-left:5px;}
+  .brew-track-desc{text-align:center;font-size:14px;color:var(--muted);max-width:640px;margin:0 auto 26px;line-height:1.6;min-height:1px;}
+
+  /* ── Watched state on cards ── */
+  .brew-card{position:relative;}
+  .brew-card.is-watched .brew-thumb img{opacity:.42;}
+  .brew-watch-toggle{position:absolute;top:9px;right:9px;z-index:3;width:27px;height:27px;border-radius:50%;border:1px solid rgba(255,255,255,.34);background:rgba(6,14,22,.76);color:#fff;font-size:13px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;transition:all .18s;}
+  .brew-watch-toggle:hover{border-color:var(--accent);color:var(--accent);transform:scale(1.1);}
+  .brew-card.is-watched .brew-watch-toggle{background:var(--accent);border-color:var(--accent);color:#04121b;}
+  .brew-card-blurb{display:block;font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:4px;}
+  .brew-card-track{display:inline-block;font-family:Inter,sans-serif;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2);margin-top:6px;}
+
+  @media(max-width:560px){
+    .brew-intro-stats{gap:26px;}
+    .brew-stat-num{font-size:25px;}
+    .brew-quiz-inner{padding:26px 20px;}
+    .brew-quiz-q{font-size:22px;}
+  }
+</style>
 </head>
 <body>
 
@@ -133,6 +200,35 @@
     <p class="port-hero-sub" data-reveal>Coffee, music, and real moments from inside a working recording studio. A 30-day season, made in this room.</p>
   </section>
 
+  <!-- Season story -->
+  <section class="brew-intro" data-reveal>
+    <p class="brew-intro-story" id="brewSeasonStory"></p>
+    <div class="brew-intro-stats">
+      <div class="brew-stat"><span class="brew-stat-num">30</span><span class="brew-stat-label">episodes</span></div>
+      <div class="brew-stat"><span class="brew-stat-num">30</span><span class="brew-stat-label">days straight</span></div>
+      <div class="brew-stat"><span class="brew-stat-num">1</span><span class="brew-stat-label">person, start to finish</span></div>
+    </div>
+  </section>
+
+  <!-- Guided path -->
+  <section class="brew-quiz" id="brewQuiz" data-reveal>
+    <div class="brew-quiz-inner">
+      <div id="brewQuizStep1">
+        <p class="brew-quiz-eyebrow">Not sure where to start?</p>
+        <h2 class="brew-quiz-q">Where are you right now?</h2>
+        <div class="brew-quiz-opts" id="brewQuizOpts"></div>
+        <button class="brew-quiz-skip" id="brewQuizSkip" type="button">Skip &mdash; just show me everything</button>
+      </div>
+      <div id="brewQuizResult" style="display:none;">
+        <p class="brew-quiz-eyebrow">Your path</p>
+        <h2 class="brew-quiz-q" id="brewResultTitle"></h2>
+        <p class="brew-quiz-desc" id="brewResultDesc"></p>
+        <div class="brew-path" id="brewPath"></div>
+        <button class="brew-quiz-skip" id="brewQuizRestart" type="button">&larr; Pick a different path</button>
+      </div>
+    </div>
+  </section>
+
   <!-- Featured Player -->
   <section class="brew-player-section" id="watch">
     <div class="brew-player-wrap" data-reveal>
@@ -151,11 +247,26 @@
   </section>
 
   <!-- Episode Grid -->
-  <section class="brew-grid-section">
+  <section class="brew-grid-section" id="episodes">
     <div class="brew-grid-head" data-reveal>
       <h2 class="brew-grid-title" id="brewSeasonTitle">Season 1</h2>
       <p class="brew-grid-count" id="brewCount"></p>
     </div>
+
+    <!-- Progress -->
+    <div class="brew-progress" id="brewProgress" data-reveal>
+      <div class="brew-progress-row">
+        <span class="brew-progress-label" id="brewProgressLabel">0 of 30 watched</span>
+        <button class="brew-progress-reset" id="brewProgressReset" type="button">Reset</button>
+      </div>
+      <div class="brew-progress-bar"><span class="brew-progress-fill" id="brewProgressFill"></span></div>
+      <p class="brew-progress-note">Tracked on this device only &mdash; no account, nothing sent anywhere.</p>
+    </div>
+
+    <!-- Track filters -->
+    <div class="brew-tracks" id="brewTracks" role="group" aria-label="Filter episodes by path" data-reveal></div>
+    <p class="brew-track-desc" id="brewTrackDesc"></p>
+
     <div class="brew-grid" id="brewGrid"></div>
     <p class="brew-empty" id="brewEmpty" style="display:none;">Episode guide coming soon. Meanwhile, the full season is in the player above.</p>
     <p class="brew-yt-link" data-reveal>
