@@ -1158,6 +1158,25 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // Checkbox groups: an opt-out choice clears the others, and picking any
+  // other choice clears the opt-out.
+  document.querySelectorAll('[data-required-group]').forEach(function (group) {
+    var boxes = group.querySelectorAll('input[type="checkbox"]');
+    boxes.forEach(function (box) {
+      box.addEventListener('change', function () {
+        if (box.checked) {
+          boxes.forEach(function (other) {
+            if (other === box) return;
+            if (box.hasAttribute('data-exclusive') || other.hasAttribute('data-exclusive')) {
+              other.checked = false;
+            }
+          });
+        }
+        group.classList.remove('field-error');
+      });
+    });
+  });
+
   // Override default form submission with validation + Netlify AJAX
   [walkthroughForm, launchForm].forEach(function (form) {
     if (!form) return;
@@ -1185,6 +1204,14 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (!field.value.trim()) {
           isValid = false;
           field.classList.add('field-error');
+        }
+      });
+
+      // Checkbox groups need at least one choice
+      form.querySelectorAll('[data-required-group]').forEach(function (group) {
+        if (!group.querySelector('input[type="checkbox"]:checked')) {
+          isValid = false;
+          group.classList.add('field-error');
         }
       });
 
@@ -1388,8 +1415,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var spDur      = document.getElementById('spTimeDuration');
 
   // ── STATE ──────────────────────────────────────────────────────
-  // Start on a random track so repeat visitors hear something different each time
-  var spIdx      = Math.floor(Math.random() * spTracks.length);
+  var spIdx      = 0;
   var spUserSetVolume = false; // prevents hero click from overriding user volume
 
   var spPlaying  = false;

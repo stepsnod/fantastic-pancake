@@ -69,6 +69,11 @@
       "postalCode": "94124",
       "addressCountry": "US"
     },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 37.740359,
+      "longitude": -122.397341
+    },
     "areaServed": ["San Francisco Bay Area", "San Francisco", "Oakland", "Daly City"],
     "knowsAbout": [
       "Music recording",
@@ -87,7 +92,7 @@
       "itemListElement": [
         {"@type": "Offer",
          "itemOffered": {"@type": "Service", "name": "Launch Intro Session", "description": "Two-hour first session with an engineer included and full backline. Entry point for new clients."},
-         "price": "95", "priceCurrency": "USD"},
+         "price": "89", "priceCurrency": "USD"},
         {"@type": "Offer",
          "itemOffered": {"@type": "Service", "name": "Recording Session", "description": "Engineer-led tracking for vocals, instruments and full arrangements. Two-hour minimum."},
          "priceSpecification": {"@type": "UnitPriceSpecification", "price": "60", "priceCurrency": "USD", "unitCode": "HUR"}},
@@ -169,7 +174,7 @@
         "name": "How do I book a session?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Start with one of the two options in Quick-Start: a free plan or a $95 intro session. After you submit the intake form, you'll pick a time on Calendly."
+          "text": "Start with one of the two options in Quick-Start: a free plan or an $89 two-hour intro session. After you submit the intake form, you'll pick a time on Calendly."
         }
       },
       {
@@ -190,10 +195,10 @@
       },
       {
         "@type": "Question",
-        "name": "What do I leave with after the session?",
+        "name": "What happens to my recordings after the session?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Every session includes your labeled session files. Editing and mixing are booked separately at the $45/hr solo rate, scoped and quoted per song before the work starts. Organized final stems are a flat $75/song. Photo and video deliverables are scoped per project."
+          "text": "You leave with the raw session export - every take exactly as recorded, unedited and unlabeled. That is yours, included in the session rate. Anything past that is separate work: labeling, editing, and mixing are billed at the $45/hr solo rate, scoped and quoted per song before anything starts. Organized final stems are a flat $75/song. Photo and video are scoped per project."
         }
       },
       {
@@ -234,6 +239,30 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. Studio San Francisco is located inside Secret Studios, which has parking available on-site."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long should I book?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There's a 2-hour minimum on hourly sessions. For band rehearsal capture, booking a longer block is recommended so setup doesn't eat your creative time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I bring?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bring your session files (stems, instrumentals, or project sessions), references, and anything unique to your sound. If you're tracking vocals, bring water and any preferred headphones."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I book off-peak vs standard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Off-peak is best when you want a quieter building (especially for delicate vocals). Review the Noise policy so I can recommend the best window."
         }
       }
     ]
@@ -383,8 +412,8 @@
   <div class="hiw-step">
     <div class="hiw-num">3</div>
     <div class="hiw-text">
-      <div class="hiw-title">Record &amp; deliver</div>
-      <div class="hiw-sub">Show up, create, leave with something real.</div>
+      <div class="hiw-title">Record</div>
+      <div class="hiw-sub">Show up, create, and get it captured right.</div>
     </div>
   </div>
 </div>
@@ -396,9 +425,9 @@
 <div class="qs-accordion-summary">
 <div class="tier1-kicker">Launch Intro</div>
 <h3 class="qs-card-title">Start with a Session</h3>
-<div class="qs-card-price gold">$95</div>
-<div class="qs-card-urgency">First-session rate</div>
-<p class="qs-card-meta">2 hours · engineer included · full backline</p>
+<div class="qs-card-price gold">$89</div>
+<div class="qs-card-urgency"><span>2-hour session</span> · <span>First-session rate</span></div>
+<p class="qs-card-meta">Engineer included · full backline</p>
 <div class="qs-card-badges">
 <span class="qs-pill">Recording</span>
 <span class="qs-pill">Band Capture</span>
@@ -412,8 +441,8 @@
       </div>
 <div class="qs-card-checks">
 <div class="qs-check"><span class="qs-check-icon">✓</span><span class="qs-ethos-line">Engineer <span class="qs-always">always</span> included.</span></div>
-<div class="qs-check"><span class="qs-check-icon">✓</span><span>Leave with takes + a direction for the next session.</span></div>
-<div class="qs-check"><span class="qs-check-icon">✓</span><span>Your labeled session files, delivered after the session.</span></div>
+<div class="qs-check"><span class="qs-check-icon">✓</span><span>Real takes and a clear direction for the next session.</span></div>
+<div class="qs-check"><span class="qs-check-icon">✓</span><span>Your raw session export &mdash; unedited, unlabeled, yours.</span></div>
 </div>
 <p class="qs-card-desc" style="font-size:13px; opacity:0.75; margin-top:14px;">Editing and mixing are booked separately at $45/hr.</p>
 <button class="card-next" data-quick-next="1" type="button">Book Session →</button>
@@ -431,14 +460,14 @@
 <span aria-hidden="true" class="qs-accordion-toggle">+</span>
 </div>
 <div aria-hidden="true" class="qs-accordion-body">
-<p class="qs-card-desc">I’ll build you an executive plan over the phone, coffee, or during a studio visit.</p>
+<p class="qs-card-desc">We’ll map out a session plan over the phone, coffee, or during a studio visit.</p>
 <div class="qs-card-who">
 <span class="qs-card-who-label">Best for:</span> Anyone who wants to talk through goals and see the space before committing.
       </div>
 <div class="qs-card-checks">
 <div class="qs-check"><span class="qs-check-icon">✓</span><span>I’ll map your project and next steps.</span></div>
 <div class="qs-check"><span class="qs-check-icon">✓</span><span>Choose: phone call, coffee meetup, or studio visit.</span></div>
-<div class="qs-check"><span class="qs-check-icon">✓</span><span>You’ll leave with an executive plan.</span></div>
+<div class="qs-check"><span class="qs-check-icon">✓</span><span>A session plan and an estimate &mdash; both free, both optional.</span></div>
 </div>
 <button class="card-next" data-quick-next="1" type="button">Start Planning →</button>
 </div>
@@ -531,6 +560,17 @@
     </select>
   </div>
 
+  <!-- What should I put together -->
+  <div>
+    <label style="display:block; font-size:14px; font-weight:500; color:var(--text); margin-bottom:6px;">What should I put together for you? *</label>
+    <p style="font-size:12.5px; color:var(--muted); margin:0 0 12px; line-height:1.5;">Both are free. Pick either, both, or neither.</p>
+    <div class="check-group" data-required-group="" style="display:grid; gap:10px;">
+      <label class="pill-check"><input name="plan_options[]" type="checkbox" value="session_plan"/><span>A session plan &mdash; what to record, in what order, and how much time it takes</span></label>
+      <label class="pill-check"><input name="plan_options[]" type="checkbox" value="estimate"/><span>A written estimate for the project</span></label>
+      <label class="pill-check"><input data-exclusive="" name="plan_options[]" type="checkbox" value="none"/><span>No thank you &mdash; I just want to talk it through</span></label>
+    </div>
+  </div>
+
   <!-- Budget -->
   <div>
     <label style="display:block; font-size:14px; font-weight:500; color:var(--text); margin-bottom:8px;">Comfortable budget range <span style="font-weight:400; color:var(--muted);">(helps me recommend options)</span></label>
@@ -614,7 +654,7 @@
   <div>
     <label style="display:block; font-size:14px; font-weight:500; color:var(--text); margin-bottom:8px;">What do you want to walk out with? *</label>
     <textarea name="walk_out_with" placeholder="Vocals tracked over your beat? A song idea captured properly? A clear direction for the next session?" required="" rows="2" style="width:100%; padding:14px 18px; background:var(--field-bg); border:2px solid var(--border); border-radius:12px; color:var(--text); font-size:15px; transition:all 0.2s; resize:vertical; box-sizing:border-box; font-family:inherit;"></textarea>
-    <p style="font-size:12.5px; color:var(--muted); margin:8px 0 0; line-height:1.5;">You&rsquo;ll leave with your labeled session files. Editing and mixing are booked separately at $45/hr &mdash; tell me the goal and I&rsquo;ll tell you what it takes.</p>
+    <p style="font-size:12.5px; color:var(--muted); margin:8px 0 0; line-height:1.5;">You&rsquo;ll leave with your raw session export, unedited and unlabeled. Labeling, editing, and mixing are booked separately at $45/hr &mdash; tell me the goal and I&rsquo;ll tell you what it takes.</p>
   </div>
 
   <!-- Experience -->
@@ -749,7 +789,7 @@
 </div>
 <div class="outcome-card">
 <div class="outcome-name">Capture your band</div>
-<p class="outcome-desc">Your band, live in the room - labeled multitracks delivered the same day.</p>
+<p class="outcome-desc">Your band, live in the room - everyone playing together, captured as multitrack across up to 8 inputs.</p>
 <div class="outcome-range">Typically $225&ndash;$400</div>
 <a class="outcome-cta" href="#estimate-form">Get an estimate &rarr;</a>
 </div>
@@ -890,7 +930,7 @@
         <div class="menu-item" data-persona="sessions">
           <div class="menu-item-left">
             <span class="menu-item-name">Band Rehearsal Capture</span>
-            <span class="menu-item-desc">Live multi-input capture for review + demos. Full backline included - bring your own gear too, if you’d like.</span>
+            <span class="menu-item-desc">Live multitrack capture for review + demos. Full backline included - bring your own gear too, if you’d like.</span>
           </div>
         </div>
 
@@ -914,7 +954,7 @@
 
         <div class="menu-rate-block" data-persona="sessions">
           <div class="menu-rate-label">Band Rehearsal Capture</div>
-          <div class="menu-rate-note">Included: up to 8 inputs (max) • up to 5 headphone mixes • labeled multitrack exports</div>
+          <div class="menu-rate-note">Included: up to 8 inputs (max) • up to 5 headphone mixes • raw multitrack export</div>
           <div class="menu-rate-note" style="margin-top:-10px; font-style: normal;">Bands are <strong>3+ people</strong> • <strong>3-hour minimum</strong></div>
           <div class="menu-rate-line menu-rate-line-band" data-persona="sessions">
             <span class="mrl-item mrl-standard"><strong>Standard</strong> $75/hr <span class="mrl-note">standard rate</span></span>
@@ -1284,7 +1324,7 @@ Coffee bar on-site - pour-overs between takes to reset and listen back. Mini fri
 <div class="engineer-text">
 <p>Hi, I'm Stephen - songwriter, musician, drummer at heart, and engineer. I've spent the last five years working with Bay Area artists and bands in this room. What started from nothing has been built into something I'm beyond excited to share with you.</p>
 <p>Long before recording, I was deep in craft - shooting photo and video, working in specialty coffee for over a decade. That background shaped how I work: details matter, vibe matters, and the environment you create affects everything that comes out of it.</p>
-<p class="engineer-strong">This isn't just a space you rent by the hour. It's a studio with an engineer already in the room - to handle setup, keep momentum, and make sure you leave with something real.</p>
+<p class="engineer-strong">This isn't just a space you rent by the hour. It's a studio with an engineer already in the room - to handle setup, keep momentum, and make sure the time actually counts.</p>
 <!-- The Room -->
 <div class="engineer-room">
 <h3>The Room</h3>
@@ -1294,8 +1334,8 @@ Coffee bar on-site - pour-overs between takes to reset and listen back. Mini fri
 <div class="engineer-craft">
 <h3>The Craft</h3>
 <p>My background is as much behind a camera as behind a console, and in photography, you don’t fix the moment later. You frame it, light it, and capture it right the first time. I work the same way with audio.</p>
-<p>Every session is built on clean stems: direct, uncolored recordings of each instrument and voice before anything is shaped by effects or room character. Texture comes later. The foundation comes first. That means you leave with something solid at the core: takes you can shape, remix, and return to without losing what made the moment real.</p>
-<p>The room runs on a Focusrite Scarlett 18i20. Eight inputs captured simultaneously, with up to six individual headphone mixes. Bands play together, stay comfortable, and walk out with clean, separated tracks.</p>
+<p>Every session is built on clean stems: direct, uncolored recordings of each instrument and voice before anything is shaped by effects or room character. Texture comes later. The foundation comes first. That means what gets captured is solid at the core: takes that can be shaped, remixed, and returned to without losing what made the moment real.</p>
+<p>The room runs on a Focusrite Scarlett 18i20. Eight inputs captured simultaneously, with up to six individual headphone mixes. Bands play together, stay comfortable, and everything lands as clean, separated tracks.</p>
 <p>There’s also a coffee bar in the studio. If you want to step back between takes, pull a pour-over, and just listen, that option is always there. Sometimes the reset matters as much as the recording.</p>
 </div>
 </div>
@@ -1327,7 +1367,7 @@ Coffee bar on-site - pour-overs between takes to reset and listen back. Mini fri
 </div>
 </details>
 <details class="faq-item" data-reveal="">
-<summary>How does pricing actually work?</summary>
+<summary>How does pricing work at Studio San Francisco?</summary>
 <div class="faq-body">
 <p>Two rates cover almost everything: <b>$60/hr when you&rsquo;re in the room</b> with me ($75/hr for bands of 3+), and <b>$45/hr when I work solo</b> on your project - editing, mixing, session prep, sourcing backing tracks, added instrumentation. Solo work is always quoted and approved before I start it. On-location shoots and special builds are scoped per project with an itemized estimate.</p>
 </div>
@@ -1335,7 +1375,7 @@ Coffee bar on-site - pour-overs between takes to reset and listen back. Mini fri
 <details class="faq-item" data-reveal="">
 <summary>How do I book a session?</summary>
 <div class="faq-body">
-<p>Start with one of the two options in <a href="#quick-start">Quick-Start</a>: a free plan or a $95 intro session. After you submit the intake form, you’ll pick a time on Calendly.</p>
+<p>Start with one of the two options in <a href="#quick-start">Quick-Start</a>: a free plan or an $89 two-hour intro session. After you submit the intake form, you’ll pick a time on Calendly.</p>
 </div>
 </details>
 <details class="faq-item" data-reveal="">
@@ -1351,9 +1391,10 @@ Coffee bar on-site - pour-overs between takes to reset and listen back. Mini fri
 </div>
 </details>
 <details class="faq-item" data-reveal="">
-<summary>What do I leave with after the session?</summary>
+<summary>What happens to my recordings after the session?</summary>
 <div class="faq-body">
-<p>You leave with your recordings - the labeled session files from everything we captured. Editing and mixing are real work with no fixed size, so they&rsquo;re booked separately at my $45/hr solo rate. I&rsquo;ll listen to your song, tell you roughly how many hours it needs, and get your OK before I start. Organized final stems are a flat $75/song.</p>
+<p>You leave with the raw session export &mdash; every take exactly as recorded, unedited and unlabeled. That&rsquo;s yours, included in the session rate.</p>
+<p>Anything past that is separate work. Labeling, editing, and mixing have no fixed size, so they&rsquo;re booked at my $45/hr solo rate. I&rsquo;ll listen to your song, tell you roughly how many hours it needs, and get your OK before I start. Organized final stems &mdash; named, consolidated, and ready to hand to any mixer &mdash; are a flat $75/song.</p>
 </div>
 </details>
 <details class="faq-item" data-reveal="">
@@ -1438,7 +1479,7 @@ Coffee bar on-site - pour-overs between takes to reset and listen back. Mini fri
 <li><span class="tick"></span><span><b>&lt;24 hours / no-show:</b> Deposit forfeited</span></li>
 </ul>
 <div class="note">
-This policy protects reserved time and preparation work. Sessions are built around capturing clean takes first - so every hour you spend here leaves you with recordings you can keep working with long after you walk out the door.
+This policy protects reserved time and preparation work. Sessions are built around capturing clean takes first - so every hour you spend here goes toward recordings worth building on.
 </div>
 </section>
 <!-- ═══════════════════════════════════════════════════════════════
@@ -1495,7 +1536,7 @@ This policy protects reserved time and preparation work. Sessions are built arou
 <p><strong>Recording Session</strong></p>
 <p>Precision-focused. Track vocals and instruments one at a time (or in small groups) with isolation and detailed engineering. Ideal for polished takes, layered production, and getting the best performance on each part.</p>
 <p><strong>Band Rehearsal Capture</strong></p>
-<p>Comfort-focused. The whole band plays together and I capture everything live (up to 8 inputs) with up to 5 headphone mixes. Drums/amps are included - bring any/all gear if you’d like. You leave with organized labeled multitrack exports.</p>
+<p>Comfort-focused. The whole band plays together and I capture everything live as multitrack (up to 8 inputs) with up to 5 headphone mixes. Drums/amps are included - bring any/all gear if you’d like. You leave with the raw multitrack export, unedited and unlabeled; labeling and mixing are booked separately at $45/hr.</p>
 <p><strong>Which should I pick?</strong></p>
 <p>If you want release-quality recordings with careful attention to each part, go with a Recording Session. If you want to capture what your band sounds like in the room - quickly and without overthinking - Band Capture is the move.</p>
 </div>

@@ -3538,6 +3538,10 @@ footer {
   text-transform: uppercase;
   margin-top: 6px;
 }
+/* Keep each segment intact so the line breaks at the separator, not mid-phrase */
+.qs-card-urgency > span {
+  white-space: nowrap;
+}
 .qs-card-footnote {
   font-size: 12px;
   color: var(--muted);
@@ -3868,6 +3872,11 @@ textarea.field-error {
   border-color: #ff4d6d !important;
   background: rgba(255, 77, 109, .06) !important;
   box-shadow: 0 0 0 3px rgba(255, 77, 109, .12);
+}
+
+.check-group.field-error {
+  border-radius: 14px;
+  box-shadow: 0 0 0 2px rgba(255, 77, 109, .45);
 }
 
 .intake-submit-btn.btn-error {

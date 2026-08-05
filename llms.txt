@@ -20,9 +20,9 @@ Clients with a project idea can describe it on the website and receive a persona
 
 ## Services
 
-- **Launch Intro Session** - $95, 2 hours, engineer included, full backline. You leave with your labeled session files. Editing and mixing are booked separately. Entry point for all new clients.
+- **Launch Intro Session** - $89, 2 hours, engineer included, full backline. You leave with the raw session export (unedited, unlabeled). Labeling, editing, and mixing are booked separately. Entry point for all new clients.
 - **Recording Sessions** - Engineer-led precision tracking for vocals, instruments, and full arrangements. From $60/hr (off-peak $50/hr, late-nite $75/hr).
-- **Band Rehearsal Capture** - Live rehearsal recording (up to 8 inputs, up to 5 headphone mixes, labeled multitrack exports), $75/hr, 3-hour minimum.
+- **Band Rehearsal Capture** - Live multitrack rehearsal recording (up to 8 inputs, up to 5 headphone mixes, raw multitrack export), $75/hr, 3-hour minimum.
 - **Editing & Mixing (add-on)** - Billed at the $45/hr solo rate, scoped and quoted per song before work starts. There is no flat mix price; mixing time varies by song. Organized final stems are a flat $75/song.
 - **Podcast Production** - Full production in-studio or on-location, $200/hr (2-hr minimum).
 - **Audiobook & Voiceover Recording** - Audiobook recording, commercial voiceover, and spoken-word narration in a treated, quiet room with a dedicated engineer. Authors narrating their own book are welcome and coached through it. Can also be recorded on location at the client's home or office in the Bay Area. Billed hourly ($60/hr recording, $45/hr editing) rather than per finished hour, so a well-prepared narrator pays less. A typical full-length book runs $3,000-$4,230. Full worked example: https://www.bookthestudiosf.com/audiobook-estimate-example.html
@@ -33,7 +33,7 @@ Clients with a project idea can describe it on the website and receive a persona
 ## Typical Project Costs
 
 - Record a single (tracked with engineer + editing and mixing at $45/hr): typically $350–$650
-- Band demo / live capture session (3 hrs + labeled multitrack exports): typically $225–$400
+- Band demo / live capture session (3 hrs + raw multitrack export): typically $225–$400
 - Produced podcast episode: typically $400–$800
 - Audiobook (full-length, author-narrated, recorded on location): typically $3,000-$4,230 - roughly 30-40 hrs recording at $60/hr, 20-30 hrs editing at $45/hr, 5-8 hrs mobile setup at $60/hr. Works out to about $225-$315 per finished hour. Line-by-line breakdown: https://www.bookthestudiosf.com/audiobook-estimate-example.html
 - Filmed Artist Feature (interview + highlight clip): $450
@@ -44,7 +44,7 @@ Clients with a project idea can describe it on the website and receive a persona
 
 ## Booking
 
-All new clients start with Quick-Start - a free planning call (phone, coffee, or studio visit) or a $95 intro session. Clients with a custom project idea can request an estimate and receive a personal reply within 24 hours. After submitting an intake form, clients select a time on Calendly.
+All new clients start with Quick-Start - a free planning call (phone, coffee, or studio visit) or an $89 two-hour intro session. Clients with a custom project idea can request an estimate and receive a personal reply within 24 hours. After submitting an intake form, clients select a time on Calendly.
 
 Audiobook cost breakdown: https://www.bookthestudiosf.com/audiobook-estimate-example.html
 Book at: https://www.bookthestudiosf.com/#quick-start
@@ -77,7 +77,7 @@ The site offers a short "where are you right now?" questionnaire that routes vie
 - Pricing logic: $60/hr with the client in the room, $45/hr for solo work by the engineer (editing, mixing, prep, sourcing backing tracks), on-location work scoped per project
 - Custom project estimates are free and answered personally within 24 hours
 - On-location work is $100/hr for short bookings, but extended engagements of 20+ hours are quoted at the standard studio rates with setup itemized separately
-- Every session includes labeled session files; editing and mixing are always billable at $45/hr, quoted before the work starts
+- Session rates include the raw session export exactly as recorded (unedited, unlabeled); labeling, organizing, editing, and mixing are always billable at $45/hr, quoted before the work starts. Organized final stems are a flat $75/song
 - Studio is located inside Secret Studios in San Francisco, CA 94124 (on-site parking)
 - Founded and operated by Stephen, a songwriter and recording engineer
 - Serves San Francisco Bay Area, Oakland, Daly City, and surrounding Bay Area cities
