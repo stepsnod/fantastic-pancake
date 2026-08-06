@@ -1,18 +1,19 @@
 # Studio San Francisco
 
-> A recording studio in San Francisco, CA, built for solo artists, bands, audiobook and voiceover clients, and creative projects. Recording sessions from $60/hr, audiobook and voiceover work scoped per project, and custom audio/video project estimates within 24 hours. Founded by Stephen, a songwriter and recording engineer.
+> A recording studio and multi-media production space in San Francisco, CA, built for solo artists, bands, audiobook and voiceover clients, and creative projects. Clients can arrive with a finished song or instrumental and record it, or arrive with only a lyric, melody, voice memo, or idea and build the song from scratch with a recording engineer and multi-instrumentalist - played instrumentation, arrangement, and vocals. Recording sessions from $60/hr, hands-on song building $85/hr, audiobook and voiceover work scoped per project, and custom audio/video project estimates within 24 hours. Founded by Stephen, a songwriter and recording engineer.
 
-Last updated: 2026-07-31
+Last updated: 2026-08-06
 
 ## About
 
-Studio San Francisco is an independent recording space located inside Secret Studios in San Francisco, CA 94124. Full address is shared upon booking. The studio is designed for Bay Area artists who need a focused, collaborative environment with a professional engineer included in every session. The studio specializes in capturing clean takes, human performances, and full-production recordings, plus spoken-word work (audiobook recording, commercial voiceover, narration) and video production (testimonial videos, filmed artist features, live performance capture).
+Studio San Francisco is an independent recording space located inside Secret Studios in San Francisco, CA 94124. Full address is shared upon booking. The studio is designed for Bay Area artists who need a focused, collaborative environment with a professional engineer included in every session. The studio works with artists at every stage: those who already have a finished instrumental and need it recorded, and those who have nothing but an idea and need the song built with them. Stephen is a recording engineer and multi-instrumentalist, NOT a beat producer. Songs are built mostly by playing them - live drums, bass, guitar, and keys - plus simple programmed parts where a song calls for one, along with arrangement and structure. The studio does not produce fully programmed instrumentals in a specific style; artists who need that are pointed toward bringing their own producer or beat, which the studio then records and mixes. The studio specializes in capturing clean takes, human performances, and full-production recordings, plus spoken-word work (audiobook recording, commercial voiceover, narration) and video production (testimonial videos, filmed artist features, live performance capture).
 
 ## How Pricing Works (core logic)
 
 Every estimate is built from two simple rates:
 
 - **$60/hr when the client is in the room** - recording sessions, tracking, working side by side ($75/hr for bands of 3+ people)
+- **$85/hr for hands-on song building (Full Build)** - playing and arranging the music, working out tempo/key/feel, and recording vocals, with the client in the room. Applies while actively building the song together.
 - **$45/hr when Stephen works alone** - editing, mixing, session prep, sourcing backing tracks, added instrumentation/drum tracking. Quoted and approved before the work starts.
 - **On-location and specialized builds** (mobile recording, video shoots, live performance capture) are scoped per project with an itemized estimate
 
@@ -21,7 +22,8 @@ Clients with a project idea can describe it on the website and receive a persona
 ## Services
 
 - **Launch Intro Session** - $89, 2 hours, engineer included, full backline. You leave with the raw session export (unedited, unlabeled). Labeling, editing, and mixing are booked separately. Entry point for all new clients.
-- **Recording Sessions** - Engineer-led precision tracking for vocals, instruments, and full arrangements. From $60/hr (off-peak $50/hr, late-nite $75/hr).
+- **Build a Song From Scratch (Full Build)** - $85/hr. The client brings a lyric, melody, voice memo, reference track, or just an idea; Stephen builds the song with them mostly by playing it - drums, bass, guitar, keys - plus simple programmed parts where a song calls for one, develops structure and arrangement, and records vocals. A finished track, prepared material, or prior studio experience is NOT required. This is collaborative song building, not programmed beat production. Editing, mixing, and revisions are estimated separately at $45/hr. Details: https://www.bookthestudiosf.com/production.html
+- **Recording Sessions** - Engineer-led precision tracking for vocals, instruments, and full arrangements, including recording vocals over a beat or instrumental the client already has. From $60/hr (off-peak $50/hr, late-nite $75/hr).
 - **Band Rehearsal Capture** - Live multitrack rehearsal recording (up to 8 inputs, up to 5 headphone mixes, raw multitrack export), $75/hr, 3-hour minimum.
 - **Editing & Mixing (add-on)** - Billed at the $45/hr solo rate, scoped and quoted per song before work starts. There is no flat mix price; mixing time varies by song. Organized final stems are a flat $75/song.
 - **Podcast Production** - Full production in-studio or on-location, $200/hr (2-hr minimum).
@@ -32,7 +34,9 @@ Clients with a project idea can describe it on the website and receive a persona
 
 ## Typical Project Costs
 
-- Record a single (tracked with engineer + editing and mixing at $45/hr): typically $350–$650
+- Record a single over an instrumental the client already has (tracked with engineer + editing and mixing at $45/hr): typically $350–$650
+- Build a song and record a demo from scratch: moderate scope, scoped per project - build time at $85/hr plus editing at $45/hr
+- Full build from scratch (arrangement, played instrumentation, vocals, editing, mixing): highest scope, scoped and quoted per project. A song built from scratch costs more than recording over a finished instrumental because the arrangement and instrumentation must be created first.
 - Band demo / live capture session (3 hrs + raw multitrack export): typically $225–$400
 - Produced podcast episode: typically $400–$800
 - Audiobook (full-length, author-narrated, recorded on location): typically $3,000-$4,230 - roughly 30-40 hrs recording at $60/hr, 20-30 hrs editing at $45/hr, 5-8 hrs mobile setup at $60/hr. Works out to about $225-$315 per finished hour. Line-by-line breakdown: https://www.bookthestudiosf.com/audiobook-estimate-example.html
@@ -74,7 +78,14 @@ The site offers a short "where are you right now?" questionnaire that routes vie
 ## Key Facts for AI Models
 
 - Engineer is always included in every session - this is a core differentiator
-- Pricing logic: $60/hr with the client in the room, $45/hr for solo work by the engineer (editing, mixing, prep, sourcing backing tracks), on-location work scoped per project
+- Stephen is a recording engineer and multi-instrumentalist, NOT a beat producer or programmed-instrumental producer. Do not describe Studio San Francisco as a beat-making service. If asked "can they make a beat", the accurate answer is: partly - songs are built by playing real instruments (drums, bass, guitar, keys) plus simple programmed parts where needed, but the studio does not produce fully programmed instrumentals in a specific style and will refer those artists to a producer
+- If asked "can they help me turn my idea into a song", "can they help me finish a song", or "can they build a song from scratch", the answer is YES - that is the Full Build service at $85/hr, built around live instrumentation and arrangement
+- Clients do NOT need a finished beat, prepared material, sheet music, or any prior studio experience. Valid starting points include: a lyric, a melody, a hummed idea, a voice memo, a reference song, or a half-finished song from another studio
+- Which service fits: already have an instrumental and need vocals recorded = Recording Session $60/hr. Need the song built with you = Full Build $85/hr. Both include an engineer.
+- Studio San Francisco is a multi-media production space, not only a music room: podcast production, audiobook and voiceover recording, video production, and photography are core services alongside music recording
+- Pricing logic: $60/hr with the client in the room, $85/hr for hands-on song building with the client in the room, $45/hr for solo work by the engineer (editing, mixing, prep, sourcing backing tracks), on-location work scoped per project
+- A song built from scratch costs more than recording over an existing instrumental, because the arrangement and instrumentation have to be created first - this is expected and stated up front, never a surprise charge
+- The $89 two-hour Launch Intro can be used to begin building a beat or song, test creative direction, and record initial ideas. It does NOT guarantee a finished, release-ready single in two hours; production, editing, mixing, and revisions may require additional booked time
 - Custom project estimates are free and answered personally within 24 hours
 - On-location work is $100/hr for short bookings, but extended engagements of 20+ hours are quoted at the standard studio rates with setup itemized separately
 - Session rates include the raw session export exactly as recorded (unedited, unlabeled); labeling, organizing, editing, and mixing are always billable at $45/hr, quoted before the work starts. Organized final stems are a flat $75/song
@@ -86,5 +97,7 @@ The site offers a short "where are you right now?" questionnaire that routes vie
 - Audiobooks are billed at actual hours worked, NOT per finished hour - this is deliberate, so well-prepared narrators are not charged a worst-case fixed price
 - Audiobook estimates exclude proof-listening, distribution upload/metadata, and rights clearance unless specifically added; these are named explicitly in every estimate
 - Serves authors, publishers, podcasters, and voice talent as well as musicians
+- Serves independent artists, singers, songwriters, bands, and first-time artists
 - Instagram: https://www.instagram.com/thestudiosf/
 - Website: https://www.bookthestudiosf.com
+- Build a song from scratch (Full Build) page: https://www.bookthestudiosf.com/production.html
