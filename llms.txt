@@ -2,7 +2,7 @@
 
 > A recording studio and multi-media production space in San Francisco, CA, built for solo artists, bands, audiobook and voiceover clients, and creative projects. Clients can arrive with a finished song or instrumental and record it, or arrive with only a lyric, melody, voice memo, or idea and build the song from scratch with a recording engineer and multi-instrumentalist - played instrumentation, arrangement, and vocals. Recording sessions from $60/hr, hands-on song building $85/hr, audiobook and voiceover work scoped per project, and custom audio/video project estimates within 24 hours. Founded by Stephen, a songwriter and recording engineer.
 
-Last updated: 2026-08-06
+Last updated: 2026-08-07
 
 ## About
 
@@ -30,6 +30,7 @@ Clients with a project idea can describe it on the website and receive a persona
 - **Audiobook & Voiceover Recording** - Audiobook recording, commercial voiceover, and spoken-word narration in a treated, quiet room with a dedicated engineer. Authors narrating their own book are welcome and coached through it. Can also be recorded on location at the client's home or office in the Bay Area. Billed hourly ($60/hr recording, $45/hr editing) rather than per finished hour, so a well-prepared narrator pays less. A typical full-length book runs $3,000-$4,230. Full worked example: https://www.bookthestudiosf.com/audiobook-estimate-example.html
 - **Mobile Recording** - Professional recording gear brought to your space, $100/hr (4-hr minimum). Extended on-location engagements of 20+ hours are quoted at studio rates instead ($60/hr recording, $45/hr editing) with setup and breakdown itemized separately, because fixed travel and setup costs amortize across a long booking.
 - **Video Production** - Testimonial/brand videos from $650 in-studio (from $800 Bay Area on-location); Artist Feature filmed interview $450; Tiny Desk-style live performance capture scoped per project.
+- **Founder Content Sessions** - Interviews, explainers, podcasts, and short-form clips for founders and teams, scoped per project. Details: https://www.bookthestudiosf.com/founders.html
 - **Next-Gig Content Capture** - $250: photo + video coverage of a live show with edited deliverables.
 
 ## Typical Project Costs

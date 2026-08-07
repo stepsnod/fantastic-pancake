@@ -3864,6 +3864,45 @@ footer {
 
 
 
+/* ─── 38b. STARTING-POINT ROUTER ──────────────────────────── */
+
+.start-strip {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 34px;
+}
+.start-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .03);
+  text-decoration: none;
+  transition: border-color .2s var(--ease), transform .15s var(--ease);
+}
+.start-row:hover {
+  border-color: var(--border2);
+  transform: translateY(-2px);
+}
+.start-row-q {
+  color: var(--text);
+  font-size: 15.5px;
+  font-weight: 500;
+}
+.start-row-a {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+@media (max-width: 560px) {
+  .start-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .start-row-a { white-space: normal; }
+}
+
 /* ─── 39. FORM VALIDATION STATES ──────────────────────────── */
 
 input.field-error,
