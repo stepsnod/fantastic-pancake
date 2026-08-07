@@ -1,0 +1,12 @@
+{
+  "name": "cme-passage-review",
+  "private": true,
+  "type": "module",
+  "description": "Call me Eliyahu — audiobook passage review (Studio San Francisco)",
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^10.0.0"
+  }
+}

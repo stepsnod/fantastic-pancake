@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Call me Eliyahu — Passage Review for Elliott</title>
+<style>
+:root{
+  --paper:#F3F4F1; --card:#FFFFFF; --ink:#16202A; --ink2:#4A5763; --ink3:#6E7A85;
+  --rule:#D5D8D3; --rule2:#E8EAE6;
+  --accent:#0E6E77; --accent-soft:#E1EFEF; --accent-dark:#0A5259;
+  --red:#B23B32; --red-soft:#FBEAE8;
+  --amber:#B87A0E; --amber-soft:#FBF0DC;
+  --green:#2E7D4F; --green-soft:#E4F1E9;
+  --flag:#8A5100; --flag-soft:#FBEEDC;
+  --omit:#7C2F2F; --omit-soft:#F6E8E6;
+  --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:20px;line-height:1.6;padding-bottom:60px}
+.wrap{max-width:940px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.25;margin:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.masthead{background:var(--ink);color:#F3F4F1;padding:24px 0 20px}
+.masthead h1{font-size:32px;color:#fff}
+.masthead .sub{font-size:17px;color:#AEBBC4;margin-top:6px}
+
+.bar{position:sticky;top:0;z-index:60;background:rgba(243,244,241,.97);
+  border-bottom:1px solid var(--rule);backdrop-filter:saturate(140%) blur(6px)}
+.bar-in{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 0}
+.crumb{flex:1 1 200px;font-size:17px;color:var(--ink2);min-width:0}
+.crumb b{color:var(--ink)}
+.saved{font-size:15px;color:var(--ink2);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.saved .dot{width:10px;height:10px;border-radius:50%;background:var(--green)}
+.saved.pending .dot{background:var(--amber)}
+
+button{font-family:var(--sans);font-size:18px;cursor:pointer;border-radius:8px;
+  border:1.5px solid var(--rule);background:#fff;color:var(--ink);padding:12px 18px;min-height:52px}
+button:hover{border-color:var(--ink3)}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+button.primary:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
+button.big{font-size:19px;padding:14px 24px;min-height:56px}
+button.quiet{border-color:transparent;background:transparent;color:var(--accent-dark);
+  text-decoration:underline;padding:8px 4px;min-height:44px;font-size:17px}
+button.danger{border-color:#C6A19C;color:var(--omit);background:#fff}
+button.danger:hover{background:var(--omit-soft)}
+.btnrow{display:flex;flex-wrap:wrap;gap:12px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.panel{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:24px 26px;margin:22px 0}
+.panel h2{font-size:25px;margin-bottom:10px}
+.panel p{margin:10px 0;color:var(--ink2)}
+.panel p strong,.panel p b{color:var(--ink)}
+details.fold > summary{cursor:pointer;font-family:var(--serif);font-size:24px;font-weight:600;
+  list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+details.fold > summary::-webkit-details-marker{display:none}
+details.fold > summary::after{content:'Show';font-family:var(--sans);font-size:15px;color:var(--accent-dark);
+  border:1px solid var(--accent);border-radius:6px;padding:5px 14px;white-space:nowrap}
+details.fold[open] > summary::after{content:'Hide'}
+ol.steps{margin:14px 0 0;padding-left:26px;color:var(--ink2)}
+ol.steps li{margin:9px 0}
+
+.bigprog{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.bigprog .num{font-family:var(--serif);font-size:44px;line-height:1}
+.bigprog .of{color:var(--ink2);font-size:18px}
+.track{height:18px;background:#E2E5E0;border-radius:9px;overflow:hidden;border:1px solid var(--rule);
+  flex:1 1 240px;min-width:180px}
+.track .fill{height:100%;background:var(--green);width:0%}
+
+.chapters{margin:22px 0}
+.chap{background:var(--card);border:1px solid var(--rule);border-radius:10px;margin:14px 0;overflow:hidden}
+.chap.st-red{border-left:10px solid var(--red)}
+.chap.st-amber{border-left:10px solid var(--amber)}
+.chap.st-green{border-left:10px solid var(--green)}
+.chap > summary{list-style:none;cursor:pointer;padding:20px 24px;display:flex;gap:18px;
+  align-items:center;flex-wrap:wrap}
+.chap > summary::-webkit-details-marker{display:none}
+.chap > summary:hover{background:#FAFBF9}
+.chap .cmain{flex:1 1 300px;min-width:0}
+.chap .cname{display:block;font-family:var(--serif);font-size:23px;line-height:1.25}
+.chap .cpages{display:block;font-size:16px;color:var(--ink2);margin-top:4px}
+.pill{display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:8px 16px;
+  font-size:16px;font-weight:600;white-space:nowrap;border:1.5px solid}
+.pill .d{width:14px;height:14px;border-radius:50%;flex:none}
+.pill.red{background:var(--red-soft);border-color:#E0B4AE;color:var(--red)}
+.pill.red .d{background:var(--red)}
+.pill.amber{background:var(--amber-soft);border-color:#E3C79A;color:var(--amber)}
+.pill.amber .d{background:var(--amber)}
+.pill.green{background:var(--green-soft);border-color:#A9CDB6;color:var(--green)}
+.pill.green .d{background:var(--green)}
+.chap .more{font-size:15px;color:var(--accent-dark);white-space:nowrap}
+.chap[open] .more::after{content:' \25B2'}
+.chap:not([open]) .more::after{content:' \25BC'}
+.chapbody{padding:4px 24px 22px;border-top:1px solid var(--rule2);background:#FAFBF9}
+.plist{margin:14px 0 0}
+.prow{display:flex;gap:14px;align-items:center;padding:11px 0;border-bottom:1px solid var(--rule2)}
+.prow:last-child{border-bottom:none}
+.prow .d{width:13px;height:13px;border-radius:50%;flex:none;border:1px solid rgba(0,0,0,.12)}
+.prow .d.red{background:var(--red)} .prow .d.amber{background:var(--amber)} .prow .d.green{background:var(--green)}
+.prow .pl{flex:1 1 auto;font-family:var(--serif);font-size:18px;min-width:0}
+.prow .pw{font-size:15px;color:var(--ink2);white-space:nowrap;font-family:var(--sans)}
+.prow button{min-height:44px;padding:8px 16px;font-size:16px}
+
+.chaphead{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:24px 26px;margin:22px 0}
+.chaphead h2{font-size:28px}
+.chaphead .pages{color:var(--ink2);font-size:17px;margin-top:6px}
+.toggle{display:flex;align-items:center;gap:12px;font-size:18px;padding:12px 0;cursor:pointer}
+.toggle input{width:26px;height:26px;accent-color:var(--accent)}
+
+.card{background:var(--card);border:1px solid var(--rule);border-radius:10px;margin:26px 0;scroll-margin-top:110px}
+.card.current{box-shadow:0 0 0 3px var(--accent-soft)}
+.card.done{border-left:8px solid var(--green)}
+.card.started{border-left:8px solid var(--amber)}
+.card.notstarted{border-left:8px solid var(--red)}
+.card.omitted{border-left:8px solid var(--omit)}
+.card-head{display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;justify-content:space-between;
+  padding:18px 26px;border-bottom:1px solid var(--rule2);background:#FAFBF9;border-radius:10px 10px 0 0}
+.cid{font-family:var(--mono);font-size:19px;font-weight:600;letter-spacing:.04em}
+.where{font-size:15px;color:var(--ink2)}
+.where b{color:var(--ink);font-weight:600}
+.card-body{padding:8px 26px 26px}
+.label{font-family:var(--serif);font-size:24px;margin:18px 0 4px}
+.srcline{font-size:16px;color:var(--ink2);margin-bottom:4px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.badge{font-size:14px;letter-spacing:.03em;border-radius:999px;padding:5px 12px;
+  border:1px solid var(--rule);color:var(--ink2);background:#fff}
+.badge.type{background:var(--accent-soft);border-color:#A9CFD1;color:var(--accent-dark);font-weight:600}
+.badge.flag{background:var(--flag-soft);border-color:#E3C79A;color:var(--flag);font-weight:600}
+.badge.done{background:var(--green-soft);border-color:#A9CDB6;color:var(--green);font-weight:600}
+.badge.edited{background:#EFE7F5;border-color:#C6B2D8;color:#5A3E77;font-weight:600}
+
+.proof{margin:0;border-left:5px solid var(--accent);background:#FCFCFA;
+  padding:20px 24px 18px;border-radius:0 8px 8px 0}
+.proof .cap{display:flex;align-items:center;gap:8px;font-size:14px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink3);margin-bottom:12px}
+.proof .txt{font-family:var(--serif);font-size:22px;line-height:1.7;white-space:pre-wrap}
+.proof .attrib{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink2);margin-top:12px}
+.ctx{margin-top:14px}
+.ctx summary{cursor:pointer;font-size:16px;color:var(--accent-dark);padding:6px 0}
+.ctx .c{font-family:var(--serif);font-size:17px;color:var(--ink3);line-height:1.6;margin:8px 0;
+  padding-left:14px;border-left:2px solid var(--rule)}
+.prep{margin-top:14px;background:var(--flag-soft);border:1px solid #E9D5B4;border-radius:8px;
+  padding:14px 16px;font-size:16px;color:#5B3A08}
+.prep b{display:block;margin-bottom:4px;letter-spacing:.04em;text-transform:uppercase;font-size:13px}
+
+.step{margin-top:26px;padding-top:20px;border-top:1px solid var(--rule2)}
+.step > h3{font-size:17px;letter-spacing:.05em;text-transform:uppercase;font-family:var(--sans);
+  font-weight:700;color:var(--ink3);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.stepnum{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;
+  border-radius:50%;background:var(--ink);color:#fff;font-family:var(--mono);font-size:15px;flex:none}
+.hint{font-size:16px;color:var(--ink2);margin:-4px 0 12px}
+.choices{display:flex;flex-wrap:wrap;gap:10px}
+.choice{position:relative}
+.choice input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.choice span{display:block;border:1.5px solid var(--rule);background:#fff;border-radius:8px;
+  padding:12px 18px;font-size:18px;min-height:52px;display:flex;align-items:center}
+.choice input:checked + span{border-color:var(--accent);background:var(--accent-soft);
+  box-shadow:inset 0 0 0 1.5px var(--accent);font-weight:600}
+.choice input:focus-visible + span{outline:3px solid var(--accent);outline-offset:2px}
+.choice.omit input:checked + span{border-color:var(--omit);background:var(--omit-soft);box-shadow:inset 0 0 0 1.5px var(--omit)}
+.choice.disc input:checked + span{border-color:var(--amber);background:var(--amber-soft);box-shadow:inset 0 0 0 1.5px var(--amber)}
+label.f{display:block;font-size:16px;color:var(--ink2);margin-bottom:6px}
+select,input[type=search],textarea{width:100%;font-family:var(--sans);font-size:18px;
+  color:var(--ink);background:#fff;border:1.5px solid var(--rule);border-radius:8px;padding:12px;min-height:52px}
+textarea{font-family:var(--serif);font-size:19px;line-height:1.65;min-height:120px}
+.editor{margin-top:14px;border:1.5px dashed var(--accent);border-radius:8px;padding:16px 18px;background:#FBFDFD}
+.editor textarea{min-height:180px}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+.compare .col{border:1px solid var(--rule);border-radius:8px;padding:14px 16px;background:#fff}
+.compare .col h4{margin:0 0 8px;font-family:var(--sans);font-size:14px;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--ink3)}
+.compare .col.orig{background:#FCFCFA}
+.compare .col.prop{background:#F7F3FB;border-color:#C6B2D8}
+.compare .col p{font-family:var(--serif);font-size:18px;line-height:1.65;margin:0;white-space:pre-wrap}
+.diffdel{background:#F6DEDA;text-decoration:line-through;text-decoration-thickness:1px}
+.diffins{background:#DCEFDF}
+.rights-note{font-size:16px;background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--flag);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin-top:12px;color:var(--ink2)}
+.complete-box{margin-top:26px;padding:18px 20px;border:2px solid var(--rule);border-radius:8px;background:#FAFBF9}
+.complete-box.on{border-color:var(--green);background:var(--green-soft)}
+.complete-box label{display:flex;align-items:center;gap:12px;font-size:20px;cursor:pointer;font-weight:600}
+.complete-box .stepnum{background:var(--green)}
+.complete-box input{width:32px;height:32px;accent-color:var(--green)}
+.warn{background:var(--omit-soft);border:1px solid #DFBAB4;border-radius:8px;padding:10px 14px;
+  font-size:16px;color:var(--omit);margin-top:10px}
+
+.emptystate{background:var(--card);border:1px dashed var(--rule);border-radius:10px;padding:40px;
+  text-align:center;color:var(--ink2)}
+.finalitem{border-bottom:1px solid var(--rule2);padding:14px 0}
+.finalitem:last-child{border-bottom:none}
+.finalitem .fid{font-family:var(--mono);font-weight:600}
+.key{display:flex;gap:22px;flex-wrap:wrap;margin-top:16px;font-size:16px;color:var(--ink2)}
+.key span{display:flex;align-items:center;gap:9px}
+.key i{width:15px;height:15px;border-radius:50%;display:inline-block}
+.chapnav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:30px 0 10px}
+.asideitem{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--rule2)}
+.asideitem:last-child{border-bottom:none}
+.asideitem .fid{font-family:var(--mono);font-weight:600;font-size:17px;flex:none}
+.asideitem .al{flex:1 1 300px;font-family:var(--serif);font-size:18px}
+.asideitem .aw{font-size:15px;color:var(--ink2);font-family:var(--sans)}
+footer{margin:50px 0 40px;color:var(--ink2);font-size:16px}
+#locked{display:none;padding:60px 0}
+#locked.on{display:block}
+#locked h2{font-size:30px}
+#locked p{font-size:20px;color:var(--ink2);margin:14px 0;max-width:640px}
+.saved.offline .dot{background:var(--amber)}
+.saved.error .dot{background:var(--red)}
+#alarm{display:none;background:var(--amber-soft);color:#5B3A08;padding:16px 0;border-bottom:2px solid #E3C79A}
+#alarm.on{display:block}
+#alarm .wrap{max-width:940px}
+#alarm h3{color:#5B3A08;font-size:21px;margin-bottom:4px}
+#alarm p{margin:6px 0;color:#5B3A08;font-size:17px}
+#alarm b{color:#3F2806}
+.remind{display:none;background:var(--amber-soft);border:2px solid #E3C79A;border-radius:10px;
+  padding:20px 24px;margin:22px 0}
+.remind.on{display:block}
+.remind h3{font-size:21px;color:#5B3A08}
+.remind p{margin:8px 0 0;color:#5B3A08;font-size:17px}
+.screen{display:none}
+.screen.on{display:block}
+
+@media (max-width:720px){
+  body{font-size:19px}
+  .masthead h1{font-size:26px}
+  .compare{grid-template-columns:1fr}
+  .card-body,.card-head{padding-left:18px;padding-right:18px}
+  .chap > summary{padding:18px}
+  .chapbody{padding:4px 18px 20px}
+  .bigprog .num{font-size:36px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+#printarea{display:none}
+body.printing #app{display:none}
+body.printing #printarea{display:block}
+@media print{
+  body{background:#fff;font-size:11pt;padding:0}
+  .bar,.noprint,button,.ctx{display:none!important}
+  .masthead{background:#fff;color:#000;border-bottom:2px solid #000;padding:0 0 10px}
+  .masthead h1{color:#000;font-size:20pt} .masthead .sub{color:#333}
+  .pcard{break-inside:avoid;page-break-inside:avoid;border:1px solid #999;border-radius:6px;
+    padding:12px 14px;margin:10pt 0}
+  .pchap{page-break-before:always;font-size:15pt;margin:0 0 8pt;border-bottom:1.5px solid #000;padding-bottom:4pt}
+  .pchap:first-of-type{page-break-before:auto}
+  @page{margin:16mm 14mm}
+}
+</style>
+</head>
+<body>
+
+<div id="locked" class="noprint"><div class="wrap">
+  <h2>This page needs your personal link</h2>
+  <p>Please open the review using the link Stephen emailed you. It is long, so the safest way is to click it in the email rather than type it.</p>
+  <p>If the link has stopped working, email Stephen and he will send a new one.</p>
+</div></div>
+
+<div id="app">
+
+<div class="masthead">
+  <div class="wrap">
+    <h1>Call me Eliyahu — Passage Review</h1>
+    <div class="sub">Choosing which passages a second voice reads. Prepared for Elliott Isenberg by Stephen Snodgrass, Studio San Francisco.</div>
+  </div>
+</div>
+
+
+
+<div id="alarm" class="noprint"><div class="wrap">
+  <h3>&#9888; Working without the internet</h3>
+  <p>Your work is being kept safely on this computer and will be sent to Stephen automatically as soon as you are back online. Carry on as normal.</p>
+</div></div>
+
+<div class="bar noprint">
+  <div class="wrap bar-in">
+    <button id="btn-home" style="display:none">&#8592; All chapters</button>
+    <div class="crumb" id="crumb"></div>
+    <div class="saved" id="savedbox"><span class="dot"></span><span id="savedtxt">Saved on this device</span></div>
+    <button class="primary" id="btn-finish">How am I doing?</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="remind noprint" id="remind-home">
+    <h3>Worth sending me a copy</h3>
+    <p id="remind-home-t"></p>
+    <div class="btnrow" style="margin-top:16px">
+      <button data-dismiss="1">Thank you</button>
+    </div>
+  </div>
+
+<section class="screen on" id="screen-chapters">
+
+  <details class="panel fold" id="welcome" open>
+    <summary>How this works</summary>
+    <p>The book is broken into chapters below. <b>Open one chapter at a time</b> and work through it. Nothing else is asked of you.</p>
+    <p>Inside a chapter are the passages a second voice might read — quotations, poems, song lyrics, dreams and visions. For each one you do six small things:</p>
+    <ol class="steps">
+      <li><b>Read the passage.</b> The boxed text is exactly as it appears in your book. It is locked and cannot be changed.</li>
+      <li><b>Choose who reads it</b> &mdash; Catherine, you, or leave it undecided.</li>
+      <li><b>Approve it, change the wording, leave it out, or mark it to discuss.</b></li>
+      <li><b>Set the rights status.</b></li>
+      <li><b>Add a note</b> if there is anything you want to tell me.</li>
+      <li><b>Tick &ldquo;I have finished with this passage.&rdquo;</b></li>
+    </ol>
+    <p style="margin-top:20px"><strong>You never have to save or send anything.</strong> Every answer goes to Stephen the moment you give it. Close the page whenever you like and come back to the same link; it will be exactly as you left it.</p>
+    <p style="margin-top:20px"><strong>The colours only show how far along you are.</strong></p>
+    <div class="key">
+      <span><i style="background:var(--red)"></i> Red &mdash; not started</span>
+      <span><i style="background:var(--amber)"></i> Yellow &mdash; part way through</span>
+      <span><i style="background:var(--green)"></i> Green &mdash; every passage finished</span>
+    </div>
+    <p style="margin-top:20px"><strong>Approving a passage is not the same as having permission to record it.</strong> You might want a song lyric in the audiobook and still not hold the rights to it. The two are kept apart everywhere. Anything with a rights question is marked in orange &mdash; you do not have to solve those.</p>
+    <p><strong>If your internet drops out, keep going.</strong> The page holds your answers on this computer and sends them the moment you are back online. You will see a note at the top if that happens; you do not need to do anything about it.</p>
+  </details>
+
+  <div class="panel">
+    <h2>Your progress</h2>
+    <div class="bigprog" style="margin-top:14px">
+      <div><span class="num" id="hdone">0</span> <span class="of">of <b id="htot">0</b> passages finished</span></div>
+      <div class="track"><div class="fill" id="hfill"></div></div>
+    </div>
+    <div class="key">
+      <span><i style="background:var(--red)"></i> Not started</span>
+      <span><i style="background:var(--amber)"></i> Part way</span>
+      <span><i style="background:var(--green)"></i> Finished</span>
+    </div>
+    <div class="btnrow" style="margin-top:20px">
+      <button class="primary big" id="btn-continue">Continue where I left off</button>
+    </div>
+  </div>
+
+  <h2 style="font-size:27px;margin-top:34px">The chapters</h2>
+  <p style="color:var(--ink2);margin-top:6px">Click a chapter to see what is in it, then open it.</p>
+  <div class="chapters" id="chaplist"></div>
+
+  <details class="panel fold" id="search">
+    <summary>Look for a particular passage</summary>
+    <p>Only if you need it. Type a few words &mdash; a poet&rsquo;s name, a phrase you remember &mdash; and anything matching will appear here.</p>
+    <label class="f sr" for="q">Search</label>
+    <input type="search" id="q" placeholder="e.g. Dylan, dream, Shakespeare">
+    <label class="toggle"><input type="checkbox" id="only-unfinished"> Show only passages I haven&rsquo;t finished</label>
+    <div id="searchres"></div>
+  </details>
+
+  <details class="panel fold" id="aside">
+    <summary>Passages we are not recording</summary>
+    <p>These sit in parts of the book that are not planned for narration &mdash; the praise pages, the punctuation essay, the printed Acknowledgments and the Endnotes. I found them and kept a record. <b>There is nothing here for you to decide.</b></p>
+    <p><b>If you want any of them in the audiobook after all, just tell me.</b> Two or three are worth a moment&rsquo;s thought &mdash; there is an Emily Dickinson poem and a Thoreau line in the Acknowledgments, and a T. S. Eliot passage in the Endnotes.</p>
+    <div id="asidelist"></div>
+  </details>
+</section>
+
+<section class="screen" id="screen-chapter">
+  <div class="remind noprint" id="remind-chap">
+    <h3 id="remind-chap-h">Worth sending me a copy</h3>
+    <p id="remind-chap-t"></p>
+    <div class="btnrow" style="margin-top:16px">
+      <button class="primary big" data-dismiss="1">Thank you</button>
+    </div>
+  </div>
+  <div class="chaphead" id="chaphead"></div>
+  <div id="chapcards"></div>
+  <div class="chapnav">
+    <button class="big" id="btn-home2">&#8592; All chapters</button>
+    <button class="primary big" id="btn-nextchap">Next chapter &#8594;</button>
+  </div>
+</section>
+
+<section class="screen" id="screen-finish">
+  <div class="panel">
+    <h2>There is nothing to send</h2>
+    <p style="font-size:20px"><b>Everything you do here reaches Stephen on its own.</b> Each answer is saved the moment you give it, and he can see how far you have got whenever he looks. You never have to email him anything, save anything, or remember anything.</p>
+    <p>Stop whenever you like and come back to the same link. It will be exactly as you left it.</p>
+    <p id="synced" style="margin-top:16px;font-size:17px"></p>
+  </div>
+
+  <div class="panel">
+    <h2>A quick check first</h2>
+    <p>Not a test &mdash; just so you know what is still open. You can send your review with all of this outstanding.</p>
+    <div id="checks"></div>
+  </div>
+
+  <details class="panel fold">
+    <summary>Other things you probably don&rsquo;t need</summary>
+    <p>Here if you want them. You do not need either to finish the review.</p>
+    <div class="btnrow" style="margin-top:14px">
+      <button id="btn-print">Print what I have decided so far</button>
+      <button id="btn-export">Keep a copy of my answers on this computer</button>
+    </div>
+  </details>
+
+  <div class="chapnav"><button class="big" id="btn-home3">&#8592; All chapters</button></div>
+</section>
+
+<footer>
+  <p><b>Call me Eliyahu: Tales told by an Elliott</b> &mdash; audiobook production index, phase one.<br>
+  Passages from the Introduction through the Epilogue, printed pages xv&ndash;279.<br>
+  Studio San Francisco. Internal production document &mdash; not for publication or distribution.</p>
+</footer>
+
+</div>
+</div>
+
+<div id="printarea"></div>
+
+<script>
+"use strict";
+// The manuscript is NOT in this file. Passages are fetched from /api/passages
+// only after the server validates the key. An unauthenticated visitor who views
+// the page source sees no book text at all.
+let ITEMS=[], REVIEW=[], ASIDE=[], CHAPTERS=[];
+const KEY = 'cme_review_v1';
+
+const TYPE_LABEL={epigraph:'Epigraph / attributed quotation',
+  thirdparty:'Poetry, lyric, scripture or third-party text',dream:'Dream',
+  vision:'Vision or altered state',extended:'Extended quoted story',
+  dialogue:'Ordinary or brief quoted speech',ambiguous:'Ambiguous \u2014 needs your decision'};
+const RIGHTS=[['not_evaluated','Not evaluated'],['likely_pd','Likely public domain \u2014 verify edition'],
+  ['translation_verify','Translation / edition must be verified'],['permission_required','Permission may be required'],
+  ['cleared','Rights cleared'],['omit_pending','Omit pending clearance'],['na','Not applicable']];
+const RIGHTS_LABEL=Object.fromEntries(RIGHTS);
+const NARRATORS=[['catherine','Catherine'],['elliott','Elliott'],['undecided','Undecided']];
+const NARR_LABEL=Object.fromEntries(NARRATORS);
+const DECISIONS=[['approve','Approve as written'],['approve_edit','Approve with my wording change'],
+  ['omit','Leave out of the audiobook'],['discuss','Discuss with Stephen']];
+const DEC_LABEL=Object.fromEntries(DECISIONS);
+const SUGGEST_NARR={catherine:'catherine',elliott:'elliott',discuss:'undecided',ambiguous:'undecided'};
+
+function buildIndex(all){
+  ITEMS=all; REVIEW=ITEMS.filter(function(i){return i.in_scope;});
+  ASIDE=ITEMS.filter(function(i){return !i.in_scope;}); CHAPTERS=[];
+  REVIEW.forEach(function(it){
+    var c=CHAPTERS.find(function(x){return x.name===it.section;});
+    if(!c){ c={name:it.section,items:[],idx:CHAPTERS.length}; CHAPTERS.push(c); }
+    c.items.push(it);
+  });
+}
+async function fetchPassages(){
+  const res=await fetch('/api/passages',{headers:{'x-cme-key':KEYSTR}});
+  if(res.status===401||res.status===403){ showLocked(); return null; }
+  if(!res.ok) throw new Error('http '+res.status);
+  return (await res.json()).passages;
+}
+function chapPages(c){
+  const f=c.items[0], l=c.items[c.items.length-1];
+  return f.printed_page===l.printed_page_end
+    ? 'printed p. '+f.printed_page : 'printed pp. '+f.printed_page+'\u2013'+l.printed_page_end;
+}
+
+let state=load();
+function blankRec(){return {narrator:'',decision:'',revision:null,rights:'',note:'',complete:false};}
+function rec(id){ if(!state.items[id]) state.items[id]=blankRec(); return state.items[id]; }
+function touch(id){ var r=rec(id); r._t=Date.now(); return r; }
+function load(){
+  try{ const s=JSON.parse(localStorage.getItem(KEY)); if(s&&s.items) return s; }catch(e){}
+  return {rev:0,version:1,book:'Call me Eliyahu',reviewer:'Elliott Isenberg',items:{},saved_at:null};
+}
+/* =====================================================================
+   Saving: the browser keeps a copy so nothing is lost if the network
+   drops, and the server holds the real record so Stephen can see it.
+   ===================================================================== */
+const API='/api/review';
+let STORAGE_OK=true, ONLINE=true, DIRTY=false, SYNCING=false, LASTSYNC=null;
+
+function storageProbe(){
+  try{ localStorage.setItem('__cme_probe__','1');
+       var v=localStorage.getItem('__cme_probe__');
+       localStorage.removeItem('__cme_probe__'); return v==='1';
+  }catch(e){ return false; }
+}
+function authKey(){
+  var u=new URL(location.href), k=u.searchParams.get('k');
+  if(k){ try{ localStorage.setItem('cme_key',k); }catch(e){}
+         u.searchParams.delete('k'); history.replaceState({},'',u.pathname+u.search+u.hash); return k; }
+  try{ return localStorage.getItem('cme_key')||''; }catch(e){ return ''; }
+}
+const KEYSTR=authKey();
+
+function setStatus(kind,text){
+  var box=document.getElementById('savedbox'), txt=document.getElementById('savedtxt');
+  box.className='saved'+(kind==='ok'?'':' '+kind);
+  txt.textContent=text;
+}
+function localSave(){
+  if(!STORAGE_OK) return;
+  try{ localStorage.setItem(KEY,JSON.stringify(state));
+       if(localStorage.getItem(KEY)===null) throw new Error('lost'); }
+  catch(e){ STORAGE_OK=false; }
+}
+
+let syncTimer=null, retryAt=1500;
+function save(){
+  DIRTY=true;
+  localSave();
+  setStatus('pending','Saving\u2026');
+  clearTimeout(syncTimer);
+  syncTimer=setTimeout(pushToServer,900);
+}
+
+async function pushToServer(){
+  if(SYNCING){ clearTimeout(syncTimer); syncTimer=setTimeout(pushToServer,600); return; }
+  SYNCING=true;
+  try{
+    const res=await fetch(API,{method:'PUT',
+      headers:{'content-type':'application/json','x-cme-key':KEYSTR},
+      body:JSON.stringify({rev:state.rev||0, items:state.items, last_export:state.last_export||null})});
+    if(res.status===409){
+      // Another tab or device is ahead. The SERVER has already merged by
+      // per-record timestamp, keeping whichever answer is newer. This tab simply
+      // adopts the merged result — it never re-imposes its own older records.
+      const d=await res.json();
+      state.items=d.state.items||{}; state.rev=d.state.rev;
+      state.updated_at=d.state.updated_at;
+      DIRTY=false; localSave();
+      if(d.rejected){
+        setStatus('ok','Saved \u00b7 '+d.rejected+' newer answer'+(d.rejected===1?'':'s')+' from another window kept');
+      } else {
+        setStatus('ok','Saved \u00b7 caught up with another window');
+      }
+      SYNCING=false;
+      if(screen==='chapter') renderChapter(); else renderChapters();
+      return;
+    }
+    if(res.status===401||res.status===403){ SYNCING=false; showLocked(); return; }
+    if(!res.ok) throw new Error('http '+res.status);
+    const d=await res.json();
+    state.rev=d.rev; state.updated_at=d.updated_at;
+    DIRTY=false; ONLINE=true; retryAt=1500; LASTSYNC=new Date();
+    localSave();
+    setStatus('ok','Saved \u00b7 '+LASTSYNC.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}));
+  }catch(e){
+    ONLINE=false;
+    setStatus('offline','Saved on this computer \u2014 will send when the internet is back');
+    clearTimeout(syncTimer);
+    retryAt=Math.min(retryAt*2, 30000);
+    syncTimer=setTimeout(pushToServer,retryAt);
+  }
+  SYNCING=false;
+}
+
+async function pullFromServer(){
+  const res=await fetch(API,{headers:{'x-cme-key':KEYSTR}});
+  if(res.status===401||res.status===403){ showLocked(); return null; }
+  if(!res.ok) throw new Error('http '+res.status);
+  const d=await res.json();
+  return d.state;
+}
+
+function showLocked(){
+  document.getElementById('locked').classList.add('on');
+  document.getElementById('app').style.display='none';
+}
+function showOfflineStart(){
+  document.getElementById('alarm').classList.add('on');
+  setStatus('offline','Working from this computer\u2019s copy');
+}
+
+window.addEventListener('online', function(){ if(DIRTY) pushToServer(); });
+window.addEventListener('offline', function(){
+  ONLINE=false; setStatus('offline','Saved on this computer \u2014 will send when the internet is back'); });
+setInterval(function(){ if(DIRTY && !SYNCING) pushToServer(); }, 20000);
+
+
+/* ---------- chapter-finished acknowledgement ---------- */
+let remindDismissedAt=0, chapterPromptOn=false;
+function completedCount(){ return REVIEW.filter(function(i){return rec(i.id).complete;}).length; }
+function updateReminders(){
+  // Nothing to nudge about: every answer goes to the server as it is given.
+  // This only clears the chapter-finished note once it has been acknowledged.
+  if(chapterPromptOn) return;
+  var el=document.getElementById('remind-chap'); if(el) el.classList.remove('on');
+  var eh=document.getElementById('remind-home'); if(eh) eh.classList.remove('on');
+}
+
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const item=id=>ITEMS.find(x=>x.id===id);
+function textToRecord(it){const r=rec(it.id);return (r.revision!=null&&r.revision!=='')?r.revision:it.text;}
+function isEdited(it){const r=rec(it.id);return r.revision!=null&&r.revision!==''&&r.revision!==it.text;}
+function touched(it){const r=rec(it.id);return !!(r.narrator||r.decision||r.rights||r.note||isEdited(it));}
+function itemStatus(it){ const r=rec(it.id); return r.complete?'green':(touched(it)?'amber':'red'); }
+function chapStatus(c){
+  const done=c.items.filter(i=>rec(i.id).complete).length;
+  const any=c.items.some(i=>touched(i)||rec(i.id).complete);
+  return {done,total:c.items.length,status:done===c.items.length?'green':(any?'amber':'red')};
+}
+const STATUS_WORD={red:'Not started',amber:'Part way',green:'Finished'};
+
+function problems(it){
+  const r=rec(it.id), out=[];
+  if(r.complete&&!r.decision) out.push('Marked finished, but no decision has been chosen.');
+  if(r.complete&&!r.narrator) out.push('Marked finished, but nobody has been chosen to read it.');
+  if(r.complete&&!r.rights) out.push('Marked finished, but the rights status is still blank.');
+  if(r.decision==='omit'&&(r.narrator==='catherine'||r.narrator==='elliott'))
+    out.push('This is set to be left out, but it is also assigned to '+NARR_LABEL[r.narrator]+' to read.');
+  if(r.decision==='approve_edit'&&!isEdited(it))
+    out.push('Approved with a wording change, but no changed wording has been saved.');
+  if(r.decision==='approve'&&isEdited(it))
+    out.push('Approved as written, but a changed wording is saved. Choose "Approve with my wording change" or restore the original.');
+  if(r.rights==='omit_pending'&&(r.decision==='approve'||r.decision==='approve_edit'))
+    out.push('Rights say "omit pending clearance", but the passage is approved. These pull in opposite directions.');
+  if(r.complete&&r.decision==='discuss'&&!r.note)
+    out.push('Marked for discussion and finished, but there is no note saying what to discuss.');
+  return out;
+}
+
+function diffWords(a,b){
+  const A=a.split(/(\s+)/),B=b.split(/(\s+)/),n=A.length,m=B.length;
+  if(n*m>250000) return [esc(a),esc(b)];
+  const d=Array.from({length:n+1},()=>new Uint32Array(m+1));
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)
+    d[i][j]=A[i]===B[j]?d[i+1][j+1]+1:Math.max(d[i+1][j],d[i][j+1]);
+  let i=0,j=0,L='',R='';
+  while(i<n&&j<m){
+    if(A[i]===B[j]){L+=esc(A[i]);R+=esc(B[j]);i++;j++;}
+    else if(d[i+1][j]>=d[i][j+1]){L+='<span class="diffdel">'+esc(A[i])+'</span>';i++;}
+    else {R+='<span class="diffins">'+esc(B[j])+'</span>';j++;}
+  }
+  while(i<n) L+='<span class="diffdel">'+esc(A[i++])+'</span>';
+  while(j<m) R+='<span class="diffins">'+esc(B[j++])+'</span>';
+  return [L,R];
+}
+
+function compare(it){
+  const d=diffWords(it.text,textToRecord(it));
+  return '<div class="compare">'+
+    '<div class="col orig"><h4>\uD83D\uDD12 Your book\u2019s wording</h4><p>'+d[0]+'</p></div>'+
+    '<div class="col prop"><h4>\u270E Your wording</h4><p>'+d[1]+'</p></div></div>';
+}
+function editor(id){
+  const it=item(id), r=rec(id);
+  const val=(r.revision!=null&&r.revision!=='')?r.revision:it.text;
+  return '<div class="editor">'+
+    '<label class="f" for="ta-'+id+'">Your wording. The original above stays exactly as it is.</label>'+
+    '<textarea id="ta-'+id+'">'+esc(val)+'</textarea>'+
+    '<div class="btnrow" style="margin-top:12px">'+
+      '<button class="primary" data-act="savedit" data-id="'+id+'">Save my wording</button>'+
+      '<button data-act="canceledit" data-id="'+id+'">Cancel</button>'+
+      '<button data-act="reseted" data-id="'+id+'">Put the book\u2019s wording back in the box</button>'+
+    '</div></div>';
+}
+
+function card(it,nth,of){
+  const r=rec(it.id), st=itemStatus(it);
+  const cls=['card', st==='green'?'done':(st==='amber'?'started':'notstarted')];
+  if(r.decision==='omit') cls.push('omitted');
+  const pages=it.printed_page===it.printed_page_end
+    ? 'printed p.&nbsp;<b>'+esc(it.printed_page)+'</b>'
+    : 'printed pp.&nbsp;<b>'+esc(it.printed_page)+'\u2013'+esc(it.printed_page_end)+'</b>';
+  const pdfp=it.pdf_page===it.pdf_page_end
+    ? 'PDF p.&nbsp;<b>'+it.pdf_page+'</b>' : 'PDF pp.&nbsp;<b>'+it.pdf_page+'\u2013'+it.pdf_page_end+'</b>';
+  const flags=(it.flags||[]).map(f=>'<span class="badge flag">'+esc(f)+'</span>').join('');
+  const probs=problems(it);
+  return '<article class="'+cls.join(' ')+'" id="c-'+it.id+'" data-id="'+it.id+'">'+
+  '<div class="card-head"><span class="cid">'+it.id+'</span>'+
+    '<span class="where"><b>Passage '+nth+' of '+of+'</b> in this chapter &nbsp;\u00b7&nbsp; '+pages+
+    ' &nbsp;\u00b7&nbsp; '+pdfp+(it.subhead?' &nbsp;\u00b7&nbsp; \u201c'+esc(it.subhead)+'\u201d':'')+'</span></div>'+
+  '<div class="card-body">'+
+    '<div class="label">'+esc(it.label)+'</div>'+
+    (it.source?'<div class="srcline">Attributed to: '+esc(it.source)+'</div>':'')+
+    '<div class="badges"><span class="badge type">'+esc(TYPE_LABEL[it.passage_type]||it.passage_type)+'</span>'+
+      (r.complete?'<span class="badge done">Finished</span>':'')+
+      (isEdited(it)?'<span class="badge edited">Edited from source</span>':'')+flags+'</div>'+
+
+    '<div class="step" style="border-top:none;padding-top:14px"><h3><span class="stepnum">1</span> Read the passage</h3></div>'+
+    '<div class="proof"><div class="cap">\uD83D\uDD12 Text from your book \u2014 locked, cannot be changed</div>'+
+      '<div class="txt">'+esc(it.text)+'</div>'+
+      (it.attribution_line?'<div class="attrib">'+esc(it.attribution_line)+'</div>':'')+'</div>'+
+    '<details class="ctx noprint"><summary>Show the words either side of this passage</summary>'+
+      '<div class="c"><b>Before:</b> '+(esc(it.preceding_context)||'<i>start of section</i>')+'</div>'+
+      '<div class="c"><b>After:</b> '+(esc(it.following_context)||'<i>end of section</i>')+'</div>'+
+      '<div class="c"><b>How it was found:</b> '+esc(it.extraction)+
+      (it.hyphen_rejoined?' \u00b7 Words broken across lines by the typesetter have been joined back up.':'')+'</div></details>'+
+    (it.prep_note?'<div class="prep"><b>Note from Stephen</b>'+esc(it.prep_note)+'</div>':'')+
+
+    '<div class="step"><h3><span class="stepnum">2</span> Who reads this passage?</h3>'+
+      '<div class="hint">My suggestion: <b>'+esc(NARR_LABEL[SUGGEST_NARR[it.suggested_narrator]||'undecided'])+'</b>'+
+      ((it.suggested_narrator==='discuss'||it.suggested_narrator==='ambiguous')?' \u2014 I would like to talk this one over with you.':'')+'</div>'+
+      '<div class="choices">'+NARRATORS.map(function(n){return '<label class="choice"><input type="radio" name="n-'+it.id+
+        '" value="'+n[0]+'" '+(r.narrator===n[0]?'checked':'')+' data-act="narr" data-id="'+it.id+'"><span>'+n[1]+'</span></label>';}).join('')+'</div></div>'+
+
+    '<div class="step"><h3><span class="stepnum">3</span> What happens to it?</h3>'+
+      '<div class="choices">'+DECISIONS.map(function(d){
+        var c=d[0]==='omit'?' omit':(d[0]==='discuss'?' disc':'');
+        return '<label class="choice'+c+'"><input type="radio" name="d-'+it.id+'" value="'+d[0]+'" '+
+          (r.decision===d[0]?'checked':'')+' data-act="dec" data-id="'+it.id+'"><span>'+d[1]+'</span></label>';}).join('')+'</div>'+
+      '<div class="hint" style="margin:18px 0 6px">If a word or line should read differently, change it here. Your book\u2019s wording stays on screen and is never overwritten.</div>'+
+      '<div class="btnrow"><button data-act="edit" data-id="'+it.id+'">\u270E '+
+        (isEdited(it)?'Change my wording again':'Suggest a wording change')+'</button>'+
+        (isEdited(it)?'<button data-act="restore" data-id="'+it.id+'">Restore the book\u2019s wording</button>':'')+'</div>'+
+      '<div id="ed-'+it.id+'"></div>'+(isEdited(it)?compare(it):'')+'</div>'+
+
+    '<div class="step"><h3><span class="stepnum">4</span> Rights status</h3>'+
+      '<div class="hint">My starting suggestion: <b>'+esc(RIGHTS_LABEL[it.rights_status])+'</b></div>'+
+      '<select data-act="rights" data-id="'+it.id+'" aria-label="Rights status for '+it.id+'">'+
+      '<option value="">\u2014 not set \u2014</option>'+
+      RIGHTS.map(function(x){return '<option value="'+x[0]+'" '+(r.rights===x[0]?'selected':'')+'>'+x[1]+'</option>';}).join('')+
+      '</select><div class="rights-note">Approving this passage does <b>not</b> mean the rights to record it have been cleared. Two separate decisions, kept separate everywhere.</div></div>'+
+
+    '<div class="step"><h3><span class="stepnum">5</span> Your note (optional)</h3>'+
+      '<textarea data-act="note" data-id="'+it.id+'" placeholder="Anything you want to tell Stephen about this passage.">'+esc(r.note)+'</textarea></div>'+
+
+    '<div class="complete-box '+(r.complete?'on':'')+'">'+
+      '<label><input type="checkbox" data-act="done" data-id="'+it.id+'" '+(r.complete?'checked':'')+
+      '> <span class="stepnum">6</span> I have finished with this passage</label>'+
+      probs.map(function(p){return '<div class="warn">\u26A0 '+esc(p)+'</div>';}).join('')+
+    '</div></div></article>';
+}
+
+let screen='chapters', curChap=0, filterUnfinished=false, chapWasGreen=false;
+function show(name){
+  screen=name;
+  var ss=document.querySelectorAll('.screen');
+  for(var i=0;i<ss.length;i++) ss[i].classList.toggle('on', ss[i].id==='screen-'+name);
+  document.getElementById('btn-home').style.display = name==='chapters' ? 'none' : '';
+  var c=document.getElementById('crumb');
+  if(name==='chapters') c.innerHTML='<b>All chapters</b>';
+  else if(name==='chapter') c.innerHTML='<b>'+esc(CHAPTERS[curChap].name)+'</b>';
+  else c.innerHTML='<b>How am I doing?</b>';
+  window.scrollTo(0,0);
+}
+function goHome(){ renderChapters(); show('chapters'); }
+function openChapter(i,focusId){
+  curChap=Math.max(0,Math.min(i,CHAPTERS.length-1));
+  filterUnfinished=false;
+  renderChapter();
+  show('chapter');
+  if(focusId) setTimeout(function(){
+    var el=document.getElementById('c-'+focusId);
+    if(el){ el.scrollIntoView({block:'start'}); el.classList.add('current'); }
+  },60);
+}
+
+function renderChapters(){
+  var done=REVIEW.filter(function(i){return rec(i.id).complete;}).length;
+  document.getElementById('hdone').textContent=done;
+  document.getElementById('htot').textContent=REVIEW.length;
+  document.getElementById('hfill').style.width=Math.round(done/REVIEW.length*100)+'%';
+  document.getElementById('chaplist').innerHTML=CHAPTERS.map(function(c){
+    var s=chapStatus(c);
+    var rows=c.items.map(function(it){
+      return '<div class="prow"><span class="d '+itemStatus(it)+'" title="'+STATUS_WORD[itemStatus(it)]+'"></span>'+
+        '<span class="pl">'+esc(it.label)+'</span>'+
+        '<span class="pw">p. '+esc(it.printed_page)+'</span>'+
+        '<button data-open="'+c.idx+'" data-focus="'+it.id+'">Open</button></div>';
+    }).join('');
+    var verb = s.done===0 ? 'Start this chapter' : (s.status==='green' ? 'Look at this chapter again' : 'Carry on with this chapter');
+    return '<details class="chap st-'+s.status+'" data-chap="'+c.idx+'"><summary>'+
+      '<span class="pill '+s.status+'"><span class="d"></span>'+STATUS_WORD[s.status]+'</span>'+
+      '<span class="cmain"><span class="cname">'+esc(c.name)+'</span>'+
+      '<span class="cpages">'+s.done+' of '+s.total+' passages finished &nbsp;\u00b7&nbsp; '+chapPages(c)+'</span></span>'+
+      '<span class="more">What\u2019s in it</span></summary>'+
+      '<div class="chapbody"><div class="btnrow" style="margin-top:16px">'+
+      '<button class="primary big" data-open="'+c.idx+'">'+verb+'</button></div>'+
+      '<div class="plist">'+rows+'</div></div></details>';
+  }).join('');
+}
+
+function renderChapter(){
+  var c=CHAPTERS[curChap], s=chapStatus(c);
+  chapWasGreen = s.status==='green';
+  chapterPromptOn=false;
+  document.getElementById('remind-chap').classList.remove('on');
+  document.getElementById('chaphead').innerHTML=
+    '<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">'+
+      '<span class="pill '+s.status+'"><span class="d"></span>'+STATUS_WORD[s.status]+'</span>'+
+      '<span style="font-size:16px;color:var(--ink2)">Chapter '+(curChap+1)+' of '+CHAPTERS.length+'</span></div>'+
+    '<h2 style="margin-top:12px">'+esc(c.name)+'</h2>'+
+    '<div class="pages">'+s.total+' passages &nbsp;\u00b7&nbsp; '+chapPages(c)+'</div>'+
+    '<div class="bigprog" style="margin-top:16px"><div><span class="num">'+s.done+
+      '</span> <span class="of">of <b>'+s.total+'</b> finished in this chapter</span></div>'+
+      '<div class="track"><div class="fill" style="width:'+Math.round(s.done/s.total*100)+'%"></div></div></div>'+
+    '<label class="toggle"><input type="checkbox" id="chap-unfinished" '+(filterUnfinished?'checked':'')+
+      '> Hide the ones I have finished</label>';
+  var list=filterUnfinished?c.items.filter(function(i){return !rec(i.id).complete;}):c.items;
+  document.getElementById('chapcards').innerHTML = list.length
+    ? list.map(function(it){return card(it,c.items.indexOf(it)+1,c.items.length);}).join('')
+    : '<div class="emptystate"><p><b>Every passage in this chapter is finished.</b></p>'+
+      '<p>Untick the box above to look at them again, or go on to the next chapter.</p></div>';
+  document.getElementById('btn-nextchap').textContent =
+    curChap<CHAPTERS.length-1 ? 'Next chapter \u2192' : 'How am I doing? \u2192';
+  document.getElementById('chap-unfinished').addEventListener('change',function(e){
+    filterUnfinished=e.target.checked; renderChapter();
+  });
+}
+
+function refreshCard(id){
+  var el=document.getElementById('c-'+id);
+  if(!el){ renderChapter(); return; }
+  var c=CHAPTERS[curChap], it=item(id);
+  var det=el.querySelector('details.ctx'), open=det?det.open:false;
+  el.outerHTML=card(it,c.items.indexOf(it)+1,c.items.length);
+  var el2=document.getElementById('c-'+id), det2=el2.querySelector('details.ctx');
+  if(open&&det2) det2.open=true;
+  var s=chapStatus(c), head=document.getElementById('chaphead'), pill=head.querySelector('.pill');
+  if(s.status==='green' && !chapWasGreen){
+    var rc=document.getElementById('remind-chap');
+    document.getElementById('remind-chap-h').textContent='That chapter is finished \u2014 well done';
+    document.getElementById('remind-chap-t').textContent=
+      'It has all reached Stephen already. Carry on to the next chapter whenever you like, or stop here and come back another day.';
+    chapterPromptOn=true;
+    rc.classList.add('on'); rc.scrollIntoView({block:'center'});
+  }
+  chapWasGreen = s.status==='green';
+  pill.className='pill '+s.status;
+  pill.innerHTML='<span class="d"></span>'+STATUS_WORD[s.status];
+  head.querySelector('.bigprog .num').textContent=s.done;
+  head.querySelector('.bigprog .fill').style.width=Math.round(s.done/s.total*100)+'%';
+}
+
+function renderSearch(){
+  var q=(document.getElementById('q').value||'').trim().toLowerCase();
+  var onlyUn=document.getElementById('only-unfinished').checked;
+  var box=document.getElementById('searchres');
+  if(!q && !onlyUn){ box.innerHTML=''; return; }
+  var hits=REVIEW.filter(function(it){
+    var r=rec(it.id);
+    if(onlyUn&&r.complete) return false;
+    if(!q) return true;
+    return (it.text+' '+it.label+' '+it.source+' '+it.id+' '+it.section+' '+(r.note||'')).toLowerCase().indexOf(q)>=0;
+  });
+  if(!hits.length){ box.innerHTML='<p style="margin-top:18px">Nothing matched. Try a different word.</p>'; return; }
+  box.innerHTML='<p style="margin-top:18px"><b>'+hits.length+'</b> passage'+(hits.length===1?'':'s')+' found.</p>'+
+    hits.slice(0,60).map(function(it){
+      var ci=CHAPTERS.map(function(c){return c.name;}).indexOf(it.section);
+      return '<div class="prow"><span class="d '+itemStatus(it)+'"></span>'+
+        '<span class="pl">'+esc(it.label)+'<br><span class="pw">'+esc(it.section)+' \u00b7 p. '+esc(it.printed_page)+'</span></span>'+
+        '<button data-open="'+ci+'" data-focus="'+it.id+'">Open</button></div>';
+    }).join('')+(hits.length>60?'<p>Showing the first 60. Try a more specific word.</p>':'');
+}
+
+function renderAside(){
+  var sec='';
+  document.getElementById('asidelist').innerHTML=ASIDE.map(function(it){
+    var h='';
+    if(it.section!==sec){ sec=it.section; h='<h3 style="font-size:19px;margin:22px 0 4px">'+esc(sec)+'</h3>'; }
+    var pg=it.printed_page==='\u2014'?'front matter':'printed p. '+esc(it.printed_page);
+    return h+'<div class="asideitem"><span class="fid">'+it.id+'</span>'+
+      '<span class="al">'+esc(it.label)+(it.source?' <span class="aw">\u2014 '+esc(it.source)+'</span>':'')+'</span>'+
+      '<span class="aw">'+pg+'</span></div>';
+  }).join('');
+}
+
+function renderChecks(){
+  var unfinished=REVIEW.filter(function(i){return !rec(i.id).complete;});
+  var conflicted=REVIEW.filter(function(i){return problems(i).length;});
+  var rightsOpen=REVIEW.filter(function(i){
+    var rs=rec(i.id).rights||'', d=rec(i.id).decision;
+    return (d==='approve'||d==='approve_edit')&&
+      (rs===''||rs==='not_evaluated'||rs==='permission_required'||rs==='translation_verify'||rs==='omit_pending');
+  });
+  function row(i){
+    var ci=CHAPTERS.map(function(c){return c.name;}).indexOf(i.section);
+    return '<div class="finalitem"><span class="fid">'+i.id+'</span> \u2014 '+esc(i.label)+
+      ' <span style="color:var(--ink2);font-size:15px">'+esc(i.section)+', p. '+esc(i.printed_page)+'</span>'+
+      (problems(i).length?'<div class="warn">'+problems(i).map(esc).join('<br>')+'</div>':'')+
+      '<div><button class="quiet" data-open="'+ci+'" data-focus="'+i.id+'">Go to it</button></div></div>';
+  }
+  function list(a){ return a.length ? a.slice(0,40).map(row).join('')+(a.length>40?'<p>\u2026and '+(a.length-40)+' more.</p>':'')
+                                    : '<p style="color:var(--ink2)">None.</p>'; }
+  document.getElementById('checks').innerHTML=
+    '<h3 style="font-size:21px;margin-top:20px">Passages you have not finished \u2014 '+unfinished.length+'</h3>'+list(unfinished)+
+    '<h3 style="font-size:21px;margin-top:30px">Decisions that pull against each other \u2014 '+conflicted.length+'</h3>'+list(conflicted)+
+    '<h3 style="font-size:21px;margin-top:30px">Approved, but the rights are still open \u2014 '+rightsOpen.length+'</h3>'+
+    '<p style="color:var(--ink2)">Perfectly fine to approve. They simply cannot be released until someone clears them.</p>'+list(rightsOpen);
+}
+
+document.addEventListener('change',function(e){
+  var t=e.target, act=t.dataset?t.dataset.act:null, id=t.dataset?t.dataset.id:null;
+  if(!act||!id) return;
+  var r=rec(id);
+  if(act==='narr'){ r.narrator=t.value; touch(id); save(); refreshCard(id); }
+  else if(act==='dec'){
+    r.decision=t.value; touch(id); save();
+    var needEd = t.value==='approve_edit' && !isEdited(item(id));
+    refreshCard(id);
+    if(needEd){ document.getElementById('ed-'+id).innerHTML=editor(id); document.getElementById('ta-'+id).focus(); }
+  }
+  else if(act==='rights'){ r.rights=t.value; touch(id); save(); refreshCard(id); }
+  else if(act==='done'){ r.complete=t.checked; touch(id); save(); refreshCard(id); }
+});
+document.addEventListener('input',function(e){
+  var t=e.target;
+  if(t.dataset&&t.dataset.act==='note'){ rec(t.dataset.id).note=t.value; touch(t.dataset.id); save(); }
+});
+document.addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b) return;
+  if(b.dataset.dismiss!==undefined){
+    chapterPromptOn=false;
+    remindDismissedAt=completedCount(); updateReminders();
+    var ss=document.querySelectorAll('.remind');
+    for(var k=0;k<ss.length;k++) ss[k].classList.remove('on');
+    return;
+  }
+  if(b.dataset.open!==undefined){ openChapter(+b.dataset.open,b.dataset.focus); return; }
+  var act=b.dataset.act, id=b.dataset.id;
+  if(act==='edit'){ document.getElementById('ed-'+id).innerHTML=editor(id); document.getElementById('ta-'+id).focus(); }
+  else if(act==='canceledit'){ document.getElementById('ed-'+id).innerHTML=''; }
+  else if(act==='reseted'){ document.getElementById('ta-'+id).value=item(id).text; }
+  else if(act==='savedit'){
+    var it=item(id), v=document.getElementById('ta-'+id).value, r=rec(id);
+    r.revision=(v.trim()===it.text.trim())?null:v; touch(id);
+    if(r.revision&&r.decision!=='omit'&&r.decision!=='discuss') r.decision='approve_edit';
+    save(); refreshCard(id);
+  }
+  else if(act==='restore'){
+    if(confirm('Remove your wording change and go back to the book\u2019s original wording for '+id+'?')){
+      var rr=rec(id); rr.revision=null; if(rr.decision==='approve_edit') rr.decision='approve'; touch(id);
+      save(); refreshCard(id);
+    }
+  }
+});
+document.getElementById('btn-home').addEventListener('click',goHome);
+document.getElementById('btn-home2').addEventListener('click',goHome);
+document.getElementById('btn-home3').addEventListener('click',goHome);
+document.getElementById('btn-nextchap').addEventListener('click',function(){
+  if(curChap<CHAPTERS.length-1) openChapter(curChap+1);
+  else { renderChecks(); paintSynced(); show('finish'); }
+});
+document.getElementById('btn-finish').addEventListener('click',function(){ renderChecks(); paintSynced(); show('finish'); });
+document.getElementById('btn-continue').addEventListener('click',function(){
+  var next=REVIEW.filter(function(i){return !rec(i.id).complete;})[0];
+  if(!next){ alert('Every passage is finished. Click "Finish & send" at the top to send your review to Stephen.'); return; }
+  openChapter(CHAPTERS.map(function(c){return c.name;}).indexOf(next.section), next.id);
+});
+var qt=null;
+document.getElementById('q').addEventListener('input',function(){clearTimeout(qt);qt=setTimeout(renderSearch,220);});
+document.getElementById('only-unfinished').addEventListener('change',renderSearch);
+
+function download(name,text,mime){
+  var b=new Blob([text],{type:mime||'application/json'}), u=URL.createObjectURL(b), a=document.createElement('a');
+  a.href=u; a.download=name; document.body.appendChild(a); a.click();
+  setTimeout(function(){URL.revokeObjectURL(u);a.remove();},400);
+}
+function stamp(){var d=new Date(),p=function(n){return String(n).padStart(2,'0');};
+  return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'_'+p(d.getHours())+p(d.getMinutes());}
+function exportPayload(){
+  return {format:'call-me-eliyahu-passage-review',format_version:1,
+    book:'Call me Eliyahu: Tales told by an Elliott',author:'Elliott Isenberg',
+    reviewer:'Elliott Isenberg',prepared_by:'Stephen Snodgrass / Studio San Francisco',
+    source_pdf:'CME_New_April_26_final.pdf',exported_at:new Date().toISOString(),
+    important:'Editorial approval by the author is NOT rights clearance. The rights_status field is a separate record and no passage may be recorded and released on the strength of approval alone.',
+    total_candidates:ITEMS.length,candidates_for_narration:REVIEW.length,candidates_set_aside:ASIDE.length,
+    narration_scope:'Introduction through Epilogue, printed pages xv to 279. Praise pages, Contents, List of Photographs, Chronology, Bibliography, Glossary, In Defence of Logical Punctuation, printed Acknowledgments, Index of Names, Endnotes and anything after printed p.279 are not planned for narration.',
+    items:ITEMS.map(function(it){
+      var r=rec(it.id);
+      return {id:it.id,in_narration_scope:!!it.in_scope,scope_note:it.scope_note||'',
+        passage_type:it.passage_type,chapter_or_section:it.section,subhead:it.subhead,
+        printed_page:it.printed_page,printed_page_end:it.printed_page_end,
+        pdf_page:it.pdf_page,pdf_page_end:it.pdf_page_end,
+        label:it.label,attributed_source:it.source,attribution_line_in_book:it.attribution_line,
+        text_from_pdf_locked:it.text,preceding_context:it.preceding_context,
+        following_context:it.following_context,extraction_method:it.extraction,
+        rights_review_flags:it.flags||[],prepared_note_from_stephen:it.prep_note,
+        suggested_narrator_from_stephen:it.suggested_narrator,
+        suggested_rights_status_from_stephen:it.rights_status,
+        elliott_narrator:r.narrator||'',elliott_decision:r.decision||'',
+        elliott_decision_label:DEC_LABEL[r.decision]||'',
+        elliott_proposed_revision:(r.revision!=null&&r.revision!=='')?r.revision:'',
+        edited_from_source:isEdited(it),text_to_record:textToRecord(it),
+        elliott_rights_status:r.rights||'',elliott_rights_status_label:RIGHTS_LABEL[r.rights]||'',
+        rights_cleared:r.rights==='cleared',elliott_note:r.note||'',
+        review_complete:!!r.complete,open_questions:problems(it),
+        catherine_recording_status:'reserved_for_phase_two',audio_filename:'reserved_for_phase_two',
+        audio_filename_stem_if_assigned:r.narrator==='catherine'?it.id:''};
+    })};
+}
+function doExport(){
+  download('CME_review_Elliott_'+stamp()+'.json', JSON.stringify(exportPayload(),null,1));
+}
+document.getElementById('btn-export').addEventListener('click',doExport);
+document.getElementById('btn-print').addEventListener('click',function(){
+  var html='<div class="wrap"><div class="masthead"><h1>Call me Eliyahu \u2014 Passage Review</h1>'+
+    '<div class="sub">Elliott Isenberg\u2019s decisions \u00b7 printed '+new Date().toLocaleDateString()+
+    ' \u00b7 approval is not rights clearance</div></div>';
+  CHAPTERS.forEach(function(c){
+    var s=chapStatus(c);
+    html+='<h2 class="pchap">'+esc(c.name)+' \u2014 '+s.done+' of '+s.total+' finished</h2>';
+    c.items.forEach(function(it){
+      var r=rec(it.id);
+      html+='<div class="pcard"><b style="font-family:var(--mono)">'+it.id+'</b> \u2014 '+esc(it.label)+
+        '<div style="font-size:9pt;color:#555">printed p. '+esc(it.printed_page)+' \u00b7 '+esc(it.source)+'</div>'+
+        '<blockquote style="border-left:3px solid #000;margin:8px 0;padding-left:12px;font-family:var(--serif);white-space:pre-wrap">'+esc(it.text)+'</blockquote>'+
+        (isEdited(it)?'<div style="background:#F4EEF8;padding:8px 12px;border-radius:4px;font-family:var(--serif)"><b style="font-family:var(--sans);font-size:9pt">ELLIOTT\u2019S WORDING:</b><br>'+esc(textToRecord(it))+'</div>':'')+
+        '<div style="font-size:10pt;margin-top:8px"><b>Reader:</b> '+esc(NARR_LABEL[r.narrator]||'not chosen')+
+        ' &nbsp;\u00b7&nbsp; <b>Decision:</b> '+esc(DEC_LABEL[r.decision]||'not chosen')+
+        ' &nbsp;\u00b7&nbsp; <b>Rights:</b> '+esc(RIGHTS_LABEL[r.rights]||'not set')+
+        ' &nbsp;\u00b7&nbsp; <b>Finished:</b> '+(r.complete?'yes':'no')+
+        (r.note?'<br><b>Note:</b> '+esc(r.note):'')+'</div></div>';
+    });
+  });
+  html+='</div>';
+  document.getElementById('printarea').innerHTML=html;
+  document.body.classList.add('printing');
+  window.print();
+  setTimeout(function(){document.body.classList.remove('printing');},600);
+});
+window.addEventListener('afterprint',function(){document.body.classList.remove('printing');});
+
+STORAGE_OK=storageProbe();
+
+function paintSynced(){
+  var el=document.getElementById('synced'); if(!el) return;
+  el.textContent = state.updated_at
+    ? 'Your last answer reached Stephen on '+new Date(state.updated_at).toLocaleString()+'.'
+    : 'Nothing has been recorded yet \u2014 open a chapter to begin.';
+}
+
+(async function boot(){
+  if(!KEYSTR){ showLocked(); return; }
+  setStatus('pending','Opening your review\u2026');
+  var all=null;
+  try{ all=await fetchPassages(); }
+  catch(e){
+    document.getElementById('alarm').classList.add('on');
+    document.querySelector('#alarm h3').textContent='\u26A0 Could not open the review just now';
+    document.querySelector('#alarm p').textContent='This usually means the internet has dropped. Check your connection and reload the page. Nothing you have already done has been lost.';
+    setStatus('error','Not connected'); return;
+  }
+  if(all===null) return;
+  buildIndex(all);
+  renderAside();
+  try{
+    const server=await pullFromServer();
+    if(server===null) return;                       // locked screen already shown
+    const localRev=state.rev||0, serverRev=server.rev||0;
+    if(serverRev>=localRev){
+      // The server is the record. Anything this browser has that the server
+      // does not is carried across rather than thrown away.
+      var merged=Object.assign({},server.items||{});
+      Object.keys(state.items||{}).forEach(function(id){
+        if(!merged[id] && state.items[id]) merged[id]=state.items[id];
+      });
+      state.items=merged; state.rev=serverRev; state.updated_at=server.updated_at;
+      localSave();
+      setStatus('ok', server.updated_at
+        ? 'Saved \u00b7 last change '+new Date(server.updated_at).toLocaleString()
+        : 'Ready');
+    } else {
+      // This browser is ahead — it has work that never reached the server.
+      setStatus('pending','Sending your last answers\u2026');
+      pushToServer();
+    }
+    if(serverRev>0 || Object.keys(state.items||{}).length) document.getElementById('welcome').open=false;
+  }catch(e){
+    showOfflineStart();
+  }
+  renderChapters();
+  updateReminders();
+  paintSynced();
+  show('chapters');
+})();
+</script>
+</body>
+</html>
