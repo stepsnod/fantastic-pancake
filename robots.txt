@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.bookthestudiosf.com/sitemap.xml
+Sitemap: https://bookthestudiosf.com/sitemap.xml

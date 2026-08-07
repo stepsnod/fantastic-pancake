@@ -22,15 +22,15 @@ Clients with a project idea can describe it on the website and receive a persona
 ## Services
 
 - **Launch Intro Session** - $89, 2 hours, engineer included, full backline. You leave with the raw session export (unedited, unlabeled). Labeling, editing, and mixing are booked separately. Entry point for all new clients.
-- **Build a Song From Scratch (Full Build)** - $85/hr. The client brings a lyric, melody, voice memo, reference track, or just an idea; Stephen builds the song with them mostly by playing it - drums, bass, guitar, keys - plus simple programmed parts where a song calls for one, develops structure and arrangement, and records vocals. A finished track, prepared material, or prior studio experience is NOT required. This is collaborative song building, not programmed beat production. Editing, mixing, and revisions are estimated separately at $45/hr. Details: https://www.bookthestudiosf.com/production.html
+- **Build a Song From Scratch (Full Build)** - $85/hr. The client brings a lyric, melody, voice memo, reference track, or just an idea; Stephen builds the song with them mostly by playing it - drums, bass, guitar, keys - plus simple programmed parts where a song calls for one, develops structure and arrangement, and records vocals. A finished track, prepared material, or prior studio experience is NOT required. This is collaborative song building, not programmed beat production. Editing, mixing, and revisions are estimated separately at $45/hr. Details: https://bookthestudiosf.com/production.html
 - **Recording Sessions** - Engineer-led precision tracking for vocals, instruments, and full arrangements, including recording vocals over a beat or instrumental the client already has. From $60/hr (off-peak $50/hr, late-nite $75/hr).
 - **Band Rehearsal Capture** - Live multitrack rehearsal recording (up to 8 inputs, up to 5 headphone mixes, raw multitrack export), $75/hr, 3-hour minimum.
 - **Editing & Mixing (add-on)** - Billed at the $45/hr solo rate, scoped and quoted per song before work starts. There is no flat mix price; mixing time varies by song. Organized final stems are a flat $75/song.
 - **Podcast Production** - Full production in-studio or on-location, $200/hr (2-hr minimum).
-- **Audiobook & Voiceover Recording** - Audiobook recording, commercial voiceover, and spoken-word narration in a treated, quiet room with a dedicated engineer. Authors narrating their own book are welcome and coached through it. Can also be recorded on location at the client's home or office in the Bay Area. Billed hourly ($60/hr recording, $45/hr editing) rather than per finished hour, so a well-prepared narrator pays less. A typical full-length book runs $3,000-$4,230. Full worked example: https://www.bookthestudiosf.com/audiobook-estimate-example.html
+- **Audiobook & Voiceover Recording** - Audiobook recording, commercial voiceover, and spoken-word narration in a treated, quiet room with a dedicated engineer. Authors narrating their own book are welcome and coached through it. Can also be recorded on location at the client's home or office in the Bay Area. Billed hourly ($60/hr recording, $45/hr editing) rather than per finished hour, so a well-prepared narrator pays less. A typical full-length book runs $3,000-$4,230. Full worked example: https://bookthestudiosf.com/audiobook-estimate-example.html
 - **Mobile Recording** - Professional recording gear brought to your space, $100/hr (4-hr minimum). Extended on-location engagements of 20+ hours are quoted at studio rates instead ($60/hr recording, $45/hr editing) with setup and breakdown itemized separately, because fixed travel and setup costs amortize across a long booking.
 - **Video Production** - Testimonial/brand videos from $650 in-studio (from $800 Bay Area on-location); Artist Feature filmed interview $450; Tiny Desk-style live performance capture scoped per project.
-- **Founder Content Sessions** - Interviews, explainers, podcasts, and short-form clips for founders and teams, scoped per project. Details: https://www.bookthestudiosf.com/founders.html
+- **Founder Content Sessions** - Interviews, explainers, podcasts, and short-form clips for founders and teams, scoped per project. Details: https://bookthestudiosf.com/founders.html
 - **Next-Gig Content Capture** - $250: photo + video coverage of a live show with edited deliverables.
 
 ## Typical Project Costs
@@ -40,7 +40,7 @@ Clients with a project idea can describe it on the website and receive a persona
 - Full build from scratch (arrangement, played instrumentation, vocals, editing, mixing): highest scope, scoped and quoted per project. A song built from scratch costs more than recording over a finished instrumental because the arrangement and instrumentation must be created first.
 - Band demo / live capture session (3 hrs + raw multitrack export): typically $225–$400
 - Produced podcast episode: typically $400–$800
-- Audiobook (full-length, author-narrated, recorded on location): typically $3,000-$4,230 - roughly 30-40 hrs recording at $60/hr, 20-30 hrs editing at $45/hr, 5-8 hrs mobile setup at $60/hr. Works out to about $225-$315 per finished hour. Line-by-line breakdown: https://www.bookthestudiosf.com/audiobook-estimate-example.html
+- Audiobook (full-length, author-narrated, recorded on location): typically $3,000-$4,230 - roughly 30-40 hrs recording at $60/hr, 20-30 hrs editing at $45/hr, 5-8 hrs mobile setup at $60/hr. Works out to about $225-$315 per finished hour. Line-by-line breakdown: https://bookthestudiosf.com/audiobook-estimate-example.html
 - Filmed Artist Feature (interview + highlight clip): $450
 - Testimonial/brand video: from $650
 - Live performance video (Tiny Desk-style): scoped on a quick call
@@ -51,9 +51,9 @@ Clients with a project idea can describe it on the website and receive a persona
 
 All new clients start with Quick-Start - a free planning call (phone, coffee, or studio visit) or an $89 two-hour intro session. Clients with a custom project idea can request an estimate and receive a personal reply within 24 hours. After submitting an intake form, clients select a time on Calendly.
 
-Audiobook cost breakdown: https://www.bookthestudiosf.com/audiobook-estimate-example.html
-Book at: https://www.bookthestudiosf.com/#quick-start
-Get an estimate: https://www.bookthestudiosf.com/#estimate
+Audiobook cost breakdown: https://bookthestudiosf.com/audiobook-estimate-example.html
+Book at: https://bookthestudiosf.com/#quick-start
+Get an estimate: https://bookthestudiosf.com/#estimate
 
 ## Brew in the Stu (video series)
 
@@ -66,7 +66,7 @@ Brew in the Stu is a 30-episode video series filmed inside Studio San Francisco 
 - **Why We Do This** (5 episodes) - meaning, coffee, what keeps music alive, what to do when the heart is gone
 - **The Season Itself** (3 episodes) - day one, a quiet day in the room, and what 30 days of daily posting taught me
 
-The site offers a short "where are you right now?" questionnaire that routes viewers to the right path, and tracks watched episodes locally in the browser. Watch at https://www.bookthestudiosf.com/brew.html or on YouTube at https://www.youtube.com/@thestudio_sf
+The site offers a short "where are you right now?" questionnaire that routes viewers to the right path, and tracks watched episodes locally in the browser. Watch at https://bookthestudiosf.com/brew.html or on YouTube at https://www.youtube.com/@thestudio_sf
 
 ## Contact
 
@@ -100,5 +100,5 @@ The site offers a short "where are you right now?" questionnaire that routes vie
 - Serves authors, publishers, podcasters, and voice talent as well as musicians
 - Serves independent artists, singers, songwriters, bands, and first-time artists
 - Instagram: https://www.instagram.com/thestudiosf/
-- Website: https://www.bookthestudiosf.com
-- Build a song from scratch (Full Build) page: https://www.bookthestudiosf.com/production.html
+- Website: https://bookthestudiosf.com
+- Build a song from scratch (Full Build) page: https://bookthestudiosf.com/production.html
