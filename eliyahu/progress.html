@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Call me Eliyahu — review progress (Stephen)</title>
+<style>
+:root{
+  --paper:#F3F4F1;--card:#fff;--ink:#16202A;--ink2:#4A5763;--ink3:#6E7A85;--rule:#D5D8D3;--rule2:#E8EAE6;
+  --accent:#0E6E77;--accent-soft:#E1EFEF;--red:#B23B32;--red-soft:#FBEAE8;
+  --amber:#B87A0E;--amber-soft:#FBF0DC;--green:#2E7D4F;--green-soft:#E4F1E9;
+  --flag:#8A5100;--flag-soft:#FBEEDC;--omit:#7C2F2F;
+  --serif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;line-height:1.25}
+.mast{background:var(--ink);color:#fff;padding:22px 0}
+.mast h1{color:#fff;font-size:26px}
+.mast .sub{color:#AEBBC4;font-size:15px;margin-top:5px}
+.panel{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:20px 22px;margin:18px 0}
+.panel h2{font-size:20px;margin-bottom:8px}
+button,select{font-family:var(--sans);font-size:15px;padding:10px 16px;min-height:44px;border-radius:8px;
+  border:1.5px solid var(--rule);background:#fff;color:var(--ink);cursor:pointer}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap}
+input[type=password]{font-size:16px;padding:11px;min-height:44px;border:1.5px solid var(--rule);border-radius:8px;width:100%;max-width:420px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:14px}
+.stat{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:11px 13px}
+.stat .n{font-family:var(--serif);font-size:26px;line-height:1}
+.stat .k{font-size:12.5px;color:var(--ink2);margin-top:3px;letter-spacing:.02em}
+.stat.warn{background:var(--flag-soft);border-color:#E3C79A}
+.stat.warn .n{color:var(--flag)}
+.track{height:16px;background:#E2E5E0;border-radius:8px;overflow:hidden;border:1px solid var(--rule);margin-top:12px}
+.track .fill{height:100%;background:var(--green)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:10px}
+th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);
+  border-bottom:1.5px solid var(--ink);padding:8px 10px 8px 0;position:sticky;top:0;background:var(--card)}
+td{border-bottom:1px solid var(--rule2);padding:9px 10px 9px 0;vertical-align:top}
+td.id{font-family:var(--mono);font-weight:600;white-space:nowrap}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:7px;vertical-align:baseline}
+.dot.red{background:var(--red)}.dot.amber{background:var(--amber)}.dot.green{background:var(--green)}
+.tag{display:inline-block;font-size:12px;border-radius:999px;padding:3px 9px;border:1px solid var(--rule);white-space:nowrap}
+.tag.ok{background:var(--green-soft);border-color:#A9CDB6;color:var(--green)}
+.tag.no{background:var(--red-soft);border-color:#E0B4AE;color:var(--omit)}
+.tag.warn{background:var(--flag-soft);border-color:#E3C79A;color:var(--flag)}
+.tag.mid{background:var(--amber-soft);border-color:#E3C79A;color:var(--amber)}
+.chaprow{display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--rule2);flex-wrap:wrap}
+.chaprow .nm{flex:1 1 300px;font-family:var(--serif);font-size:17px}
+.chaprow .mini{width:130px;height:10px;background:#E2E5E0;border-radius:5px;overflow:hidden;border:1px solid var(--rule)}
+.chaprow .mini i{display:block;height:100%;background:var(--green)}
+.chaprow .ct{font-size:14px;color:var(--ink2);width:110px;text-align:right}
+.note{font-style:italic;color:var(--ink2)}
+.muted{color:var(--ink3)}
+#gate{padding:60px 0}
+.err{background:var(--red-soft);border:1px solid #E0B4AE;color:var(--omit);border-radius:8px;padding:12px 14px;margin-top:12px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+footer{margin:40px 0;color:var(--ink3);font-size:14px}
+</style>
+</head>
+<body>
+
+<div class="mast"><div class="wrap">
+  <h1>Call me Eliyahu — review progress</h1>
+  <div class="sub">Live view of Elliott's decisions. Read-only. Studio San Francisco.</div>
+</div></div>
+
+<div class="wrap">
+
+<div id="gate">
+  <div class="panel">
+    <h2>Enter your progress key</h2>
+    <p class="muted">This is the value of <code>CME_STEPHEN_KEY</code> in the Netlify environment variables. It is remembered in this browser once entered.</p>
+    <input type="password" id="key" placeholder="progress key" autocomplete="off">
+    <div class="btnrow" style="margin-top:12px"><button class="primary" id="go">Open</button></div>
+    <div id="gerr"></div>
+  </div>
+</div>
+
+<div id="app" style="display:none">
+  <div class="panel">
+    <h2>Where Elliott has got to</h2>
+    <div id="head"></div>
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <div class="stats" id="stats"></div>
+    <div class="btnrow" style="margin-top:16px">
+      <button id="refresh">Refresh</button>
+      <button id="csv">Download approved list (CSV)</button>
+      <button id="json">Download everything (JSON)</button>
+      <button id="snaps">Recovery points…</button>
+    </div>
+    <div id="snapbox"></div>
+  </div>
+
+  <div class="panel">
+    <h2>By chapter</h2>
+    <div id="chapters"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Needs your attention</h2>
+    <div id="attention"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Every passage</h2>
+    <div class="filters">
+      <select id="f-chap"></select>
+      <select id="f-state">
+        <option value="">All states</option>
+        <option value="done">Finished</option>
+        <option value="part">Started, not finished</option>
+        <option value="none">Not started</option>
+      </select>
+      <select id="f-narr">
+        <option value="">Any reader</option>
+        <option value="catherine">Catherine</option>
+        <option value="elliott">Elliott</option>
+        <option value="undecided">Undecided</option>
+        <option value="__none">Not chosen</option>
+      </select>
+      <select id="f-dec">
+        <option value="">Any decision</option>
+        <option value="approve">Approve as written</option>
+        <option value="approve_edit">Approve with change</option>
+        <option value="omit">Leave out</option>
+        <option value="discuss">Discuss</option>
+        <option value="__none">No decision</option>
+      </select>
+    </div>
+    <div style="max-height:640px;overflow:auto;margin-top:6px"><table id="tbl"></table></div>
+  </div>
+</div>
+
+<footer>Internal production document. Approval by the author is not rights clearance.</footer>
+</div>
+
+<script>
+"use strict";
+// No manuscript in this file either — passages arrive from /api/passages
+// only after the key is validated server-side.
+let ITEMS=[], REVIEW=[];
+async function fetchPassages(){
+  const res=await fetch('/api/passages',{headers:{'x-cme-key':KEYSTR}});
+  if(res.status===401||res.status===403) throw new Error('key');
+  if(!res.ok) throw new Error('http '+res.status);
+  const d=await res.json();
+  ITEMS=d.passages; REVIEW=ITEMS.filter(function(i){return i.in_scope;});
+}
+const TYPE={epigraph:'Epigraph',thirdparty:'Third-party text',dream:'Dream',vision:'Vision',
+  extended:'Extended quote',dialogue:'Dialogue',ambiguous:'Ambiguous'};
+const RIGHTS={not_evaluated:'Not evaluated',likely_pd:'Likely public domain',
+  translation_verify:'Verify translation',permission_required:'Permission required',
+  cleared:'Rights cleared',omit_pending:'Omit pending clearance',na:'Not applicable'};
+const NARR={catherine:'Catherine',elliott:'Elliott',undecided:'Undecided'};
+const DEC={approve:'Approve as written',approve_edit:'Approve with change',omit:'Leave out',discuss:'Discuss'};
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+let KEYSTR=localStorage.getItem('cme_stephen_key')||'';
+let STATE={rev:0,items:{},updated_at:null};
+const rec=id=>STATE.items[id]||{};
+const isEdited=it=>{const r=rec(it.id);return r.revision&&r.revision!==it.text;};
+const touched=it=>{const r=rec(it.id);return !!(r.narrator||r.decision||r.rights||r.note||isEdited(it));};
+const stat=it=>rec(it.id).complete?'green':(touched(it)?'amber':'red');
+const textToRecord=it=>{const r=rec(it.id);return (r.revision&&r.revision!=='')?r.revision:it.text;};
+
+function problems(it){
+  const r=rec(it.id),o=[];
+  if(r.complete&&!r.decision)o.push('finished with no decision');
+  if(r.complete&&!r.narrator)o.push('finished with no reader chosen');
+  if(r.complete&&!r.rights)o.push('finished with no rights status');
+  if(r.decision==='omit'&&(r.narrator==='catherine'||r.narrator==='elliott'))o.push('omitted but still assigned to '+NARR[r.narrator]);
+  if(r.decision==='approve_edit'&&!isEdited(it))o.push('approve-with-change but no change saved');
+  if(r.decision==='approve'&&isEdited(it))o.push('approved as written but a change is saved');
+  if(r.rights==='omit_pending'&&(r.decision==='approve'||r.decision==='approve_edit'))o.push('approved but rights say omit pending clearance');
+  if(r.complete&&r.decision==='discuss'&&!r.note)o.push('marked to discuss with no note');
+  return o;
+}
+
+async function pull(){
+  const res=await fetch('/api/review',{headers:{'x-cme-key':KEYSTR}});
+  if(res.status===401||res.status===403) throw new Error('key');
+  if(!res.ok) throw new Error('http '+res.status);
+  const d=await res.json();
+  STATE=d.state||{rev:0,items:{}};
+}
+
+function render(){
+  const done=REVIEW.filter(i=>rec(i.id).complete).length;
+  const started=REVIEW.filter(i=>touched(i)&&!rec(i.id).complete).length;
+  const pct=Math.round(done/REVIEW.length*100);
+  document.getElementById('fill').style.width=pct+'%';
+  document.getElementById('head').innerHTML=
+    `<div style="font-family:var(--serif);font-size:30px">${done} <span style="font-size:17px;color:var(--ink2)">of ${REVIEW.length} passages finished (${pct}%)</span></div>`+
+    `<div class="muted" style="margin-top:6px">${STATE.updated_at?'Last answer received '+new Date(STATE.updated_at).toLocaleString()+' · save #'+STATE.rev:'Elliott has not started yet.'}</div>`;
+
+  const c={cath:0,ell:0,und:0,app:0,edit:0,omit:0,disc:0,rights:0,probs:0};
+  REVIEW.forEach(it=>{const r=rec(it.id);
+    if(r.narrator==='catherine')c.cath++; if(r.narrator==='elliott')c.ell++; if(r.narrator==='undecided')c.und++;
+    if(r.decision==='approve'||r.decision==='approve_edit')c.app++;
+    if(r.decision==='omit')c.omit++; if(r.decision==='discuss')c.disc++;
+    if(isEdited(it))c.edit++;
+    if((r.decision==='approve'||r.decision==='approve_edit')&&r.rights!=='cleared')c.rights++;
+    if(problems(it).length)c.probs++;});
+  document.getElementById('stats').innerHTML=[
+    ['Started, unfinished',started],['To Catherine',c.cath],['To Elliott',c.ell],['Undecided',c.und],
+    ['Approved',c.app],['Wording changed',c.edit],['Left out',c.omit],['To discuss',c.disc]
+  ].map(([k,n])=>`<div class="stat"><div class="n">${n}</div><div class="k">${k}</div></div>`).join('')
+   +`<div class="stat warn"><div class="n">${c.rights}</div><div class="k">Approved, not cleared</div></div>`
+   +(c.probs?`<div class="stat warn"><div class="n">${c.probs}</div><div class="k">Contradictions</div></div>`:'');
+
+  const chaps=[];
+  REVIEW.forEach(it=>{let x=chaps.find(z=>z.name===it.section);if(!x){x={name:it.section,items:[]};chaps.push(x);}x.items.push(it);});
+  document.getElementById('chapters').innerHTML=chaps.map(x=>{
+    const d=x.items.filter(i=>rec(i.id).complete).length;
+    const any=x.items.some(i=>touched(i)||rec(i.id).complete);
+    const st=d===x.items.length?'green':(any?'amber':'red');
+    return `<div class="chaprow"><span class="dot ${st}"></span><span class="nm">${esc(x.name)}</span>
+      <span class="mini"><i style="width:${Math.round(d/x.items.length*100)}%"></i></span>
+      <span class="ct">${d} of ${x.items.length}</span></div>`;}).join('');
+
+  const att=REVIEW.filter(i=>problems(i).length);
+  const rightsOpen=REVIEW.filter(i=>{const r=rec(i.id);
+    return (r.decision==='approve'||r.decision==='approve_edit')&&r.rights!=='cleared'&&r.rights!=='na';});
+  const notes=REVIEW.filter(i=>rec(i.id).note);
+  document.getElementById('attention').innerHTML=
+    `<h3 style="font-size:16px;margin-top:6px">Contradictions — ${att.length}</h3>`+
+    (att.length?att.map(i=>`<div style="padding:7px 0;border-bottom:1px solid var(--rule2)"><span class="tag no">${i.id}</span> ${esc(i.label)} <span class="muted">— ${problems(i).map(esc).join('; ')}</span></div>`).join(''):'<p class="muted">None.</p>')+
+    `<h3 style="font-size:16px;margin-top:20px">Approved but not cleared — ${rightsOpen.length}</h3>`+
+    (rightsOpen.length?rightsOpen.map(i=>`<div style="padding:7px 0;border-bottom:1px solid var(--rule2)"><span class="tag warn">${i.id}</span> ${esc(i.label)} <span class="muted">— ${esc(RIGHTS[rec(i.id).rights]||'not set')}</span></div>`).join(''):'<p class="muted">None.</p>')+
+    `<h3 style="font-size:16px;margin-top:20px">Notes from Elliott — ${notes.length}</h3>`+
+    (notes.length?notes.map(i=>`<div style="padding:7px 0;border-bottom:1px solid var(--rule2)"><span class="tag">${i.id}</span> ${esc(i.label)}<div class="note">“${esc(rec(i.id).note)}”</div></div>`).join(''):'<p class="muted">None yet.</p>');
+
+  renderTable();
+}
+
+function renderTable(){
+  const fc=document.getElementById('f-chap').value, fs=document.getElementById('f-state').value,
+        fn=document.getElementById('f-narr').value, fd=document.getElementById('f-dec').value;
+  const rows=REVIEW.filter(it=>{
+    const r=rec(it.id), st=stat(it);
+    if(fc&&it.section!==fc)return false;
+    if(fs==='done'&&st!=='green')return false;
+    if(fs==='part'&&st!=='amber')return false;
+    if(fs==='none'&&st!=='red')return false;
+    if(fn){ if(fn==='__none'){if(r.narrator)return false;} else if(r.narrator!==fn)return false; }
+    if(fd){ if(fd==='__none'){if(r.decision)return false;} else if(r.decision!==fd)return false; }
+    return true;
+  });
+  document.getElementById('tbl').innerHTML=
+    '<thead><tr><th>ID</th><th>Passage</th><th>p.</th><th>Reader</th><th>Decision</th><th>Rights</th><th>Cleared</th><th>Note</th></tr></thead><tbody>'+
+    rows.map(it=>{const r=rec(it.id);
+      return `<tr><td class="id"><span class="dot ${stat(it)}"></span>${it.id}</td>
+        <td>${esc(it.label)}${isEdited(it)?' <span class="tag mid">edited</span>':''}<div class="muted" style="font-size:12.5px">${esc(TYPE[it.passage_type])}${it.source?' · '+esc(it.source):''}</div></td>
+        <td>${esc(it.printed_page)}</td>
+        <td>${esc(NARR[r.narrator]||'—')}</td>
+        <td>${esc(DEC[r.decision]||'—')}</td>
+        <td>${esc(RIGHTS[r.rights]||'—')}</td>
+        <td>${r.rights==='cleared'?'<span class="tag ok">yes</span>':'<span class="tag no">no</span>'}</td>
+        <td class="note">${esc(r.note||'')}</td></tr>`;}).join('')+'</tbody>';
+}
+
+function dl(name,text,mime){
+  const b=new Blob([text],{type:mime||'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');
+  a.href=u;a.download=name;document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(u);a.remove();},400);
+}
+const stamp=()=>{const d=new Date(),p=n=>String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}`;};
+
+document.getElementById('csv').addEventListener('click',()=>{
+  const rows=[['id','printed_page','pdf_page','chapter','type','label','source','reader','decision',
+    'edited_from_source','text_to_record','original_text_from_pdf','rights_status','RIGHTS_CLEARED',
+    'rights_flags','elliott_note','audio_filename_stem']];
+  REVIEW.forEach(it=>{const r=rec(it.id);
+    if(!(r.decision==='approve'||r.decision==='approve_edit'))return;
+    rows.push([it.id,it.printed_page,it.pdf_page,it.section,TYPE[it.passage_type],it.label,it.source,
+      NARR[r.narrator]||'(not chosen)',DEC[r.decision],isEdited(it)?'YES':'no',
+      textToRecord(it),it.text,RIGHTS[r.rights]||'(not set)',
+      r.rights==='cleared'?'CLEARED':'NOT CLEARED — approval is not clearance',
+      (it.flags||[]).join('; '),r.note||'',r.narrator==='catherine'?it.id:'']);});
+  if(rows.length===1){alert('Nothing approved yet.');return;}
+  const csv=rows.map(r=>r.map(c=>{const s=String(c==null?'':c);
+    return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}).join(',')).join('\r\n');
+  dl(`CME_approved_index_${stamp()}.csv`,'\ufeff'+csv,'text/csv;charset=utf-8');
+});
+
+document.getElementById('json').addEventListener('click',()=>{
+  dl(`CME_review_snapshot_${stamp()}.json`,JSON.stringify({
+    format:'call-me-eliyahu-passage-review',format_version:1,
+    book:'Call me Eliyahu: Tales told by an Elliott',reviewer:'Elliott Isenberg',
+    exported_at:new Date().toISOString(),server_rev:STATE.rev,server_updated_at:STATE.updated_at,
+    important:'Editorial approval by the author is NOT rights clearance.',
+    items:ITEMS.map(it=>{const r=rec(it.id);
+      return Object.assign({},it,{elliott_narrator:r.narrator||'',elliott_decision:r.decision||'',
+        elliott_proposed_revision:r.revision||'',edited_from_source:!!isEdited(it),
+        text_to_record:textToRecord(it),elliott_rights_status:r.rights||'',
+        rights_cleared:r.rights==='cleared',elliott_note:r.note||'',
+        review_complete:!!r.complete,open_questions:problems(it)});})
+  },null,1));
+});
+
+document.getElementById('snaps').addEventListener('click',async()=>{
+  const box=document.getElementById('snapbox');
+  box.innerHTML='<p class="muted">Loading…</p>';
+  try{
+    const res=await fetch('/api/review?snapshots=1',{headers:{'x-cme-key':KEYSTR}});
+    const d=await res.json();
+    box.innerHTML='<h3 style="font-size:16px;margin-top:16px">Hourly recovery points</h3>'+
+      '<p class="muted">One per hour Elliott worked. If something goes wrong, these are what you restore from.</p>'+
+      (d.snapshots||[]).slice(0,40).map(k=>`<div style="padding:5px 0"><code>${esc(k)}</code> <button data-snap="${esc(k)}" style="min-height:32px;padding:4px 10px;font-size:13px">Download</button></div>`).join('');
+    box.querySelectorAll('[data-snap]').forEach(b=>b.addEventListener('click',async()=>{
+      const r=await fetch('/api/review?snapshot='+encodeURIComponent(b.dataset.snap),{headers:{'x-cme-key':KEYSTR}});
+      const j=await r.json();
+      dl('CME_recovery_'+b.dataset.snap.replace('snapshots/','')+'.json',JSON.stringify(j.state,null,1));
+    }));
+  }catch(e){ box.innerHTML='<div class="err">Could not load recovery points.</div>'; }
+});
+
+['f-chap','f-state','f-narr','f-dec'].forEach(id=>document.getElementById(id).addEventListener('change',renderTable));
+document.getElementById('refresh').addEventListener('click',async()=>{await pull();render();});
+
+async function open_(){
+  try{
+    await fetchPassages();
+    await pull();
+    localStorage.setItem('cme_stephen_key',KEYSTR);
+    document.getElementById('gate').style.display='none';
+    document.getElementById('app').style.display='';
+    const chaps=[...new Set(REVIEW.map(i=>i.section))];
+    document.getElementById('f-chap').innerHTML='<option value="">All chapters</option>'+
+      chaps.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+    render();
+    setInterval(async()=>{try{await pull();render();}catch(e){}},60000);
+  }catch(e){
+    document.getElementById('gerr').innerHTML='<div class="err">That key was not accepted. Check CME_STEPHEN_KEY in your Netlify environment variables.</div>';
+  }
+}
+document.getElementById('go').addEventListener('click',()=>{KEYSTR=document.getElementById('key').value.trim();open_();});
+document.getElementById('key').addEventListener('keydown',e=>{if(e.key==='Enter'){KEYSTR=e.target.value.trim();open_();}});
+if(KEYSTR) open_();
+</script>
+</body>
+</html>
