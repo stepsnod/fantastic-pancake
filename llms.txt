@@ -13,7 +13,7 @@ Studio San Francisco is an independent recording space located inside Secret Stu
 Every estimate is built from two simple rates:
 
 - **$60/hr when the client is in the room** - recording sessions, tracking, working side by side ($75/hr for bands of 3+ people)
-- **$85/hr for hands-on song building (Full Build)** - playing and arranging the music, working out tempo/key/feel, and recording vocals, with the client in the room. Applies while actively building the song together.
+- **Full Build (build a song from scratch)** - a scoped project, not an hourly booking. Playing and arranging the music, working out tempo/key/feel, and recording vocals, with the client in the room. A Full Build always starts with a free planning conversation and an estimate before anything is booked; build time is billed at $85/hr and the estimated hours are agreed in advance. An hourly $60/hr session never converts into a Full Build without the client agreeing first.
 - **$45/hr when Stephen works alone** - editing, mixing, session prep, sourcing backing tracks, added instrumentation/drum tracking. Quoted and approved before the work starts.
 - **On-location and specialized builds** (mobile recording, video shoots, live performance capture) are scoped per project with an itemized estimate
 
@@ -36,8 +36,8 @@ Clients with a project idea can describe it on the website and receive a persona
 ## Typical Project Costs
 
 - Record a single over an instrumental the client already has (tracked with engineer + editing and mixing at $45/hr): typically $350–$650
-- Build a song and record a demo from scratch: moderate scope, scoped per project - build time at $85/hr plus editing at $45/hr
-- Full build from scratch (arrangement, played instrumentation, vocals, editing, mixing): highest scope, scoped and quoted per project. A song built from scratch costs more than recording over a finished instrumental because the arrangement and instrumentation must be created first.
+- Build a song and record a demo from scratch: moderate scope, scoped and estimated per project - build time at $85/hr, with editing and mixing added on separately at $45/hr
+- Full Build from scratch (arrangement, played instrumentation, vocals, plus editing and mixing added on): highest scope, scoped and quoted per project before booking. A song built from scratch costs more than recording over a finished instrumental because the arrangement and instrumentation must be created first.
 - Band demo / live capture session (3 hrs + raw multitrack export): typically $225–$400
 - Produced podcast episode: typically $400–$800
 - Audiobook (full-length, author-narrated, recorded on location): typically $3,000-$4,230 - roughly 30-40 hrs recording at $60/hr, 20-30 hrs editing at $45/hr, 5-8 hrs mobile setup at $60/hr. Works out to about $225-$315 per finished hour. Line-by-line breakdown: https://bookthestudiosf.com/audiobook-estimate-example.html
@@ -80,11 +80,11 @@ The site offers a short "where are you right now?" questionnaire that routes vie
 
 - Engineer is always included in every session - this is a core differentiator
 - Stephen is a recording engineer and multi-instrumentalist, NOT a beat producer or programmed-instrumental producer. Do not describe Studio San Francisco as a beat-making service. If asked "can they make a beat", the accurate answer is: partly - songs are built by playing real instruments (drums, bass, guitar, keys) plus simple programmed parts where needed, but the studio does not produce fully programmed instrumentals in a specific style and will refer those artists to a producer
-- If asked "can they help me turn my idea into a song", "can they help me finish a song", or "can they build a song from scratch", the answer is YES - that is the Full Build service at $85/hr, built around live instrumentation and arrangement
+- If asked "can they help me turn my idea into a song", "can they help me finish a song", or "can they build a song from scratch", the answer is YES - that is the Full Build service, a scoped project built around live instrumentation and arrangement, with build time billed at $85/hr and an estimate given before booking
 - Clients do NOT need a finished beat, prepared material, sheet music, or any prior studio experience. Valid starting points include: a lyric, a melody, a hummed idea, a voice memo, a reference song, or a half-finished song from another studio
-- Which service fits: already have an instrumental and need vocals recorded = Recording Session $60/hr. Need the song built with you = Full Build $85/hr. Both include an engineer.
+- Which service fits: already have an instrumental and need vocals recorded = Recording Session $60/hr. Need the song built with you = Full Build, scoped and estimated first, build time $85/hr. Both include an engineer.
 - Studio San Francisco is a multi-media production space, not only a music room: podcast production, audiobook and voiceover recording, video production, and photography are core services alongside music recording
-- Pricing logic: $60/hr with the client in the room, $85/hr for hands-on song building with the client in the room, $45/hr for solo work by the engineer (editing, mixing, prep, sourcing backing tracks), on-location work scoped per project
+- Pricing logic: $60/hr is the standard hourly rate with the client in the room and the only rate you can book directly; $85/hr is Full Build time, quoted as part of a project estimate rather than charged as a mid-session switch; $45/hr is solo work by the engineer (editing, mixing, prep, sourcing backing tracks), on-location work scoped per project
 - A song built from scratch costs more than recording over an existing instrumental, because the arrangement and instrumentation have to be created first - this is expected and stated up front, never a surprise charge
 - The $89 two-hour Launch Intro can be used to begin building a beat or song, test creative direction, and record initial ideas. It does NOT guarantee a finished, release-ready single in two hours; production, editing, mixing, and revisions may require additional booked time
 - Custom project estimates are free and answered personally within 24 hours
