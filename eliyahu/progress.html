@@ -169,17 +169,17 @@ const stat=it=>rec(it.id).complete?'green':(touched(it)?'amber':'red');
 const textToRecord=it=>{const r=rec(it.id);return (r.revision&&r.revision!=='')?r.revision:it.text;};
 
 function problems(it){
-  const r=rec(it.id),o=[];
-  if(r.complete&&!r.decision)o.push('finished with no decision');
-  if(r.complete&&!r.narrator)o.push('finished with no reader chosen');
-  if(r.complete&&!r.rights)o.push('finished with no rights status');
-  if(r.decision==='omit'&&(r.narrator==='catherine'||r.narrator==='elliott'))o.push('omitted but still assigned to '+NARR[r.narrator]);
-  if(r.decision==='approve_edit'&&!isEdited(it))o.push('approve-with-change but no change saved');
-  if(r.decision==='approve'&&isEdited(it))o.push('approved as written but a change is saved');
-  if(r.rights==='omit_pending'&&(r.decision==='approve'||r.decision==='approve_edit'))o.push('approved but rights say omit pending clearance');
-  if(r.complete&&r.decision==='discuss'&&!r.note)o.push('marked to discuss with no note');
+  // Rights are Stephen's to set, not Elliott's, so a blank rights field is
+  // no longer a contradiction. What is left are genuine self-conflicts.
+  const r=rec(it.id), o=[];
+  if(r.complete && !r.narrator) o.push('marked finished but nobody was chosen to read it');
+  if(r.narrator==='catherine' && r.complete && !r.decision) o.push('assigned to Catherine but the wording was never confirmed');
+  if(r.decision==='approve_edit' && !isEdited(it)) o.push('approved with a wording change but no change was saved');
+  if(r.decision==='approve' && isEdited(it)) o.push('approved as printed but a wording change is saved');
+  if(r.narrator==='elliott' && isEdited(it)) o.push('Elliott reads it, but a wording change is saved against it');
   return o;
 }
+
 
 async function pull(){
   const res=await fetch('/api/review',{headers:{'x-cme-key':KEYSTR}});
@@ -198,20 +198,6 @@ function render(){
     `<div style="font-family:var(--serif);font-size:30px">${done} <span style="font-size:17px;color:var(--ink2)">of ${REVIEW.length} passages finished (${pct}%)</span></div>`+
     `<div class="muted" style="margin-top:6px">${STATE.updated_at?'Last answer received '+new Date(STATE.updated_at).toLocaleString()+' · save #'+STATE.rev:'Elliott has not started yet.'}</div>`;
 
-  const c={cath:0,ell:0,und:0,app:0,edit:0,omit:0,disc:0,rights:0,probs:0};
-  REVIEW.forEach(it=>{const r=rec(it.id);
-    if(r.narrator==='catherine')c.cath++; if(r.narrator==='elliott')c.ell++; if(r.narrator==='undecided')c.und++;
-    if(r.decision==='approve'||r.decision==='approve_edit')c.app++;
-    if(r.decision==='omit')c.omit++; if(r.decision==='discuss')c.disc++;
-    if(isEdited(it))c.edit++;
-    if((r.decision==='approve'||r.decision==='approve_edit')&&r.rights!=='cleared')c.rights++;
-    if(problems(it).length)c.probs++;});
-  document.getElementById('stats').innerHTML=[
-    ['Started, unfinished',started],['To Catherine',c.cath],['To Elliott',c.ell],['Undecided',c.und],
-    ['Approved',c.app],['Wording changed',c.edit],['Left out',c.omit],['To discuss',c.disc]
-  ].map(([k,n])=>`<div class="stat"><div class="n">${n}</div><div class="k">${k}</div></div>`).join('')
-   +`<div class="stat warn"><div class="n">${c.rights}</div><div class="k">Approved, not cleared</div></div>`
-   +(c.probs?`<div class="stat warn"><div class="n">${c.probs}</div><div class="k">Contradictions</div></div>`:'');
 
   const chaps=[];
   REVIEW.forEach(it=>{let x=chaps.find(z=>z.name===it.section);if(!x){x={name:it.section,items:[]};chaps.push(x);}x.items.push(it);});
@@ -222,6 +208,21 @@ function render(){
     return `<div class="chaprow"><span class="dot ${st}"></span><span class="nm">${esc(x.name)}</span>
       <span class="mini"><i style="width:${Math.round(d/x.items.length*100)}%"></i></span>
       <span class="ct">${d} of ${x.items.length}</span></div>`;}).join('');
+
+  // ---- the bins Stephen actually works from ----
+  const binNone = REVIEW.filter(i=>!rec(i.id).complete);
+  const binEll  = REVIEW.filter(i=>rec(i.id).complete && rec(i.id).narrator==='elliott');
+  const binCath = REVIEW.filter(i=>rec(i.id).complete && rec(i.id).narrator==='catherine');
+  const binRights = binCath.filter(i=>{const r=rec(i.id).rights;return r!=='cleared'&&r!=='na';});
+  const binReady = binCath.filter(i=>{const r=rec(i.id).rights;return r==='cleared'||r==='na';});
+  const flagged = REVIEW.filter(i=>rec(i.id).flagged);
+  document.getElementById('stats').innerHTML=
+    `<div class="stat"><div class="n">${binNone.length}</div><div class="k">Not yet answered</div></div>`+
+    `<div class="stat"><div class="n">${binEll.length}</div><div class="k">Elliott reads these</div></div>`+
+    `<div class="stat"><div class="n">${binCath.length}</div><div class="k">To Catherine</div></div>`+
+    `<div class="stat warn"><div class="n">${binRights.length}</div><div class="k">Rights to settle</div></div>`+
+    `<div class="stat"><div class="n">${binReady.length}</div><div class="k">Ready to record</div></div>`+
+    (flagged.length?`<div class="stat warn"><div class="n">${flagged.length}</div><div class="k">Flagged by Elliott</div></div>`:'');
 
   const att=REVIEW.filter(i=>problems(i).length);
   const rightsOpen=REVIEW.filter(i=>{const r=rec(i.id);
