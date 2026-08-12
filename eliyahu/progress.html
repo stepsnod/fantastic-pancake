@@ -93,6 +93,18 @@ footer{margin:40px 0;color:var(--ink3);font-size:14px}
       <button id="json">Download everything (JSON)</button>
       <button id="snaps">Recovery points…</button>
     </div>
+    <details style="margin-top:22px">
+      <summary style="cursor:pointer;color:var(--omit);font-size:15px">Start the review over…</summary>
+      <div style="border:1.5px solid #C6A19C;border-radius:8px;padding:16px 18px;margin-top:12px;background:#FDF7F6">
+        <p style="margin:0 0 10px;font-size:15px"><b>Wipes every answer</b> — Elliott's and any of your own test
+        answers — and puts all 192 passages back to unanswered. A recovery point is saved first, so this can be
+        undone from <b>Recovery points…</b> above.</p>
+        <p style="margin:0 0 12px;font-size:15px;color:var(--ink2)">Use this before Elliott starts. Once he is
+        underway, don't.</p>
+        <button class="danger" id="reset">Erase all answers and start over</button>
+        <div id="resetmsg" style="margin-top:10px;font-size:15px"></div>
+      </div>
+    </details>
     <div id="snapbox"></div>
   </div>
 
@@ -324,6 +336,24 @@ document.getElementById('snaps').addEventListener('click',async()=>{
 
 ['f-chap','f-state','f-narr','f-dec'].forEach(id=>document.getElementById(id).addEventListener('change',renderTable));
 document.getElementById('refresh').addEventListener('click',async()=>{await pull();render();});
+
+document.getElementById('reset').addEventListener('click',async()=>{
+  const msg=document.getElementById('resetmsg');
+  if(!confirm('This erases every answer in the review and puts all passages back to unanswered.\n\nA recovery point is saved first, so it can be undone.\n\nContinue?')) return;
+  const typed=prompt('To confirm, type:  ERASE EVERYTHING');
+  if(typed!=='ERASE EVERYTHING'){ msg.innerHTML='<span class="muted">Nothing was erased.</span>'; return; }
+  msg.textContent='Erasing…';
+  try{
+    const res=await fetch('/api/review',{method:'DELETE',
+      headers:{'content-type':'application/json','x-cme-key':KEYSTR},
+      body:JSON.stringify({confirm:'ERASE EVERYTHING', ids:ITEMS.map(i=>i.id)})});
+    const d=await res.json();
+    if(!res.ok) throw new Error(d.error||('http '+res.status));
+    await pull(); render();
+    msg.innerHTML='<span class="tag ok">Done</span> '+d.cleared+' answers erased. '+
+      '<b>Now open Elliott\u2019s link once and reload it</b> so any copy still sitting in a browser is replaced.';
+  }catch(e){ msg.innerHTML='<div class="err">Could not reset: '+esc(e.message)+'</div>'; }
+});
 
 async function open_(){
   try{

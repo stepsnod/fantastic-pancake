@@ -578,8 +578,18 @@ async function pushToServer(){
   try{
     const res=await fetch(API,{method:'PUT',
       headers:{'content-type':'application/json','x-cme-key':KEYSTR},
-      body:JSON.stringify({rev:state.rev||0, items:state.items, last_export:state.last_export||null})});
+      body:JSON.stringify({rev:state.rev||0, items:state.items, reset_at:state.reset_at||null, last_export:state.last_export||null})});
     if(res.status===409){
+      var peek=await res.clone().json();
+      if(peek.error==='reset'){
+        // The review was started over. This browser's copy is history.
+        state.items=peek.state.items||{}; state.rev=peek.state.rev;
+        state.reset_at=peek.reset_at; state.updated_at=peek.state.updated_at;
+        DIRTY=false; localSave(); SYNCING=false;
+        setStatus('ok','The review was reset \u2014 this page has been refreshed');
+        OPEN={}; if(screen==='chapter') renderChapter(); else renderChapters();
+        return;
+      }
       // Another tab or device is ahead. The SERVER has already merged by
       // per-record timestamp, keeping whichever answer is newer. This tab simply
       // adopts the merged result — it never re-imposes its own older records.
@@ -1233,7 +1243,12 @@ function paintSynced(){
     const server=await pullFromServer();
     if(server===null) return;                       // locked screen already shown
     const localRev=state.rev||0, serverRev=server.rev||0;
-    if(serverRev>=localRev){
+    if(server.reset_at && server.reset_at!==state.reset_at){
+      // Started over since this browser last looked: adopt the server, merge nothing.
+      state.items=server.items||{}; state.rev=server.rev;
+      state.reset_at=server.reset_at; state.updated_at=server.updated_at;
+      localSave(); setStatus('ok','Ready');
+    } else if(serverRev>=localRev){
       // The server is the record. Anything this browser has that the server
       // does not is carried across rather than thrown away.
       var merged=Object.assign({},server.items||{});

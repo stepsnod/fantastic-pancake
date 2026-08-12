@@ -86,6 +86,49 @@ export default async (req) => {
     return json({ role, state });
   }
 
+  // --------------------------------------------------------- reset (rare)
+  // Wipes every answer. Stephen only, and only with the typed phrase. The
+  // previous state is snapshotted first, so a reset is recoverable.
+  //
+  // Note on roles: Stephen's key still cannot EDIT answers — it can only
+  // perform this one all-or-nothing, doubly-confirmed operation. That is a
+  // deliberate narrowing of the read-only rule, not a hole in it.
+  if (req.method === 'DELETE') {
+    if (role !== 'stephen') return json({ error: 'forbidden' }, 403);
+    let body = {};
+    try { body = JSON.parse((await req.text()) || '{}'); } catch { /* ignore */ }
+    if (body.confirm !== 'ERASE EVERYTHING') {
+      return json({ error: 'confirmation_required' }, 400);
+    }
+    const current = (await store.get(CURRENT, { type: 'json' })) || emptyState();
+    try {
+      await store.setJSON(`snapshots/pre-reset-${Date.now()}`, current);
+    } catch { /* a failed snapshot must not block the reset */ }
+
+    // Blank every id the caller knows about, stamped NOW. Writing blanks (rather
+    // than deleting keys) is what stops a browser that still holds old answers
+    // from pushing them back on its next sync: the per-record timestamp merge
+    // sees the blank as newer and keeps it.
+    const now = Date.now();
+    const blanks = {};
+    for (const id of (body.ids || Object.keys(current.items || {}))) {
+      blanks[id] = { narrator: '', decision: '', revision: null, rights: '',
+                     note: '', flagged: false, complete: false, _t: now };
+    }
+    const next = {
+      rev: (current.rev || 0) + 1,
+      items: blanks,
+      updated_at: new Date().toISOString(),
+      updated_by: 'reset',
+      reset_at: new Date().toISOString(),
+      last_export: current.last_export || null,
+    };
+    await store.setJSON(CURRENT, next);
+    return json({ ok: true, reset: true, rev: next.rev,
+                  cleared: Object.keys(current.items || {}).length,
+                  blanked: Object.keys(blanks).length });
+  }
+
   // --------------------------------------------------------------- write
   if (req.method === 'PUT' || req.method === 'POST') {
     if (role !== 'elliott') return json({ error: 'forbidden', message: 'This key can read but not write.' }, 403);
@@ -103,6 +146,14 @@ export default async (req) => {
     }
 
     const current = (await store.get(CURRENT, { type: 'json' })) || emptyState();
+
+    // If the review has been reset since this browser last synced, its copy is
+    // history. Refuse its items outright and hand back the current state, or a
+    // tab left open across a reset would push the old answers straight back.
+    if (current.reset_at && body.reset_at !== current.reset_at) {
+      return json({ error: 'reset', reset_at: current.reset_at, state: current }, 409);
+    }
+
     const clientRev = Number(body.rev);
 
     // Per-record timestamps decide conflicts. The server never takes a client's
@@ -124,6 +175,7 @@ export default async (req) => {
       const next = {
         rev: (current.rev || 0) + 1, items: merged,
         updated_at: new Date().toISOString(), updated_by: 'elliott',
+        reset_at: current.reset_at || null,
         last_export: body.last_export || current.last_export || null,
       };
       await store.setJSON(CURRENT, next);
@@ -136,6 +188,7 @@ export default async (req) => {
       items: merged,
       updated_at: new Date().toISOString(),
       updated_by: 'elliott',
+      reset_at: current.reset_at || null,
       last_export: body.last_export || current.last_export || null,
     };
 
