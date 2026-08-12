@@ -60,6 +60,12 @@ td.id{font-family:var(--mono);font-weight:600;white-space:nowrap}
 .err{background:var(--red-soft);border:1px solid #E0B4AE;color:var(--omit);border-radius:8px;padding:12px 14px;margin-top:12px}
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
 footer{margin:40px 0;color:var(--ink3);font-size:14px}
+.rrow{display:grid;grid-template-columns:1fr 210px 260px;gap:12px;align-items:start;
+  padding:12px 0;border-bottom:1px solid var(--rule2)}
+.rrow.settled{opacity:.62}
+.rrow .rmain{min-width:0}
+.rrow select,.rrow input{min-height:42px;font-size:14px;padding:8px 10px}
+@media (max-width:900px){.rrow{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -118,6 +124,30 @@ footer{margin:40px 0;color:var(--ink3);font-size:14px}
     <div id="attention"></div>
   </div>
 
+  <div class="panel" id="rightspanel">
+    <h2>Rights clearance <span id="rsaved" class="muted" style="font-size:13px;font-weight:400"></span></h2>
+    <p class="muted">Yours alone &mdash; Elliott never sees this. A passage moves to <b>Ready to record</b>
+    once it is marked <i>Rights cleared</i> or <i>Not applicable</i>. The starting value on each row is
+    the preliminary assessment from extraction, not a legal opinion.</p>
+    <div class="filters">
+      <select id="r-scope">
+        <option value="cath">Assigned to Catherine, not yet settled</option>
+        <option value="allcath">Everything assigned to Catherine</option>
+        <option value="all">Every passage in the book</option>
+        <option value="risk">Permission required or translation to verify</option>
+      </select>
+      <select id="r-group">
+        <option value="">All sources</option>
+        <option value="lyric">Song lyrics</option>
+        <option value="sunyata">Sunyata</option>
+        <option value="eliot">T. S. Eliot</option>
+        <option value="dylan">Bob Dylan</option>
+      </select>
+      <button id="r-bulk">Mark all shown as…</button>
+    </div>
+    <div id="rightslist" style="max-height:720px;overflow:auto;margin-top:8px"></div>
+  </div>
+
   <div class="panel">
     <h2>Every passage</h2>
     <div class="filters">
@@ -173,6 +203,37 @@ const DEC={approve:'Approve as written',approve_edit:'Approve with change',omit:
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 let KEYSTR=localStorage.getItem('cme_stephen_key')||'';
+let RIGHTS_STATE={rev:0,rights:{}};
+const rt = id => RIGHTS_STATE.rights[id] || {};
+// The working rights value: what Stephen has recorded, else the prepared assessment.
+function rightsOf(it){ const r=rt(it.id); return r.status || it.rights_status || 'not_evaluated'; }
+const isSettled = it => ['cleared','na'].includes(rightsOf(it));
+
+async function pullRights(){
+  const res=await fetch('/api/rights',{headers:{'x-cme-key':KEYSTR}});
+  if(!res.ok) throw new Error('rights http '+res.status);
+  RIGHTS_STATE=(await res.json()).state||{rev:0,rights:{}};
+}
+let rightsQueue={}, rightsTimer=null;
+function saveRights(id, patch){
+  const cur=rt(id);
+  RIGHTS_STATE.rights[id]=Object.assign({status:'',note:'',asked_on:''},cur,patch,{_t:Date.now()});
+  rightsQueue[id]=RIGHTS_STATE.rights[id];
+  const el=document.getElementById('rsaved'); if(el) el.textContent='Saving\u2026';
+  clearTimeout(rightsTimer);
+  rightsTimer=setTimeout(async()=>{
+    const batch=rightsQueue; rightsQueue={};
+    try{
+      const res=await fetch('/api/rights',{method:'PUT',
+        headers:{'content-type':'application/json','x-cme-key':KEYSTR},
+        body:JSON.stringify({rights:batch})});
+      if(!res.ok) throw new Error('http '+res.status);
+      const d=await res.json(); RIGHTS_STATE.rev=d.rev;
+      if(el) el.textContent='Saved \u00b7 '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+      render();
+    }catch(e){ if(el) el.textContent='Could not save \u2014 check your connection'; }
+  },600);
+}
 let STATE={rev:0,items:{},updated_at:null};
 const rec=id=>STATE.items[id]||{};
 const isEdited=it=>{const r=rec(it.id);return r.revision&&r.revision!==it.text;};
@@ -225,8 +286,8 @@ function render(){
   const binNone = REVIEW.filter(i=>!rec(i.id).complete);
   const binEll  = REVIEW.filter(i=>rec(i.id).complete && rec(i.id).narrator==='elliott');
   const binCath = REVIEW.filter(i=>rec(i.id).complete && rec(i.id).narrator==='catherine');
-  const binRights = binCath.filter(i=>{const r=rec(i.id).rights;return r!=='cleared'&&r!=='na';});
-  const binReady = binCath.filter(i=>{const r=rec(i.id).rights;return r==='cleared'||r==='na';});
+  const binRights = binCath.filter(i=>!isSettled(i));
+  const binReady  = binCath.filter(i=>isSettled(i));
   const flagged = REVIEW.filter(i=>rec(i.id).flagged);
   document.getElementById('stats').innerHTML=
     `<div class="stat"><div class="n">${binNone.length}</div><div class="k">Not yet answered</div></div>`+
@@ -243,13 +304,49 @@ function render(){
   document.getElementById('attention').innerHTML=
     `<h3 style="font-size:16px;margin-top:6px">Contradictions — ${att.length}</h3>`+
     (att.length?att.map(i=>`<div style="padding:7px 0;border-bottom:1px solid var(--rule2)"><span class="tag no">${i.id}</span> ${esc(i.label)} <span class="muted">— ${problems(i).map(esc).join('; ')}</span></div>`).join(''):'<p class="muted">None.</p>')+
-    `<h3 style="font-size:16px;margin-top:20px">Approved but not cleared — ${rightsOpen.length}</h3>`+
-    (rightsOpen.length?rightsOpen.map(i=>`<div style="padding:7px 0;border-bottom:1px solid var(--rule2)"><span class="tag warn">${i.id}</span> ${esc(i.label)} <span class="muted">— ${esc(RIGHTS[rec(i.id).rights]||'not set')}</span></div>`).join(''):'<p class="muted">None.</p>')+
+    `<h3 style="font-size:16px;margin-top:20px">Waiting on rights — ${rightsOpen.length}</h3>`+
+    `<p class="muted" style="margin:4px 0 0;font-size:13px">Work through these in the Rights clearance panel below.</p>`+
+    (rightsOpen.length?rightsOpen.map(i=>`<div style="padding:7px 0;border-bottom:1px solid var(--rule2)"><span class="tag warn">${i.id}</span> ${esc(i.label)} <span class="muted">— ${esc(RIGHTS[rightsOf(i)]||'not set')}</span></div>`).join(''):'<p class="muted">None.</p>')+
     `<h3 style="font-size:16px;margin-top:20px">Notes from Elliott — ${notes.length}</h3>`+
     (notes.length?notes.map(i=>`<div style="padding:7px 0;border-bottom:1px solid var(--rule2)"><span class="tag">${i.id}</span> ${esc(i.label)}<div class="note">“${esc(rec(i.id).note)}”</div></div>`).join(''):'<p class="muted">None yet.</p>');
 
   renderTable();
+  renderRights();
 }
+
+function renderRights(){
+  const scope=document.getElementById('r-scope').value;
+  const group=document.getElementById('r-group').value;
+  const cath = i => rec(i.id).complete && rec(i.id).narrator==='catherine';
+  let rows = REVIEW.filter(i=>{
+    if(scope==='cath')    return cath(i) && !isSettled(i);
+    if(scope==='allcath') return cath(i);
+    if(scope==='risk')    return ['permission_required','translation_verify'].includes(rightsOf(i));
+    return true;
+  });
+  if(group){
+    const m={lyric:/Song lyric/i, sunyata:/Sunyata|S\u00f8rensen/i, eliot:/Eliot/i, dylan:/Dylan/i};
+    rows=rows.filter(i=>m[group].test((i.source||'')+' '+(i.flags||[]).join(' ')));
+  }
+  const box=document.getElementById('rightslist');
+  if(!rows.length){ box.innerHTML='<p class="muted" style="padding:14px 0">Nothing here right now.</p>'; return; }
+  box.innerHTML='<p class="muted" style="margin:10px 0">'+rows.length+' passage'+(rows.length===1?'':'s')+'</p>'+
+    rows.map(i=>{
+      const r=rt(i.id), cur=rightsOf(i);
+      return `<div class="rrow${isSettled(i)?' settled':''}">
+        <div class="rmain">
+          <span class="tag${isSettled(i)?' ok':' warn'}">${i.id}</span>
+          <b>${esc(i.label)}</b>
+          <div class="muted" style="font-size:13px">${esc(i.source||'source not identified')} · printed p. ${esc(i.printed_page)}</div>
+        </div>
+        <select data-rs="${i.id}">${RIGHTS_OPTS.map(([v,l])=>
+          `<option value="${v}" ${cur===v?'selected':''}>${l}</option>`).join('')}</select>
+        <input type="text" data-rn="${i.id}" value="${esc(r.note||'')}" placeholder="Who did you ask? What did they say?">
+      </div>`;}).join('');
+}
+const RIGHTS_OPTS=[['not_evaluated','Not evaluated'],['likely_pd','Likely public domain'],
+  ['translation_verify','Verify translation'],['permission_required','Permission required'],
+  ['cleared','\u2713 Rights cleared'],['omit_pending','Omit pending clearance'],['na','Not applicable']];
 
 function renderTable(){
   const fc=document.getElementById('f-chap').value, fs=document.getElementById('f-state').value,
@@ -335,6 +432,25 @@ document.getElementById('snaps').addEventListener('click',async()=>{
 });
 
 ['f-chap','f-state','f-narr','f-dec'].forEach(id=>document.getElementById(id).addEventListener('change',renderTable));
+['r-scope','r-group'].forEach(id=>document.getElementById(id).addEventListener('change',renderRights));
+document.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.dataset.rs){ saveRights(t.dataset.rs,{status:t.value}); }
+});
+document.addEventListener('input',e=>{
+  const t=e.target;
+  if(t.dataset.rn){ clearTimeout(t._d); t._d=setTimeout(()=>saveRights(t.dataset.rn,{note:t.value}),700); }
+});
+document.getElementById('r-bulk').addEventListener('click',()=>{
+  const shown=[...document.querySelectorAll('[data-rs]')].map(x=>x.dataset.rs);
+  if(!shown.length){ alert('Nothing is shown to change.'); return; }
+  const v=prompt('Set all '+shown.length+' shown passages to which status?\n\n'+
+    RIGHTS_OPTS.map((o,n)=>(n+1)+'. '+o[1].replace('\u2713 ','')).join('\n')+'\n\nType the number:');
+  const pick=RIGHTS_OPTS[parseInt(v,10)-1];
+  if(!pick){ return; }
+  if(!confirm('Set '+shown.length+' passages to "'+pick[1].replace('\u2713 ','')+'"?')) return;
+  shown.forEach(id=>saveRights(id,{status:pick[0]}));
+});
 document.getElementById('refresh').addEventListener('click',async()=>{await pull();render();});
 
 document.getElementById('reset').addEventListener('click',async()=>{
@@ -359,6 +475,7 @@ async function open_(){
   try{
     await fetchPassages();
     await pull();
+    try{ await pullRights(); }catch(e){ console.warn('rights store unavailable',e); }
     localStorage.setItem('cme_stephen_key',KEYSTR);
     document.getElementById('gate').style.display='none';
     document.getElementById('app').style.display='';
