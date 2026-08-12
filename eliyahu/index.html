@@ -142,6 +142,12 @@ ol.steps li{margin:9px 0}
 .proof .attrib{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink2);margin-top:12px}
 .ctx{margin-top:14px}
 .ctx summary{cursor:pointer;font-size:16px;color:var(--accent-dark);padding:6px 0}
+.editrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}
+.editbtn{font-size:17px;min-height:48px;padding:11px 20px;border-radius:8px;
+  border:1.5px solid var(--accent);background:#fff;color:var(--accent-dark);font-weight:600}
+.editbtn:hover{background:var(--accent-soft);border-color:var(--accent-dark)}
+.editedtag{font-size:15px;font-weight:600;color:#5A3E77;background:#EFE7F5;
+  border:1px solid #C6B2D8;border-radius:999px;padding:5px 14px}
 .ctx .c{font-family:var(--serif);font-size:17px;color:var(--ink3);line-height:1.6;margin:8px 0;
   padding-left:14px;border-left:2px solid var(--rule)}
 .prep{margin-top:14px;background:var(--flag-soft);border:1px solid #E9D5B4;border-radius:8px;
@@ -706,7 +712,7 @@ function editor(id){
 function statusLine(it){
   var r=rec(it.id);
   if(!r.complete) return '';
-  if(r.narrator==='elliott') return 'You will read this one.';
+  if(r.narrator==='elliott') return 'Elliott reads this one' + (isEdited(it)?' \u2014 with a wording change.':'.');
   if(isEdited(it)) return 'Catherine reads it \u2014 with your wording change.';
   return 'Catherine reads it \u2014 exactly as printed.';
 }
@@ -718,7 +724,7 @@ function doneBar(it,nth,of){
       '<span class="tick">\u2713</span>'+
       '<span class="dl"><b>'+esc(it.label)+'</b><span class="ds">'+esc(statusLine(it))+
         (r.flagged?' <span class="miniflag">\u2691 flagged for Stephen</span>':'')+'</span></span>'+
-      '<button class="quiet" data-act="reopen" data-id="'+it.id+'">Change</button>'+
+      '<button class="editbtn" data-act="reopen" data-id="'+it.id+'">\u270E Change</button>'+
     '</div>'+
     // a note stays editable without reopening the whole card
     (r.flagged||r.note
@@ -749,8 +755,17 @@ function card(it,nth,of){
     '<div class="label">'+esc(it.label)+'</div>'+
     (it.source?'<div class="srcline">'+esc(it.source)+'</div>':'')+
     warnHtml+
-    '<div class="proof"><div class="txt">'+esc(it.text)+'</div>'+
+    '<div class="proof">'+
+      (isEdited(it)?'<div class="cap">\u270E Showing your wording</div>':'')+
+      '<div class="txt">'+esc(textToRecord(it))+'</div>'+
       (it.attribution_line?'<div class="attrib">'+esc(it.attribution_line)+'</div>':'')+'</div>'+
+    '<div class="editrow">'+
+      '<button class="editbtn" data-act="edit" data-id="'+it.id+'">\u270E '+
+        (isEdited(it)?'Edit this text again':'Edit this text')+'</button>'+
+      (isEdited(it)?'<span class="editedtag">\u270E Edited from the book</span>'+
+        '<button class="quiet" data-act="restore" data-id="'+it.id+'">Put the printed wording back</button>':'')+
+    '</div>'+
+    '<div id="ed-'+it.id+'"></div>'+(isEdited(it)?compare(it):'')+
     '<details class="ctx"><summary>Why is this here?</summary>'+
       (it.prep_note?'<div class="c">'+esc(it.prep_note)+'</div>':'')+
       '<div class="c"><b>Before:</b> '+(esc(it.preceding_context)||'<i>start of section</i>')+'</div>'+
@@ -763,7 +778,7 @@ function card(it,nth,of){
       '<button class="pick '+(r.narrator==='catherine'?'on':'')+'" data-act="cath" data-id="'+it.id+'">'+
         '<span class="pk">Yes \u2014 Catherine reads it</span></button>'+
       '<button class="pick alt '+(r.narrator==='elliott'?'on':'')+'" data-act="ell" data-id="'+it.id+'">'+
-        '<span class="pk">No \u2014 I\u2019ll read it</span></button>'+
+        '<span class="pk">No \u2014 Elliott will read this</span></button>'+
     '</div></div>';
 
   // ---- STEP TWO: only if Catherine ----
@@ -775,9 +790,7 @@ function card(it,nth,of){
           '<span class="pk">Yes \u2014 exactly as printed</span></button>'+
         '<button class="pick alt '+(isEdited(it)?'on':'')+'" data-act="edit" data-id="'+it.id+'">'+
           '<span class="pk">\u270E Change a word</span></button>'+
-      '</div>'+
-      '<div id="ed-'+it.id+'"></div>'+(isEdited(it)?compare(it):'')+
-      '</div>';
+      '</div></div>';
   }
 
   // ---- always available, never in the way ----
@@ -1062,10 +1075,14 @@ document.addEventListener('click',function(e){
     return;
   }
   if(act==='ell'){
-    answer(id,function(r){ r.narrator='elliott'; r.decision='approve'; r.revision=null; r.complete=true; }, true);
+    // keep any wording change he has already made — saying "Elliott reads this"
+    // is a casting decision, not an instruction to discard his edit
+    answer(id,function(r){ r.narrator='elliott'; r.decision=isEdited(item(id))?'approve_edit':'approve'; r.complete=true; }, true);
     return;
   }
   if(act==='asprinted'){
+    var wasEdited=isEdited(item(id));
+    if(wasEdited && !confirm('You have a wording change saved on this passage.\n\nChoosing "exactly as printed" will discard it and go back to the book\u2019s wording.\n\nGo ahead?')) return;
     answer(id,function(r){ r.narrator='catherine'; r.decision='approve'; r.revision=null; r.complete=true; }, true);
     return;
   }
@@ -1082,16 +1099,23 @@ document.addEventListener('click',function(e){
   else if(act==='reseted'){ document.getElementById('ta-'+id).value=item(id).text; }
   else if(act==='savedit'){
     var it=item(id), v=document.getElementById('ta-'+id).value;
+    var had=rec(id).narrator;
     answer(id,function(r){
       r.revision=(v.trim()===it.text.trim())?null:v;
-      r.narrator='catherine';
-      r.decision=r.revision?'approve_edit':'approve';
-      r.complete=true;
-    }, true);
+      if(had==='elliott'){                       // fixing wording on a passage he narrates
+        r.decision='approve'; r.complete=true;
+      } else if(had==='catherine'){              // wording change answers step two
+        r.decision=r.revision?'approve_edit':'approve'; r.complete=true;
+      }
+      // no reader chosen yet: keep the edit, leave the question standing
+    }, had==='catherine'||had==='elliott');
   }
   else if(act==='restore'){
     if(confirm('Remove your wording change and go back to the book\u2019s original wording for '+id+'?')){
-      answer(id,function(rr){ rr.revision=null; rr.decision='approve'; rr.complete=true; }, false);
+      answer(id,function(rr){
+        rr.revision=null;
+        if(rr.narrator){ rr.decision='approve'; rr.complete=true; }
+      }, false);
     }
   }
 });
