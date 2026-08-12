@@ -764,9 +764,9 @@ function card(it,nth,of){
     : 'pp.&nbsp;'+esc(it.printed_page)+'\u2013'+esc(it.printed_page_end);
 
   // Only rights warnings stay on Elliott's screen. Everything else folds away.
-  var RIGHTSY={'Song lyric':1,'Poetry':1,'Translation':1,'Scripture':1,'Extended third-party prose':1,'Uncertain attribution':1};
-  var warn=(it.flags||[]).filter(function(f){return RIGHTSY[f];});
-  var warnHtml = warn.length
+  // Only the passages that genuinely need a licence. Descriptive tags like
+  // "Poetry" were firing this on Shakespeare and Dickinson, which need nothing.
+  var warnHtml = (it.rights_status==='permission_required')
     ? '<div class="rwarn">\u26A0 We may need permission to record this one. Nothing for you to do \u2014 Stephen will sort it out.</div>' : '';
 
   var body='<article class="card '+(r.narrator?'started':'notstarted')+'" id="c-'+it.id+'" data-id="'+it.id+'">'+

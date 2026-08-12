@@ -126,15 +126,19 @@ footer{margin:40px 0;color:var(--ink3);font-size:14px}
 
   <div class="panel" id="rightspanel">
     <h2>Rights clearance <span id="rsaved" class="muted" style="font-size:13px;font-weight:400"></span></h2>
-    <p class="muted">Yours alone &mdash; Elliott never sees this. A passage moves to <b>Ready to record</b>
-    once it is marked <i>Rights cleared</i> or <i>Not applicable</i>. The starting value on each row is
-    the preliminary assessment from extraction, not a legal opinion.</p>
+    <p class="muted">Yours alone &mdash; Elliott never sees this. Each row starts at the preliminary
+    assessment from extraction, which is a triage to point you at the right questions, <b>not a legal
+    opinion</b>.</p>
+    <p class="muted"><b>A licence is needed because a passage is spoken in the audiobook at all, not
+    because of who speaks it.</b> A Dylan lyric needs clearing whether Catherine or Elliott reads it, so
+    this queue is not filtered by narrator. Marking one <i>Rights cleared</i> or <i>Not applicable</i>
+    settles it; if Elliott has also sent it to Catherine, it then appears in <b>Ready to record</b>.</p>
     <div class="filters">
       <select id="r-scope">
-        <option value="cath">Assigned to Catherine, not yet settled</option>
-        <option value="allcath">Everything assigned to Catherine</option>
+        <option value="todo">Needs clearing, not yet settled</option>
+        <option value="risk">Everything flagged permission-required or translation-to-verify</option>
+        <option value="cath">Only those Elliott sent to Catherine</option>
         <option value="all">Every passage in the book</option>
-        <option value="risk">Permission required or translation to verify</option>
       </select>
       <select id="r-group">
         <option value="">All sources</option>
@@ -319,9 +323,11 @@ function renderRights(){
   const group=document.getElementById('r-group').value;
   const cath = i => rec(i.id).complete && rec(i.id).narrator==='catherine';
   let rows = REVIEW.filter(i=>{
-    if(scope==='cath')    return cath(i) && !isSettled(i);
-    if(scope==='allcath') return cath(i);
-    if(scope==='risk')    return ['permission_required','translation_verify'].includes(rightsOf(i));
+    // A licence is needed because the passage is spoken in the audiobook at all,
+    // not because of who speaks it — so this queue is NOT filtered by narrator.
+    if(scope==='todo') return ['permission_required','translation_verify','not_evaluated','omit_pending'].includes(rightsOf(i));
+    if(scope==='risk') return ['permission_required','translation_verify'].includes(rightsOf(i));
+    if(scope==='cath') return cath(i);
     return true;
   });
   if(group){
