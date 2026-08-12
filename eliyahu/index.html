@@ -124,7 +124,7 @@ ol.steps li{margin:9px 0}
 .where{font-size:15px;color:var(--ink2)}
 .where b{color:var(--ink);font-weight:600}
 .card-body{padding:8px 26px 26px}
-.label{font-family:var(--serif);font-size:24px;margin:18px 0 4px}
+.label{font-family:var(--serif);font-size:22px;margin:18px 0 4px}
 .srcline{font-size:16px;color:var(--ink2);margin-bottom:4px}
 .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .badge{font-size:14px;letter-spacing:.03em;border-radius:999px;padding:5px 12px;
@@ -136,18 +136,30 @@ ol.steps li{margin:9px 0}
 
 .proof{margin:0;border-left:5px solid var(--accent);background:#FCFCFA;
   padding:20px 24px 18px;border-radius:0 8px 8px 0}
+
+/* the passage under review — the largest thing on the page */
+.kicker{font-family:var(--sans);font-size:14px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink3);font-weight:700;margin:16px 0 12px}
+.quote{position:relative;background:#FBFCFA;border:1.5px solid var(--rule);
+  border-left:6px solid var(--accent);border-radius:0 12px 12px 0;padding:30px 32px 26px}
+.quote.edited{border-left-color:#8B6BB1;background:#FBF9FD}
+.qcap{font-family:var(--sans);font-size:13px;letter-spacing:.07em;text-transform:uppercase;
+  color:#5A3E77;font-weight:700;margin-bottom:12px}
+.qtext{font-family:var(--serif);font-size:27px;line-height:1.6;white-space:pre-wrap;color:var(--ink)}
+.quote .attrib{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--ink2);margin-top:16px}
+.srcline{font-size:16px;color:var(--ink2);margin:12px 0 0}
+
+/* secondary actions stay quiet */
+.minor{font-size:16px;min-height:44px;padding:9px 16px;border-radius:999px;
+  border:1.5px solid var(--rule);background:#fff;color:var(--ink2)}
+.minor:hover{border-color:var(--accent);color:var(--accent-dark)}
+.extras{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .proof .cap{display:flex;align-items:center;gap:8px;font-size:14px;letter-spacing:.06em;
   text-transform:uppercase;color:var(--ink3);margin-bottom:12px}
 .proof .txt{font-family:var(--serif);font-size:22px;line-height:1.7;white-space:pre-wrap}
 .proof .attrib{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink2);margin-top:12px}
 .ctx{margin-top:14px}
 .ctx summary{cursor:pointer;font-size:16px;color:var(--accent-dark);padding:6px 0}
-.editrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}
-.editbtn{font-size:17px;min-height:48px;padding:11px 20px;border-radius:8px;
-  border:1.5px solid var(--accent);background:#fff;color:var(--accent-dark);font-weight:600}
-.editbtn:hover{background:var(--accent-soft);border-color:var(--accent-dark)}
-.editedtag{font-size:15px;font-weight:600;color:#5A3E77;background:#EFE7F5;
-  border:1px solid #C6B2D8;border-radius:999px;padding:5px 14px}
 .ctx .c{font-family:var(--serif);font-size:17px;color:var(--ink3);line-height:1.6;margin:8px 0;
   padding-left:14px;border-left:2px solid var(--rule)}
 .prep{margin-top:14px;background:var(--flag-soft);border:1px solid #E9D5B4;border-radius:8px;
@@ -213,8 +225,7 @@ footer{margin:50px 0 40px;color:var(--ink2);font-size:16px}
 
 /* the one question that matters */
 .ask{margin-top:26px;padding-top:22px;border-top:1px solid var(--rule2)}
-.ask h3{font-family:var(--serif);font-size:24px;font-weight:600;margin-bottom:16px}
-.ask.step2{animation:reveal .32s ease both}
+.ask h3{font-family:var(--serif);font-size:23px;font-weight:600;margin-bottom:16px}
 @keyframes reveal{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 .bigchoice{display:flex;gap:14px;flex-wrap:wrap}
 .pick{flex:1 1 260px;min-height:78px;font-size:20px;font-weight:600;border-radius:12px;
@@ -734,7 +745,7 @@ function doneBar(it,nth,of){
       '<span class="tick">\u2713</span>'+
       '<span class="dl"><b>'+esc(it.label)+'</b><span class="ds">'+esc(statusLine(it))+
         (r.flagged?' <span class="miniflag">\u2691 flagged for Stephen</span>':'')+'</span></span>'+
-      '<button class="editbtn" data-act="reopen" data-id="'+it.id+'">\u270E Change</button>'+
+      '<button class="minor" data-act="reopen" data-id="'+it.id+'">Change</button>'+
     '</div>'+
     // a note stays editable without reopening the whole card
     (r.flagged||r.note
@@ -762,19 +773,14 @@ function card(it,nth,of){
   '<div class="card-head"><span class="cid">'+it.id+'</span>'+
     '<span class="where">'+pages+' &nbsp;\u00b7&nbsp; '+nth+' of '+of+' in this chapter</span></div>'+
   '<div class="card-body">'+
-    '<div class="label">'+esc(it.label)+'</div>'+
+    '<div class="kicker">'+esc(it.label)+'</div>'+
+    '<div class="quote'+(isEdited(it)?' edited':'')+'">'+
+      (isEdited(it)?'<div class="qcap">\u270E Your wording</div>':'')+
+      '<div class="qtext">'+esc(textToRecord(it))+'</div>'+
+      (it.attribution_line?'<div class="attrib">'+esc(it.attribution_line)+'</div>':'')+
+    '</div>'+
     (it.source?'<div class="srcline">'+esc(it.source)+'</div>':'')+
     warnHtml+
-    '<div class="proof">'+
-      (isEdited(it)?'<div class="cap">\u270E Showing your wording</div>':'')+
-      '<div class="txt">'+esc(textToRecord(it))+'</div>'+
-      (it.attribution_line?'<div class="attrib">'+esc(it.attribution_line)+'</div>':'')+'</div>'+
-    '<div class="editrow">'+
-      '<button class="editbtn" data-act="edit" data-id="'+it.id+'">\u270E '+
-        (isEdited(it)?'Edit this text again':'Edit this text')+'</button>'+
-      (isEdited(it)?'<span class="editedtag">\u270E Edited from the book</span>'+
-        '<button class="quiet" data-act="restore" data-id="'+it.id+'">Put the printed wording back</button>':'')+
-    '</div>'+
     '<div id="ed-'+it.id+'"></div>'+(isEdited(it)?compare(it):'')+
     '<details class="ctx"><summary>Why is this here?</summary>'+
       (it.prep_note?'<div class="c">'+esc(it.prep_note)+'</div>':'')+
@@ -791,20 +797,11 @@ function card(it,nth,of){
         '<span class="pk">No \u2014 Elliott will read this</span></button>'+
     '</div></div>';
 
-  // ---- STEP TWO: only if Catherine ----
-  if(r.narrator==='catherine'){
-    body+='<div class="ask step2">'+
-      '<h3>Is the wording right?</h3>'+
-      '<div class="bigchoice">'+
-        '<button class="pick '+(r.decision==='approve'&&!isEdited(it)?'on':'')+'" data-act="asprinted" data-id="'+it.id+'">'+
-          '<span class="pk">Yes \u2014 exactly as printed</span></button>'+
-        '<button class="pick alt '+(isEdited(it)?'on':'')+'" data-act="edit" data-id="'+it.id+'">'+
-          '<span class="pk">\u270E Change a word</span></button>'+
-      '</div></div>';
-  }
-
   // ---- always available, never in the way ----
   body+='<div class="extras">'+
+    '<button class="minor" data-act="edit" data-id="'+it.id+'">\u270E '+
+      (isEdited(it)?'Change the wording again':'Change the wording')+'</button>'+
+    (isEdited(it)?'<button class="minor" data-act="restore" data-id="'+it.id+'">Put the printed wording back</button>':'')+
     '<button class="flagbtn'+(r.flagged?' on':'')+'" data-act="flag" data-id="'+it.id+'">'+
       (r.flagged?'\u2691 Flagged for Stephen':'\u2691 Flag this for Stephen')+'</button>'+
     (r.flagged||r.note
@@ -1078,22 +1075,17 @@ document.addEventListener('click',function(e){
   if(b.dataset.open!==undefined){ openChapter(+b.dataset.open,b.dataset.focus); return; }
   var act=b.dataset.act, id=b.dataset.id;
   if(act==='cath'){
-    answer(id,function(r){ r.narrator='catherine'; if(!r.decision) r.decision=''; r.complete=false; }, false);
-    var el=document.getElementById('c-'+id);
-    var s2=el&&el.querySelector('.step2');
-    if(s2) s2.scrollIntoView({block:'center',behavior:'smooth'});
+    answer(id,function(r){
+      r.narrator='catherine';
+      r.decision=isEdited(item(id))?'approve_edit':'approve';
+      r.complete=true;
+    }, true);
     return;
   }
   if(act==='ell'){
     // keep any wording change he has already made — saying "Elliott reads this"
     // is a casting decision, not an instruction to discard his edit
     answer(id,function(r){ r.narrator='elliott'; r.decision=isEdited(item(id))?'approve_edit':'approve'; r.complete=true; }, true);
-    return;
-  }
-  if(act==='asprinted'){
-    var wasEdited=isEdited(item(id));
-    if(wasEdited && !confirm('You have a wording change saved on this passage.\n\nChoosing "exactly as printed" will discard it and go back to the book\u2019s wording.\n\nGo ahead?')) return;
-    answer(id,function(r){ r.narrator='catherine'; r.decision='approve'; r.revision=null; r.complete=true; }, true);
     return;
   }
   if(act==='reopen'){ OPEN[id]=true; refreshCard(id);
