@@ -32,7 +32,7 @@
     X-Robots-Tag = "noindex, nofollow"
 
 [[headers]]
-  for = "/founders*"
+  for = "/ashvita-suresh-kumar*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
