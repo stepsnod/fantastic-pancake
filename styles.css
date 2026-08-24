@@ -3905,6 +3905,21 @@ footer {
 
 /* ─── 39. FORM VALIDATION STATES ──────────────────────────── */
 
+.form-error-summary {
+  display: none;
+  margin: 0 0 14px;
+  padding: 13px 16px;
+  border: 1px solid rgba(255, 77, 109, .45);
+  background: rgba(255, 77, 109, .10);
+  border-radius: 12px;
+  color: #ffd9e0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.form-error-summary.visible { display: block; }
+.form-error-summary strong { color: #fff; font-weight: 600; }
+
+
 input.field-error,
 select.field-error,
 textarea.field-error {

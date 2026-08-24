@@ -1177,6 +1177,53 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Human-readable label for a field, used in the error summary
+  function spFieldLabel(el) {
+    var node = el;
+    for (var i = 0; i < 4 && node; i++) {
+      node = node.parentElement;
+      if (!node) break;
+      var labs = node.querySelectorAll('label');
+      for (var j = 0; j < labs.length; j++) {
+        if (!labs[j].classList.contains('pill-check')) {
+          return labs[j].textContent.replace(/\*/g, '').trim();
+        }
+      }
+    }
+    return (el.name || 'this field').replace(/\[\]$/, '').replace(/_/g, ' ');
+  }
+
+  // Persistent error summary directly above the submit button.
+  // The page uses overflow:clip, so scrollIntoView cannot move the viewport -
+  // the error has to appear where the user already is.
+  function spErrorSummary(form) {
+    var el = form.querySelector('.form-error-summary');
+    if (!el) {
+      el = document.createElement('div');
+      el.className = 'form-error-summary';
+      el.setAttribute('role', 'alert');
+      el.setAttribute('aria-live', 'assertive');
+      var btn = form.querySelector('.intake-submit-btn');
+      if (btn && btn.parentElement) btn.parentElement.insertBefore(el, btn);
+      else form.appendChild(el);
+    }
+    return el;
+  }
+
+  // Clear the error summary as soon as the user starts fixing things
+  [walkthroughForm, launchForm].forEach(function (form) {
+    if (!form) return;
+    ['input', 'change'].forEach(function (evt) {
+      form.addEventListener(evt, function () {
+        var sum = form.querySelector('.form-error-summary');
+        if (sum && sum.classList.contains('visible')) {
+          sum.classList.remove('visible');
+          sum.textContent = '';
+        }
+      });
+    });
+  });
+
   // Override default form submission with validation + Netlify AJAX
   [walkthroughForm, launchForm].forEach(function (form) {
     if (!form) return;
@@ -1196,13 +1243,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Check required fields
       var isValid = true;
+      var missing = [];
       form.querySelectorAll('[required]').forEach(function (field) {
         if (field.type === 'checkbox' && !field.checked) {
           isValid = false;
+          missing.push(spFieldLabel(field));
           var row = field.closest('.terms-row');
           if (row) row.classList.add('field-error');
         } else if (!field.value.trim()) {
           isValid = false;
+          missing.push(spFieldLabel(field));
           field.classList.add('field-error');
         }
       });
@@ -1211,26 +1261,35 @@ document.addEventListener('DOMContentLoaded', function () {
       form.querySelectorAll('[data-required-group]').forEach(function (group) {
         if (!group.querySelector('input[type="checkbox"]:checked')) {
           isValid = false;
+          missing.push(spFieldLabel(group));
           group.classList.add('field-error');
         }
       });
 
+      var summaryEl = spErrorSummary(form);
+
       if (!isValid) {
         if (submitBtn) {
           submitBtn.classList.add('btn-error');
-          submitBtn.textContent = 'Please fill required fields';
+          submitBtn.textContent = missing.length === 1
+            ? '1 answer still missing'
+            : missing.length + ' answers still missing';
           setTimeout(function () {
             submitBtn.classList.remove('btn-error');
             submitBtn.textContent = 'Submit and Schedule Now \u2192';
-          }, 2000);
+          }, 2600);
         }
+        summaryEl.innerHTML = 'Still needed: <strong>' + missing.join('</strong>, <strong>') + '</strong>';
+        summaryEl.classList.add('visible');
         var firstError = form.querySelector('.field-error');
-        if (firstError) {
-          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          firstError.focus();
+        if (firstError && typeof firstError.focus === 'function') {
+          try { firstError.focus({ preventScroll: true }); } catch (e) {}
         }
         return;
       }
+
+      summaryEl.classList.remove('visible');
+      summaryEl.textContent = '';
 
       // Show submitting state
       var statusEl = form.querySelector('.form-status');
