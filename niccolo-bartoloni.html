@@ -4,29 +4,38 @@
   Niccolo Bartoloni · Session Archive
 
   ── Sessions on this page ─────────────────────────────────
-  1. Poesia Cruda   - August 25, 2026  - 2 mixes
+  1. Poesia Cruda   - August 20, 2026  - 2 mixes
+  2. Cosmos         - August 27, 2026  - 2 mixes
 
   ── Server setup ──────────────────────────────────────────
-  Place these 5 files in the SAME folder on your server:
+  Place these 9 files in the SAME folder on your server:
     niccolo-bartoloni.html
+
+    -- Session 1, Poesia Cruda, Aug 20 --
     poesia-cruda-vocal-mix.mp3
     poesia-cruda-vocal-mix.wav
     poesia-cruda-doubled-vocal-mix.mp3
     poesia-cruda-doubled-vocal-mix.wav
 
+    -- Session 2, Cosmos, Aug 27 --
+    Beat_COSMOS_session_two_2026-08-27_MASTER.mp3
+    Beat_COSMOS_session_two_2026-08-27_MASTER.wav
+    Beat_COSMOS_session_two_2026-08-27_vocal_double_MASTER.mp3
+    Beat_COSMOS_session_two_2026-08-27_vocal_double_MASTER.wav
+
   The MP3 is what the on-page player streams. Each card offers
   BOTH an MP3 and a WAV download. The card only shows its "done"
   state once both files for that track have been downloaded.
 
-  NOTE: rename your exports to match the four filenames above
-  exactly, or tell me your real filenames and I'll patch them.
+  Session 2 filenames are copied verbatim from your folder.
+  They are CASE-SENSITIVE on most servers, so keep them exact.
 
   IMPORTANT: if a filename contains SPACES, URL-encode them as %20
   in every src and href (this is the bug that broke Ashvita's page).
   Simplest fix is to just not use spaces in the uploaded filenames.
 
-  ALSO CHECK: the session date is set to August 25, 2026 in four
-  places. Change it if the session was a different day.
+  ALSO CHECK: session 2 tracks are titled "Cosmos", taken from the
+  Beat_COSMOS filenames. Change if the song has a different name.
 
   The download="" attribute renames each file on the client's device.
 
@@ -800,16 +809,37 @@
 
     <div class="session-list">
 
-      <!-- Cover Session -->
+      <!-- Session Two: Cosmos -->
+      <div class="session-card is-featured" id="select-cosmos"
+           data-target="delivery-cosmos"
+           role="button" tabindex="0"
+           aria-label="Open Cosmos - August 27, 2026">
+        <div class="session-card-left">
+          <div class="session-eyebrow">Second Session</div>
+          <div class="session-title">Cosmos</div>
+          <div class="session-meta-row">
+            <span>August 27, 2026</span>
+            <span class="meta-dot">·</span>
+            <span>2 mixes</span>
+          </div>
+        </div>
+        <div class="session-arrow">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- First Session: Poesia Cruda -->
       <div class="session-card" id="select-poesia"
            data-target="delivery-poesia"
            role="button" tabindex="0"
-           aria-label="Open Poesia Cruda - August 25, 2026">
+           aria-label="Open Poesia Cruda - August 20, 2026">
         <div class="session-card-left">
           <div class="session-eyebrow">First Session</div>
           <div class="session-title">Poesia Cruda</div>
           <div class="session-meta-row">
-            <span>August 25, 2026</span>
+            <span>August 20, 2026</span>
             <span class="meta-dot">·</span>
             <span>2 mixes</span>
           </div>
@@ -846,7 +876,7 @@
         <p class="delivery-meta">
           Poesia Cruda
           <span class="dot">·</span>
-          August 25, 2026
+          August 20, 2026
         </p>
       </div>
 
@@ -865,7 +895,7 @@
             </div>
             <div class="file-meta">
               <div class="file-title">Poesia Cruda</div>
-              <div class="file-label">Vocal Mix &nbsp;·&nbsp; August 25, 2026</div>
+              <div class="file-label">Vocal Mix &nbsp;·&nbsp; August 20, 2026</div>
             </div>
             <div class="card-waveform" aria-hidden="true">
               <div class="wave-bar" style="height:8px"></div>
@@ -936,7 +966,7 @@
             </div>
             <div class="file-meta">
               <div class="file-title">Poesia Cruda</div>
-              <div class="file-label">Doubled Vocal Mix &nbsp;·&nbsp; August 25, 2026</div>
+              <div class="file-label">Doubled Vocal Mix &nbsp;·&nbsp; August 20, 2026</div>
             </div>
             <div class="card-waveform" aria-hidden="true">
               <div class="wave-bar" style="height:8px"></div>
@@ -1013,6 +1043,194 @@
   </div>
 
 
+  <!-- ══════════════════════════════════════════════════
+       DELIVERY - Session Two, Cosmos (2 tracks)
+  ══════════════════════════════════════════════════ -->
+  <div id="delivery-cosmos" class="delivery-screen">
+    <div class="delivery-inner">
+
+      <button class="back-link" data-back type="button">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+        </svg>
+        All Sessions
+      </button>
+
+      <a href="https://bookthestudiosf.com" class="delivery-wordmark"
+         target="_blank" rel="noopener">Studio San Francisco</a>
+
+      <div class="delivery-header">
+        <h1>Your recordings,<br><span class="delivery-name">Nico.</span></h1>
+        <p class="delivery-meta">
+          Cosmos
+          <span class="dot">·</span>
+          August 27, 2026
+        </p>
+      </div>
+
+      <div class="tracks">
+
+        <!-- Track cs-1: Cosmos - Master -->
+        <div class="track-card" id="card-cs-1" data-src="Beat_COSMOS_session_two_2026-08-27_MASTER.mp3">
+          <div class="card-top">
+            <div class="file-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 18V5l12-2v13"/>
+                <circle cx="6" cy="18" r="3"/>
+                <circle cx="18" cy="16" r="3"/>
+              </svg>
+            </div>
+            <div class="file-meta">
+              <div class="file-title">Cosmos</div>
+              <div class="file-label">Master &nbsp;·&nbsp; August 27, 2026</div>
+            </div>
+            <div class="card-waveform" aria-hidden="true">
+              <div class="wave-bar" style="height:8px"></div>
+              <div class="wave-bar" style="height:16px"></div>
+              <div class="wave-bar" style="height:22px"></div>
+              <div class="wave-bar" style="height:13px"></div>
+              <div class="wave-bar" style="height:19px"></div>
+            </div>
+          </div>
+          <div class="card-sep"></div>
+          <div class="player">
+            <div class="player-row1">
+              <button class="play-btn" aria-label="Play Cosmos, Master">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </button>
+              <div class="progress-wrap">
+                <input type="range" class="progress-range" value="0" min="0" max="100" step="0.1" aria-label="Playback position"/>
+              </div>
+              <span class="time-display">0:00 / --:--</span>
+            </div>
+            <div class="player-row2">
+              <div class="volume-group">
+                <span class="vol-icon" aria-hidden="true"></span>
+                <input type="range" class="volume-range" value="80" min="0" max="100" aria-label="Volume"/>
+              </div>
+              <div class="dl-group">
+                <a class="dl-btn" id="btn-cs-1"
+                   href="Beat_COSMOS_session_two_2026-08-27_MASTER.mp3"
+                   download="Niccolo Bartoloni - Cosmos (Master).mp3"
+                   onclick="onDownload(event,'cs-1','Cosmos - Master [MP3]','delivery-cosmos')">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                  MP3
+                </a>
+                <a class="dl-btn dl-alt" id="btn-cs-1w"
+                   href="Beat_COSMOS_session_two_2026-08-27_MASTER.wav"
+                   download="Niccolo Bartoloni - Cosmos (Master).wav"
+                   onclick="onDownload(event,'cs-1w','Cosmos - Master [WAV]','delivery-cosmos')">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                  WAV
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Track cs-2: Cosmos - Vocal Double Master -->
+        <div class="track-card" id="card-cs-2" data-src="Beat_COSMOS_session_two_2026-08-27_vocal_double_MASTER.mp3">
+          <div class="card-top">
+            <div class="file-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 18V5l12-2v13"/>
+                <circle cx="6" cy="18" r="3"/>
+                <circle cx="18" cy="16" r="3"/>
+              </svg>
+            </div>
+            <div class="file-meta">
+              <div class="file-title">Cosmos</div>
+              <div class="file-label">Vocal Double Master &nbsp;·&nbsp; August 27, 2026</div>
+            </div>
+            <div class="card-waveform" aria-hidden="true">
+              <div class="wave-bar" style="height:8px"></div>
+              <div class="wave-bar" style="height:16px"></div>
+              <div class="wave-bar" style="height:22px"></div>
+              <div class="wave-bar" style="height:13px"></div>
+              <div class="wave-bar" style="height:19px"></div>
+            </div>
+          </div>
+          <div class="card-sep"></div>
+          <div class="player">
+            <div class="player-row1">
+              <button class="play-btn" aria-label="Play Cosmos, Vocal Double Master">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </button>
+              <div class="progress-wrap">
+                <input type="range" class="progress-range" value="0" min="0" max="100" step="0.1" aria-label="Playback position"/>
+              </div>
+              <span class="time-display">0:00 / --:--</span>
+            </div>
+            <div class="player-row2">
+              <div class="volume-group">
+                <span class="vol-icon" aria-hidden="true"></span>
+                <input type="range" class="volume-range" value="80" min="0" max="100" aria-label="Volume"/>
+              </div>
+              <div class="dl-group">
+                <a class="dl-btn" id="btn-cs-2"
+                   href="Beat_COSMOS_session_two_2026-08-27_vocal_double_MASTER.mp3"
+                   download="Niccolo Bartoloni - Cosmos (Vocal Double Master).mp3"
+                   onclick="onDownload(event,'cs-2','Cosmos - Vocal Double Master [MP3]','delivery-cosmos')">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                  MP3
+                </a>
+                <a class="dl-btn dl-alt" id="btn-cs-2w"
+                   href="Beat_COSMOS_session_two_2026-08-27_vocal_double_MASTER.wav"
+                   download="Niccolo Bartoloni - Cosmos (Vocal Double Master).wav"
+                   onclick="onDownload(event,'cs-2w','Cosmos - Vocal Double Master [WAV]','delivery-cosmos')">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                  WAV
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /tracks -->
+
+      <div class="all-done-banner" id="all-done-cosmos" role="status" aria-live="polite">
+        <p>✓ All files saved</p>
+        <small>You're all set. Reach out anytime for a revision or your next session.</small>
+      </div>
+
+      <footer>
+        <a href="https://bookthestudiosf.com" target="_blank" rel="noopener">Studio San Francisco</a>
+        <span class="fdot">·</span>
+        <a href="mailto:hello@bookthestudiosf.com">hello@bookthestudiosf.com</a>
+        <br>
+        <span style="opacity:.5; font-size:11px;">Secret Studios &nbsp;·&nbsp; San Francisco, CA</span>
+      </footer>
+
+    </div>
+  </div>
+
+
   <script>
     /* ════════════════════════════════════════════════════════════
        SESSION REGISTRY
@@ -1025,7 +1243,13 @@
         storeKey: 'ssf_nico_poesia_v1',
         total: 4,
         title: 'Poesia Cruda',
-        date: '2026-08-25'
+        date: '2026-08-20'
+      },
+      'delivery-cosmos': {
+        storeKey: 'ssf_nico_cosmos_v1',
+        total: 4,
+        title: 'Cosmos',
+        date: '2026-08-27'
       }
     };
 
@@ -1218,7 +1442,7 @@
     }
 
     /* Boot every player across every session (lazy: metadata-only until played) */
-    ['pc-1', 'pc-2'].forEach(id => initPlayer(id));
+    ['pc-1', 'pc-2', 'cs-1', 'cs-2'].forEach(id => initPlayer(id));
 
 
     /* ════════════════════════════════════════════════════════════
