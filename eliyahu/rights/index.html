@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Call me Eliyahu — Rights clearance</title>
+<style>
+:root{
+  --paper:#F3F4F1;--card:#fff;--ink:#16202A;--ink2:#4A5763;--ink3:#6E7A85;
+  --rule:#D5D8D3;--rule2:#E8EAE6;
+  --accent:#0E6E77;--accent-soft:#E1EFEF;--accent-dark:#0A5259;
+  --red:#B23B32;--red-soft:#FBEAE8;--amber:#B87A0E;--amber-soft:#FBF0DC;
+  --green:#2E7D4F;--green-soft:#E4F1E9;--violet:#5A3E77;--violet-soft:#EFE7F5;
+  --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:17px;line-height:1.6;padding-bottom:70px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;line-height:1.25}
+button,select,input,textarea{font-family:var(--sans);font-size:16px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.mast{background:var(--ink);color:#fff;padding:22px 0}
+.mast h1{color:#fff;font-size:29px}
+.mast .sub{color:#AEBBC4;font-size:16px;margin-top:6px;max-width:760px}
+
+.bar{position:sticky;top:0;z-index:60;background:rgba(243,244,241,.97);
+  border-bottom:1px solid var(--rule);backdrop-filter:saturate(140%) blur(6px)}
+.bar-in{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:11px 0}
+.who{font-size:15px;color:var(--ink2)}
+.who b{color:var(--ink)}
+.saved{font-size:14px;color:var(--ink2);display:flex;align-items:center;gap:8px;white-space:nowrap;margin-left:auto}
+.saved .dot{width:9px;height:9px;border-radius:50%;background:var(--green)}
+.saved.pending .dot{background:var(--amber)}
+.saved.error .dot{background:var(--red)}
+
+.panel{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:22px 24px;margin:20px 0}
+.panel h2{font-size:22px;margin-bottom:8px}
+.panel p{margin:9px 0;color:var(--ink2)}
+.panel p b,.panel p strong{color:var(--ink)}
+details.fold>summary{cursor:pointer;font-family:var(--serif);font-size:22px;font-weight:600;
+  list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::after{content:'Show';font-family:var(--sans);font-size:14px;color:var(--accent-dark);
+  border:1px solid var(--accent);border-radius:6px;padding:4px 12px;white-space:nowrap}
+details.fold[open]>summary::after{content:'Hide'}
+
+btn,button{cursor:pointer;border-radius:8px;border:1.5px solid var(--rule);background:#fff;
+  color:var(--ink);padding:10px 16px;min-height:46px}
+button:hover{border-color:var(--ink3)}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+button.primary:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
+button.quiet{border-color:transparent;background:transparent;color:var(--accent-dark);
+  text-decoration:underline;min-height:38px;padding:6px 4px;font-size:15px}
+button.danger{border-color:#C6A19C;color:var(--red);background:#fff}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap}
+
+/* progress */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px;margin-top:14px}
+.stat{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:11px 13px}
+.stat .n{font-family:var(--serif);font-size:27px;line-height:1}
+.stat .k{font-size:12.5px;color:var(--ink2);margin-top:3px}
+.stat.sev{background:var(--red-soft);border-color:#E0B4AE}.stat.sev .n{color:var(--red)}
+.stat.ok{background:var(--green-soft);border-color:#A9CDB6}.stat.ok .n{color:var(--green)}
+.track{height:15px;background:#E2E5E0;border-radius:8px;overflow:hidden;border:1px solid var(--rule);margin-top:12px}
+.track .fill{height:100%;background:var(--green);width:0%;transition:width .3s ease}
+
+/* filters */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;align-items:center}
+select,input[type=search],input[type=text]{background:#fff;border:1.5px solid var(--rule);
+  border-radius:8px;padding:9px 11px;min-height:44px;color:var(--ink)}
+input[type=search]{min-width:230px}
+
+/* cluster */
+.cluster{background:var(--card);border:1px solid var(--rule);border-radius:10px;margin:16px 0;overflow:hidden}
+.cluster.t-severe{border-left:9px solid var(--red)}
+.cluster.t-serious{border-left:9px solid var(--amber)}
+.cluster.t-check{border-left:9px solid var(--accent)}
+.cluster.t-courtesy{border-left:9px solid var(--green)}
+.cluster.t-clear{border-left:9px solid var(--ink3)}
+.cluster>summary{list-style:none;cursor:pointer;padding:18px 22px;display:flex;gap:16px;
+  align-items:center;flex-wrap:wrap}
+.cluster>summary::-webkit-details-marker{display:none}
+.cluster>summary:hover{background:#FAFBF9}
+.cname{flex:1 1 320px;font-family:var(--serif);font-size:21px}
+.cmeta{font-size:14px;color:var(--ink2);display:block;margin-top:3px;font-family:var(--sans)}
+.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:6px 14px;
+  font-size:14px;font-weight:600;white-space:nowrap;border:1.5px solid}
+.pill.severe{background:var(--red-soft);border-color:#E0B4AE;color:var(--red)}
+.pill.serious{background:var(--amber-soft);border-color:#E3C79A;color:var(--amber)}
+.pill.check{background:var(--accent-soft);border-color:#A9CFD1;color:var(--accent-dark)}
+.pill.courtesy{background:var(--green-soft);border-color:#A9CDB6;color:var(--green)}
+.pill.clear{background:#EEF0ED;border-color:var(--rule);color:var(--ink2)}
+.cbody{padding:4px 22px 20px;border-top:1px solid var(--rule2);background:#FAFBF9}
+
+.brief{display:grid;grid-template-columns:118px 1fr;gap:0;margin:14px 0 6px;font-size:15px}
+.brief dt{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);
+  font-weight:700;padding:7px 10px 7px 0;border-top:1px solid var(--rule2)}
+.brief dd{margin:0;padding:7px 0;color:var(--ink2);border-top:1px solid var(--rule2)}
+.brief .worst{background:var(--red-soft);color:#6B2A24;padding-left:9px;padding-right:9px}
+
+/* item */
+.item{background:#fff;border:1px solid var(--rule);border-radius:9px;padding:15px 17px;margin:12px 0}
+.item.done{border-left:6px solid var(--green);background:#FCFDFC}
+.ihead{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.iid{font-family:var(--mono);font-size:15px;font-weight:700;letter-spacing:.03em}
+.ipage{font-size:14px;color:var(--ink2)}
+.ilabel{flex:1 1 300px;font-family:var(--serif);font-size:18px;min-width:0}
+.isrc{display:block;font-size:14px;color:var(--ink2);margin-top:3px;font-family:var(--sans)}
+.quote{font-family:var(--serif);font-size:17px;line-height:1.6;background:#FBFCFA;
+  border-left:4px solid var(--accent);border-radius:0 7px 7px 0;padding:12px 15px;margin:11px 0 0}
+.quote.long{max-height:110px;overflow:hidden;position:relative}
+.quote.long::after{content:'';position:absolute;inset:auto 0 0 0;height:44px;
+  background:linear-gradient(transparent,#FBFCFA)}
+.more{font-size:14px;color:var(--accent-dark);background:none;border:none;padding:6px 0;
+  min-height:34px;text-decoration:underline;cursor:pointer}
+.ctrls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:11px;margin-top:13px}
+.fld label{display:block;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--ink3);font-weight:700;margin-bottom:4px}
+.fld select,.fld input{width:100%}
+.note{margin-top:11px}
+.note textarea{width:100%;min-height:64px;background:#fff;border:1.5px solid var(--rule);
+  border-radius:8px;padding:10px 11px;font-family:var(--serif);font-size:16px;line-height:1.5}
+.stamp{font-size:13px;color:var(--ink3);margin-top:7px}
+.tag{display:inline-block;font-size:12.5px;border-radius:999px;padding:3px 10px;border:1px solid var(--rule);
+  color:var(--ink2);background:#fff;white-space:nowrap}
+.tag.pd{background:var(--green-soft);border-color:#A9CDB6;color:var(--green)}
+.tag.perm{background:var(--red-soft);border-color:#E0B4AE;color:var(--red)}
+.tag.unres{background:var(--amber-soft);border-color:#E3C79A;color:var(--amber)}
+.tag.sug{background:var(--violet-soft);border-color:#C6B2D8;color:var(--violet)}
+
+#gate{padding:52px 0}
+#gate .box{max-width:520px}
+.err{background:var(--red-soft);border:1px solid #E0B4AE;color:var(--red);border-radius:8px;
+  padding:11px 14px;margin-top:11px;font-size:15px}
+.hint{font-size:14px;color:var(--ink2);margin-top:5px}
+footer{margin:44px 0;color:var(--ink3);font-size:14px}
+@media print{
+  .bar,.filters,#gate,button,.mast{display:none!important}
+  .cluster,.item{break-inside:avoid;border:1px solid #999}
+  body{background:#fff;font-size:11pt}
+  details{display:block!important}
+  .cbody{display:block!important}
+}
+@media (max-width:760px){.brief{grid-template-columns:1fr}.brief dt{border-top:none;padding-bottom:0}}
+</style>
+</head>
+<body>
+
+<div class="mast"><div class="wrap">
+  <h1>Call me Eliyahu — Rights clearance</h1>
+  <div class="sub">Everything in the book written by somebody else that gets read aloud in the
+  audiobook. What it is, whether it needs permission, and where each one has got to.</div>
+</div></div>
+
+<div id="gate"><div class="wrap"><div class="panel box">
+  <h2>Sign in</h2>
+  <p>Enter the access key Stephen sent you, and tell us who you are so your notes are signed.</p>
+  <div class="fld" style="margin-top:12px"><label for="key">Access key</label>
+    <input type="password" id="key" autocomplete="off" style="width:100%"></div>
+  <div class="fld" style="margin-top:12px"><label for="whoami">I am</label>
+    <select id="whoami" style="width:100%">
+      <option value="">— choose —</option>
+      <option>Elliott</option><option>Rebecca</option><option>Stephen</option>
+      <option>Counsel</option><option>Other</option>
+    </select></div>
+  <div class="btnrow" style="margin-top:14px"><button class="primary" id="go">Open</button></div>
+  <div id="gerr"></div>
+</div></div></div>
+
+<div id="app" style="display:none">
+<div class="bar"><div class="wrap bar-in">
+  <span class="who">Signed in as <b id="whotag"></b> <button class="quiet" id="switch">change</button></span>
+  <button id="print">Print / save as PDF</button>
+  <div class="saved" id="savedbox"><span class="dot"></span><span id="savedtxt">Saved</span></div>
+</div></div>
+
+<div class="wrap">
+
+  <details class="panel fold" id="intro" open>
+    <summary>How this works</summary>
+    <p>Every item here is a passage from the book that belongs to somebody else. For each one there
+    are two questions: <b>does it need permission at all</b>, and if so, <b>where has that got to</b>.</p>
+    <p><b>Two words that are easy to mix up, and the difference matters here.</b></p>
+    <p><b>Public domain</b> means copyright has expired and anyone may use the work freely. It is
+    decided by age and by when the author died. Shakespeare, the King James Bible and Emily
+    Dickinson are all public domain, and there is nothing to ask.</p>
+    <p><b>But an old work can still carry a new copyright.</b> Dante died in 1321 and Catullus two
+    thousand years ago — yet the <i>English translation</i> quoted in this book is a separate,
+    recent work with its own copyright. This catches people out constantly, and roughly a sixth of
+    the list is here for exactly that reason. So when marking something public domain, please say
+    <i>why</i> in the box provided: published before 1930, author died in such a year, and so on.</p>
+    <p class="hint">There is a third idea, <b>fair use</b>, which sometimes permits short quotation
+    without asking. It is a defence argued case by case rather than a category a passage belongs to,
+    so it is deliberately not one of the options here. If counsel wants to rely on it for any item,
+    the note field is the place to record that.</p>
+    <p style="margin-top:16px"><b>What to do:</b> work through the groups, most serious first. For
+    each item set what it is, what we want to do, who writes the letter if one is needed, and where
+    it has got to. Add a note for anything worth remembering — who you spoke to, what they said.</p>
+    <p><b>Everything saves by itself</b> and everyone with the link sees the same page, so Elliott,
+    Rebecca and counsel are always looking at the same state. Your name is stamped on whatever you
+    change.</p>
+  </details>
+
+  <div class="panel">
+    <h2>Where this stands</h2>
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <div class="stats" id="stats"></div>
+    <div class="filters">
+      <select id="f-tier">
+        <option value="">All levels</option>
+        <option value="severe">Severe only</option>
+        <option value="serious">Serious only</option>
+        <option value="check">Check only</option>
+        <option value="courtesy">Courtesy only</option>
+      </select>
+      <select id="f-stage">
+        <option value="">Any stage</option>
+        <option value="open">Not settled yet</option>
+        <option value="not_started">Not started</option>
+        <option value="letter_drafted">Letter drafted</option>
+        <option value="letter_sent">Letter sent</option>
+        <option value="awaiting_reply">Awaiting reply</option>
+        <option value="granted">Granted</option>
+        <option value="refused">Refused</option>
+        <option value="no_action_needed">No action needed</option>
+      </select>
+      <select id="f-writer">
+        <option value="">Anyone writing</option>
+        <option value="us">We write it</option>
+        <option value="counsel">Counsel writes it</option>
+        <option value="not_needed">No letter needed</option>
+      </select>
+      <input type="search" id="q" placeholder="Search a name, page or phrase">
+      <button class="quiet" id="clear">Clear</button>
+    </div>
+  </div>
+
+  <div id="list"></div>
+
+  <details class="panel fold">
+    <summary>For counsel — a one-page brief</summary>
+    <div id="brief"></div>
+  </details>
+
+  <details class="panel fold">
+    <summary>Export and admin</summary>
+    <p>The page saves itself, so these are only if you want a copy outside the site.</p>
+    <div class="btnrow" style="margin-top:12px">
+      <button id="csv">Download everything as a spreadsheet</button>
+      <button id="json">Download everything as a data file</button>
+    </div>
+    <p style="margin-top:20px">Wipes every decision and note on this page. The passage review site is
+    not affected.</p>
+    <div class="btnrow"><button class="danger" id="reset">Erase and start over</button></div>
+    <div id="resetmsg" style="margin-top:9px;font-size:15px"></div>
+  </details>
+
+  <footer>
+    <p><b>This is a working checklist, not legal advice.</b> It is a triage prepared from the
+    manuscript so the right questions reach the right people in the right order. Where an item is
+    marked public domain, that is a starting point for verification rather than a conclusion —
+    copyright terms differ between countries and an audiobook sold worldwide is subject to more than
+    one of them.<br><br>
+    Studio San Francisco · internal production document · not for distribution.</p>
+  </footer>
+</div>
+</div>
+
+<script>
+"use strict";
+const API='/api/clearance';
+let DATA=null, ST={rev:0,records:{},reset_at:null}, KEYSTR='', WHO='';
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const CLASSES=[['','— not set —'],['public_domain','Public domain — no permission needed'],
+  ['permission','Permission needed'],['unresolved','Unresolved — needs research'],
+  ['not_applicable','Not applicable — author’s own words']];
+const ACTIONS=[['','— not set —'],['ask','Ask for permission'],['cut','Cut from the audiobook'],
+  ['swap','Swap for a public-domain version'],['keep','Keep as is']];
+const WRITERS=[['','— not set —'],['us','We write the letter'],['counsel','Counsel writes it'],
+  ['not_needed','No letter needed']];
+const STAGES=[['','— not set —'],['not_started','Not started'],['letter_drafted','Letter drafted'],
+  ['letter_sent','Letter sent'],['awaiting_reply','Awaiting reply'],['granted','Granted'],
+  ['refused','Refused'],['no_action_needed','No action needed']];
+const L=a=>Object.fromEntries(a);
+const CL=L(CLASSES), AC=L(ACTIONS), WR=L(WRITERS), SG=L(STAGES);
+const TIERWORD={severe:'Severe',serious:'Serious',check:'Check',courtesy:'Courtesy',clear:'Public domain'};
+
+const key=it=>it.id||('X:'+it.cluster+':'+(it.label||'').slice(0,40));
+const rec=it=>ST.records[key(it)]||{};
+const settled=it=>{const r=rec(it);return ['granted','no_action_needed','refused'].includes(r.stage)
+  || r.action==='cut' || r.action==='swap' || r.classification==='public_domain' || r.classification==='not_applicable';};
+
+/* ---------------- saving ---------------- */
+function status(kind,txt){
+  const b=document.getElementById('savedbox');
+  b.className='saved'+(kind==='ok'?'':' '+kind);
+  document.getElementById('savedtxt').textContent=txt;
+}
+let queue={}, timer=null;
+function save(it,patch){
+  const k=key(it);
+  ST.records[k]=Object.assign({classification:'',action:'',stage:'',writer:'',pd_reason:'',holder:'',note:''},
+    ST.records[k],patch,{by:WHO,at:new Date().toISOString(),_t:Date.now()});
+  queue[k]=ST.records[k];
+  status('pending','Saving…');
+  clearTimeout(timer);
+  timer=setTimeout(flush,700);
+}
+async function flush(){
+  const batch=queue; queue={};
+  if(!Object.keys(batch).length) return;
+  try{
+    const res=await fetch(API,{method:'PUT',
+      headers:{'content-type':'application/json','x-cme-key':KEYSTR},
+      body:JSON.stringify({records:batch,reset_at:ST.reset_at})});
+    if(res.status===409){
+      const d=await res.json();
+      ST=d.state; ST.reset_at=d.reset_at;
+      status('ok','Refreshed — the page had been reset');
+      render(); return;
+    }
+    if(!res.ok) throw new Error('http '+res.status);
+    const d=await res.json(); ST.rev=d.rev; ST.reset_at=d.reset_at;
+    status('ok','Saved · '+new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}));
+    renderStats();
+  }catch(e){
+    Object.assign(queue,batch);
+    status('error','Not saved — will retry');
+    clearTimeout(timer); timer=setTimeout(flush,5000);
+  }
+}
+async function pull(){
+  const res=await fetch(API,{headers:{'x-cme-key':KEYSTR}});
+  if(res.status===401) throw new Error('key');
+  if(!res.ok) throw new Error('http '+res.status);
+  ST=(await res.json()).state||{rev:0,records:{}};
+}
+setInterval(async()=>{ if(!Object.keys(queue).length){ try{ await pull(); render(); }catch(e){} } },45000);
+
+/* ---------------- rendering ---------------- */
+function sel(id,opts,val,extra){
+  return '<select data-f="'+id+'" '+(extra||'')+'>'+opts.map(function(o){
+    return '<option value="'+o[0]+'"'+(val===o[0]?' selected':'')+'>'+esc(o[1])+'</option>';}).join('')+'</select>';
+}
+function itemHtml(it){
+  const r=rec(it), k=key(it);
+  const sugTag = it.suggested==='public_domain' ? '<span class="tag sug">suggested: public domain</span>'
+               : it.suggested==='permission'    ? '<span class="tag sug">suggested: permission needed</span>'
+               : '<span class="tag sug">suggested: needs research</span>';
+  const clsTag = r.classification==='public_domain' ? '<span class="tag pd">Public domain</span>'
+               : r.classification==='permission'    ? '<span class="tag perm">Permission needed</span>'
+               : r.classification==='unresolved'    ? '<span class="tag unres">Unresolved</span>'
+               : r.classification==='not_applicable'? '<span class="tag pd">Author’s own words</span>' : '';
+  const long = (it.text||'').length>320;
+  return '<div class="item'+(settled(it)?' done':'')+'" data-k="'+esc(k)+'">'+
+    '<div class="ihead">'+
+      (it.id?'<span class="iid">'+esc(it.id)+'</span>':'<span class="iid">—</span>')+
+      (it.page?'<span class="ipage">printed p. '+esc(it.page)+'</span>':'')+
+      '<span class="ilabel">'+esc(it.label)+
+        (it.source?'<span class="isrc">'+esc(it.source)+'</span>':'')+'</span>'+
+      (it.words?'<span class="ipage">'+it.words+' words</span>':'')+
+    '</div>'+
+    (it.text?'<div class="quote'+(long?' long':'')+'">'+esc(it.text)+'</div>'+
+       (long?'<button class="more" data-more="'+esc(k)+'">Show the whole passage</button>':''):'')+
+    '<div style="margin-top:9px">'+clsTag+' '+sugTag+'</div>'+
+    '<div class="ctrls">'+
+      '<div class="fld"><label>What it is</label>'+sel('classification',CLASSES,r.classification||'')+'</div>'+
+      '<div class="fld"><label>What we do</label>'+sel('action',ACTIONS,r.action||'')+'</div>'+
+      '<div class="fld"><label>Who writes the letter</label>'+sel('writer',WRITERS,r.writer||'')+'</div>'+
+      '<div class="fld"><label>Where it has got to</label>'+sel('stage',STAGES,r.stage||'')+'</div>'+
+    '</div>'+
+    '<div class="ctrls">'+
+      '<div class="fld"><label>Why public domain (year, author’s death)</label>'+
+        '<input type="text" data-f="pd_reason" value="'+esc(r.pd_reason||'')+'" placeholder="e.g. published 1918, author died 1889"></div>'+
+      '<div class="fld"><label>Rights holder / contact</label>'+
+        '<input type="text" data-f="holder" value="'+esc(r.holder||'')+'" placeholder="who owns it, who we asked"></div>'+
+    '</div>'+
+    '<div class="note"><textarea data-f="note" placeholder="Notes — who you spoke to, what they said, what is outstanding.">'+esc(r.note||'')+'</textarea></div>'+
+    (r.by?'<div class="stamp">Last changed by '+esc(r.by)+' · '+new Date(r.at).toLocaleString()+'</div>':'')+
+  '</div>';
+}
+
+function pass(it){
+  const t=document.getElementById('f-tier').value;
+  const s=document.getElementById('f-stage').value;
+  const w=document.getElementById('f-writer').value;
+  const q=(document.getElementById('q').value||'').trim().toLowerCase();
+  const r=rec(it);
+  if(t && it.tier!==t) return false;
+  if(s){ if(s==='open'){ if(settled(it)) return false; } else if((r.stage||'')!==s) return false; }
+  if(w && (r.writer||'')!==w) return false;
+  if(q){
+    const hay=((it.label||'')+' '+(it.source||'')+' '+(it.text||'')+' '+(it.id||'')+' '+
+               (it.page||'')+' '+(r.note||'')+' '+(r.holder||'')).toLowerCase();
+    if(!hay.includes(q)) return false;
+  }
+  return true;
+}
+
+function render(){
+  const order={severe:0,serious:1,check:2,courtesy:3,clear:4};
+  const cs=DATA.clusters.slice().sort((a,b)=>order[a.tier]-order[b.tier]);
+  document.getElementById('list').innerHTML=cs.map(function(c){
+    const items=DATA.items.filter(i=>i.cluster===c.key && pass(i));
+    if(!items.length) return '';
+    const done=items.filter(settled).length;
+    return '<details class="cluster t-'+c.tier+'"'+(c.tier==='severe'?' open':'')+'>'+
+      '<summary><span class="pill '+c.tier+'">'+TIERWORD[c.tier]+'</span>'+
+        '<span class="cname">'+esc(c.name)+
+          '<span class="cmeta">'+done+' of '+items.length+' settled · '+esc(c.groups.join(', ')).slice(0,90)+'</span></span>'+
+        '<span class="ipage">'+(done===items.length?'✓ done':(items.length-done)+' to go')+'</span></summary>'+
+      '<div class="cbody">'+
+        '<dl class="brief">'+
+          '<dt>Who owns it</dt><dd>'+esc(c.who)+'</dd>'+
+          '<dt>The issue</dt><dd>'+esc(c.what)+'</dd>'+
+          '<dt>Why it matters</dt><dd>'+esc(c.why)+'</dd>'+
+          '<dt class="worst">Worst case</dt><dd class="worst">'+esc(c.worst)+'</dd>'+
+          '<dt>Cheapest fix</dt><dd>'+esc(c.cheap)+'</dd>'+
+        '</dl>'+
+        items.map(itemHtml).join('')+
+      '</div></details>';
+  }).join('') || '<div class="panel"><p>Nothing matches those filters.</p></div>';
+  renderStats(); renderBrief();
+}
+
+function renderStats(){
+  const all=DATA.items.filter(i=>i.tier!=='clear');
+  const s=all.filter(settled).length;
+  document.getElementById('fill').style.width=Math.round(s/all.length*100)+'%';
+  const sev=DATA.items.filter(i=>i.tier==='severe');
+  const c=k=>DATA.items.filter(i=>rec(i).classification===k).length;
+  const st=k=>DATA.items.filter(i=>rec(i).stage===k).length;
+  document.getElementById('stats').innerHTML=
+    '<div class="stat"><div class="n">'+s+' / '+all.length+'</div><div class="k">Settled</div></div>'+
+    '<div class="stat sev"><div class="n">'+sev.filter(i=>!settled(i)).length+'</div><div class="k">Severe, still open</div></div>'+
+    '<div class="stat"><div class="n">'+c('permission')+'</div><div class="k">Need permission</div></div>'+
+    '<div class="stat ok"><div class="n">'+(c('public_domain')+c('not_applicable'))+'</div><div class="k">Public domain</div></div>'+
+    '<div class="stat"><div class="n">'+st('letter_sent')+'</div><div class="k">Letters sent</div></div>'+
+    '<div class="stat"><div class="n">'+st('awaiting_reply')+'</div><div class="k">Awaiting reply</div></div>'+
+    '<div class="stat ok"><div class="n">'+st('granted')+'</div><div class="k">Granted</div></div>';
+}
+
+function renderBrief(){
+  const need=DATA.items.filter(i=>rec(i).classification==='permission'||
+    (!rec(i).classification && i.suggested==='permission'));
+  const counsel=DATA.items.filter(i=>rec(i).writer==='counsel');
+  const byHolder={};
+  need.forEach(function(i){ (byHolder[i.group]=byHolder[i.group]||[]).push(i); });
+  document.getElementById('brief').innerHTML=
+    '<p>The audiobook covers the Introduction through the Epilogue, printed pages xv to 279. The '+
+    'praise pages, Acknowledgments, Endnotes, Bibliography, Glossary and Index are not narrated and '+
+    'are therefore out of scope.</p>'+
+    '<p><b>'+need.length+' passages are marked, or suggested, as needing permission</b>, grouped by '+
+    'rights holder below because one letter covers one holder. <b>'+counsel.length+'</b> are '+
+    'currently assigned to counsel to write.</p>'+
+    '<table style="width:100%;border-collapse:collapse;margin-top:12px;font-size:15px">'+
+    Object.keys(byHolder).sort().map(function(g){
+      const rows=byHolder[g];
+      return '<tr><td style="border-bottom:1px solid var(--rule2);padding:7px 10px 7px 0"><b>'+esc(g)+'</b>'+
+        '<div style="font-size:13px;color:var(--ink2)">'+rows.map(r=>esc(r.id||'—')+' (p. '+esc(r.page||'?')+')').join(' · ')+'</div></td>'+
+        '<td style="border-bottom:1px solid var(--rule2);padding:7px 0;text-align:right;white-space:nowrap">'+
+        rows.length+' passage'+(rows.length===1?'':'s')+'</td></tr>';
+    }).join('')+'</table>'+
+    '<p style="margin-top:14px"><b>What each request needs:</b> the format stated plainly as a '+
+    'spoken-word audiobook sold by download and streaming subscription; the territory (worldwide, or '+
+    'a named list); the passage exactly as it will be spoken with its word count; roughly a page and '+
+    'a half of surrounding book for context; and the expected number of listeners and retail price. '+
+    'Permission granted for a printed book does not automatically cover an audio recording.</p>';
+}
+
+/* ---------------- events ---------------- */
+document.addEventListener('change',function(e){
+  const t=e.target, f=t.dataset.f; if(!f) return;
+  const box=t.closest('.item'); if(!box) return;
+  const it=DATA.items.find(i=>key(i)===box.dataset.k); if(!it) return;
+  const patch={}; patch[f]=t.value;
+  if(f==='classification'&&t.value==='public_domain'&&!rec(it).stage) patch.stage='no_action_needed';
+  if(f==='classification'&&t.value==='permission'&&!rec(it).action) patch.action='ask';
+  save(it,patch);
+  if(f==='classification'||f==='action'||f==='stage') setTimeout(render,60);
+});
+let typing=null;
+document.addEventListener('input',function(e){
+  const t=e.target, f=t.dataset.f; if(!f||t.tagName==='SELECT') return;
+  const box=t.closest('.item'); if(!box) return;
+  const it=DATA.items.find(i=>key(i)===box.dataset.k); if(!it) return;
+  clearTimeout(typing);
+  typing=setTimeout(function(){ const p={}; p[f]=t.value; save(it,p); },600);
+});
+document.addEventListener('click',function(e){
+  const b=e.target.closest('[data-more]'); if(!b) return;
+  const q=b.previousElementSibling; q.classList.remove('long'); b.remove();
+});
+['f-tier','f-stage','f-writer'].forEach(id=>document.getElementById(id).addEventListener('change',render));
+let qt=null;
+document.getElementById('q').addEventListener('input',function(){clearTimeout(qt);qt=setTimeout(render,250);});
+document.getElementById('clear').addEventListener('click',function(){
+  ['f-tier','f-stage','f-writer'].forEach(i=>document.getElementById(i).value='');
+  document.getElementById('q').value=''; render();
+});
+document.getElementById('print').addEventListener('click',function(){
+  document.querySelectorAll('details').forEach(d=>d.open=true); setTimeout(()=>window.print(),120);
+});
+document.getElementById('switch').addEventListener('click',function(){
+  localStorage.removeItem('cme_clr_who'); location.reload();
+});
+
+function dl(name,text,mime){
+  const b=new Blob([text],{type:mime||'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');
+  a.href=u;a.download=name;document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(u);a.remove();},400);
+}
+const stamp=()=>{const d=new Date(),p=n=>String(n).padStart(2,'0');
+  return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());};
+document.getElementById('csv').addEventListener('click',function(){
+  const rows=[['id','printed_page','level','group','label','source','words',
+    'suggested','classification','why_public_domain','action','who_writes','stage',
+    'rights_holder','note','last_changed_by','last_changed_at','passage']];
+  DATA.items.forEach(function(i){
+    const r=rec(i);
+    rows.push([i.id||'',i.page||'',TIERWORD[i.tier],i.group,i.label,i.source,i.words||'',
+      i.suggested,CL[r.classification||'']||'',r.pd_reason||'',AC[r.action||'']||'',
+      WR[r.writer||'']||'',SG[r.stage||'']||'',r.holder||'',r.note||'',r.by||'',r.at||'',i.text||'']);
+  });
+  const csv=rows.map(r=>r.map(function(c){const s=String(c==null?'':c);
+    return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}).join(',')).join('\r\n');
+  dl('CME_rights_clearance_'+stamp()+'.csv','\ufeff'+csv,'text/csv;charset=utf-8');
+});
+document.getElementById('json').addEventListener('click',function(){
+  dl('CME_rights_clearance_'+stamp()+'.json',JSON.stringify({
+    exported_at:new Date().toISOString(),rev:ST.rev,
+    important:'Working checklist, not legal advice. Public-domain markings are a starting point for verification.',
+    items:DATA.items.map(i=>Object.assign({},i,{decision:rec(i)}))},null,1));
+});
+document.getElementById('reset').addEventListener('click',async function(){
+  const m=document.getElementById('resetmsg');
+  if(!confirm('This erases every decision and note on this page.\n\nA recovery copy is saved first. Continue?')) return;
+  if(prompt('To confirm, type:  ERASE EVERYTHING')!=='ERASE EVERYTHING'){ m.textContent='Nothing was erased.'; return; }
+  try{
+    const res=await fetch(API,{method:'DELETE',
+      headers:{'content-type':'application/json','x-cme-key':KEYSTR},
+      body:JSON.stringify({confirm:'ERASE EVERYTHING',ids:DATA.items.map(key)})});
+    const d=await res.json(); if(!res.ok) throw new Error(d.error||res.status);
+    await pull(); render(); m.textContent=d.cleared+' entries erased.';
+  }catch(e){ m.innerHTML='<div class="err">Could not reset.</div>'; }
+});
+
+/* ---------------- boot ---------------- */
+async function open_(){
+  const gerr=document.getElementById('gerr');
+  if(!WHO){ gerr.innerHTML='<div class="err">Please say who you are, so your notes are signed.</div>'; return; }
+  try{
+    DATA=await (await fetch('clearance-data.json')).json();
+    await pull();
+    localStorage.setItem('cme_clr_key',KEYSTR);
+    localStorage.setItem('cme_clr_who',WHO);
+    document.getElementById('gate').style.display='none';
+    document.getElementById('app').style.display='';
+    document.getElementById('whotag').textContent=WHO;
+    status('ok','Saved');
+    render();
+    if(ST.rev>0) document.getElementById('intro').open=false;
+  }catch(e){
+    gerr.innerHTML='<div class="err">'+(e.message==='key'
+      ? 'That key was not accepted. Check the one Stephen sent you.'
+      : 'Could not open the page. Check your connection and try again.')+'</div>';
+  }
+}
+document.getElementById('go').addEventListener('click',function(){
+  KEYSTR=document.getElementById('key').value.trim();
+  WHO=document.getElementById('whoami').value;
+  open_();
+});
+document.getElementById('key').addEventListener('keydown',function(e){
+  if(e.key==='Enter') document.getElementById('go').click();
+});
+(function(){
+  const u=new URL(location.href), k=u.searchParams.get('k');
+  if(k){ localStorage.setItem('cme_clr_key',k);
+         u.searchParams.delete('k'); history.replaceState({},'',u.pathname+u.search); }
+  KEYSTR=localStorage.getItem('cme_clr_key')||'';
+  WHO=localStorage.getItem('cme_clr_who')||'';
+  if(KEYSTR){ document.getElementById('key').value=KEYSTR; }
+  if(WHO){ document.getElementById('whoami').value=WHO; }
+  if(KEYSTR&&WHO) open_();
+})();
+</script>
+</body>
+</html>
