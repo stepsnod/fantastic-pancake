@@ -139,6 +139,57 @@ input[type=search]{min-width:230px}
   padding:11px 14px;margin-top:11px;font-size:15px}
 .hint{font-size:14px;color:var(--ink2);margin-top:5px}
 footer{margin:44px 0;color:var(--ink3);font-size:14px}
+
+.screen{display:none}
+.screen.on{display:block}
+.crumb{flex:1 1 180px;font-size:16px;color:var(--ink2);min-width:0}
+.crumb b{color:var(--ink)}
+.bigprog{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:12px}
+.bigprog .num{font-family:var(--serif);font-size:42px;line-height:1}
+.bigprog .of{color:var(--ink2);font-size:17px}
+.track{flex:1 1 240px;min-width:180px;margin-top:0}
+button.big{font-size:18px;padding:13px 22px;min-height:54px}
+.key{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;font-size:15px;color:var(--ink2)}
+.key span{display:flex;align-items:center;gap:8px}
+.key i{width:14px;height:14px;border-radius:50%;display:inline-block}
+.navrow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:28px 0 10px}
+
+/* group cards on the home screen */
+.gcard{background:var(--card);border:1px solid var(--rule);border-radius:10px;margin:13px 0;
+  display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:18px 22px;cursor:pointer;
+  width:100%;text-align:left;min-height:0}
+.gcard:hover{background:#FAFBF9;border-color:var(--ink3)}
+.gcard.st-red{border-left:9px solid var(--red)}
+.gcard.st-amber{border-left:9px solid var(--amber)}
+.gcard.st-green{border-left:9px solid var(--green)}
+.gcard .gn{flex:1 1 300px;min-width:0}
+.gcard .gt{display:block;font-family:var(--serif);font-size:21px;line-height:1.25}
+.gcard .gm{display:block;font-size:14.5px;color:var(--ink2);margin-top:4px}
+.gcard .go{font-size:15px;color:var(--accent-dark);white-space:nowrap;font-weight:600}
+.mini{width:120px;height:9px;background:#E2E5E0;border-radius:5px;overflow:hidden;border:1px solid var(--rule)}
+.mini i{display:block;height:100%;background:var(--green)}
+
+/* five priorities */
+.prow{display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--rule2)}
+.prow:last-child{border-bottom:none}
+.prow .pn{font-family:var(--serif);font-size:26px;color:var(--ink3);width:26px;flex:none;line-height:1.1}
+.prow .pb{flex:1 1 auto;min-width:0;display:block}
+.prow .ph{display:block;font-weight:700;font-size:16.5px}
+.prow .pd{display:block;color:var(--ink2);font-size:15.5px;margin-top:4px}
+.prow button{margin-top:8px;min-height:42px;padding:8px 16px;font-size:15px}
+
+/* group header */
+.ghead{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:22px 24px;margin:20px 0}
+.ghead h2{font-size:26px;margin-top:10px}
+
+/* settled items collapse */
+.item.done .collapsible{display:none}
+.donebar{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.donebar .tick{width:30px;height:30px;border-radius:50%;background:var(--green-soft);color:var(--green);
+  display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;flex:none}
+.donebar .dl{flex:1 1 240px;min-width:0;font-family:var(--serif);font-size:17px}
+.donebar .ds{display:block;font-family:var(--sans);font-size:14px;color:var(--ink2);margin-top:2px}
+
 @media print{
   .bar,.filters,#gate,button,.mast{display:none!important}
   .cluster,.item{break-inside:avoid;border:1px solid #999}
@@ -164,7 +215,7 @@ footer{margin:44px 0;color:var(--ink3);font-size:14px}
     <input type="password" id="key" autocomplete="off" style="width:100%"></div>
   <div class="fld" style="margin-top:12px"><label for="whoami">I am</label>
     <select id="whoami" style="width:100%">
-      <option value="">— choose —</option>
+      <option value="">&mdash; choose &mdash;</option>
       <option>Elliott</option><option>Rebecca</option><option>Stephen</option>
       <option>Counsel</option><option>Other</option>
     </select></div>
@@ -174,77 +225,77 @@ footer{margin:44px 0;color:var(--ink3);font-size:14px}
 
 <div id="app" style="display:none">
 <div class="bar"><div class="wrap bar-in">
-  <span class="who">Signed in as <b id="whotag"></b> <button class="quiet" id="switch">change</button></span>
-  <button id="print">Print / save as PDF</button>
+  <button id="home" style="display:none">&#8592; All groups</button>
+  <span class="crumb" id="crumb"></span>
+  <button id="briefbtn">For counsel</button>
+  <span class="who">as <b id="whotag"></b> <button class="quiet" id="switch">change</button></span>
   <div class="saved" id="savedbox"><span class="dot"></span><span id="savedtxt">Saved</span></div>
 </div></div>
 
 <div class="wrap">
 
+<!-- ============ SCREEN 1 : HOME ============ -->
+<section class="screen on" id="s-home">
+
   <details class="panel fold" id="intro" open>
-    <summary>How this works</summary>
-    <p>Every item here is a passage from the book that belongs to somebody else. For each one there
-    are two questions: <b>does it need permission at all</b>, and if so, <b>where has that got to</b>.</p>
-    <p><b>Two words that are easy to mix up, and the difference matters here.</b></p>
+    <summary>Start here</summary>
+    <p>Every item on this site is a passage from the book that belongs to somebody else and gets read
+    aloud in the audiobook. For each one there are two questions: <b>does it need permission at
+    all</b>, and if so, <b>where has that got to</b>.</p>
+
+    <p style="margin-top:18px"><b>The one thing worth knowing before you start.</b></p>
     <p><b>Public domain</b> means copyright has expired and anyone may use the work freely. It is
-    decided by age and by when the author died. Shakespeare, the King James Bible and Emily
-    Dickinson are all public domain, and there is nothing to ask.</p>
+    decided by age. Shakespeare, the King James Bible and Emily Dickinson are all public domain, and
+    there is nothing to ask.</p>
     <p><b>But an old work can still carry a new copyright.</b> Dante died in 1321 and Catullus two
-    thousand years ago — yet the <i>English translation</i> quoted in this book is a separate,
-    recent work with its own copyright. This catches people out constantly, and roughly a sixth of
-    the list is here for exactly that reason. So when marking something public domain, please say
-    <i>why</i> in the box provided: published before 1930, author died in such a year, and so on.</p>
-    <p class="hint">There is a third idea, <b>fair use</b>, which sometimes permits short quotation
+    thousand years ago &mdash; yet the <i>English translation</i> quoted in this book is a separate,
+    recent work with a copyright of its own. About a sixth of this list is here for exactly that
+    reason. So whenever you mark something public domain, please say <i>why</i> in the box:
+    published before 1930, author died in such a year. That one habit is what stops
+    &ldquo;it&rsquo;s old, so it&rsquo;s free&rdquo;.</p>
+    <p class="hint">There is a third idea, <b>fair use</b>, which sometimes allows short quotation
     without asking. It is a defence argued case by case rather than a category a passage belongs to,
-    so it is deliberately not one of the options here. If counsel wants to rely on it for any item,
-    the note field is the place to record that.</p>
-    <p style="margin-top:16px"><b>What to do:</b> work through the groups, most serious first. For
-    each item set what it is, what we want to do, who writes the letter if one is needed, and where
-    it has got to. Add a note for anything worth remembering — who you spoke to, what they said.</p>
-    <p><b>Everything saves by itself</b> and everyone with the link sees the same page, so Elliott,
-    Rebecca and counsel are always looking at the same state. Your name is stamped on whatever you
-    change.</p>
+    so it is deliberately not one of the options here. If counsel wants to rely on it, the note box
+    is the place to say so.</p>
+
+    <p style="margin-top:18px"><b>How to work.</b> Open one group, work down it, come back. Each
+    group shows a colour &mdash; red not started, yellow part way, green finished. Everything saves
+    by itself and everyone with the link sees the same page, so there are no versions to email
+    around. Your name goes on whatever you change.</p>
+    <div class="key">
+      <span><i style="background:var(--red)"></i> Not started</span>
+      <span><i style="background:var(--amber)"></i> Part way</span>
+      <span><i style="background:var(--green)"></i> Finished</span>
+    </div>
   </details>
 
   <div class="panel">
     <h2>Where this stands</h2>
-    <div class="track"><div class="fill" id="fill"></div></div>
+    <div class="bigprog">
+      <div><span class="num" id="bignum">0</span> <span class="of">of <b id="bigtot">0</b> settled</span></div>
+      <div class="track"><div class="fill" id="fill"></div></div>
+    </div>
     <div class="stats" id="stats"></div>
-    <div class="filters">
-      <select id="f-tier">
-        <option value="">All levels</option>
-        <option value="severe">Severe only</option>
-        <option value="serious">Serious only</option>
-        <option value="check">Check only</option>
-        <option value="courtesy">Courtesy only</option>
-      </select>
-      <select id="f-stage">
-        <option value="">Any stage</option>
-        <option value="open">Not settled yet</option>
-        <option value="not_started">Not started</option>
-        <option value="letter_drafted">Letter drafted</option>
-        <option value="letter_sent">Letter sent</option>
-        <option value="awaiting_reply">Awaiting reply</option>
-        <option value="granted">Granted</option>
-        <option value="refused">Refused</option>
-        <option value="no_action_needed">No action needed</option>
-      </select>
-      <select id="f-writer">
-        <option value="">Anyone writing</option>
-        <option value="us">We write it</option>
-        <option value="counsel">Counsel writes it</option>
-        <option value="not_needed">No letter needed</option>
-      </select>
-      <input type="search" id="q" placeholder="Search a name, page or phrase">
-      <button class="quiet" id="clear">Clear</button>
+    <div class="btnrow" style="margin-top:16px">
+      <button class="primary big" id="continue">Continue where I left off</button>
     </div>
   </div>
 
-  <div id="list"></div>
+  <details class="panel fold" id="five" open>
+    <summary>If you do nothing else, do these five</summary>
+    <p>In this order. The first two are the ones that could actually stop the audiobook.</p>
+    <div id="fivelist"></div>
+  </details>
+
+  <h2 style="font-size:25px;margin-top:32px">The groups</h2>
+  <p style="color:var(--ink2);margin-top:6px">Most serious first. Open one and work down it.</p>
+  <div id="grouplist"></div>
 
   <details class="panel fold">
-    <summary>For counsel — a one-page brief</summary>
-    <div id="brief"></div>
+    <summary>Look for one passage</summary>
+    <p>Only if you need it. Type a name, a page number or a phrase.</p>
+    <input type="search" id="q" placeholder="e.g. Dylan, Sunyata, p. 159" style="width:100%">
+    <div id="searchres"></div>
   </details>
 
   <details class="panel fold">
@@ -253,25 +304,44 @@ footer{margin:44px 0;color:var(--ink3);font-size:14px}
     <div class="btnrow" style="margin-top:12px">
       <button id="csv">Download everything as a spreadsheet</button>
       <button id="json">Download everything as a data file</button>
+      <button id="print">Print / save as PDF</button>
     </div>
     <p style="margin-top:20px">Wipes every decision and note on this page. The passage review site is
     not affected.</p>
     <div class="btnrow"><button class="danger" id="reset">Erase and start over</button></div>
     <div id="resetmsg" style="margin-top:9px;font-size:15px"></div>
   </details>
+</section>
+
+<!-- ============ SCREEN 2 : ONE GROUP ============ -->
+<section class="screen" id="s-group">
+  <div id="ghead"></div>
+  <div id="gitems"></div>
+  <div class="navrow">
+    <button class="big" id="home2">&#8592; All groups</button>
+    <button class="primary big" id="nextgroup">Next group &#8594;</button>
+  </div>
+</section>
+
+<!-- ============ SCREEN 3 : COUNSEL BRIEF ============ -->
+<section class="screen" id="s-brief">
+  <div class="panel"><h2>Brief for counsel</h2><div id="brief"></div></div>
+  <div class="navrow"><button class="big" id="home3">&#8592; All groups</button></div>
+</section>
 
   <footer>
     <p><b>This is a working checklist, not legal advice.</b> It is a triage prepared from the
     manuscript so the right questions reach the right people in the right order. Where an item is
-    marked public domain, that is a starting point for verification rather than a conclusion —
+    marked public domain, that is a starting point for verification rather than a conclusion &mdash;
     copyright terms differ between countries and an audiobook sold worldwide is subject to more than
     one of them.<br><br>
-    Studio San Francisco · internal production document · not for distribution.</p>
+    Studio San Francisco &middot; internal production document &middot; not for distribution.</p>
   </footer>
 </div>
 </div>
 
 <script>
+"use strict";
 "use strict";
 const API='/api/clearance';
 let DATA=null, ST={rev:0,records:{},reset_at:null}, KEYSTR='', WHO='';
@@ -293,8 +363,17 @@ const TIERWORD={severe:'Severe',serious:'Serious',check:'Check',courtesy:'Courte
 
 const key=it=>it.id||('X:'+it.cluster+':'+(it.label||'').slice(0,40));
 const rec=it=>ST.records[key(it)]||{};
-const settled=it=>{const r=rec(it);return ['granted','no_action_needed','refused'].includes(r.stage)
-  || r.action==='cut' || r.action==='swap' || r.classification==='public_domain' || r.classification==='not_applicable';};
+// A passage marked public domain is not finished until the REASON is recorded.
+// That single rule is what stops "it's old, so it's free" going in unchallenged —
+// and it is the trap this book is full of, because the originals are ancient but
+// the English translations are recent.
+const settled=function(it){
+  const r=rec(it);
+  if(r.classification==='public_domain') return !!(r.pd_reason||'').trim();
+  if(r.classification==='not_applicable') return true;
+  if(r.action==='cut' || r.action==='swap') return true;
+  return ['granted','no_action_needed','refused'].includes(r.stage);
+};
 
 /* ---------------- saving ---------------- */
 function status(kind,txt){
@@ -343,32 +422,83 @@ async function pull(){
 }
 setInterval(async()=>{ if(!Object.keys(queue).length){ try{ await pull(); render(); }catch(e){} } },45000);
 
-/* ---------------- rendering ---------------- */
-function sel(id,opts,val,extra){
-  return '<select data-f="'+id+'" '+(extra||'')+'>'+opts.map(function(o){
+/* ---------------- screens ---------------- */
+var SCREEN='home', GI=0, OPEN={};
+function show(n){
+  SCREEN=n;
+  ['home','group','brief'].forEach(function(x){
+    document.getElementById('s-'+x).classList.toggle('on', x===n); });
+  document.getElementById('home').style.display = n==='home' ? 'none' : '';
+  var c=document.getElementById('crumb');
+  c.innerHTML = n==='home' ? '<b>All groups</b>'
+              : n==='brief' ? '<b>Brief for counsel</b>'
+              : '<b>'+esc(GROUPS[GI].name)+'</b>';
+  window.scrollTo(0,0);
+}
+function goHome(){ renderHome(); show('home'); }
+function openGroup(i,focus){
+  OPEN={};
+  GI=Math.max(0,Math.min(i,GROUPS.length-1));
+  renderGroup(); show('group');
+  if(focus) setTimeout(function(){
+    var el=document.querySelector('.item[data-k="'+CSS.escape(focus)+'"]');
+    if(el) el.scrollIntoView({block:'center',behavior:'smooth'});
+  },80);
+}
+
+/* groups, most serious first, empty ones dropped */
+var ORDER={severe:0,serious:1,check:2,courtesy:3,clear:4};
+var GROUPS=[];
+function buildGroups(){
+  GROUPS=DATA.clusters.slice()
+    .map(function(c){ c.items=DATA.items.filter(function(i){return i.cluster===c.key;}); return c; })
+    .filter(function(c){ return c.items.length; })
+    .sort(function(a,b){ return ORDER[a.tier]-ORDER[b.tier]; });
+}
+function gStat(c){
+  var d=c.items.filter(settled).length;
+  var any=c.items.some(function(i){ var r=rec(i); return r.classification||r.action||r.stage||r.note; });
+  return {done:d,total:c.items.length,
+          status: d===c.items.length?'green':(any?'amber':'red')};
+}
+
+/* ---------------- item card ---------------- */
+function sel(id,opts,val){
+  return '<select data-f="'+id+'">'+opts.map(function(o){
     return '<option value="'+o[0]+'"'+(val===o[0]?' selected':'')+'>'+esc(o[1])+'</option>';}).join('')+'</select>';
 }
+function summaryLine(it){
+  var r=rec(it), bits=[];
+  if(r.classification) bits.push(CL[r.classification]);
+  if(r.action) bits.push(AC[r.action]);
+  if(r.writer && r.writer!=='not_needed') bits.push(WR[r.writer]);
+  if(r.stage && r.stage!=='not_started') bits.push(SG[r.stage]);
+  return bits.join(' \u00b7 ') || 'Settled';
+}
 function itemHtml(it){
-  const r=rec(it), k=key(it);
-  const sugTag = it.suggested==='public_domain' ? '<span class="tag sug">suggested: public domain</span>'
-               : it.suggested==='permission'    ? '<span class="tag sug">suggested: permission needed</span>'
-               : '<span class="tag sug">suggested: needs research</span>';
-  const clsTag = r.classification==='public_domain' ? '<span class="tag pd">Public domain</span>'
-               : r.classification==='permission'    ? '<span class="tag perm">Permission needed</span>'
-               : r.classification==='unresolved'    ? '<span class="tag unres">Unresolved</span>'
-               : r.classification==='not_applicable'? '<span class="tag pd">Author’s own words</span>' : '';
-  const long = (it.text||'').length>320;
-  return '<div class="item'+(settled(it)?' done':'')+'" data-k="'+esc(k)+'">'+
+  var r=rec(it), k=key(it), done=settled(it) && !OPEN[k];
+  if(done){
+    return '<div class="item done" data-k="'+esc(k)+'">'+
+      '<div class="donebar"><span class="tick">\u2713</span>'+
+      '<span class="dl">'+(it.id?'<span class="iid">'+esc(it.id)+'</span> ':'')+esc(it.label)+
+        '<span class="ds">'+esc(summaryLine(it))+(r.by?' \u2014 '+esc(r.by):'')+'</span></span>'+
+      '<button class="quiet" data-open="'+esc(k)+'">Change</button></div></div>';
+  }
+  var sug = it.suggested==='public_domain' ? 'suggested: public domain'
+          : it.suggested==='permission' ? 'suggested: permission needed' : 'suggested: needs research';
+  var long=(it.text||'').length>320;
+  return '<div class="item" data-k="'+esc(k)+'">'+
+    '<div class="collapsible">'+
     '<div class="ihead">'+
-      (it.id?'<span class="iid">'+esc(it.id)+'</span>':'<span class="iid">—</span>')+
+      (it.id?'<span class="iid">'+esc(it.id)+'</span>':'<span class="iid">\u2014</span>')+
       (it.page?'<span class="ipage">printed p. '+esc(it.page)+'</span>':'')+
       '<span class="ilabel">'+esc(it.label)+
         (it.source?'<span class="isrc">'+esc(it.source)+'</span>':'')+'</span>'+
       (it.words?'<span class="ipage">'+it.words+' words</span>':'')+
     '</div>'+
     (it.text?'<div class="quote'+(long?' long':'')+'">'+esc(it.text)+'</div>'+
-       (long?'<button class="more" data-more="'+esc(k)+'">Show the whole passage</button>':''):'')+
-    '<div style="margin-top:9px">'+clsTag+' '+sugTag+'</div>'+
+      (long?'<button class="more" data-more="'+esc(k)+'">Show the whole passage</button>':''):'')+
+    '<div style="margin-top:9px"><span class="tag sug">'+sug+'</span></div>'+
     '<div class="ctrls">'+
       '<div class="fld"><label>What it is</label>'+sel('classification',CLASSES,r.classification||'')+'</div>'+
       '<div class="fld"><label>What we do</label>'+sel('action',ACTIONS,r.action||'')+'</div>'+
@@ -376,69 +506,68 @@ function itemHtml(it){
       '<div class="fld"><label>Where it has got to</label>'+sel('stage',STAGES,r.stage||'')+'</div>'+
     '</div>'+
     '<div class="ctrls">'+
-      '<div class="fld"><label>Why public domain (year, author’s death)</label>'+
+      '<div class="fld"><label>'+(r.classification==='public_domain'
+        ? '<span style="color:var(--red)">Why public domain \u2014 needed to finish this one</span>'
+        : 'Why public domain (year, author\u2019s death)')+'</label>'+
         '<input type="text" data-f="pd_reason" value="'+esc(r.pd_reason||'')+'" placeholder="e.g. published 1918, author died 1889"></div>'+
       '<div class="fld"><label>Rights holder / contact</label>'+
         '<input type="text" data-f="holder" value="'+esc(r.holder||'')+'" placeholder="who owns it, who we asked"></div>'+
     '</div>'+
-    '<div class="note"><textarea data-f="note" placeholder="Notes — who you spoke to, what they said, what is outstanding.">'+esc(r.note||'')+'</textarea></div>'+
-    (r.by?'<div class="stamp">Last changed by '+esc(r.by)+' · '+new Date(r.at).toLocaleString()+'</div>':'')+
-  '</div>';
+    '<div class="note"><textarea data-f="note" placeholder="Notes \u2014 who you spoke to, what they said, what is outstanding.">'+esc(r.note||'')+'</textarea></div>'+
+    (r.by?'<div class="stamp">Last changed by '+esc(r.by)+' \u00b7 '+new Date(r.at).toLocaleString()+'</div>':'')+
+    '</div></div>';
 }
 
-function pass(it){
-  const t=document.getElementById('f-tier').value;
-  const s=document.getElementById('f-stage').value;
-  const w=document.getElementById('f-writer').value;
-  const q=(document.getElementById('q').value||'').trim().toLowerCase();
-  const r=rec(it);
-  if(t && it.tier!==t) return false;
-  if(s){ if(s==='open'){ if(settled(it)) return false; } else if((r.stage||'')!==s) return false; }
-  if(w && (r.writer||'')!==w) return false;
-  if(q){
-    const hay=((it.label||'')+' '+(it.source||'')+' '+(it.text||'')+' '+(it.id||'')+' '+
-               (it.page||'')+' '+(r.note||'')+' '+(r.holder||'')).toLowerCase();
-    if(!hay.includes(q)) return false;
-  }
-  return true;
-}
-
-function render(){
-  const order={severe:0,serious:1,check:2,courtesy:3,clear:4};
-  const cs=DATA.clusters.slice().sort((a,b)=>order[a.tier]-order[b.tier]);
-  document.getElementById('list').innerHTML=cs.map(function(c){
-    const items=DATA.items.filter(i=>i.cluster===c.key && pass(i));
-    if(!items.length) return '';
-    const done=items.filter(settled).length;
-    return '<details class="cluster t-'+c.tier+'"'+(c.tier==='severe'?' open':'')+'>'+
-      '<summary><span class="pill '+c.tier+'">'+TIERWORD[c.tier]+'</span>'+
-        '<span class="cname">'+esc(c.name)+
-          '<span class="cmeta">'+done+' of '+items.length+' settled · '+esc(c.groups.join(', ')).slice(0,90)+'</span></span>'+
-        '<span class="ipage">'+(done===items.length?'✓ done':(items.length-done)+' to go')+'</span></summary>'+
-      '<div class="cbody">'+
-        '<dl class="brief">'+
-          '<dt>Who owns it</dt><dd>'+esc(c.who)+'</dd>'+
-          '<dt>The issue</dt><dd>'+esc(c.what)+'</dd>'+
-          '<dt>Why it matters</dt><dd>'+esc(c.why)+'</dd>'+
-          '<dt class="worst">Worst case</dt><dd class="worst">'+esc(c.worst)+'</dd>'+
-          '<dt>Cheapest fix</dt><dd>'+esc(c.cheap)+'</dd>'+
-        '</dl>'+
-        items.map(itemHtml).join('')+
-      '</div></details>';
-  }).join('') || '<div class="panel"><p>Nothing matches those filters.</p></div>';
-  renderStats(); renderBrief();
-}
-
-function renderStats(){
-  const all=DATA.items.filter(i=>i.tier!=='clear');
-  const s=all.filter(settled).length;
+/* ---------------- home ---------------- */
+var FIVE=[
+ ['Find out who owns the Sunyata writings',
+  'Ten passages running through the whole of chapter 7. Unlike a song lyric this cannot simply be cut \u2014 the chapter is built on it. Start here, because the answer changes what chapter 7 is.',
+  'the-sunyata-material'],
+ ['Decide about the nine song lyrics',
+  'Dylan four times, the Beatles twice, Neil Young, Iris DeMent and \u201cThe Impossible Dream\u201d. Elliott only needs to say, for each, whether it stays or goes. Anything cut stops being a problem immediately.',
+  'song-lyrics'],
+ ['Write to three publishers',
+  'T. S. Eliot, Allen Ginsberg and the Matrix scene. Routine requests that take weeks to come back, so send them early even though nothing depends on them yet.',
+  'poetry-still-in-copyright'],
+ ['Swap the modern Bible translations for the King James',
+  'Two passages. The King James is public domain and the book already uses it elsewhere, so this reads as consistent rather than as a change. Costs nothing.',
+  'modern-bible-translations'],
+ ['Ask the people who are quoted at length',
+  'A short, warm note to each. Not a legal matter \u2014 but the teacher quoted about his cancer diagnosis is a passage where asking is plainly right.',
+  'living-people-quoted-at-length'],
+];
+function renderHome(){
+  buildGroups();
+  var all=DATA.items.filter(function(i){return i.tier!=='clear';});
+  var s=all.filter(settled).length;
+  document.getElementById('bignum').textContent=s;
+  document.getElementById('bigtot').textContent=all.length;
   document.getElementById('fill').style.width=Math.round(s/all.length*100)+'%';
-  const sev=DATA.items.filter(i=>i.tier==='severe');
-  const c=k=>DATA.items.filter(i=>rec(i).classification===k).length;
-  const st=k=>DATA.items.filter(i=>rec(i).stage===k).length;
+  renderStats();
+  document.getElementById('fivelist').innerHTML=FIVE.map(function(f,n){
+    var gi=GROUPS.map(function(g){return g.key;}).indexOf(f[2]);
+    var st=gi>=0?gStat(GROUPS[gi]):null;
+    return '<div class="prow"><span class="pn">'+(n+1)+'</span><span class="pb">'+
+      '<span class="ph">'+esc(f[0])+'</span><span class="pd">'+esc(f[1])+'</span>'+
+      (gi>=0?'<button data-go="'+gi+'">'+(st.done===st.total?'Look again':(st.done?'Carry on':'Start'))+
+        ' \u2014 '+st.done+' of '+st.total+'</button>':'')+'</span></div>';
+  }).join('');
+  document.getElementById('grouplist').innerHTML=GROUPS.map(function(c,i){
+    var st=gStat(c);
+    return '<button class="gcard st-'+st.status+'" data-go="'+i+'">'+
+      '<span class="pill '+c.tier+'">'+TIERWORD[c.tier]+'</span>'+
+      '<span class="gn"><span class="gt">'+esc(c.name)+'</span>'+
+        '<span class="gm">'+st.done+' of '+st.total+' settled \u00b7 '+esc(c.groups.join(', ')).slice(0,80)+'</span></span>'+
+      '<span class="mini"><i style="width:'+Math.round(st.done/st.total*100)+'%"></i></span>'+
+      '<span class="go">'+(st.done===st.total?'\u2713 done':'Open \u2192')+'</span></button>';
+  }).join('');
+}
+function renderStats(){
+  var c=function(k){return DATA.items.filter(function(i){return rec(i).classification===k;}).length;};
+  var st=function(k){return DATA.items.filter(function(i){return rec(i).stage===k;}).length;};
+  var sev=DATA.items.filter(function(i){return i.tier==='severe';});
   document.getElementById('stats').innerHTML=
-    '<div class="stat"><div class="n">'+s+' / '+all.length+'</div><div class="k">Settled</div></div>'+
-    '<div class="stat sev"><div class="n">'+sev.filter(i=>!settled(i)).length+'</div><div class="k">Severe, still open</div></div>'+
+    '<div class="stat sev"><div class="n">'+sev.filter(function(i){return !settled(i);}).length+'</div><div class="k">Severe, still open</div></div>'+
     '<div class="stat"><div class="n">'+c('permission')+'</div><div class="k">Need permission</div></div>'+
     '<div class="stat ok"><div class="n">'+(c('public_domain')+c('not_applicable'))+'</div><div class="k">Public domain</div></div>'+
     '<div class="stat"><div class="n">'+st('letter_sent')+'</div><div class="k">Letters sent</div></div>'+
@@ -446,24 +575,80 @@ function renderStats(){
     '<div class="stat ok"><div class="n">'+st('granted')+'</div><div class="k">Granted</div></div>';
 }
 
+/* ---------------- one group ---------------- */
+function renderGroup(){
+  var c=GROUPS[GI], st=gStat(c);
+  document.getElementById('ghead').innerHTML='<div class="ghead">'+
+    '<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">'+
+      '<span class="pill '+c.tier+'">'+TIERWORD[c.tier]+'</span>'+
+      '<span style="font-size:15px;color:var(--ink2)">Group '+(GI+1)+' of '+GROUPS.length+'</span></div>'+
+    '<h2>'+esc(c.name)+'</h2>'+
+    '<div class="bigprog" style="margin-top:14px"><div><span class="num">'+st.done+'</span>'+
+      ' <span class="of">of <b>'+st.total+'</b> settled'+(st.done<st.total?' \u00b7 '+(st.total-st.done)+' to go':'')+'</span></div>'+
+      '<div class="track"><div class="fill" style="width:'+Math.round(st.done/st.total*100)+'%"></div></div></div>'+
+    '<dl class="brief">'+
+      '<dt>Who owns it</dt><dd>'+esc(c.who)+'</dd>'+
+      '<dt>The issue</dt><dd>'+esc(c.what)+'</dd>'+
+      '<dt>Why it matters</dt><dd>'+esc(c.why)+'</dd>'+
+      '<dt class="worst">Worst case</dt><dd class="worst">'+esc(c.worst)+'</dd>'+
+      '<dt>Cheapest fix</dt><dd>'+esc(c.cheap)+'</dd>'+
+    '</dl></div>';
+  document.getElementById('gitems').innerHTML=c.items.map(itemHtml).join('');
+  document.getElementById('nextgroup').textContent =
+    GI<GROUPS.length-1 ? 'Next group \u2192' : 'Back to the start \u2192';
+}
+function refreshItem(k){
+  var el=document.querySelector('.item[data-k="'+CSS.escape(k)+'"]');
+  var it=DATA.items.find(function(i){return key(i)===k;});
+  if(!el||!it) return;
+  el.outerHTML=itemHtml(it);
+  var c=GROUPS[GI], st=gStat(c);
+  var h=document.querySelector('#ghead .bigprog .num');
+  if(h){ h.textContent=st.done;
+    document.querySelector('#ghead .bigprog .fill').style.width=Math.round(st.done/st.total*100)+'%';
+    var p=document.querySelector('#ghead .pill');
+    p.className='pill '+c.tier; }
+}
+
+/* ---------------- search ---------------- */
+function renderSearch(){
+  var q=(document.getElementById('q').value||'').trim().toLowerCase();
+  var box=document.getElementById('searchres');
+  if(!q){ box.innerHTML=''; return; }
+  var hits=DATA.items.filter(function(it){
+    var r=rec(it);
+    return ((it.label||'')+' '+(it.source||'')+' '+(it.text||'')+' '+(it.id||'')+' '+
+            (it.page||'')+' '+(r.note||'')+' '+(r.holder||'')).toLowerCase().indexOf(q)>=0;
+  });
+  if(!hits.length){ box.innerHTML='<p style="margin-top:14px">Nothing matched.</p>'; return; }
+  box.innerHTML='<p style="margin-top:14px"><b>'+hits.length+'</b> found.</p>'+
+    hits.slice(0,40).map(function(it){
+      var gi=GROUPS.map(function(g){return g.key;}).indexOf(it.cluster);
+      return '<div class="prow"><span class="pb"><span class="ph">'+esc(it.label)+'</span>'+
+        '<span class="pd">'+esc(it.id||'')+' \u00b7 '+esc(it.source||'')+'</span>'+
+        '<button data-go="'+gi+'" data-focus="'+esc(key(it))+'">Open</button></span></div>';
+    }).join('');
+}
+
 function renderBrief(){
-  const need=DATA.items.filter(i=>rec(i).classification==='permission'||
-    (!rec(i).classification && i.suggested==='permission'));
-  const counsel=DATA.items.filter(i=>rec(i).writer==='counsel');
-  const byHolder={};
+  var need=DATA.items.filter(function(i){
+    return rec(i).classification==='permission' || (!rec(i).classification && i.suggested==='permission'); });
+  var counsel=DATA.items.filter(function(i){return rec(i).writer==='counsel';});
+  var byHolder={};
   need.forEach(function(i){ (byHolder[i.group]=byHolder[i.group]||[]).push(i); });
   document.getElementById('brief').innerHTML=
     '<p>The audiobook covers the Introduction through the Epilogue, printed pages xv to 279. The '+
     'praise pages, Acknowledgments, Endnotes, Bibliography, Glossary and Index are not narrated and '+
-    'are therefore out of scope.</p>'+
+    'are out of scope.</p>'+
     '<p><b>'+need.length+' passages are marked, or suggested, as needing permission</b>, grouped by '+
     'rights holder below because one letter covers one holder. <b>'+counsel.length+'</b> are '+
     'currently assigned to counsel to write.</p>'+
     '<table style="width:100%;border-collapse:collapse;margin-top:12px;font-size:15px">'+
     Object.keys(byHolder).sort().map(function(g){
-      const rows=byHolder[g];
+      var rows=byHolder[g];
       return '<tr><td style="border-bottom:1px solid var(--rule2);padding:7px 10px 7px 0"><b>'+esc(g)+'</b>'+
-        '<div style="font-size:13px;color:var(--ink2)">'+rows.map(r=>esc(r.id||'—')+' (p. '+esc(r.page||'?')+')').join(' · ')+'</div></td>'+
+        '<div style="font-size:13px;color:var(--ink2)">'+rows.map(function(r){
+          return esc(r.id||'\u2014')+' (p. '+esc(r.page||'?')+')';}).join(' \u00b7 ')+'</div></td>'+
         '<td style="border-bottom:1px solid var(--rule2);padding:7px 0;text-align:right;white-space:nowrap">'+
         rows.length+' passage'+(rows.length===1?'':'s')+'</td></tr>';
     }).join('')+'</table>'+
@@ -473,44 +658,57 @@ function renderBrief(){
     'a half of surrounding book for context; and the expected number of listeners and retail price. '+
     'Permission granted for a printed book does not automatically cover an audio recording.</p>';
 }
+function render(){ if(SCREEN==='home') renderHome(); else if(SCREEN==='group') renderGroup(); renderBrief(); }
 
 /* ---------------- events ---------------- */
 document.addEventListener('change',function(e){
-  const t=e.target, f=t.dataset.f; if(!f) return;
-  const box=t.closest('.item'); if(!box) return;
-  const it=DATA.items.find(i=>key(i)===box.dataset.k); if(!it) return;
-  const patch={}; patch[f]=t.value;
+  var t=e.target, f=t.dataset.f; if(!f) return;
+  var box=t.closest('.item'); if(!box) return;
+  var it=DATA.items.find(function(i){return key(i)===box.dataset.k;}); if(!it) return;
+  var patch={}; patch[f]=t.value;
   if(f==='classification'&&t.value==='public_domain'&&!rec(it).stage) patch.stage='no_action_needed';
   if(f==='classification'&&t.value==='permission'&&!rec(it).action) patch.action='ask';
   save(it,patch);
-  if(f==='classification'||f==='action'||f==='stage') setTimeout(render,60);
+  if(f==='classification'||f==='action'||f==='stage') setTimeout(function(){refreshItem(key(it));},80);
 });
-let typing=null;
+var typing=null;
 document.addEventListener('input',function(e){
-  const t=e.target, f=t.dataset.f; if(!f||t.tagName==='SELECT') return;
-  const box=t.closest('.item'); if(!box) return;
-  const it=DATA.items.find(i=>key(i)===box.dataset.k); if(!it) return;
+  var t=e.target, f=t.dataset.f; if(!f||t.tagName==='SELECT') return;
+  var box=t.closest('.item'); if(!box) return;
+  var it=DATA.items.find(function(i){return key(i)===box.dataset.k;}); if(!it) return;
   clearTimeout(typing);
-  typing=setTimeout(function(){ const p={}; p[f]=t.value; save(it,p); },600);
+  typing=setTimeout(function(){ var p={}; p[f]=t.value; save(it,p); },600);
 });
 document.addEventListener('click',function(e){
-  const b=e.target.closest('[data-more]'); if(!b) return;
-  const q=b.previousElementSibling; q.classList.remove('long'); b.remove();
+  var g=e.target.closest('[data-go]');
+  if(g){ openGroup(+g.dataset.go, g.dataset.focus); return; }
+  var o=e.target.closest('[data-open]');
+  if(o){ OPEN[o.dataset.open]=true; refreshItem(o.dataset.open); return; }
+  var m=e.target.closest('[data-more]');
+  if(m){ m.previousElementSibling.classList.remove('long'); m.remove(); }
 });
-['f-tier','f-stage','f-writer'].forEach(id=>document.getElementById(id).addEventListener('change',render));
-let qt=null;
-document.getElementById('q').addEventListener('input',function(){clearTimeout(qt);qt=setTimeout(render,250);});
-document.getElementById('clear').addEventListener('click',function(){
-  ['f-tier','f-stage','f-writer'].forEach(i=>document.getElementById(i).value='');
-  document.getElementById('q').value=''; render();
+document.getElementById('home').addEventListener('click',goHome);
+document.getElementById('home2').addEventListener('click',goHome);
+document.getElementById('home3').addEventListener('click',goHome);
+document.getElementById('briefbtn').addEventListener('click',function(){ renderBrief(); show('brief'); });
+document.getElementById('nextgroup').addEventListener('click',function(){
+  if(GI<GROUPS.length-1) openGroup(GI+1); else goHome(); });
+document.getElementById('continue').addEventListener('click',function(){
+  for(var i=0;i<GROUPS.length;i++){
+    var open=GROUPS[i].items.filter(function(x){return !settled(x);});
+    if(open.length){ openGroup(i, key(open[0])); return; }
+  }
+  alert('Everything is settled. Well done.');
 });
-document.getElementById('print').addEventListener('click',function(){
-  document.querySelectorAll('details').forEach(d=>d.open=true); setTimeout(()=>window.print(),120);
-});
+var qt=null;
+document.getElementById('q').addEventListener('input',function(){clearTimeout(qt);qt=setTimeout(renderSearch,250);});
 document.getElementById('switch').addEventListener('click',function(){
-  localStorage.removeItem('cme_clr_who'); location.reload();
+  localStorage.removeItem('cme_clr_who'); location.reload(); });
+document.getElementById('print').addEventListener('click',function(){
+  document.querySelectorAll('details').forEach(function(d){d.open=true;});
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.add('on');});
+  setTimeout(function(){window.print();},150);
 });
-
 function dl(name,text,mime){
   const b=new Blob([text],{type:mime||'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');
   a.href=u;a.download=name;document.body.appendChild(a);a.click();
@@ -564,8 +762,8 @@ async function open_(){
     document.getElementById('app').style.display='';
     document.getElementById('whotag').textContent=WHO;
     status('ok','Saved');
-    render();
-    if(ST.rev>0) document.getElementById('intro').open=false;
+    buildGroups(); renderHome(); renderBrief(); show('home');
+    if(ST.rev>0){ document.getElementById('intro').open=false; document.getElementById('five').open=false; }
   }catch(e){
     gerr.innerHTML='<div class="err">'+(e.message==='key'
       ? 'That key was not accepted. Check the one Stephen sent you.'
@@ -590,6 +788,7 @@ document.getElementById('key').addEventListener('keydown',function(e){
   if(WHO){ document.getElementById('whoami').value=WHO; }
   if(KEYSTR&&WHO) open_();
 })();
+
 </script>
 </body>
 </html>
