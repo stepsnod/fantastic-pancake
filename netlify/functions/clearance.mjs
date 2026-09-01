@@ -20,8 +20,8 @@ const MAX = 2_000_000;
 
 const CLASSES = new Set(['', 'public_domain', 'permission', 'unresolved', 'not_applicable']);
 const ACTIONS = new Set(['', 'ask', 'cut', 'swap', 'keep']);
-const STAGES  = new Set(['', 'not_started', 'letter_drafted', 'letter_sent', 'awaiting_reply',
-                         'granted', 'refused', 'no_action_needed']);
+const STAGES  = new Set(['', 'not_started', 'verifying_ownership', 'letter_drafted', 'letter_sent',
+                         'awaiting_reply', 'granted', 'refused', 'no_action_needed']);
 const WRITERS = new Set(['', 'us', 'counsel', 'not_needed']);
 
 const json = (b, s = 200) => new Response(JSON.stringify(b), {

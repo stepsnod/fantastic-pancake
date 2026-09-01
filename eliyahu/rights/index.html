@@ -132,6 +132,8 @@ input[type=search]{min-width:230px}
 .tag.perm{background:var(--red-soft);border-color:#E0B4AE;color:var(--red)}
 .tag.unres{background:var(--amber-soft);border-color:#E3C79A;color:var(--amber)}
 .tag.sug{background:var(--violet-soft);border-color:#C6B2D8;color:var(--violet)}
+.claim{margin-top:11px;background:var(--amber-soft);border:1px solid #E3C79A;border-left:5px solid var(--amber);
+  border-radius:0 8px 8px 0;padding:11px 14px;font-size:15px;color:#5B3A08}
 
 #gate{padding:52px 0}
 #gate .box{max-width:520px}
@@ -354,7 +356,8 @@ const ACTIONS=[['','— not set —'],['ask','Ask for permission'],['cut','Cut f
   ['swap','Swap for a public-domain version'],['keep','Keep as is']];
 const WRITERS=[['','— not set —'],['us','We write the letter'],['counsel','Counsel writes it'],
   ['not_needed','No letter needed']];
-const STAGES=[['','— not set —'],['not_started','Not started'],['letter_drafted','Letter drafted'],
+const STAGES=[['','— not set —'],['not_started','Not started'],
+  ['verifying_ownership','Ownership claimed — verifying the basis'],['letter_drafted','Letter drafted'],
   ['letter_sent','Letter sent'],['awaiting_reply','Awaiting reply'],['granted','Granted'],
   ['refused','Refused'],['no_action_needed','No action needed']];
 const L=a=>Object.fromEntries(a);
@@ -362,7 +365,14 @@ const CL=L(CLASSES), AC=L(ACTIONS), WR=L(WRITERS), SG=L(STAGES);
 const TIERWORD={severe:'Severe',serious:'Serious',check:'Check',courtesy:'Courtesy',clear:'Public domain'};
 
 const key=it=>it.id||('X:'+it.cluster+':'+(it.label||'').slice(0,40));
-const rec=it=>ST.records[key(it)]||{};
+// A pre-filled value shows until somebody actually edits the item. It is a
+// starting point on the record, never a decision made on anyone's behalf.
+const rec=function(it){
+  const saved=ST.records[key(it)];
+  if(saved && Object.keys(saved).some(function(k){return k!=='_t'&&saved[k];})) return saved;
+  return it.prefill || saved || {};
+};
+const isPrefill=it=>!!(it.prefill && rec(it)===it.prefill);
 // A passage marked public domain is not finished until the REASON is recorded.
 // That single rule is what stops "it's old, so it's free" going in unchallenged —
 // and it is the trap this book is full of, because the originals are ancient but
@@ -372,6 +382,7 @@ const settled=function(it){
   if(r.classification==='public_domain') return !!(r.pd_reason||'').trim();
   if(r.classification==='not_applicable') return true;
   if(r.action==='cut' || r.action==='swap') return true;
+  if(r.stage==='verifying_ownership') return false;   // claimed, not yet established
   return ['granted','no_action_needed','refused'].includes(r.stage);
 };
 
@@ -484,6 +495,9 @@ function itemHtml(it){
         '<span class="ds">'+esc(summaryLine(it))+(r.by?' \u2014 '+esc(r.by):'')+'</span></span>'+
       '<button class="quiet" data-open="'+esc(k)+'">Change</button></div></div>';
   }
+  var claim = isPrefill(it) ? '<div class="claim"><b>\u2691 Elliott says he owns this one.</b> '+
+      'Recorded here so it is not lost. It stays open until the basis is written down \u2014 '+
+      'see the note at the top of this group for the four things that could mean.</div>' : '';
   var sug = it.suggested==='public_domain' ? 'suggested: public domain'
           : it.suggested==='permission' ? 'suggested: permission needed' : 'suggested: needs research';
   var long=(it.text||'').length>320;
@@ -498,7 +512,7 @@ function itemHtml(it){
     '</div>'+
     (it.text?'<div class="quote'+(long?' long':'')+'">'+esc(it.text)+'</div>'+
       (long?'<button class="more" data-more="'+esc(k)+'">Show the whole passage</button>':''):'')+
-    '<div style="margin-top:9px"><span class="tag sug">'+sug+'</span></div>'+
+    claim+'<div style="margin-top:9px"><span class="tag sug">'+sug+'</span></div>'+
     '<div class="ctrls">'+
       '<div class="fld"><label>What it is</label>'+sel('classification',CLASSES,r.classification||'')+'</div>'+
       '<div class="fld"><label>What we do</label>'+sel('action',ACTIONS,r.action||'')+'</div>'+
@@ -520,8 +534,8 @@ function itemHtml(it){
 
 /* ---------------- home ---------------- */
 var FIVE=[
- ['Find out who owns the Sunyata writings',
-  'Ten passages running through the whole of chapter 7. Unlike a song lyric this cannot simply be cut \u2014 the chapter is built on it. Start here, because the answer changes what chapter 7 is.',
+ ['Write down how Elliott owns the Sunyata material',
+  'Ten passages through the whole of chapter 7. Elliott says this material is his \u2014 which likely settles the biggest single risk in the book. All that is needed now is a short signed note saying how the rights came to him, with any document that supports it. One page, and this group closes.',
   'the-sunyata-material'],
  ['Decide about the nine song lyrics',
   'Dylan four times, the Beatles twice, Neil Young, Iris DeMent and \u201cThe Impossible Dream\u201d. Elliott only needs to say, for each, whether it stays or goes. Anything cut stops being a problem immediately.',
